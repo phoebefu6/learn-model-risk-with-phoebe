@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- social:start -->
+<meta name="description" content="Practitioner session 9 of 10. A finding is five parts: what was observed, the evidence, the consequence, the severity that consequence implies, and the condition that follows. Brackwater's four findings written out and graded, with the register that tracks them and the model card that does not settle them.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Learn with Phoebe">
+<meta property="og:title" content="Writing findings - learn model risk with phoebe">
+<meta property="og:description" content="Practitioner session 9 of 10. A finding without a consequence is an observation, and observations do not get tracked. Severity is about consequence, not about cleverness or effort.">
+<meta property="og:url" content="https://phoebefu6.github.io/learn-model-risk-with-phoebe/courses/p9-writing-findings.html">
+<meta property="og:image" content="https://phoebefu6.github.io/learn-model-risk-with-phoebe/assets/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Writing findings - learn model risk with phoebe">
+<meta name="twitter:description" content="Four findings, two severities, one register. The leak is high severity because of what it invalidates, not because it was hard to find.">
+<meta name="twitter:image" content="https://phoebefu6.github.io/learn-model-risk-with-phoebe/assets/og-cover.png">
+<!-- social:end -->
+<title>Practitioner session 9 · Writing findings - learn model risk with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=2">
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-model-risk-with-phoebe</a> / Practitioner session 9 of 10</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Learn Model Risk with Phoebe · Practitioner session 9 of 10</div>
+    <h1>Writing <span class="accent">findings</span></h1>
+    <p class="sub">Six sessions of technique have produced four things that are true about Brackwater's scorecard: a field written after the outcome, a calibration that is right in aggregate and wrong in every band, a benchmark the complexity never beat by anything worth having, and a book that moved toward the borrowers the model knows least about. None of that changes anything yet. What changes something is a finding, and a finding is five parts: what was observed, what evidence supports it, what the consequence is, what severity that consequence implies, and what condition follows. Leave out the consequence and you have written an observation, and observations do not get tracked, owned, or closed.</p>
+    <div class="chip-row">
+      <span class="chip level">🟠 Advanced</span>
+      <span class="chip audience">Validators and the second line</span>
+      <span class="chip audience">Anyone whose model is being reviewed</span>
+      <span class="chip time">45 min</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:1">0-3 · Welcome</span>
+      <span class="a2" style="flex:4">3-16 · The five parts</span>
+      <span class="a3" style="flex:3">16-27 · Four findings, written</span>
+      <span class="a4" style="flex:5">27-45 · Build-along and Q&amp;A</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ INTRO ============ -->
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>Where this sits in the practitioner track</h2>
+    </div>
+    <p class="lede">Sessions 3 to 7 produced evidence and session 8 turned two of those tests into standing controls. Tonight is the conversion that decides whether any of it mattered: evidence into findings, findings into severities, severities into conditions with owners and dates, and all of it into a register that outlives the meeting. Session 10 runs the whole workflow end to end against a model whose truth is known by construction, and it uses the shapes built tonight. The worked example is <strong>Brackwater</strong>'s consumer scorecard, 4,000 development applications at a bad rate of 0.292 and 2,000 from the following year at 0.324, and by the end of tonight its four findings exist as rows somebody has to answer.</p>
+
+    <div class="legend">
+      <span class="pill">Live = presented in the 45 minutes</span>
+      <span class="pill">Self-study = the full depth, after class</span>
+      <span class="pill">🔍 Every diagram zooms</span>
+    </div>
+
+    <div class="callout win">
+      <p><strong>★ What you walk out with tonight.</strong> The five-part shape of a finding and a test that catches the part people leave out. A severity rule that survives being argued with, because it grades the consequence rather than the work. Brackwater's four findings written out in full at two severities, with the canon numbers attached to each. A register schema with ten columns, each of which exists because somebody later has to answer a question from it. And the honest version of the professional reality: findings get downgraded between the draft and the final, there are exactly two places it happens, and the defence is written evidence and a tracked register rather than a better argument on the day.</p>
+    </div>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>Five parts, and the missing one is always the same<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>What was observed. What evidence supports it. What the consequence is. What severity that consequence implies. What condition or remediation follows. Five parts, in that order, and the order matters because each one is answerable only once the one before it exists.</p>
+        <p>The part that goes missing is the third, every time. A validator who has spent two weeks finding something is full of the observation and the evidence, and writes both of them beautifully: here is the field, here is when it is written, here is what the model scores with and without it. Then the paragraph ends. The reader, who has a model to run and a committee on Thursday, is left to work out for themselves what goes wrong if nothing changes, and the answer they arrive at is usually "nothing much, for now".</p>
+        <p>Without a consequence there is nothing to grade, so there is no severity. Without a severity there is nothing to escalate, so there is no condition. Without a condition there is nobody's name on it and no date, so it does not enter the register, and a thing that is not in the register is a thing nobody will ever be asked about again. One missing sentence removes the entire chain.</p>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>Brackwater's earlier review did notice the collections field. The note in the file reads, in full, that the field is "predictive and available in the warehouse". Both statements are true, neither is a consequence, and the item was recorded as an observation. Two years and eight quarterly packs later nobody had ever been asked about it, because observations are not the kind of thing anybody is asked about.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Observation, finding, condition, recommendation<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <ul>
+          <li><strong>Observation.</strong> Something true and noted, with no stated consequence. Perfectly legitimate as a category and dishonest as a landing place for something that has one. Observations are not tracked to closure, which is precisely why a contested finding gets pushed into this box.</li>
+          <li><strong>Finding.</strong> An observation plus a consequence plus a severity. It enters the register, it has an owner, and it has a status that has to reach a terminal value before anybody can say the review is closed.</li>
+          <li><strong>Condition.</strong> Something that has to happen for the model to be used, or to keep being used. It binds. It carries a name and a date, and failing it is itself an event with a consequence.</li>
+          <li><strong>Recommendation.</strong> Something the validator thinks would be an improvement, which the model owner may decline with a reason. Useful, and not a control. Mixing recommendations into the condition list is how condition lists stop being taken literally.</li>
+          <li><strong>Exception.</strong> A condition that has been formally not met, with an approval attached. It is a legitimate outcome, and the register has to be able to hold it, because the alternative is a condition that quietly stays open forever.</li>
+        </ul>
+        <p>The reason to be strict about these five words is that the difference between them is the difference between something that happens and something that does not, and the words are the only place that difference is recorded.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 1 ============ -->
+  <section class="section" id="part-1">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · covers the anatomy and the severity rule</span>
+      <h2>Grade the consequence, not the work</h2>
+      <span class="tag concept">13 min live</span>
+    </div>
+    <p class="lede">Severity is where validation reports go wrong most often and most invisibly, because the wrong rule feels like the right one. The wrong rule grades effort and ingenuity: a finding that took two weeks of forensic work on a join condition feels like a big finding, and a finding you noticed in the first ten minutes feels small. The right rule ignores both. Severity is the size of what goes wrong if nothing changes, and the leak at Brackwater is high severity for one reason only, which is that it invalidates the number the approval was requested on.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 326" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The five parts of a finding shown as labelled rows: observed, evidence, consequence, severity and condition, each with a description of what that part has to contain. The consequence row is marked in red. A red panel underneath states that removing the consequence turns the finding into an observation, and that observations are not tracked, owned or closed.">
+        <style>
+          .p9aH { font: 800 12px Inter, sans-serif; fill: #0F172A; }
+          .p9aT { font: 800 11px Inter, sans-serif; fill: #FFFFFF; }
+          .p9aB { font: 400 11px Inter, sans-serif; fill: #0F172A; }
+          .p9aR { font: 800 11px Inter, sans-serif; fill: #B91C1C; }
+        </style>
+
+        <text class="p9aH" x="14" y="22">Five parts. A finding is missing one of them far more often than it is wrong.</text>
+
+        <rect x="14" y="44" width="150" height="34" rx="8" fill="#1E3A8A"></rect>
+        <text class="p9aT" x="28" y="66">Observed</text>
+        <rect x="172" y="44" width="694" height="34" rx="8" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <text class="p9aB" x="186" y="66">What is true of the model, in one sentence a reader can disagree with precisely.</text>
+
+        <rect x="14" y="84" width="150" height="34" rx="8" fill="#1E40AF"></rect>
+        <text class="p9aT" x="28" y="106">Evidence</text>
+        <rect x="172" y="84" width="694" height="34" rx="8" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <text class="p9aB" x="186" y="106">The number, the timestamp or the document line that makes the observation checkable.</text>
+
+        <rect x="14" y="124" width="150" height="34" rx="8" fill="#B91C1C"></rect>
+        <text class="p9aT" x="28" y="146">Consequence</text>
+        <rect x="172" y="124" width="694" height="34" rx="8" fill="#FEF2F2" stroke="#B91C1C"></rect>
+        <text class="p9aB" x="186" y="146">What goes wrong if nothing changes. This is the part that gets left out.</text>
+
+        <rect x="14" y="164" width="150" height="34" rx="8" fill="#1E40AF"></rect>
+        <text class="p9aT" x="28" y="186">Severity</text>
+        <rect x="172" y="164" width="694" height="34" rx="8" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <text class="p9aB" x="186" y="186">The size of that consequence, on a scale written down first. Not the effort it took.</text>
+
+        <rect x="14" y="204" width="150" height="34" rx="8" fill="#1E3A8A"></rect>
+        <text class="p9aT" x="28" y="226">Condition</text>
+        <rect x="172" y="204" width="694" height="34" rx="8" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <text class="p9aB" x="186" y="226">What has to happen, by when, owned by a named person. Otherwise it is advice.</text>
+
+        <rect x="14" y="252" width="852" height="58" rx="9" fill="#FEF2F2" stroke="#B91C1C"></rect>
+        <text class="p9aR" x="30" y="276">Remove the consequence and the finding becomes an observation.</text>
+        <text class="p9aB" x="30" y="296">Observations are not tracked, not owned and not closed, which is why the consequence is the part that goes missing.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - each part is answerable only once the one above it exists, which is why one missing sentence removes the whole chain.</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Writing each of the five so it cannot be softened<span class="mini">5 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><strong>Observed.</strong> One sentence, about the model or the process, phrased so that somebody could disagree with it precisely rather than generally. "The field <code>collections</code> counts contacts logged after the outcome window opens" is disagreeable precisely: a model owner who thinks it is wrong has to say when the field is written. "The feature selection process was not sufficiently rigorous" is disagreeable only generally, which means it is arguable forever.</p>
+        <p><strong>Evidence.</strong> Whatever makes the observation checkable by somebody who was not there. A number with its method and its sample, a timestamp, a line in the model document with its page. The test is reproducibility rather than volume: three numbers somebody else can regenerate beat a page of narrative.</p>
+        <p><strong>Consequence.</strong> What goes wrong if nothing changes, stated in the currency the reader spends. Not "performance is overstated" but "the performance in the model document does not describe a model that could have been run, so the approval rests on a number that was never available". Write it so that the reader cannot agree with the observation and still shrug.</p>
+        <p><strong>Severity.</strong> A grade, from a scale defined before the review started, applied to the consequence you just wrote. If the scale is invented during the write-up it will be invented to fit whatever the political weather allows.</p>
+        <p><strong>Condition.</strong> What has to happen, by when, owned by a name. And what follows if it does not, because a condition with no failure branch is a request.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Severity is about consequence, not about cleverness or effort<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The leak is the cleanest illustration available, because it scores low on every wrong measure. It took about ten seconds to find once somebody asked when the field is written. It required no technique, no unusual access and no statistics. The whole finding is the order of two events. By any effort-based standard it is a minor item, and a validator who graded by effort would file it below a hard-won piece of forensic work on an imputation rule.</p>
+        <p>It is high severity because of what it does. The approval for this model was requested on a development AUC of 0.863, and that number is partly produced by a field whose value is determined by the outcome. Refit honestly, the development figure is 0.772. The consequence is that the decision was taken on evidence that does not describe a model anybody could run, and everything downstream of that decision inherits the problem. Nothing about how easy it was to find changes any of that.</p>
+        <p>The rule runs the other way too, and that is the harder half to hold. A finding that took three weeks, that nobody else would have spotted, and that turns out to change the number in the fourth decimal place is a low-severity finding. Grading it higher because of the work is the single most common way a severity scale stops meaning anything, and once a scale stops meaning anything the high grades stop being believed, including the ones that are right.</p>
+        <div class="callout tip">
+          <p><strong>Write the consequence before you pick the grade, and pick the grade only from the consequence.</strong> If the consequence sentence does not justify the grade on its own, without anybody knowing how the finding was made, then the grade is wrong or the consequence is badly written. Both are fixable and only one of them is a fix to the grade.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Conditions, remediation and what documentation is actually for<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>A condition has three parts and each of them is load-bearing. An owner, who is a person: a team cannot be chased, a function cannot be emailed on a Friday, and "the modelling group" has never once completed a remediation. A trigger or a date: either a calendar date or an event that is certain to occur and easy to observe, such as the next credit committee or the next scheduled recalibration. And a consequence of its own, which is what happens if the date passes with nothing done. Two of the three is the common shape and it is the shape that quietly expires.</p>
+        <p>This is also where documentation earns its reputation, which in most organisations is poor. The current guidance is specific about what it is for: documentation helps maximise the likelihood of continuity of operations, including supporting the tracking of recommendations, responses and exceptions, and it can be used to more effectively help manage any model remediation efforts. Read that as a list of three jobs. Continuity, so the next person can run this. Tracking, so a recommendation, the response to it and any exception granted are all recoverable. Remediation management, so the work that was promised can be followed.</p>
+        <p>None of those three is served by a long document. All three are served by a register with stable identifiers, and a register is a small thing to maintain compared with what it prevents. The practical marker of a healthy one is that it can answer "what happened to that" for an item raised two years ago, in under a minute, without asking anybody who was in the room.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 2 ============ -->
+  <section class="section" id="part-2">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · covers the four Brackwater findings</span>
+      <h2>Four findings, written out</h2>
+      <span class="tag concept">11 min live</span>
+    </div>
+    <p class="lede">Everything the track has produced comes down to four rows. Two are high severity and two are medium, and the grading is entirely a consequence of the consequences. Notice while reading them that no row says the model is bad and no row recommends the challenger. The defensible position throughout is narrower and much harder to argue with: the evidence submitted did not support the claim made, which is a statement about a document rather than a verdict on a model.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 378" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Four Brackwater findings with their evidence and severity. First, the collections field is written after the outcome window opens, evidenced by a submitted development AUC of 0.863, collections alone at 0.748 and an honest development figure of 0.772, graded high because it invalidates the approved number. Second, calibration is right in aggregate and wrong in every band, evidenced by an aggregate gap of minus 0.006 over band gaps of plus 0.061 to minus 0.142, graded high because it mis-prices both ends of the book. Third, the complexity was never shown to buy anything, evidenced by 0.682 out of time against a three-column challenger at 0.676, graded medium. Fourth, the book moved toward borrowers the model knows least, evidenced by a thin-file share moving from 19.0 to 34.0 percent, graded medium.">
+        <style>
+          .p9bH { font: 800 12px Inter, sans-serif; fill: #0F172A; }
+          .p9bT { font: 800 11px Inter, sans-serif; fill: #FFFFFF; }
+          .p9bW { font: 400 11px Inter, sans-serif; fill: #FFFFFF; }
+          .p9bK { font: 800 11px Inter, sans-serif; fill: #0F172A; }
+          .p9bM { font: 400 11px Inter, sans-serif; fill: #56617A; }
+        </style>
+
+        <text class="p9bH" x="14" y="22">Four findings, two grades, and the grade comes from the consequence.</text>
+
+        <text class="p9bM" x="14" y="50">What was observed, and the evidence</text>
+        <text class="p9bM" x="646" y="50">Consequence and grade</text>
+
+        <rect x="14" y="62" width="620" height="62" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <text class="p9bK" x="30" y="86">collections is written after the outcome window opens</text>
+        <text class="p9bM" x="30" y="106">submitted 0.863; collections alone 0.748; honest development 0.772</text>
+        <rect x="646" y="62" width="220" height="62" rx="9" fill="#B91C1C"></rect>
+        <text class="p9bT" x="662" y="88">High</text>
+        <text class="p9bW" x="662" y="108">Invalidates the approved number</text>
+
+        <rect x="14" y="132" width="620" height="62" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <text class="p9bK" x="30" y="156">Calibration is right in aggregate and wrong in every band</text>
+        <text class="p9bM" x="30" y="176">aggregate gap -0.006 over band gaps of +0.061 to -0.142</text>
+        <rect x="646" y="132" width="220" height="62" rx="9" fill="#B91C1C"></rect>
+        <text class="p9bT" x="662" y="158">High</text>
+        <text class="p9bW" x="662" y="178">Mis-prices both ends of the book</text>
+
+        <rect x="14" y="202" width="620" height="62" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <text class="p9bK" x="30" y="226">The complexity was never shown to buy anything</text>
+        <text class="p9bM" x="30" y="246">champion 0.682 out of time against a three-column 0.676</text>
+        <rect x="646" y="202" width="220" height="62" rx="9" fill="#1E40AF"></rect>
+        <text class="p9bT" x="662" y="228">Medium</text>
+        <text class="p9bW" x="662" y="248">Ongoing cost, no evidence for it</text>
+
+        <rect x="14" y="272" width="620" height="62" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <text class="p9bK" x="30" y="296">The book moved toward borrowers the model knows least</text>
+        <text class="p9bM" x="30" y="316">thin-file share 19.0 to 34.0 percent on the later vintage</text>
+        <rect x="646" y="272" width="220" height="62" rx="9" fill="#1E40AF"></rect>
+        <text class="p9bT" x="662" y="298">Medium</text>
+        <text class="p9bW" x="662" y="318">Development evidence is weaker</text>
+
+        <text class="p9bM" x="14" y="358">The leak is high because of what it invalidates, not because it was hard to find. It took about ten seconds.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - no row says the model is bad. Every row says something specific about what the evidence does and does not support.</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>The two high findings<span class="mini">5 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><strong>The leaked field.</strong> Observed: the field <code>collections</code> counts collections contacts, which are logged after the outcome window opens, so its value is determined by the outcome the model predicts. Evidence: the model document reports a development AUC of 0.863; the field fitted alone on the same sample reaches 0.748; the champion refit without it reaches 0.772. Consequence: the performance in the model document does not describe a model that could have been run at the decision point, so the approval rests on a number that was never available. Severity: high. Condition: requote development and out-of-time performance without the field, and resubmit for approval on the restated numbers.</p>
+        <p><strong>The band-level calibration error.</strong> Observed: predicted default rates are close to actual in aggregate and systematically wrong within every band. Evidence: out of time the model predicts a mean rate of 0.330 against an actual 0.324, an aggregate gap of -0.006, while by quintile of predicted risk the gaps run +0.061, +0.068, +0.035, -0.054 and -0.142. Consequence: the model under-prices the safest borrowers and over-prices the riskiest, and any use of the predicted probability as a level rather than as a rank is wrong in opposite directions at the two ends of the book. Severity: high. Condition: recalibrate before the score is used to set any price, and report calibration by band in every monitoring cycle rather than in aggregate.</p>
+        <p>Both are high for the same structural reason and it is worth naming: each one invalidates a specific use that the model has already been approved for. That is the thing a high grade is supposed to mean, and reserving it for that keeps the grade worth something.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>The two medium findings, and why they are not high<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><strong>The benchmark result.</strong> Observed: no simpler alternative was built or reported during development, so the model document contains no evidence that the eleven-feature specification buys anything over a simple one. Evidence: out of time the honestly refit champion reaches 0.682 and a three-feature challenger reaches 0.676. Consequence: the organisation is carrying the build cost, the validation cost and the ongoing monitoring obligation of a complex model with no evidence on file that the complexity is earning them. Severity: medium. Condition: build and report a simple benchmark at the next scheduled revalidation, and include one in the development evidence for any future scorecard.</p>
+        <p>It is medium rather than high because nothing about it says the approved use is unsafe. The model still ranks. The finding is about an absent piece of evidence and an unjustified ongoing cost, which is real and is not the same as a decision taken on a number that does not exist. Note also what this finding must not say: it must not say the challenger is better. On this data the two are within noise of each other on discrimination and each wins on a different business axis, so the claim would be unsupported and it would hand the model owner an easy rebuttal that distracts from the point.</p>
+        <p><strong>The population shift.</strong> Observed: the population scored by the model has moved away from the population it was developed on. Evidence: thin-file applicants rose from 19.0 percent to 34.0 percent between the vintages, prior delinquency from 34.0 to 36.8 percent, mean utilisation from 0.448 to 0.464, and the bad rate from 0.292 to 0.324. Consequence: the development testing in the model document is weaker evidence about the current book than it appears to be, concentrated exactly where the model has least evidence. Severity: medium. Condition: monitor the thin-file share against the approved baseline of 0.190 with the trigger set in the validation report, and bring forward the revalidation if it moves further.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Model cards: one documentation format, and what it does not settle<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>A model card, in the sense proposed by Mitchell and colleagues in 2019, is a short structured document accompanying a model. Its fields are intended use, out-of-scope use, training data, evaluation data, and performance disaggregated by group. It is one format among several that can carry model documentation, and it is named here because it is the format most people have heard of.</p>
+        <p>Two things it does well, and both are genuinely useful in a validation context. It forces intended use and out-of-scope use to be written down, as separate named fields that are conspicuously empty if nobody fills them. Using a model beyond its intended purpose introduces additional uncertainty and risk, so a format that makes the boundary an explicit field is doing real work. And it forces performance to be reported disaggregated rather than as a single headline, which is the same instinct that makes banded calibration the only version of that test worth running.</p>
+        <p>What it does not settle is everything else. A model card is a description, not a validation: nothing in it is independently checked, nothing in it constitutes effective challenge, and a card can be complete, well written and entirely consistent with a model that should never have been approved. Brackwater's champion would fill one out beautifully. Intended use, stated. Training data, described. Evaluation data, described. Performance, 0.863. Every field correct, every field sourced from the model document, and not one of them capable of surfacing that a feature is written after the outcome. The card would have recorded the wrong number accurately.</p>
+        <p>So treat it as a container. If the organisation wants its documentation in that shape, that is a reasonable choice and it satisfies the documentation expectation as well as any other layout. Just do not let the completeness of the card be read as evidence about the model, because completeness of a description and soundness of the thing described are unrelated properties.</p>
+      </div>
+    </details>
+
+    <div class="callout tip">
+      <p><strong>The politics, stated plainly, because it is professional practice and not a rumour.</strong> Findings get downgraded between the draft and the final. It happens in exactly two places and both are easy to watch for. The first is the severity grade, where high becomes medium on the argument that the consequence is theoretical until it happens. The second is the word: a condition becomes an observation, and with that one substitution the item leaves the register, loses its owner and its date, and stops being something anybody will ever be asked about. Sessions 2 and 5 cover why the pressure exists and what makes challenge effective against it. The defence here is narrower and entirely mechanical: written evidence that reproduces, a severity scale that was fixed before the review started, a consequence sentence that stands on its own, and a register with stable identifiers where the original grade and every change to it remain visible. Arguing better on the day is not a defence. Having written it down before the day is.</p>
+    </div>
+  </section>
+
+  <!-- ============ PART 3 ============ -->
+  <section class="section" id="part-3">
+    <div class="section-kicker">
+      <span class="klabel">Part 3 · build-along</span>
+      <h2>Build the register, then put the four findings in it</h2>
+      <span class="tag build">18 min build-along</span>
+    </div>
+    <p class="lede">The register is the artefact that outlives everything else in a validation. The memo gets read once, the meeting is remembered inaccurately, and the register is what somebody opens in two years to ask what happened to that. Ten columns, each present because a specific question gets asked of it later. Build the schema first, make it refuse the row people try to write, and only then put Brackwater's four findings through it.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div>
+          <p><strong>Write the observation as a sentence somebody can disagree with precisely.</strong> Name the field, the process or the number. A sentence that can only be disagreed with generally will be, and the disagreement will outlast your involvement in the review.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <p><strong>Attach evidence that somebody else can regenerate.</strong> The number with its sample and method, the timestamp, the page of the model document. If a reader would have to take your word for any part of it, that part is not yet evidence.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <p><strong>State the consequence, or file the item as an observation and say so.</strong> If you genuinely cannot say what goes wrong when nothing changes, the honest move is the observation category, openly used. What is not honest is a finding-shaped paragraph with the third sentence missing, which reads as a finding and behaves as nothing.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <p><strong>Grade against a scale that existed before the review.</strong> Apply it to the consequence you just wrote, not to the work you just did. Ten seconds of insight can be high and three weeks of forensics can be low, and a scale that cannot produce both of those results is not being applied.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <p><strong>Write the condition with an owner, a date or trigger, and a failure branch.</strong> A person by name. A date, or an event certain to occur and easy to observe. And what happens if the date passes, because a condition with nothing on the other side of it is a request that expires quietly.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <p><strong>Give the item a stable identifier and put it in the register.</strong> Tracking recommendations, responses and exceptions is one of documentation's stated purposes, along with continuity of operations and managing remediation, and none of the three works without an identifier that survives the document being rewritten.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <p><strong>Record what you could not test as a limitation of the validation.</strong> The data you were not given, the code you could not run, the question that needed an owner who was unavailable. Even with sound modelling and rigorous validation, material model risk can remain, and a report that states its own blind spots is describing the residual risk rather than pretending it away.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <p><strong>Keep the draft, dated, alongside the final.</strong> Not as a weapon and not as a threat. As the thing that makes a downgrade visible as a decision somebody took, with a reason, on a date, rather than as a difference nobody can account for afterwards.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="prompt-box good">
+      <span class="label">★ Try it now - the register schema, and the row it refuses</span>
+      <pre style="margin:0"><code>import pandas as pd
+
+# Ten columns. Each one exists because somebody later has to answer
+# a question from it, and none of them is decoration.
+COLUMNS = [
+    "id",            # stable, quoted in the memo and in every follow-up
+    "component",     # conceptual soundness, outcomes analysis, ongoing monitoring
+    "observation",   # one sentence, disagreeable precisely
+    "evidence",      # what makes the observation checkable by somebody else
+    "consequence",   # what goes wrong if nothing changes
+    "severity",      # graded on the consequence, scale fixed before the review
+    "condition",     # what has to happen
+    "owner",         # a named person, never a team
+    "due",           # a date, or an event certain to occur
+    "status",        # open, responded, accepted, closed, exception
+]
+
+def finding(**kw):
+    """Refuse to build a row that is missing the part people leave out."""
+    if not kw.get("consequence"):
+        raise ValueError("no consequence: this is an observation, file it as one")
+    if kw.get("severity") and not kw.get("condition"):
+        raise ValueError("graded but unconditioned: nothing would have to happen")
+    return {c: kw.get(c, "") for c in COLUMNS}</code></pre>
+    </div>
+
+    <div class="prompt-box good">
+      <span class="label">★ Try it now - Brackwater's four findings as rows</span>
+      <pre style="margin:0"><code>register = pd.DataFrame([
+    finding(
+        id="MR-2026-014",
+        component="conceptual soundness",
+        observation="collections counts contacts logged after the outcome window "
+                    "opens, so its value is determined by the outcome predicted",
+        evidence="submitted development 0.863; collections fitted alone 0.748; "
+                 "champion refit without it 0.772",
+        consequence="the performance in the model document does not describe a "
+                    "model that could have been run at the decision point",
+        severity="high",
+        condition="requote development and out-of-time performance without the field",
+        owner="model owner",
+        due="before the next credit committee",
+        status="open",
+    ),
+    finding(
+        id="MR-2026-015",
+        component="outcomes analysis",
+        observation="calibration is close in aggregate and systematically wrong "
+                    "within every band of predicted risk",
+        evidence="out of time, predicted 0.330 against actual 0.324, a gap of "
+                 "-0.006, over quintile gaps of +0.061, +0.068, +0.035, "
+                 "-0.054 and -0.142",
+        consequence="the safest borrowers are under-priced and the riskiest are "
+                    "over-priced, so any use of the level rather than the rank is wrong",
+        severity="high",
+        condition="recalibrate before the score sets any price; report calibration "
+                  "by band every cycle",
+        owner="model owner",
+        due="before the score is used in pricing",
+        status="open",
+    ),
+    finding(
+        id="MR-2026-016",
+        component="conceptual soundness",
+        observation="no simple benchmark was built during development, so nothing "
+                    "on file shows the eleven-feature specification buys anything",
+        evidence="out of time the honest champion reaches 0.682 and a three-feature "
+                 "challenger reaches 0.676",
+        consequence="build, validation and monitoring cost is being carried for "
+                    "complexity with no evidence on file that it earns its place",
+        severity="medium",
+        condition="build and report a simple benchmark at the next revalidation",
+        owner="model owner",
+        due="next scheduled revalidation",
+        status="open",
+    ),
+    finding(
+        id="MR-2026-017",
+        component="ongoing monitoring",
+        observation="the population being scored has moved away from the population "
+                    "the model was developed on",
+        evidence="thin-file share 19.0 to 34.0 percent; prior delinquency 34.0 to "
+                 "36.8; mean utilisation 0.448 to 0.464; bad rate 0.292 to 0.324",
+        consequence="the development testing is weaker evidence about the current "
+                    "book than it appears, concentrated where the model knows least",
+        severity="medium",
+        condition="monitor thin-file share against the approved baseline of 0.190 "
+                  "with the trigger set in this report",
+        owner="model owner",
+        due="every quarterly monitoring cycle",
+        status="open",
+    ),
+])
+
+print(register[["id", "component", "severity", "owner", "due", "status"]])
+
+# Two high, two medium. The grades come from the consequence column and
+# from nothing else: the leak took about ten seconds to find.</code></pre>
+    </div>
+
+    <div class="callout tip">
+      <p><strong>When you cannot test something, that is a row too.</strong> Record it as a limitation of the validation, with the same discipline: what you could not test, why, and what risk therefore remains unmeasured. Even with sound modelling practices and rigorous validation, material model risk can remain, and the report that says where its own blind spots are is the one a supervisor can rely on. A validation that reads as complete when it was not is a worse document than one that names three things it could not reach.</p>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions</h2>
+    </div>
+
+    <div class="quiz-q" data-answer="2">
+      <p class="qtext">A validator writes: "The field <code>collections</code> is written after the outcome window opens. Development AUC falls from 0.863 to 0.772 when it is removed." What is missing, and why does it matter?</p>
+      <button class="qopt" type="button">A · Nothing is missing; the observation is precise and the evidence reproduces, which is everything a finding needs</button>
+      <button class="qopt" type="button">B · The remediation is missing, but the model owner is the right person to propose it so leaving it out is correct</button>
+      <button class="qopt" type="button">C · The consequence is missing, so there is nothing to grade, nothing to escalate, and nothing that enters the register with an owner and a date</button>
+      <p class="qwhy">Observation and evidence are both there and both good. Without a stated consequence there is no severity, without a severity there is no condition, and without a condition the item never gets an owner or a date and is never tracked to closure. One missing sentence removes the whole chain, which is why it is the part that reliably goes missing.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">The leak took about ten seconds to find once somebody asked when the field is written. A separate finding about an imputation rule took three weeks of forensic work and moves the reported number in the fourth decimal place. How should they be graded?</p>
+      <button class="qopt" type="button">A · The imputation finding higher, since it is the harder piece of work and grading it low will discourage that kind of rigour</button>
+      <button class="qopt" type="button">B · The leak high, because it invalidates the number the approval was requested on, and the imputation finding low, because its consequence is negligible regardless of the effort</button>
+      <button class="qopt" type="button">C · Both medium, since severity should reflect a balance of consequence and the difficulty of detection</button>
+      <p class="qwhy">Severity grades the consequence and nothing else. The leak means the approval rests on a development figure of 0.863 that partly measures the outcome, against an honest 0.772. The imputation finding changes almost nothing. Grading by effort is the most common way a severity scale stops meaning anything, and once it does the high grades stop being believed, including the ones that are right.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">A model owner proposes that the benchmark finding be recorded as an observation rather than a condition, since the model still ranks and nothing unsafe has been shown. What is the effect of that change?</p>
+      <button class="qopt" type="button">A · The item leaves the register: it loses its owner, its date and its status, so nobody is ever asked about it again, which is why the substitution is one of the two places findings get downgraded</button>
+      <button class="qopt" type="button">B · No practical effect, since both categories are recorded in the validation report and can be revisited at the next review</button>
+      <button class="qopt" type="button">C · The item becomes stronger, since an observation is not time-bound and therefore stays open indefinitely</button>
+      <p class="qwhy">Observations are not tracked to closure, and that is exactly what makes the box attractive for a contested item. The two places a finding gets softened between draft and final are the severity grade and the word "condition" becoming "observation". The defence is written evidence, a severity scale fixed before the review, and a register with stable identifiers where the original grade remains visible.</p>
+    </div>
+    <p class="quiz-score"></p>
+  </section>
+
+  <!-- ============ HOMEWORK ============ -->
+  <section class="section" id="homework">
+    <div class="section-kicker">
+      <span class="klabel">Homework</span>
+      <h2>Before session 10</h2>
+      <span class="tag time">45 min</span>
+    </div>
+    <div class="callout">
+      <p>Find the last validation report or review memo your organisation produced, and mark up every item in it against the five parts: observed, evidence, consequence, severity, condition. Count how many have all five and how many stop after two. Then take the items recorded as observations and ask, for each one, whether a consequence could have been written and was not. That count is the more interesting number. Finally, pick the single item you would most want to be able to find in two years and check whether it has a stable identifier, a named owner and a status that can reach a terminal value. Bring what you find to session 10, where the whole workflow runs end to end against a model whose truth is known by construction, and where the findings you write get checked against what is actually true.</p>
+    </div>
+  </section>
+
+  <!-- ============ COVERAGE ============ -->
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Sources covered</span>
+      <h2>What tonight maps to</h2>
+    </div>
+    <div class="covered">
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">The anatomy of a finding</span>
+        <span class="note">What was observed, what evidence supports it, what the consequence is, what severity that implies, and what condition or remediation follows. A finding without a consequence is an observation, and observations do not get tracked.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Severity is about consequence</span>
+        <span class="note">Not about cleverness or effort. The leak is high severity because it invalidates the number the approval was requested on, and it took about ten seconds to find once somebody asked when the field is written.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">The four Brackwater findings, with the numbers</span>
+        <span class="note">The leaked field, high: submitted 0.863, collections alone 0.748, honest development 0.772. Band-level calibration, high: aggregate -0.006 over band gaps +0.061 to -0.142. The benchmark, medium: 0.682 against 0.676 out of time. The population shift, medium: thin-file share 19.0 to 34.0 percent.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Conditions, remediation and the register</span>
+        <span class="note">An owner who is a person, a trigger or date, and a consequence if it is missed. Under the revised interagency guidance of 17 April 2026, documentation helps maximise the likelihood of continuity of operations, including supporting the tracking of recommendations, responses and exceptions, and can be used to more effectively help manage model remediation. SR 11-7 is superseded.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Model cards as one documentation format</span>
+        <span class="note">Mitchell and colleagues, 2019: intended use, out-of-scope use, training data, evaluation data, and performance disaggregated by group. Good at forcing the intended-use boundary and disaggregated reporting to be written down. It is a description rather than a validation, nothing in it is independently checked, and Brackwater's champion would have filled one out beautifully.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">What to do when you cannot test something</span>
+        <span class="note">Record it as a limitation of the validation. Even with sound modelling practices and rigorous validation, material model risk can remain, and a report that names its own blind spots is describing residual risk rather than pretending it away.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Where findings get downgraded</span>
+        <span class="note">Two places: the severity grade, and the word "condition" becoming "observation". The defence is written evidence that reproduces, a severity scale fixed before the review, and a register with stable identifiers.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill light">◐</span>
+        <span class="name">Why the pressure to downgrade exists</span>
+        <span class="note">Sessions 2 and 5. Conceptual soundness explains why the leak is a design finding rather than a performance one, and the benchmark explains why the complexity finding is hard to argue with once the simple model has been run.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill light">◐</span>
+        <span class="name">The recommendation, and the refusal</span>
+        <span class="note">Session 10 makes the call on these four findings, and the leader track covers what approval with conditions buys and when to refuse.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill inkpill">·</span>
+        <span class="name">Fairness auditing as a discipline</span>
+        <span class="note">Not covered by design. Disaggregated performance appears here as a model-card field and as a validation test; the fairness literature and its impossibility results are left to the specialists who own them.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill inkpill">·</span>
+        <span class="name">What AUC and calibration are</span>
+        <span class="note">Not covered by design. <strong>learn-model-evaluation-with-phoebe</strong> defines the metrics; here they appear only as evidence a validator weighs.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill inkpill">·</span>
+        <span class="name">Governance frameworks of every kind</span>
+        <span class="note">Not covered by design, in any session. <strong>learn-ai-governance-with-phoebe</strong> owns them.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CHEAT SHEET ============ -->
+  <section class="cheat" id="cheatsheet">
+    <h3>Session 9 cheat sheet</h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>Five parts</b><span>Observed, evidence, consequence, severity, condition. The third is the one that goes missing.</span></div>
+      <div class="cheat-item"><b>No consequence, no finding</b><span>It is an observation, and observations are not tracked, owned or closed.</span></div>
+      <div class="cheat-item"><b>Grade the consequence</b><span>Not the cleverness, not the effort. Ten seconds can be high; three weeks can be low.</span></div>
+      <div class="cheat-item"><b>Why the leak is high</b><span>0.863 submitted against an honest 0.772. It invalidates the number the approval was asked for.</span></div>
+      <div class="cheat-item"><b>Why the benchmark is medium</b><span>0.682 against 0.676. Unjustified ongoing cost, not an unsafe approved use. Never claim the challenger is better.</span></div>
+      <div class="cheat-item"><b>A condition has three parts</b><span>A named person, a date or certain event, and what happens if it is missed.</span></div>
+      <div class="cheat-item"><b>Model cards are containers</b><span>Intended use, out-of-scope use, training data, evaluation data, disaggregated performance. A description, not a validation.</span></div>
+      <div class="cheat-item"><b>Name what you could not test</b><span>Material model risk can remain even after sound modelling and rigorous validation. Say where yours is.</span></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="pagefoot">
+  <div class="wrap">
+    <p>Practitioner session 9 of 10 · learn-model-risk-with-phoebe · by Phoebe Fu</p>
+    <nav class="pagenav">
+      <a href="p8-ongoing-monitoring.html">← Practitioner session 8 · Ongoing monitoring</a>
+      <a href="p10-the-validation-bench.html">Practitioner session 10 · The validation bench →</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="../assets/app.js?v=2"></script>
+</body>
+</html>

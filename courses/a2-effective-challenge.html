@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- social:start -->
+<meta name="description" content="Leader session 2 of 6. Effective challenge needs expertise, independence and organizational standing. Expertise can be hired and independence can be drawn on an org chart. Standing has to be granted, and it is the one that fails.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Learn with Phoebe">
+<meta property="og:title" content="Effective challenge - learn model risk with phoebe">
+<meta property="og:description" content="Leader session 2 of 6. Why organisations with a validation team, a policy and a committee still challenge nothing.">
+<meta property="og:url" content="https://phoebefu6.github.io/learn-model-risk-with-phoebe/courses/a2-effective-challenge.html">
+<meta property="og:image" content="https://phoebefu6.github.io/learn-model-risk-with-phoebe/assets/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Effective challenge - learn model risk with phoebe">
+<meta name="twitter:description" content="Expertise is hired. Independence is drawn. Standing is granted, and that is the one nobody grants.">
+<meta name="twitter:image" content="https://phoebefu6.github.io/learn-model-risk-with-phoebe/assets/og-cover.png">
+<!-- social:end -->
+<title>Leader session 2 · Effective challenge - learn model risk with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=2">
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-model-risk-with-phoebe</a> / Leader session 2 of 6</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Learn Model Risk with Phoebe · Leader session 2 of 6</div>
+    <h1>Effective challenge, and why it <span class="accent">almost never happens</span></h1>
+    <p class="sub">Brackwater had a validation team, a model risk policy and a committee that met monthly. Its validators read the scorecard properly and found the thing that mattered: a collections field that could not honestly be predicting anything. They raised it. It was recorded as an observation rather than a condition, nobody owned it, no date was attached to it, and the launch went ahead on the day the commercial plan had always said it would. Every box in the policy was ticked. The challenge did not happen, because the people doing it had no way to make anything stop.</p>
+    <div class="chip-row">
+      <span class="chip level">🟠 Advanced</span>
+      <span class="chip audience">Whoever signs the approval</span>
+      <span class="chip audience">Risk, audit and the second line</span>
+      <span class="chip time">45 min</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:1">0-3 · Welcome</span>
+      <span class="a2" style="flex:5">3-22 · Why it fails</span>
+      <span class="a3" style="flex:4">22-40 · Build-along: audit your own</span>
+      <span class="a4" style="flex:1">40-45 · Q&amp;A</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ INTRO ============ -->
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>Where this sits</h2>
+    </div>
+    <p class="lede">Session 1 set out what model risk is: adverse financial consequences from decisions made on model output, sized by inherent risk, exposure, purpose and use. Tonight is the mechanism the whole discipline relies on to control it, and the one that is hardest to install. Effective challenge is the named safeguard in the April 2026 guidance, it has three stated requirements, and organisations reliably deliver two of them. Session 3 is what a validator actually checks, in plain terms. The example throughout is again <strong>Brackwater</strong>'s consumer scorecard.</p>
+
+    <div class="legend">
+      <span class="pill">Live = presented in the 45 minutes</span>
+      <span class="pill">Self-study = the full depth, after class</span>
+      <span class="pill">🔍 Every diagram zooms</span>
+    </div>
+
+    <div class="callout win">
+      <p><strong>★ What you walk out with tonight.</strong> The three requirements of effective challenge, and which one your organisation is missing. A way to tell a real challenge function from a compliant one in about four questions, none of which is about headcount or reporting lines. The distinction between what internal audit does and what validation does, which is confused almost everywhere and produces either duplicated work or a gap. And the legitimate way to put a model in front of customers before validation has finished, which exists, and which Brackwater did not use.</p>
+    </div>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>The definition, and the word that carries it<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The current guidance defines effective challenge as the critical analysis conducted by objective experts who evaluate model risk and effect appropriate changes throughout the model lifecycle. Every clause in that sentence is load bearing, but the last one is the one that decides whether any of it happens: <strong>effect appropriate changes</strong>. Analysis that does not change anything is not challenge. It is commentary that has been filed.</p>
+        <p>The guidance then says what it takes, and names three things. <strong>Appropriate expertise</strong>: the reviewer has to understand the method well enough to find the flaw, not merely to notice the documentation is thin. <strong>Sufficient independence</strong> to maintain objectivity: the reviewer's judgement must survive knowing which answer the business is hoping for. And <strong>the organizational standing and influence to effect any change</strong>: the reviewer's conclusion has to be able to move something.</p>
+        <p>Say those three out loud about your own institution and the pattern usually appears immediately. Expertise is a recruitment problem and most places have solved it. Independence is a structural claim and most places can point at a line on a chart. Standing is a question about power, and almost nobody can answer it with a document.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>What the 2011 wording asked for, and what changed<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The 2011 text rested effective challenge on <strong>incentives, competence, and influence</strong>. The 2026 text rests it on <strong>expertise, sufficient independence, and organizational standing and influence</strong>. Competence became expertise, influence survived and gained the word standing in front of it, independence was named explicitly for the first time in this list, and incentives dropped out of it.</p>
+        <p>That last move is worth a thought rather than a shrug. Incentives are the honest description of why challenge fails: a reviewer whose bonus, promotion or next project depends on the business unit being pleased will find fewer problems, and no amount of expertise fixes that. Naming independence instead is a tighter, more auditable requirement, and it is easier to supervise against. But independence is a statement about position and incentives are a statement about motive, and the two are not the same thing. A validator can be structurally independent and still be paid, rated and staffed by people who want the model approved.</p>
+        <p>The practical reading: the list tells you what a supervisor will ask about, and incentives are now something you have to raise yourself. The guidance has not gone quiet on the subject entirely, and the place it reappears is conflicts of interest, which Part 2 covers.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 1 ============ -->
+  <section class="section" id="part-1">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · covers the three requirements and which one fails</span>
+      <h2>Two of the three can be arranged. The third has to be given</h2>
+      <span class="tag concept">10 min live</span>
+    </div>
+    <p class="lede">Expertise can be hired: you write a job description, you pay the market rate, you have it by the end of the quarter. Independence can be drawn: you move a box on the org chart, you change a reporting line, you have it by the end of the reorganisation. Standing cannot be obtained either way. It is the power to stop something, it is held by whoever can overrule the business, and the only way a validator gets it is if that person hands it over and then backs them the first time it is used.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 372" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The three requirements of effective challenge shown as three pillars holding up its definition. Pillar one is appropriate expertise, obtained by hiring, marked appointed. Pillar two is sufficient independence, obtained through reporting lines and the rigour test, marked appointed. Pillar three is organizational standing and influence, marked granted, because it is the power to stop something and can only be handed over by whoever can overrule the business. A red base band records that at Brackwater expertise was present and standing was absent, so the collections finding was recorded as an observation rather than a condition and the launch proceeded.">
+        <style>
+          .a2aT { font: 800 12px Inter, sans-serif; fill: #FFFFFF; }
+          .a2aW { font: 400 11px Inter, sans-serif; fill: #FFFFFF; }
+          .a2aH { font: 800 12px Inter, sans-serif; fill: #0F172A; }
+          .a2aB { font: 400 11px Inter, sans-serif; fill: #0F172A; }
+          .a2aM { font: 400 11px Inter, sans-serif; fill: #56617A; }
+          .a2aK { font: 700 10px Inter, sans-serif; fill: #56617A; }
+          .a2aR { font: 800 11px Inter, sans-serif; fill: #B91C1C; }
+          .a2aRb { font: 400 11px Inter, sans-serif; fill: #B91C1C; }
+        </style>
+        <defs>
+          <marker id="a2aRd" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#B91C1C"></path></marker>
+        </defs>
+
+        <text class="a2aH" x="14" y="20">Three requirements. Two are arranged. One is granted.</text>
+
+        <rect x="14" y="30" width="852" height="46" rx="9" fill="#1E3A8A"></rect>
+        <text class="a2aT" x="28" y="49">Effective challenge</text>
+        <text class="a2aW" x="28" y="67">Critical analysis by objective experts who evaluate model risk and effect appropriate changes throughout the lifecycle</text>
+
+        <rect x="14" y="92" width="272" height="196" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <rect x="14" y="92" width="272" height="26" rx="9" fill="#1E40AF"></rect>
+        <text class="a2aT" x="28" y="110">1 · Appropriate expertise</text>
+        <text class="a2aB" x="28" y="138">Understands the method well</text>
+        <text class="a2aB" x="28" y="156">enough to find the actual flaw</text>
+        <line x1="28" y1="172" x2="272" y2="172" stroke="#DDE5F0" stroke-width="1"></line>
+        <text class="a2aK" x="28" y="190">HOW IT IS OBTAINED</text>
+        <text class="a2aM" x="28" y="208">Hire it, or buy it in for one</text>
+        <text class="a2aM" x="28" y="226">review. A budget question.</text>
+        <rect x="28" y="242" width="92" height="22" rx="6" fill="#BFDBFE" stroke="#93C5FD"></rect>
+        <text class="a2aK" x="40" y="257">APPOINTED</text>
+
+        <rect x="304" y="92" width="272" height="196" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <rect x="304" y="92" width="272" height="26" rx="9" fill="#1E40AF"></rect>
+        <text class="a2aT" x="318" y="110">2 · Sufficient independence</text>
+        <text class="a2aB" x="318" y="138">Judgement survives knowing</text>
+        <text class="a2aB" x="318" y="156">the answer the business wants</text>
+        <line x1="318" y1="172" x2="562" y2="172" stroke="#DDE5F0" stroke-width="1"></line>
+        <text class="a2aK" x="318" y="190">HOW IT IS OBTAINED</text>
+        <text class="a2aM" x="318" y="208">Reporting lines, plus the</text>
+        <text class="a2aM" x="318" y="226">rigour test (session 1).</text>
+        <rect x="318" y="242" width="92" height="22" rx="6" fill="#BFDBFE" stroke="#93C5FD"></rect>
+        <text class="a2aK" x="330" y="257">APPOINTED</text>
+
+        <rect x="594" y="92" width="272" height="196" rx="9" fill="#FEF2F2" stroke="#B91C1C"></rect>
+        <rect x="594" y="92" width="272" height="26" rx="9" fill="#B91C1C"></rect>
+        <text class="a2aT" x="608" y="110">3 · Standing and influence</text>
+        <text class="a2aB" x="608" y="138">The power to effect any change,</text>
+        <text class="a2aB" x="608" y="156">including stopping a launch</text>
+        <line x1="608" y1="172" x2="852" y2="172" stroke="#DDE5F0" stroke-width="1"></line>
+        <text class="a2aK" x="608" y="190">HOW IT IS OBTAINED</text>
+        <text class="a2aRb" x="608" y="208">Handed over by whoever can</text>
+        <text class="a2aRb" x="608" y="226">overrule the business. Only.</text>
+        <rect x="608" y="242" width="82" height="22" rx="6" fill="#B91C1C"></rect>
+        <text class="a2aT" x="620" y="257" style="font-size:10px">GRANTED</text>
+
+        <line x1="730" y1="292" x2="730" y2="312" stroke="#B91C1C" stroke-width="2" marker-end="url(#a2aRd)"></line>
+
+        <rect x="14" y="316" width="852" height="48" rx="9" fill="#FEF2F2" stroke="#B91C1C"></rect>
+        <text class="a2aR" x="28" y="336">Brackwater: expertise present, standing absent.</text>
+        <text class="a2aB" x="28" y="354">The collections finding was raised, recorded as an observation rather than a condition, and the launch proceeded.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the two pillars an institution can install are the two it always has. The missing one is the one that makes the other two matter.</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>What standing actually looks like when it exists<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Standing is easiest to identify by its consequences rather than its definition. In an institution where validation has it, three things are observably true. A validator has said no to something in the last two years and the thing did not happen. Launch dates are set after validation has an opinion, not before. And when a finding is graded, the grade is argued about by the business, which only happens when the grade has teeth.</p>
+        <p>Where standing is absent, the same three observations invert, and the tell is usually the second one. If the launch date was fixed in a commercial plan before validation started, then validation's only available outputs are approve, or approve with words attached. Refusal has been designed out of the process before any analysis happens, and the review is a schedule risk rather than a decision.</p>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>At Brackwater the scorecard's launch date was fixed in the commercial plan before the validation work reported. Nobody instructed the validators to approve anything. They simply arrived at a process where the only question on the table was whether anything was serious enough to justify moving a date the business had already committed to, which is a much higher bar than whether the evidence supports the claim.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Conflicts of interest, and the one the guidance names<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Independence is not only about who signs the validator's appraisal. The guidance is explicit that conflicts of interest include the misalignment of incentives between different reporting lines, such as model development and validation groups. That is a precise thing to look for: not bad faith, but two groups whose definitions of a good quarter are incompatible.</p>
+        <p>Development is measured on models shipped and performance improved. Validation, if it is measured at all, is usually measured on reviews completed and backlog cleared. Notice that both of those metrics reward the same behaviour, which is finishing. Neither of them rewards finding something, and finding something makes both numbers worse. An institution that wants challenge has to be willing for validation's throughput to fall in a year when validation is working.</p>
+        <p>The leader's version of this is a single question at the point of approval: who, other than me, is worse off if this model is delayed, and are any of them in the review chain. If the answer includes the person who graded the findings, the grade is worth less than it looks.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>The committee that cannot challenge<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Most institutions place effective challenge inside a committee, and most committees are structurally incapable of providing it. A committee sees a summary, not the work. It meets after the analysis is complete and before the decision is due, which is the one window in which nothing can be changed cheaply. Its members mostly lack the expertise requirement for any given model on the agenda, because no group of eight people is expert in credit scorecards, market risk models and an anti-money-laundering engine at once. And it operates by consensus, which is precisely the mechanism that converts one person's serious objection into a note in the minutes.</p>
+        <p>None of that makes committees useless. It makes them the wrong place for the critical analysis and the right place for the standing. A committee that reliably backs a validator who has said no is granting the third requirement, which is the thing only it can do. A committee that reads a summary and asks two questions is performing challenge, and the difference is visible in whether anything on its agenda has ever been sent back.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 2 ============ -->
+  <section class="section" id="part-2">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · covers the failure modes and who is supposed to do what</span>
+      <h2>A finding has four chances to disappear</h2>
+      <span class="tag concept">8 min live</span>
+    </div>
+    <p class="lede">Challenge does not usually fail at the analysis. The validator finds the thing. It fails afterwards, in the ordinary administrative steps between someone noticing a problem and the problem being fixed, and it fails in two specific places that leave no fingerprints. Knowing where those places are is most of what a leader needs, because both of them are visible from the approval seat if you ask for the right document.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 344" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The path a validation finding takes through four stages: raised, written up, tracked, and closed. Two red downgrade points are marked. The first is at the write-up stage, where severity is chosen by the people the finding will inconvenience and a condition becomes an observation. The second is at the tracking stage, where an observation needs no owner, no date and no closure. A summary band records that at Brackwater the collections field was raised at stage one and recorded as an observation at stage two, so there was no owner, no date and no gate on the launch.">
+        <style>
+          .a2bH { font: 800 12px Inter, sans-serif; fill: #0F172A; }
+          .a2bT { font: 800 11px Inter, sans-serif; fill: #FFFFFF; }
+          .a2bB { font: 400 11px Inter, sans-serif; fill: #0F172A; }
+          .a2bM { font: 400 11px Inter, sans-serif; fill: #56617A; }
+          .a2bR { font: 800 11px Inter, sans-serif; fill: #B91C1C; }
+          .a2bRb { font: 400 11px Inter, sans-serif; fill: #B91C1C; }
+        </style>
+        <defs>
+          <marker id="a2bAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#56617A"></path></marker>
+          <marker id="a2bRd" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#B91C1C"></path></marker>
+        </defs>
+
+        <text class="a2bH" x="16" y="20">From found to fixed, and the two steps where it stops.</text>
+
+        <rect x="16" y="32" width="200" height="94" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <rect x="16" y="32" width="200" height="24" rx="9" fill="#1E3A8A"></rect>
+        <text class="a2bT" x="28" y="49">1 · Raised</text>
+        <text class="a2bB" x="28" y="76">A validator finds it and</text>
+        <text class="a2bB" x="28" y="94">says it in the room.</text>
+        <text class="a2bM" x="28" y="114">This part usually works.</text>
+
+        <rect x="232" y="32" width="200" height="94" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <rect x="232" y="32" width="200" height="24" rx="9" fill="#1E3A8A"></rect>
+        <text class="a2bT" x="244" y="49">2 · Written up</text>
+        <text class="a2bB" x="244" y="76">It becomes a condition,</text>
+        <text class="a2bB" x="244" y="94">or it becomes an</text>
+        <text class="a2bB" x="244" y="112">observation.</text>
+
+        <rect x="448" y="32" width="200" height="94" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <rect x="448" y="32" width="200" height="24" rx="9" fill="#1E3A8A"></rect>
+        <text class="a2bT" x="460" y="49">3 · Tracked</text>
+        <text class="a2bB" x="460" y="76">It gets an owner and a</text>
+        <text class="a2bB" x="460" y="94">date, or it gets a line</text>
+        <text class="a2bB" x="460" y="112">in the minutes.</text>
+
+        <rect x="664" y="32" width="200" height="94" rx="9" fill="#BFDBFE" stroke="#93C5FD"></rect>
+        <rect x="664" y="32" width="200" height="24" rx="9" fill="#1E40AF"></rect>
+        <text class="a2bT" x="676" y="49">4 · Closed</text>
+        <text class="a2bB" x="676" y="76">Fixed and re-checked,</text>
+        <text class="a2bB" x="676" y="94">or closed because the</text>
+        <text class="a2bB" x="676" y="112">launch went ahead.</text>
+
+        <line x1="218" y1="79" x2="228" y2="79" stroke="#56617A" stroke-width="1.6" marker-end="url(#a2bAr)"></line>
+        <line x1="434" y1="79" x2="444" y2="79" stroke="#56617A" stroke-width="1.6" marker-end="url(#a2bAr)"></line>
+        <line x1="650" y1="79" x2="660" y2="79" stroke="#56617A" stroke-width="1.6" marker-end="url(#a2bAr)"></line>
+
+        <line x1="332" y1="130" x2="332" y2="162" stroke="#B91C1C" stroke-width="2" marker-end="url(#a2bRd)"></line>
+        <line x1="548" y1="130" x2="548" y2="162" stroke="#B91C1C" stroke-width="2" marker-end="url(#a2bRd)"></line>
+
+        <rect x="232" y="168" width="200" height="82" rx="9" fill="#FEF2F2" stroke="#B91C1C"></rect>
+        <text class="a2bR" x="244" y="188">Downgrade 1</text>
+        <text class="a2bRb" x="244" y="208">Severity is chosen by</text>
+        <text class="a2bRb" x="244" y="226">the people the finding</text>
+        <text class="a2bRb" x="244" y="244">will inconvenience.</text>
+
+        <rect x="448" y="168" width="200" height="82" rx="9" fill="#FEF2F2" stroke="#B91C1C"></rect>
+        <text class="a2bR" x="460" y="188">Downgrade 2</text>
+        <text class="a2bRb" x="460" y="208">An observation needs</text>
+        <text class="a2bRb" x="460" y="226">no owner, no date and</text>
+        <text class="a2bRb" x="460" y="244">no closure evidence.</text>
+
+        <rect x="16" y="264" width="848" height="64" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <text class="a2bH" x="30" y="286">Brackwater took both downgrades.</text>
+        <text class="a2bB" x="30" y="306">The collections field was raised at stage 1 and written up as an observation at stage 2. With no owner and no date, there</text>
+        <text class="a2bB" x="30" y="324">was nothing at stage 3 to gate the launch on. The finding was correct throughout and changed nothing.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the analysis was right. The loss happened in the grading and the tracking, which is where to look.</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Five failure modes you can spot from the approval seat<span class="mini">5 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>None of these require you to understand the model. All of them are visible in the paperwork or in the room.</p>
+        <ul>
+          <li><strong>Findings downgraded to observations.</strong> Ask how many findings were raised and how many became conditions. A review that produced only observations either found nothing, which is rare in a first validation, or found things and graded them away.</li>
+          <li><strong>Validation arriving after the launch date is fixed.</strong> Compare the date the go-live appeared in a plan with the date validation started. If the plan came first, the review could only ever be a formality with a schedule attached.</li>
+          <li><strong>A validator who has never been allowed to say no.</strong> Ask for the last refusal, by name and date. If there has never been one, you do not have evidence that refusal is available, and neither does the validator.</li>
+          <li><strong>Challenge that arrives as a document rather than a conversation.</strong> A report emailed a week before a committee cannot be argued with, and a finding nobody has had to defend out loud has not been tested. Critical analysis is a dialogue; a PDF is its residue.</li>
+          <li><strong>The model owner choosing the validator.</strong> Selection is where independence is really decided. If the developer picks the reviewer, or picks the vendor who reviews, the reporting line on the chart is decoration.</li>
+        </ul>
+        <div class="callout tip">
+          <p><strong>One question that covers four of the five.</strong> Ask to see the findings log with its grades, its owners and its dates, for the last three models approved. Empty columns are the whole answer, and it takes about ninety seconds to read.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Internal audit is not a second validation team<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>This is confused almost everywhere, and it produces one of two failures: audit duplicating validation badly with less expertise, or audit assuming validation has it covered and looking at nothing. The guidance is unusually clear about the split.</p>
+        <p>Internal audit would generally not duplicate model risk management activities such as model development or validation. Instead, its role is generally to evaluate whether the model risk management practices are rigorous and effective and whether related policies are implemented accordingly.</p>
+        <p>Read that as a difference in the object being examined. Validation examines the model. Audit examines the validation. The question audit is answering is not whether the scorecard is sound, it is whether the process that declared the scorecard sound was rigorous, and whether what the policy says would happen actually happened. Those are different skills and different evidence, and an auditor does not need to be able to refit a logistic regression to answer the second one.</p>
+        <p>Applied to Brackwater, audit's finding would not have been that the collections field is a leak. It would have been that a finding was raised, graded as an observation with no recorded rationale, given no owner, and closed at launch, and that the policy required conditions to be tracked to closure. That is a process failure, it is fully evidenced by the paperwork, and it is arguably the more damaging of the two findings because it applies to every model the institution has approved and not just this one.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Using a model before validation has finished, properly<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The expectation is that validation generally occurs prior to a model's first use. The guidance also accepts that an urgent business need may mean the model is used first, which is worth knowing because most leaders assume the choice is between waiting and quietly proceeding. There is a third option and it is the supervised one.</p>
+        <p>Where a model is used before validation is complete, sound practice is to give greater attention to the model's limitations, to inform the relevant stakeholders of those limitations, and to place controls on its use: limits on what it may decide, and closer monitoring while it runs. The pattern is simple to recognise. The urgency is named rather than implied, the limitations are written down rather than discovered, the people relying on the output know what they are relying on, and the use is fenced until the validation catches up.</p>
+        <p>Brackwater did the first half of this and none of the second. There was an urgent business need, the model went live, and then nothing else on the list happened: the limitation that had been identified was recorded as an observation rather than communicated as a constraint, no limits were placed on the decisions the score could make, and monitoring was the standard monthly pack. The difference between the legitimate version and what happened is not the decision to launch. It is everything that was supposed to accompany it.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 3 ============ -->
+  <section class="section" id="part-3">
+    <div class="section-kicker">
+      <span class="klabel">Part 3 · build-along</span>
+      <h2>Audit your own challenge function</h2>
+      <span class="tag build">20 min build-along</span>
+    </div>
+    <p class="lede">No laptop. Take the last model your area approved, or the one currently in front of you, and walk it through the seven questions below out loud. Answer with evidence rather than intent: a date, a name, a document, a decision that was actually taken. Where you cannot produce evidence, that is the requirement you are missing, and it will be the third one.</p>
+
+    <div class="steps">
+      <div class="step">
+                <div>
+          <p><strong>Name the expert.</strong> Who read this model critically, and what makes them qualified to find a flaw in this particular method. "The validation team" is not an answer. A person is.</p>
+        </div>
+      </div>
+      <div class="step">
+                <div>
+          <p><strong>Find out who chose them.</strong> Selection decides independence more reliably than reporting lines do. If the model owner picked the reviewer or the external firm, say so out loud and see how it sounds.</p>
+        </div>
+      </div>
+      <div class="step">
+                <div>
+          <p><strong>Put two dates side by side.</strong> The date the go-live was first committed to in a plan, and the date validation began. The order of those two dates tells you what kind of review was possible.</p>
+        </div>
+      </div>
+      <div class="step">
+                <div>
+          <p><strong>Count the findings and their grades.</strong> How many were raised, how many became conditions, how many became observations, and who decided each grade. Then ask what the rationale was for any downgrade, and whether it was written anywhere.</p>
+        </div>
+      </div>
+      <div class="step">
+                <div>
+          <p><strong>Check the tracking columns.</strong> Every open item should have an owner and a date. Blank columns mean the item exists on paper only, and blank columns are the single most common finding in this exercise.</p>
+        </div>
+      </div>
+      <div class="step">
+                <div>
+          <p><strong>Ask for the last refusal.</strong> When did a reviewer in this institution last stop something, and what happened to that reviewer afterwards. If there is no example, standing is unproven, regardless of what the policy grants on paper.</p>
+        </div>
+      </div>
+      <div class="step">
+                <div>
+          <p><strong>Write one sentence.</strong> "Our challenge has [expertise / independence / standing], is missing [the others], and the evidence is [the thing you could not produce]." Take that sentence to whoever can fix it, which for standing is whoever can overrule the business.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <p><strong>The cheapest thing a leader can do about standing.</strong> Grant it publicly and in advance, in a room that includes the business. Say that a condition from validation stops a launch until it is met, and that this is your decision rather than the validator's. It costs nothing on the day you say it, it is the only thing that makes the other two requirements operational, and the first time you honour it is when it becomes real.</p>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions</h2>
+    </div>
+
+    <div class="quiz-q" data-answer="2">
+      <p class="qtext">Your institution hires two experienced quantitative reviewers and moves them into a separate second-line unit with its own reporting line. Which requirement of effective challenge is still unaddressed?</p>
+      <button class="qopt" type="button">A · Expertise, because two people cannot cover every model type</button>
+      <button class="qopt" type="button">B · Independence, because a second-line unit still sits inside the same institution</button>
+      <button class="qopt" type="button">C · Organizational standing and influence, because nothing in that arrangement gives them the power to effect a change the business does not want</button>
+      <p class="qwhy">The definition requires expertise, sufficient independence to maintain objectivity, and the organizational standing and influence to effect any change. Hiring buys the first and the org chart addresses the second. The third is not a structure or a skill; it is the power to stop something, and it exists only when whoever can overrule the business has handed it over and is willing to back it.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">Internal audit proposes to re-run the validator's tests on the credit scorecard and reach its own view on whether the model is sound. Is that the right use of audit?</p>
+      <button class="qopt" type="button">A · Yes, a second opinion on the model is exactly what audit exists to provide</button>
+      <button class="qopt" type="button">B · No, audit would generally not duplicate activities such as development or validation; its role is to evaluate whether the model risk management practices are rigorous and effective and whether the policies were actually implemented</button>
+      <button class="qopt" type="button">C · Only if audit employs someone with the same modelling background as the validator</button>
+      <p class="qwhy">Validation examines the model; audit examines the validation. Duplicating the tests costs expertise the audit function usually does not have and leaves the real question unasked, which is whether the process that approved this model was rigorous and whether what the policy required actually happened. At Brackwater that second question has a much sharper answer than the first, and it applies to every model approved under the same process.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">An urgent commercial need means a model will go live before validation is finished. What does sound practice require?</p>
+      <button class="qopt" type="button">A · Give greater attention to the model's limitations, inform the relevant stakeholders of them, and place controls on its use such as limits or closer monitoring</button>
+      <button class="qopt" type="button">B · Nothing further, since validation generally occurs prior to first use and an exception has been made</button>
+      <button class="qopt" type="button">C · Escalate to the board, which is the only body able to authorise use of an unvalidated model</button>
+      <p class="qwhy">Validation generally occurs prior to a model's first use, and the guidance accepts that urgent business need can invert that order. What it does not accept is inverting the order and changing nothing else. The limitations get more attention rather than less, the people relying on the output are told what they are relying on, and the use is fenced with limits or closer monitoring until validation catches up. Brackwater launched and did none of that.</p>
+    </div>
+    <p class="quiz-score"></p>
+  </section>
+
+  <!-- ============ HOMEWORK ============ -->
+  <section class="section" id="homework">
+    <div class="section-kicker">
+      <span class="klabel">Homework</span>
+      <h2>Before session 3</h2>
+      <span class="tag time">30 min</span>
+    </div>
+    <div class="callout">
+      <p>Get hold of the findings log for the last three models your area approved, with the grades, the owners and the target dates in it. Count the conditions and count the observations. For every observation, find out who decided it was an observation and whether a reason was recorded. Then find one finding that was closed and ask what evidence was accepted as proof it had been fixed. Bring the counts to session 3, which is about what a validator is checking in the first place, and therefore what should have been in that log.</p>
+    </div>
+  </section>
+
+  <!-- ============ COVERAGE ============ -->
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Sources covered</span>
+      <h2>What tonight maps to</h2>
+    </div>
+    <div class="covered">
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Effective challenge, defined</span>
+        <span class="note">Critical analysis conducted by objective experts who evaluate model risk and effect appropriate changes throughout the model lifecycle.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Its three requirements</span>
+        <span class="note">Appropriate expertise, sufficient independence to maintain objectivity, and the organizational standing and influence to effect any change.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">What the 2026 restatement moved</span>
+        <span class="note">The 2011 text rested challenge on incentives, competence and influence. The current text rests it on expertise, independence and standing: incentives out of the list, independence named.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Conflicts of interest</span>
+        <span class="note">Named in the guidance as including misalignment of incentives between different reporting lines, such as model development and validation groups.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Internal audit's actual role</span>
+        <span class="note">Generally not duplicating model development or validation; evaluating instead whether the model risk management practices are rigorous and effective and whether related policies are implemented accordingly.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Use before validation is complete</span>
+        <span class="note">Validation generally occurs prior to first use; where urgent business need inverts that, sound practice is greater attention to limitations, informing stakeholders, and controls on use such as limits or closer monitoring.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill light">◐</span>
+        <span class="name">The independence change, structure against rigour</span>
+        <span class="note">Session 1 covers it in full, including why both readings are defensible. Tonight it appears only as the way the second requirement is evidenced.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill light">◐</span>
+        <span class="name">Findings, severity and conditions</span>
+        <span class="note">Session 5. Tonight shows where a finding is lost; how severity is set, what a condition obliges and when to refuse comes with the validation report itself.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill inkpill">·</span>
+        <span class="name">The EU AI Act, NIST AI RMF, ISO/IEC 42001, MAS and FEAT</span>
+        <span class="note">Not covered by design, in any session. Governing AI systems belongs to <strong>learn-ai-governance-with-phoebe</strong>.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill inkpill">·</span>
+        <span class="name">What AUC, calibration and a base rate mean</span>
+        <span class="note">Not covered by design. <strong>learn-model-evaluation-with-phoebe</strong> defines the metrics; here they are only the evidence a challenge is conducted on.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CHEAT SHEET ============ -->
+  <section class="cheat" id="cheatsheet">
+    <h3>Session 2 cheat sheet</h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>Challenge that changes nothing is not challenge</b><span>The definition ends in "effect appropriate changes". Analysis that gets filed fails the definition.</span></div>
+      <div class="cheat-item"><b>Three requirements</b><span>Appropriate expertise, sufficient independence to maintain objectivity, organizational standing and influence.</span></div>
+      <div class="cheat-item"><b>Standing is the one that fails</b><span>Expertise is hired, independence is drawn on a chart, standing has to be granted by whoever can overrule the business.</span></div>
+      <div class="cheat-item"><b>Incentives left the list</b><span>2011 said incentives, competence, influence. 2026 says expertise, independence, standing. Raise incentives yourself.</span></div>
+      <div class="cheat-item"><b>Two downgrade points</b><span>Grading a condition into an observation, and tracking it with no owner and no date. Both are visible in the log.</span></div>
+      <div class="cheat-item"><b>Audit checks the validation, not the model</b><span>It evaluates whether the practices were rigorous and effective and whether the policy was actually implemented.</span></div>
+      <div class="cheat-item"><b>Conflicts are named</b><span>Misalignment of incentives between different reporting lines, such as development and validation groups.</span></div>
+      <div class="cheat-item"><b>The legitimate early launch</b><span>Urgent need, then greater attention to limitations, stakeholders informed, and limits or closer monitoring on use.</span></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="pagefoot">
+  <div class="wrap">
+    <p>Leader session 2 of 6 · learn-model-risk-with-phoebe · by Phoebe Fu</p>
+    <nav class="pagenav">
+      <a href="../index.html">← All sessions</a>
+      <a href="a3-what-a-validator-checks.html">Leader session 3 · What a validator is checking →</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="../assets/app.js?v=2"></script>
+</body>
+</html>

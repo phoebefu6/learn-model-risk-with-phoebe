@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- social:start -->
+<meta name="description" content="Leader session 5 of 6. The five parts of a validation report, severity graded by consequence, and the three things a condition needs before it is a control. Plus what approval with conditions actually buys at Brackwater.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Learn with Phoebe">
+<meta property="og:title" content="Reading a validation report - learn model risk with phoebe">
+<meta property="og:description" content="Leader session 5 of 6. A condition with no owner, no date and no consequence is a sentence, and a sentence approves the model outright.">
+<meta property="og:url" content="https://phoebefu6.github.io/learn-model-risk-with-phoebe/courses/a5-reading-a-validation-report.html">
+<meta property="og:image" content="https://phoebefu6.github.io/learn-model-risk-with-phoebe/assets/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Reading a validation report - learn model risk with phoebe">
+<meta name="twitter:description" content="Owner, trigger or date, consequence. Miss any one and the condition is decoration.">
+<meta name="twitter:image" content="https://phoebefu6.github.io/learn-model-risk-with-phoebe/assets/og-cover.png">
+<!-- social:end -->
+<title>Leader session 5 · Reading a validation report - learn model risk with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=2">
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-model-risk-with-phoebe</a> / Leader session 5 of 6</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Learn Model Risk with Phoebe · Leader session 5 of 6</div>
+    <h1>A condition is a control, or it is <span class="accent">a sentence in a document</span></h1>
+    <p class="sub">Brackwater's validation came back with four findings and a recommendation to approve with conditions. On this evidence that is the right recommendation. Whether it is worth anything depends entirely on what the conditions section says, and most conditions sections are full of sentences: the owner should review, the team will consider, performance will be monitored closely. Nobody is named, nothing is dated, and nothing happens if none of it is done. A model approved on those terms has been approved outright, with a paragraph attached that makes everybody feel better. Tonight is how to read the document you are being asked to act on, what severity is actually grading, and the three parts a condition needs before it changes anybody's behaviour.</p>
+    <div class="chip-row">
+      <span class="chip level">🟠 Advanced</span>
+      <span class="chip audience">Whoever signs the approval</span>
+      <span class="chip audience">Risk, audit and the second line</span>
+      <span class="chip time">45 min</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:1">0-3 · Welcome</span>
+      <span class="a2" style="flex:5">3-22 · Anatomy, severity, conditions</span>
+      <span class="a3" style="flex:4">22-40 · Build-along: re-read an approval</span>
+      <span class="a4" style="flex:1">40-45 · Q&amp;A</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ INTRO ============ -->
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>Where tonight sits</h2>
+    </div>
+    <p class="lede">Session 1 was what model risk is: adverse consequences from decisions made on model output, rather than a synonym for the model being wrong. Session 2 was effective challenge and why it fails in organisations that have all the right job titles. Session 3 was what a validator is actually checking, in plain terms. Session 4 was materiality and the register: which models earn the work at all. Tonight is the document that comes back when the work is done, and session 6 is putting your name on it. The worked example stays <strong>Brackwater</strong>, whose scorecard was submitted at a development AUC of 0.863 and turned out to score 0.682 out of time once the field that was doing the work was removed.</p>
+
+    <div class="legend">
+      <span class="pill">Live = presented in the 45 minutes</span>
+      <span class="pill">Self-study = the full depth, after class</span>
+      <span class="pill">🔍 Every diagram zooms</span>
+    </div>
+
+    <div class="callout win">
+      <p><strong>★ What you walk out with tonight.</strong> The five parts every readable validation report has, and what it tells you when the report is organised some other way. A grading rule for severity that survives contact with a proud author: consequence, not cleverness, and not how hard the finding was to dig out. The three parts a condition must contain before it is a control rather than a sentence, which is the one test on this page you will use every month. And the claim to refuse to make about Brackwater, because the defensible finding is narrower than the one everybody in the room will reach for.</p>
+    </div>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>A validation report is an argument, not a summary<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The most useful habit you can bring to one of these documents is to stop reading it as a report on a model and start reading it as an argument about a claim. Somebody asserted something, in writing, in the model document. Validation evaluates whether the model performs as expected, assesses its reliability and its limitations, and clarifies appropriate use and whether corrective actions may be warranted. Everything in the report exists to support or undermine that assertion, and a report that never states the assertion is asking you to grade an answer without showing you the question.</p>
+        <p>This matters because of what it does to the reading order. If the claim is stated up front, every finding underneath it has an obvious weight: it either survives the claim, narrows it, or breaks it. If the claim is missing, the findings become a list of technical observations of unknown importance, and the only person in the room who can weigh them is the person who wrote them. That is how a report ends up being summarised to a committee by its own author, which is a governance failure with a perfectly pleasant surface.</p>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>Brackwater's model document made one claim: an eleven-feature scorecard that discriminates at 0.863 on the development sample, recommended for deployment. That sentence is the thing being validated. Not the model, not the team, not the method. By the end of the report, three of the four findings are about that sentence rather than about the scorecard, and the fourth is about the world the scorecard was deployed into.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>The words this session runs on<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <ul>
+          <li><strong>The claim.</strong> What the model document asserts, in one sentence. The thing the report is about.</li>
+          <li><strong>Finding.</strong> A statement of what the evidence showed, written so that the model owner can agree with the fact even while disagreeing with the grade.</li>
+          <li><strong>Severity.</strong> The weight attached to a finding. A judgement about consequence, made by the validator and signed off by somebody, and the field most often quietly edited.</li>
+          <li><strong>Observation.</strong> A finding that has been graded as not worth a condition. Legitimate, and also the drawer that findings disappear into.</li>
+          <li><strong>Condition.</strong> Something that must happen before or during use. A control if it names an owner, a trigger or a date, and a consequence. Otherwise a sentence.</li>
+          <li><strong>Limitation.</strong> A boundary on the claim that no amount of remediation removes. It belongs in the report and then in the use.</li>
+          <li><strong>Scope.</strong> What was tested, and by omission what was not. An untested area is not a passed one.</li>
+          <li><strong>Recommendation.</strong> One of three answers: approve, approve with conditions, or decline to approve.</li>
+        </ul>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 1 ============ -->
+  <section class="section" id="part-1">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · covers the anatomy of a report, and what severity grades</span>
+      <h2>Five parts, and the shape that tells you the report is honest</h2>
+      <span class="tag concept">10 min live</span>
+    </div>
+    <p class="lede">There is no mandated template for a validation report, and the good ones differ. What the good ones share is that a reader who has never seen the model can find five things quickly: what was claimed, what was found, how heavily each finding weighs, what has to happen as a result, and what the answer is. Read the five in order and the document either holds together or visibly does not.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 432" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="An annotated anatomy of a validation report in five numbered parts, each with the question a reader should ask of it. Part one, the claim being validated: ask what claim was validated, since it is one sentence and everything below is evidence for or against it. Part two, the findings: ask what was not tested, because scope is a finding and an untested area is not a passed one. Part three, severity, one per finding: ask who set the severity and who changed it, because downgrades happen in meetings that leave no record. Part four, the conditions: ask what happens if a condition is missed, because if nothing happens it is not a condition. Part five, the recommendation: ask whether the recommendation follows the findings, because a green recommendation over amber findings needs a reason in writing. Below, two contrasting boxes. A report organised by the three components of validation lets missing work show up as an empty section. A report organised by whatever got run looks complete on its face, because the sections are the tests somebody chose.">
+        <style>
+          .a5aH { font: 800 12px Inter, sans-serif; fill: #0F172A; }
+          .a5aT { font: 800 12px Inter, sans-serif; fill: #FFFFFF; }
+          .a5aL { font: 800 11px Inter, sans-serif; fill: #0F172A; }
+          .a5aB { font: 400 11px Inter, sans-serif; fill: #0F172A; }
+          .a5aM { font: 400 11px Inter, sans-serif; fill: #56617A; }
+          .a5aR { font: 800 11px Inter, sans-serif; fill: #B91C1C; }
+          .a5aRb { font: 400 11px Inter, sans-serif; fill: #B91C1C; }
+        </style>
+        <defs>
+          <marker id="a5aAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#56617A"></path></marker>
+        </defs>
+
+        <text class="a5aH" x="14" y="20">Five parts, in this order. A reader should find each one in under a minute.</text>
+
+        <rect x="14" y="32" width="300" height="56" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <rect x="14" y="32" width="30" height="56" rx="9" fill="#1E40AF"></rect>
+        <text class="a5aT" x="23" y="66">1</text>
+        <text class="a5aL" x="54" y="56">The claim being validated</text>
+        <text class="a5aM" x="54" y="74">What the model document asserts</text>
+        <line x1="318" y1="60" x2="344" y2="60" stroke="#56617A" stroke-width="1.6" marker-end="url(#a5aAr)"></line>
+        <rect x="350" y="32" width="516" height="56" rx="9" fill="#FFFFFF" stroke="#DDE5F0"></rect>
+        <text class="a5aL" x="364" y="56">Ask what claim was validated</text>
+        <text class="a5aM" x="364" y="74">One sentence. Everything below is evidence for or against it.</text>
+
+        <rect x="14" y="96" width="300" height="56" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <rect x="14" y="96" width="30" height="56" rx="9" fill="#1E40AF"></rect>
+        <text class="a5aT" x="23" y="130">2</text>
+        <text class="a5aL" x="54" y="120">The findings</text>
+        <text class="a5aM" x="54" y="138">What the evidence actually showed</text>
+        <line x1="318" y1="124" x2="344" y2="124" stroke="#56617A" stroke-width="1.6" marker-end="url(#a5aAr)"></line>
+        <rect x="350" y="96" width="516" height="56" rx="9" fill="#FFFFFF" stroke="#DDE5F0"></rect>
+        <text class="a5aL" x="364" y="120">Ask what was not tested</text>
+        <text class="a5aM" x="364" y="138">Scope is a finding. An untested area is not a passed one.</text>
+
+        <rect x="14" y="160" width="300" height="56" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <rect x="14" y="160" width="30" height="56" rx="9" fill="#1E40AF"></rect>
+        <text class="a5aT" x="23" y="194">3</text>
+        <text class="a5aL" x="54" y="184">Severity, one per finding</text>
+        <text class="a5aM" x="54" y="202">Consequence if the finding is right</text>
+        <line x1="318" y1="188" x2="344" y2="188" stroke="#56617A" stroke-width="1.6" marker-end="url(#a5aAr)"></line>
+        <rect x="350" y="160" width="516" height="56" rx="9" fill="#FFFFFF" stroke="#DDE5F0"></rect>
+        <text class="a5aL" x="364" y="184">Ask who set the severity, and who changed it</text>
+        <text class="a5aM" x="364" y="202">Downgrades happen in meetings that leave no record.</text>
+
+        <rect x="14" y="224" width="300" height="56" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <rect x="14" y="224" width="30" height="56" rx="9" fill="#1E40AF"></rect>
+        <text class="a5aT" x="23" y="258">4</text>
+        <text class="a5aL" x="54" y="248">The conditions</text>
+        <text class="a5aM" x="54" y="266">What must happen, and by when</text>
+        <line x1="318" y1="252" x2="344" y2="252" stroke="#56617A" stroke-width="1.6" marker-end="url(#a5aAr)"></line>
+        <rect x="350" y="224" width="516" height="56" rx="9" fill="#FFFFFF" stroke="#DDE5F0"></rect>
+        <text class="a5aL" x="364" y="248">Ask what happens if a condition is missed</text>
+        <text class="a5aM" x="364" y="266">If nothing happens, it is not a condition.</text>
+
+        <rect x="14" y="288" width="300" height="56" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <rect x="14" y="288" width="30" height="56" rx="9" fill="#1E3A8A"></rect>
+        <text class="a5aT" x="23" y="322">5</text>
+        <text class="a5aL" x="54" y="312">The recommendation</text>
+        <text class="a5aM" x="54" y="330">One of three, and it follows</text>
+        <line x1="318" y1="316" x2="344" y2="316" stroke="#56617A" stroke-width="1.6" marker-end="url(#a5aAr)"></line>
+        <rect x="350" y="288" width="516" height="56" rx="9" fill="#FFFFFF" stroke="#DDE5F0"></rect>
+        <text class="a5aL" x="364" y="312">Ask whether the recommendation follows the findings</text>
+        <text class="a5aM" x="364" y="330">A green answer over amber findings needs a reason in writing.</text>
+
+        <rect x="14" y="356" width="422" height="64" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <text class="a5aL" x="28" y="380">Organised by the three components</text>
+        <text class="a5aB" x="28" y="400">Missing work shows up as an empty section.</text>
+
+        <rect x="444" y="356" width="422" height="64" rx="9" fill="#FEF2F2" stroke="#B91C1C"></rect>
+        <text class="a5aR" x="458" y="380">Organised by whatever got run</text>
+        <text class="a5aRb" x="458" y="400">Complete on its face: the sections are the tests chosen.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the five questions on the right are the whole of a leader's reading method. Nothing on this page requires you to check the arithmetic.</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Organised by component, or organised by whatever got run<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Session 3 gave the three components of validation in the order the guidance uses them: conceptual soundness, outcomes analysis, and ongoing model monitoring. A report organised around those three headings is one a non-specialist can follow, for a reason that has nothing to do with taste. The three headings exist independently of what anybody ran. If the outcomes analysis section is thin, you can see that it is thin. If there is no ongoing monitoring section, the absence is on the page.</p>
+        <p>A report organised around the work that happened has the opposite property. Its sections are the tests somebody chose to run, so every section is full, every section reports a result, and the document looks complete no matter how much was skipped. There is no empty heading, because the headings were written after the work. You are reading a list of things that were done, presented as an assessment of a model, and the only way to find the gap is to already know what should have been there.</p>
+        <p>The leader's move is not to redesign anybody's template. It is to ask, for each of the three components, which section covers it and what it concluded. Three questions, and a report that cannot answer one of them has told you what it is.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Severity grades the consequence, not the cleverness<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Severity is the field that decides whether anything happens, and it is graded by people who have just spent six weeks on the work. Two failure modes follow from that, and they pull in opposite directions.</p>
+        <p><strong>Grading by difficulty.</strong> A finding that took three weeks of forensic effort to uncover feels heavier than one that was obvious on the first afternoon. It is not. Severity is a statement about what happens if the finding is correct and nothing is done about it, and the effort spent discovering it is information about the review, not about the model. The obvious finding that puts the whole claim in doubt outranks the ingenious one that narrows it slightly.</p>
+        <p><strong>Grading by embarrassment.</strong> The mirror image, and the more common one. A finding is graded down because the consequence of grading it up is a delayed launch, an awkward conversation, or a colleague's reputation. This is rarely done dishonestly. It is done by adding qualifiers until the sentence is true and weightless, and the tell is that the finding text and the severity no longer describe the same event.</p>
+        <p>The discipline that fixes both is to write the consequence before choosing the grade. One sentence: if this finding is right and nothing changes, the following happens to the following decisions. Grade that sentence. If the sentence is hard to write, the finding is not yet understood well enough to grade, and that is itself worth saying out loud.</p>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>Brackwater's leaked field was not hard to find. Anybody who asked when the <strong>collections</strong> contact was recorded relative to the outcome window would have had it in an afternoon. It is also the finding that breaks the claim, because the submitted 0.863 depends on it and the honest development figure is 0.772. Session 2 recorded what actually happened: it was written up as an observation rather than a condition, and an observation obliges nobody.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>The four Brackwater findings, and what each one weighs<span class="mini">5 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Four findings, in the order a reader can follow rather than the order they were discovered. None of them require you to evaluate a metric; each is a statement about whether the submitted evidence supports the submitted claim.</p>
+        <ul>
+          <li><strong>A field that could not have been available at decision time.</strong> The <strong>collections</strong> field records contacts logged after the outcome window opens, so it is a consequence of default rather than a predictor of it. On its own it discriminates at 0.748 against the submitted 0.863. Refit without it, development performance falls to 0.772, so the leak was worth 0.091. Consequence if right: the headline number in the model document is not a number the model can reproduce in production. This is the finding that decides the report.</li>
+          <li><strong>Performance on a later vintage.</strong> The honest model, scored on the following year's 2,000 applications, discriminates at 0.682, a further drop of 0.090. Consequence if right: the approved performance and the lived performance are different numbers, and the cutoff calibrated on the first is being applied to the second.</li>
+          <li><strong>Calibration that is sound in aggregate and wrong in every band.</strong> Out of time, the model predicts a mean default rate of 0.330 against an actual 0.324, a gap of -0.006 and as close as anybody reports. By quintile of predicted risk the picture inverts: the safest fifth is under-predicted by 0.061, and the riskiest fifth is over-predicted by 0.142. Consequence if right: the aggregate figure that was reported would have passed this model, and the decisions are made in the bands.</li>
+          <li><strong>A population that moved.</strong> The share of thin-file applicants in the book went from 19.0 percent to 34.0 percent between the two vintages. Consequence if right: the growth is concentrated in the applicants the model has least evidence about, and no monitoring threshold was written that would have fired.</li>
+        </ul>
+        <p>There is a fifth thing in the pack that is not a finding, and it is worth naming as an item in its own right. A three-feature benchmark, built from columns anybody could have written, scores 0.676 out of time against the champion's 0.682. That is not a finding about a defect. It is a finding about what the eleven features, the leak and the validation cycle actually bought, which is 0.006.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 2 ============ -->
+  <section class="section" id="part-2">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · covers conditions, and the three available recommendations</span>
+      <h2>What approval with conditions actually buys</h2>
+      <span class="tag concept">8 min live</span>
+    </div>
+    <p class="lede">Approval with conditions is the most common recommendation in this discipline and the least examined. It reads as a compromise between yes and no, which is exactly what it is not. It is a yes, with the use of the model bounded by controls that have to hold. Whether the bounding is real is decided entirely in the wording, and a conditions section can be read in ninety seconds against three tests.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A comparison of a sentence and a control, followed by the three parts a condition needs and the three available recommendations. On the left, a sentence in a document reads that the model owner should review the collections field and consider whether it remains appropriate, with no owner, no date and no consequence, so nothing fires when it is not done. On the right, a control reads that the model owner refits without collections and reports out-of-time performance to the committee by 31 March, and until that report is accepted the score may not be used to set price, so owner, date and consequence are all present. Below, three requirement boxes: an owner, meaning a named person rather than a team or a function; a trigger or a date, meaning when it is due or the event that makes it due, written in advance; and a consequence if it is not met, meaning what stops, narrows or escalates, decided now rather than in the moment. Below that, the three recommendations: approve, where the evidence supports the claim; approve with conditions, highlighted as the one this evidence supports, where use is permitted and bounded and each condition is a control with a consequence; and decline to approve, for a model that cannot be used safely at all, not for one that is merely disappointing.">
+        <style>
+          .a5bH { font: 800 12px Inter, sans-serif; fill: #0F172A; }
+          .a5bT { font: 800 11px Inter, sans-serif; fill: #FFFFFF; }
+          .a5bW { font: 400 11px Inter, sans-serif; fill: #FFFFFF; }
+          .a5bL { font: 800 11px Inter, sans-serif; fill: #0F172A; }
+          .a5bB { font: 400 11px Inter, sans-serif; fill: #0F172A; }
+          .a5bM { font: 400 11px Inter, sans-serif; fill: #56617A; }
+          .a5bR { font: 800 11px Inter, sans-serif; fill: #B91C1C; }
+          .a5bRb { font: 400 11px Inter, sans-serif; fill: #B91C1C; }
+        </style>
+
+        <text class="a5bH" x="14" y="20">The same finding, written twice. Only one of them changes behaviour.</text>
+
+        <rect x="14" y="30" width="416" height="140" rx="9" fill="#FEF2F2" stroke="#B91C1C"></rect>
+        <rect x="14" y="30" width="416" height="26" rx="9" fill="#B91C1C"></rect>
+        <text class="a5bT" x="28" y="48">A SENTENCE IN A DOCUMENT</text>
+        <text class="a5bB" x="28" y="78">"The model owner should review the collections</text>
+        <text class="a5bB" x="28" y="96">field and consider whether it remains</text>
+        <text class="a5bB" x="28" y="114">appropriate for production use."</text>
+        <text class="a5bRb" x="28" y="140">No owner. No date. No consequence.</text>
+        <text class="a5bRb" x="28" y="158">Nothing fires when it is not done.</text>
+
+        <rect x="450" y="30" width="416" height="140" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <rect x="450" y="30" width="416" height="26" rx="9" fill="#1E3A8A"></rect>
+        <text class="a5bT" x="464" y="48">A CONTROL</text>
+        <text class="a5bB" x="464" y="78">"The model owner refits without collections and</text>
+        <text class="a5bB" x="464" y="96">reports out-of-time performance to the committee</text>
+        <text class="a5bB" x="464" y="114">by 31 March. Until that report is accepted, the</text>
+        <text class="a5bB" x="464" y="132">score may not be used to set price."</text>
+        <text class="a5bM" x="464" y="158">Owner, date, consequence. All three present.</text>
+
+        <text class="a5bH" x="14" y="192">Three parts. Miss any one and what you have is a sentence.</text>
+
+        <rect x="14" y="200" width="276" height="72" rx="9" fill="#BFDBFE" stroke="#93C5FD"></rect>
+        <text class="a5bL" x="28" y="224">An owner</text>
+        <text class="a5bB" x="28" y="244">A named person, not a team</text>
+        <text class="a5bB" x="28" y="262">or a function.</text>
+
+        <rect x="302" y="200" width="276" height="72" rx="9" fill="#BFDBFE" stroke="#93C5FD"></rect>
+        <text class="a5bL" x="316" y="224">A trigger or a date</text>
+        <text class="a5bB" x="316" y="244">When it is due, or the event</text>
+        <text class="a5bB" x="316" y="262">that makes it due.</text>
+
+        <rect x="590" y="200" width="276" height="72" rx="9" fill="#BFDBFE" stroke="#93C5FD"></rect>
+        <text class="a5bL" x="604" y="224">A consequence if missed</text>
+        <text class="a5bB" x="604" y="244">What stops, narrows or</text>
+        <text class="a5bB" x="604" y="262">escalates. Decided now.</text>
+
+        <text class="a5bH" x="14" y="294">Three recommendations. This evidence supports the middle one.</text>
+
+        <rect x="14" y="302" width="276" height="92" rx="9" fill="#FFFFFF" stroke="#C7D2E4"></rect>
+        <text class="a5bL" x="28" y="326">Approve</text>
+        <text class="a5bM" x="28" y="348">The evidence supports the</text>
+        <text class="a5bM" x="28" y="366">claim. Use it as described,</text>
+        <text class="a5bM" x="28" y="384">under ordinary monitoring.</text>
+
+        <rect x="302" y="302" width="276" height="92" rx="9" fill="#1E3A8A"></rect>
+        <text class="a5bT" x="316" y="326">Approve with conditions</text>
+        <text class="a5bW" x="316" y="348">Use is permitted and</text>
+        <text class="a5bW" x="316" y="366">bounded. Every condition</text>
+        <text class="a5bW" x="316" y="384">carries a consequence.</text>
+
+        <rect x="590" y="302" width="276" height="92" rx="9" fill="#FFFFFF" stroke="#C7D2E4"></rect>
+        <text class="a5bR" x="604" y="326">Decline to approve</text>
+        <text class="a5bM" x="604" y="348">For a model that cannot be</text>
+        <text class="a5bM" x="604" y="366">used safely at all. Not for</text>
+        <text class="a5bM" x="604" y="384">one that is disappointing.</text>
+
+        <text class="a5bM" x="14" y="420">Declining is not a stronger version of conditions. It is a different finding: no safe setting exists for this use.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - read a conditions section by looking for three things. Anything missing one of them is prose.</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Owner, trigger or date, consequence<span class="mini">5 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>A condition is a promise that the model's use is bounded until something happens. Three things have to be in the text for that promise to mean anything, and the reason each one is necessary is worth having separately, because conditions usually fail on exactly one of them.</p>
+        <p><strong>An owner, and a person rather than a role.</strong> "The modelling team will refit the scorecard" assigns the work to an abstraction. Teams reorganise, priorities move, and no abstraction has ever taken a phone call. A named individual can be asked in a corridor, can hand the item over explicitly when they move on, and can say no, which is information you want early. The test is whether you could send one email. If you would have to ask who owns this first, the condition has no owner.</p>
+        <p><strong>A trigger or a date, written now.</strong> Time-bound conditions get a date. Event-bound ones get a trigger: when the book crosses a stated size, when the next vintage closes, when the feed definition changes, when the model is put to a new use. Either is acceptable and the mixture is common. What is not acceptable is "as soon as practicable", which is a date chosen later by whoever is least inconvenienced by the delay. A trigger written in advance also has a property a date does not: it survives the plan changing, because it describes the world rather than the calendar.</p>
+        <p><strong>A consequence if it is not met, decided before it is needed.</strong> This is the part that is almost always missing, and it is the part that makes the other two load-bearing. If the condition is not met by the date, what happens: does the model stop, does a use narrow, does the approval lapse, does it escalate to a named committee. Decide it now, while the model is not yet in production and nobody is under pressure. Decided later, in the week the date is missed, the answer is always an extension, because by then the model is running the book and stopping it is a business event.</p>
+        <p>Two smaller tests catch most of what survives those three. Is the condition observable by somebody who is not thinking about model risk that day, and is it recorded somewhere other than the report. Documentation supports the tracking of recommendations, responses and exceptions, and a condition that lives only in a PDF in a shared drive is not being tracked, whatever the policy says. Session 4 made the same point about the register: the artefact that holds the item is the one that decides whether the item exists.</p>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>A conditions section for Brackwater that would actually bound the use has four entries, and each one names a person, a date and a consequence. Refit without collections and report the honest development and out-of-time figures by a stated date, or the score may not be used to set price. Report calibration by band, not in aggregate, in every monthly pack, or the monthly pack is returned unaccepted. Set and publish a thin-file share threshold, with the action that fires when it is crossed. And re-examine the eleven-feature design against the three-feature benchmark at the next scheduled review, given that out of time the difference between them is 0.006.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>The three answers, and which one this evidence supports<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><strong>Approve.</strong> The evidence supports the claim, the limitations are stated, and the use described in the model document is the use being approved. This is not a rare answer and it should not be treated as suspicious. A well-built model with honest evidence and a clear statement of what it cannot do earns a clean approval, and a function that never gives one is teaching its model owners that the report is theatre.</p>
+        <p><strong>Approve with conditions.</strong> The model can be used, and the use is bounded until stated things happen. This is the answer Brackwater's evidence supports, and it is worth being precise about why. Nothing in the four findings says the scorecard cannot rank applicants. What they say is that the number in the document is not the number the model produces honestly, that the later vintage performs worse than the approved figure, that the aggregate calibration conceals the band-level picture, and that the population has moved toward the applicants the model knows least about. Every one of those is addressable, and every one of them is a boundary on use until it is addressed. That combination is the definition of this recommendation.</p>
+        <p><strong>Decline to approve.</strong> Reserved for a model that cannot be used safely at all in the use proposed. Not a model that disappoints, not a model whose author was careless, and not a model whose findings are numerous. The test is whether a bounded use exists: if you can describe a narrower use, a lower limit, or a closer monitoring regime under which the model is defensible, the answer is conditions, and the narrowing belongs in the conditions. If no such setting exists, conditions are dishonest, because you would be writing controls around a use that should not happen. Session 6 is about that answer, including how to give it without leaving the business stranded.</p>
+        <p>One structural point holds across all three. The recommendation is the last thing in the report and the first thing everybody reads, which means it routinely gets negotiated independently of the findings above it. When a recommendation is upgraded, the findings almost never change to match, and the document is left arguing with itself. A report whose recommendation does not follow from its own severity grades has recorded that a decision was made somewhere else, and the useful question is where.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>The claim not to make, and the risk that stays after you sign<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>There is a sentence everybody in the room reaches for once the findings are on the table, and it is wrong. It is some version of "the champion is worthless, the challenger is better, build the simple one." On this evidence that claim cannot be sustained. Out of time the champion scores 0.682 and the three-feature challenger 0.676, which is a difference of 0.006 and well inside the noise of a 2,000-application sample. At their respective cutoffs they win on different axes: the champion approves 69.3 percent of applicants with 24.7 percent bad among those approved, the challenger approves 72.2 percent with 25.3 percent bad. The champion buys 0.6 points of bad rate and gives up 2.9 points of volume. Which of those a lender prefers is a business question, not a validation finding.</p>
+        <p>The defensible finding is narrower and sharper: <strong>the evidence submitted did not support the claim made</strong>. That is a statement about the model document, not about the model, and it is the one you can hold in front of a supervisor, a committee or the model owner without retreating. It also survives the most likely counterattack, which is a rebuttal about the challenger's own weaknesses, because the finding was never about the challenger.</p>
+        <p>Notice what the narrower claim does to the conditions. If the finding is "the model is bad", the only condition available is "build a new one", which is not a control and will not happen on any timescale you can name. If the finding is "the evidence did not support the claim", the conditions write themselves: produce honest evidence for the claim you want to make, or make a smaller claim. That is achievable, datable and ownable, which is the whole point.</p>
+        <p>The last thing to carry out of the report is what it does not remove. Even with sound modelling practices and rigorous validation, material model risk can remain. That is a statement in the guidance, not a pessimistic aside, and it puts a short list of obligations on the people who use the output rather than on the people who validated it: understand and communicate the model's limitations, monitor performance, periodically review whether the model is still relevant, and supplement the output with complementary analysis and information. Session 3 covered that list from the validator's side. Tonight it arrives as the thing a signature does not buy: the conditions bound the use, the report bounds the claim, and the residual risk stays with the business.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 3 ============ -->
+  <section class="section" id="part-3">
+    <div class="section-kicker">
+      <span class="klabel">Part 3 · build-along</span>
+      <h2>Re-read a report you already approved</h2>
+      <span class="tag build">20 min build-along</span>
+    </div>
+    <p class="lede">No laptop. Bring the last validation report your area signed, ideally one that was approved with conditions, and work the seven steps out loud. The output is not a re-opened decision. It is a list of the conditions that turned out to be sentences, and one rewritten condition that would have held.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div>
+          <p><strong>Find the claim, and read it aloud.</strong> One sentence from the model document saying what this model does and how well. If the report does not contain it, write what you believe it was, and notice that you are now reconstructing the question after grading the answer.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <p><strong>List the findings without their severities.</strong> Just the facts, in the order a stranger could follow. Cover them up before you look at the grades, because the grades will otherwise tell you what to think about each one.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <p><strong>Grade each one yourself, by consequence.</strong> For each finding, one sentence: if this is right and nothing changes, the following happens to the following decision. Then compare your grade with the one in the report and look only at the disagreements.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <p><strong>Ask what is not in the report.</strong> Which of the three components got the least space, what was out of scope, and whether the scope was recorded anywhere. An untested area that nobody wrote down as untested will be read next year as an area that passed.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <p><strong>Run the three tests on every condition.</strong> A named person, a date or a trigger, a stated consequence. Count how many of the conditions have all three. In most packs the number is zero or one, and saying the count out loud is the most useful thing that will happen in this session.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <p><strong>Find out what actually happened to each condition.</strong> Met, missed, extended, or quietly dropped. Then ask who would have noticed a miss, and whether anybody did. This is the step that tells you whether your conditions are a control system or a writing style.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <p><strong>Rewrite one condition so it would have held.</strong> Take the weakest one and put a name, a date or a trigger, and a consequence into it. Read it back and ask whether you would have been willing to enforce the consequence in the month it fell due. If not, the consequence is wrong and the condition is still a sentence.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <p><strong>The question that tests a conditions section in one move.</strong> Pick any condition and ask what would have happened last quarter if it had been missed. Not what the policy says: what would actually have happened, to this model, in this business. If the honest answer is that the date would have moved, you are looking at a target rather than a control, and the model was approved outright.</p>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions</h2>
+    </div>
+
+    <div class="quiz-q" data-answer="2">
+      <p class="qtext">A validation report approves a model subject to one condition: "The model owner will monitor performance closely and report any deterioration to the risk committee." What is wrong with it?</p>
+      <button class="qopt" type="button">A · Nothing; it names the model owner, the activity and the escalation route, which is everything a condition needs</button>
+      <button class="qopt" type="button">B · It is too specific, and a condition should describe the outcome required rather than the activity</button>
+      <button class="qopt" type="button">C · It has no trigger or date and no consequence, so nothing fires if it is not done, and "the model owner" is a role rather than a named person</button>
+      <p class="qwhy">Three parts make a condition a control: a named owner, a trigger or a date, and a stated consequence if it is not met. This one has an activity and a destination but nothing that can be missed, so there is no moment at which anybody is late and nothing narrows when they are. A model approved on this condition has been approved outright.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">Two findings sit in front of you. One took a validator three weeks of forensic work to uncover and narrows the model's use slightly. The other was obvious within a day and means the headline performance figure cannot be reproduced in production. How should severity be assigned?</p>
+      <button class="qopt" type="button">A · The three-week finding is graded higher, because the depth of work is evidence of how serious the issue is</button>
+      <button class="qopt" type="button">B · The one-day finding is graded higher, because severity grades the consequence if the finding is right, and the effort spent discovering it says nothing about the model</button>
+      <button class="qopt" type="button">C · Both get the same grade, since grading findings against each other invites the model owner to argue about rankings</button>
+      <p class="qwhy">Severity is a statement about what happens if the finding is correct and nothing is done. Discovery effort is information about the review, not about the model. Writing the consequence sentence first and grading that sentence defends against both failure modes: inflating a clever finding, and deflating an awkward one.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">Brackwater's champion scores 0.682 out of time against a three-feature challenger's 0.676. At their cutoffs the champion approves 69.3 percent with 24.7 percent bad and the challenger 72.2 percent with 25.3 percent bad. What is the defensible finding?</p>
+      <button class="qopt" type="button">A · That the evidence submitted did not support the claim made, which is a statement about the model document rather than about the model</button>
+      <button class="qopt" type="button">B · That the champion is worthless and the challenger should replace it, since three columns match eleven</button>
+      <button class="qopt" type="button">C · That the champion is vindicated, because it beats the challenger on discrimination out of time</button>
+      <p class="qwhy">The two models are within 0.006 on discrimination and each wins on a different business axis: the champion buys 0.6 points of bad rate and gives up 2.9 points of volume. Neither "worthless" nor "vindicated" survives that. What does survive is that the submitted 0.863 depended on a field that could not have been available at decision time, so the evidence offered did not support the claim made, and that finding writes its own conditions.</p>
+    </div>
+    <p class="quiz-score"></p>
+  </section>
+
+  <!-- ============ HOMEWORK ============ -->
+  <section class="section" id="homework">
+    <div class="section-kicker">
+      <span class="klabel">Homework</span>
+      <h2>Before session 6</h2>
+      <span class="tag time">30 min</span>
+    </div>
+    <div class="callout">
+      <p>Pull every open condition attached to a model in your area and put them in one list, with four columns: the condition, the named person, the date or trigger, and the consequence if it is missed. Count the blanks in each column. Then find one model in the portfolio that your organisation did not build, and find out three things about it: what evidence you hold on how it was constructed, who monitors it on your own book, and what was customised when it was installed. Bring the blank count and the vendor answers to session 6, which is the sign-off itself, and which spends its second half on exactly those models.</p>
+    </div>
+  </section>
+
+  <!-- ============ COVERAGE ============ -->
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Sources covered</span>
+      <h2>What tonight maps to</h2>
+    </div>
+    <div class="covered">
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">What validation is for</span>
+        <span class="note">It evaluates whether models perform as expected and assesses reliability and limitations; sound validation identifies limitations and errors and clarifies appropriate use and whether corrective actions may be warranted.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">The three components as the readable shape of a report</span>
+        <span class="note">Conceptual soundness, outcomes analysis and ongoing monitoring. A report organised around them shows its gaps; a report organised around the work performed cannot.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">What documentation has to carry</span>
+        <span class="note">Tracking of recommendations, responses and exceptions, and support for managing remediation. A condition that lives only in the report is not being tracked.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Severity, conditions and the three recommendations</span>
+        <span class="note">Professional practice rather than a quoted taxonomy. Severity graded by consequence; a condition needing an owner, a trigger or a date, and a stated consequence; approval, approval with conditions, and declining to approve.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">The Brackwater findings, in full</span>
+        <span class="note">A leaked field scoring 0.748 alone against a submitted 0.863 and an honest 0.772; out-of-time performance of 0.682; a benchmark within 0.006; calibration of -0.006 overall against +0.061 and -0.142 by band; thin-file share from 19.0 to 34.0 percent.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">What validation does not remove</span>
+        <span class="note">Even with sound modelling practices and rigorous validation, material model risk can remain, so users benefit from understanding and communicating limitations, monitoring performance, periodically reviewing relevance, and supplementing output with complementary analysis.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill light">◐</span>
+        <span class="name">Internal audit, and the legitimate route to using a model early</span>
+        <span class="note">Session 2 covers both. Tonight assumes them: audit evaluates whether the practices are rigorous and effective rather than re-running the tests.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill light">◐</span>
+        <span class="name">The refusal, vendor models, and who owns what</span>
+        <span class="note">Session 6. Tonight names declining to approve as one of three answers; when it is correct, and how to give it, comes next.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill inkpill">·</span>
+        <span class="name">The EU AI Act, NIST AI RMF, ISO/IEC 42001, MAS and FEAT</span>
+        <span class="note">Not covered by design, in any session. Governing AI systems is <strong>learn-ai-governance-with-phoebe</strong>'s territory, and the model risk guidance itself puts generative and agentic AI out of scope.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill inkpill">·</span>
+        <span class="name">What AUC and calibration actually measure</span>
+        <span class="note">Not covered by design. <strong>learn-model-evaluation-with-phoebe</strong> defines the metrics; here they appear only as evidence a report puts in front of you.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CHEAT SHEET ============ -->
+  <section class="cheat" id="cheatsheet">
+    <h3>Session 5 cheat sheet</h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>A report is an argument</b><span>Find the claim first. Every finding either survives it, narrows it, or breaks it.</span></div>
+      <div class="cheat-item"><b>Five parts, in order</b><span>The claim, the findings, the severity, the conditions, the recommendation. Missing one is a finding about the report.</span></div>
+      <div class="cheat-item"><b>Shape tells you about gaps</b><span>Organised by the three components, missing work shows as an empty section. Organised by what got run, it cannot.</span></div>
+      <div class="cheat-item"><b>Severity is consequence</b><span>Not how clever the finding was, not how hard it was to find. Write the consequence sentence, then grade that.</span></div>
+      <div class="cheat-item"><b>Owner, trigger or date, consequence</b><span>All three or it is a sentence. The consequence is the part that makes the other two load-bearing.</span></div>
+      <div class="cheat-item"><b>Conditions bound the use</b><span>Approval with conditions is a yes with limits, not a compromise between yes and no.</span></div>
+      <div class="cheat-item"><b>Decline means no safe setting</b><span>If a narrower use, a lower limit or closer monitoring would make it defensible, the answer is conditions.</span></div>
+      <div class="cheat-item"><b>The claim to make about Brackwater</b><span>The evidence submitted did not support the claim made. Not that the champion is worthless or the challenger better.</span></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="pagefoot">
+  <div class="wrap">
+    <p>Leader session 5 of 6 · learn-model-risk-with-phoebe · by Phoebe Fu</p>
+    <nav class="pagenav">
+      <a href="a4-materiality-and-inventory.html">← Leader session 4 · Materiality and the inventory</a>
+      <a href="a6-signing-it-off.html">Leader session 6 · Signing it off →</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="../assets/app.js?v=2"></script>
+</body>
+</html>

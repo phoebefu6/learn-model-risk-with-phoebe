@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- social:start -->
+<meta name="description" content="Leader session 1 of 6. Model risk is not model inaccuracy. Brackwater's scorecard was submitted at 0.863 and scores 0.682 out of time, six thousandths ahead of three columns. Plus what the April 2026 guidance changed.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Learn with Phoebe">
+<meta property="og:title" content="What model risk actually is - learn model risk with phoebe">
+<meta property="og:description" content="Leader session 1 of 6. A sound model can still be a high-risk model, and an accurate one can still be indefensible.">
+<meta property="og:url" content="https://phoebefu6.github.io/learn-model-risk-with-phoebe/courses/a1-what-model-risk-is.html">
+<meta property="og:image" content="https://phoebefu6.github.io/learn-model-risk-with-phoebe/assets/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="What model risk actually is - learn model risk with phoebe">
+<meta name="twitter:description" content="0.863 submitted, 0.682 out of time, and 0.006 ahead of a three-column benchmark.">
+<meta name="twitter:image" content="https://phoebefu6.github.io/learn-model-risk-with-phoebe/assets/og-cover.png">
+<!-- social:end -->
+<title>Leader session 1 · What model risk actually is - learn model risk with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=2">
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-model-risk-with-phoebe</a> / Leader session 1 of 6</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Learn Model Risk with Phoebe · Leader session 1 of 6</div>
+    <h1>What model risk <span class="accent">actually is</span></h1>
+    <p class="sub">Brackwater, a consumer lender, submitted its new credit scorecard with a development AUC of 0.863 and a recommendation to deploy. The number was correct. It reproduced every time the query ran. Eleven months later the same model, scored on the following year's applications, discriminates at 0.682 - and a benchmark built from three columns anybody could have written scores 0.676. Nothing in that story is a modelling error. It is a model risk story, which is a different thing, and it is the thing the person who signs the approval is accountable for.</p>
+    <div class="chip-row">
+      <span class="chip level">🟠 Advanced</span>
+      <span class="chip audience">Whoever signs the approval</span>
+      <span class="chip audience">Risk, audit and the second line</span>
+      <span class="chip time">45 min</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:1">0-3 · Welcome</span>
+      <span class="a2" style="flex:5">3-20 · What the risk is</span>
+      <span class="a3" style="flex:4">20-40 · Build-along: score your own</span>
+      <span class="a4" style="flex:1">40-45 · Q&amp;A</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ INTRO ============ -->
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>How the leader track works</h2>
+    </div>
+    <p class="lede">Six sessions, 45 minutes each, no code and no query boxes. Tonight: what model risk is, and why it is not a synonym for the model being wrong. Session 2 is effective challenge, and why it fails in organisations that have all the right job titles. Session 3 is what a validator actually checks, in plain terms. Session 4 is materiality and the model inventory: which models get the full treatment and which get a line in a register. Session 5 is how to read a validation report, including what "approve with conditions" really buys you. Session 6 is the sign-off itself: the questions to ask, what to require in writing, and when refusing is the correct answer. The example throughout is <strong>Brackwater</strong>'s consumer scorecard.</p>
+
+    <div class="legend">
+      <span class="pill">Live = presented in the 45 minutes</span>
+      <span class="pill">Self-study = the full depth, after class</span>
+      <span class="pill">🔍 Every diagram zooms</span>
+    </div>
+
+    <div class="callout win">
+      <p><strong>★ What you walk out with tonight.</strong> The four things that set a model's risk, so you can say why one model gets three weeks of review and another gets a paragraph. The distinction that makes the whole discipline coherent: a model can be accurate and still be high risk, and the guidance says so in as many words. And the current text, which matters more than usual this year: the guidance the industry has quoted for fifteen years was replaced in April 2026, and one of the things it changed is how independent your validators have to be.</p>
+    </div>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>Model risk is not the model being wrong<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The intuitive definition is that model risk is the risk the model is inaccurate. That definition is wrong in a way that costs money, because it points every review at the one question the modellers have already spent months on. They know the accuracy. What nobody has examined is everything around it.</p>
+        <p>The supervisory definition is about consequences rather than correctness: model risk is the potential for adverse financial consequences arising from decisions made on the back of model output. Read that carefully and the surface area gets much larger than a performance metric. A model that is accurate on the population it was built for and is then pointed at a different population is a model risk event. A model whose number is correct but is read as a certainty when it was built as an estimate is a model risk event. The guidance is explicit that a fundamentally sound model producing accurate outputs consistent with its design objective can still exhibit high model risk, if it is misapplied or misused.</p>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>Brackwater's scorecard was built on applications from one year and deployed against the next, during which the share of thin-file applicants in the book went from 19.0 percent to 34.0 percent. No line of code changed and nobody made a mistake. The model was simply answering a question about a population that had stopped existing, and the cutoff that approved 75.0 percent of applicants on the development sample approved 69.3 percent of the new one, with the bad rate among those approved rising from 19.5 percent to 24.7 percent.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>The words that will keep coming back<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <ul>
+          <li><strong>Model.</strong> In the current guidance, a simplified representation of real-world relationships among observed characteristics, values and events. Deliberately broad: a spreadsheet with an assumption in it qualifies.</li>
+          <li><strong>Inherent risk.</strong> What the model is like before anyone uses it: its assumptions, its complexity, the quality of its inputs, the constraints in its data.</li>
+          <li><strong>Exposure.</strong> How much rides on the output. Bigger portfolio, bigger exposure.</li>
+          <li><strong>Purpose.</strong> What the output is for. A model used to meet a regulatory requirement or manage financial risk carries more weight than one that sizes a marketing list.</li>
+          <li><strong>Materiality.</strong> Purpose and exposure together. This is the dial that decides how much review a model earns.</li>
+          <li><strong>Effective challenge.</strong> Critical analysis by objective experts who can actually make the change happen. Session 2 is entirely about the last clause.</li>
+          <li><strong>Validation.</strong> The work of deciding whether the model performs as expected, what its limitations are, and whether the evidence offered actually supports the claim being made.</li>
+          <li><strong>Aggregate risk.</strong> What happens when twenty models lean on the same assumption, the same feed, or the same vendor. Each one looks fine alone.</li>
+        </ul>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 1 ============ -->
+  <section class="section" id="part-1">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · covers the four factors and how they combine</span>
+      <h2>Four things set the risk, and only one is about accuracy</h2>
+      <span class="tag concept">10 min live</span>
+    </div>
+    <p class="lede">The current guidance decomposes model risk into inherent risk, exposure, purpose and use. The first is a property of the model. The middle two are properties of the decision it feeds, and together they are called materiality. The fourth is a property of the people, and it is the one that turns a good model into a bad outcome without anybody touching the code.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 366" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Model risk decomposed into four contributing factors. Inherent risk covers assumptions, complexity, input quality and data constraints. Exposure covers portfolio size and business impact. Purpose covers what the output is used for, with regulatory and financial risk uses weighted higher. Exposure and purpose combine into materiality. Inherent risk seen in the context of materiality gives the overall magnitude of model risk. A fourth box, use, sits to the side and shows that misapplication raises risk on its own even when the model is sound.">
+        <style>
+          .a1aT { font: 800 12px Inter, sans-serif; fill: #fff; }
+          .a1aH { font: 800 12px Inter, sans-serif; fill: #0F172A; }
+          .a1aB { font: 400 11px Inter, sans-serif; fill: #0F172A; }
+          .a1aM { font: 400 11px Inter, sans-serif; fill: #56617A; }
+          .a1aR { font: 800 11px Inter, sans-serif; fill: #B91C1C; }
+        </style>
+        <defs>
+          <marker id="a1aAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#56617A"></path></marker>
+          <marker id="a1aRd" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#B91C1C"></path></marker>
+        </defs>
+
+        <text class="a1aH" x="14" y="22">Two of these are about the model. Two are about the decision and the people.</text>
+
+        <rect x="14" y="42" width="250" height="96" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <rect x="14" y="42" width="250" height="26" rx="9" fill="#1E3A8A"></rect>
+        <text class="a1aT" x="28" y="60">Inherent risk</text>
+        <text class="a1aB" x="28" y="86">Assumptions and complexity</text>
+        <text class="a1aM" x="28" y="104">Input quality, data constraints</text>
+        <text class="a1aM" x="28" y="122">A property of the model itself</text>
+
+        <rect x="14" y="158" width="250" height="80" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <rect x="14" y="158" width="250" height="26" rx="9" fill="#1E40AF"></rect>
+        <text class="a1aT" x="28" y="176">Exposure</text>
+        <text class="a1aB" x="28" y="202">How much rides on the output</text>
+        <text class="a1aM" x="28" y="220">Measurable: portfolio size, impact</text>
+
+        <rect x="14" y="252" width="250" height="80" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <rect x="14" y="252" width="250" height="26" rx="9" fill="#1E40AF"></rect>
+        <text class="a1aT" x="28" y="270">Purpose</text>
+        <text class="a1aB" x="28" y="296">What the output is for</text>
+        <text class="a1aM" x="28" y="314">Regulatory and risk uses weigh more</text>
+
+        <line x1="268" y1="198" x2="332" y2="220" stroke="#56617A" stroke-width="1.6" marker-end="url(#a1aAr)"></line>
+        <line x1="268" y1="292" x2="332" y2="246" stroke="#56617A" stroke-width="1.6" marker-end="url(#a1aAr)"></line>
+
+        <rect x="338" y="196" width="196" height="72" rx="9" fill="#BFDBFE" stroke="#93C5FD"></rect>
+        <text class="a1aH" x="352" y="222">Materiality</text>
+        <text class="a1aM" x="352" y="242">Purpose and exposure together</text>
+        <text class="a1aM" x="352" y="258">decide how much review it earns</text>
+
+        <line x1="268" y1="90" x2="600" y2="128" stroke="#56617A" stroke-width="1.6" marker-end="url(#a1aAr)"></line>
+        <line x1="538" y1="230" x2="600" y2="176" stroke="#56617A" stroke-width="1.6" marker-end="url(#a1aAr)"></line>
+
+        <rect x="606" y="112" width="260" height="86" rx="9" fill="#1E3A8A"></rect>
+        <text class="a1aT" x="622" y="140">Overall model risk</text>
+        <text class="a1aT" x="622" y="162" style="font-weight:400">Inherent risk read in the context</text>
+        <text class="a1aT" x="622" y="180" style="font-weight:400">of how much the decision matters</text>
+
+        <rect x="606" y="252" width="260" height="80" rx="9" fill="#FEF2F2" stroke="#B91C1C"></rect>
+        <text class="a1aR" x="622" y="276">Use</text>
+        <text class="a1aB" x="622" y="296">A sound model, misapplied,</text>
+        <text class="a1aB" x="622" y="314">is still a high-risk model</text>
+        <line x1="736" y1="248" x2="736" y2="204" stroke="#B91C1C" stroke-width="2" marker-end="url(#a1aRd)"></line>
+      </svg>
+      <figcaption>🔍 Click to zoom - accuracy lives inside the first box only. Three of the four factors are decided outside the modelling team.</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Why materiality is the only sustainable way to allocate review<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Every institution that tries to validate everything to the same depth ends up validating nothing well, because the queue grows faster than the team. The guidance solves this by saying the rigour should be commensurate with the risk, and by giving materiality as the dial: a model may be judged immaterial on the basis of its exposure and purpose, in which case the sensible treatment is to record that it exists and watch for the conditions under which it would stop being immaterial.</p>
+        <p>That last clause is the part most registers get wrong. An immaterial model is not an unwatched one. The pricing sheet nobody validated because it only covered one product line becomes material the quarter that product line triples, and the trigger for a fresh look should have been written down when the model was first tiered, not improvised afterwards.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Aggregate risk, and why twenty green models can still be a problem<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Model risk is assessed both for individual models and in aggregate, and the aggregate view asks a question no single validation can: what do these models share. Interactions and dependencies between them, reliance on common assumptions, a common data feed, a common methodology - any of these can move a whole portfolio of models in the same direction at the same time.</p>
+        <p>The practical version for a leader: ask what happens to the other models if the assumption in front of you turns out to be wrong. If the answer is "nothing, they are independent", ask who verified that. Shared inputs are the usual culprit, and they rarely appear in any individual model document.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 2 ============ -->
+  <section class="section" id="part-2">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · covers the April 2026 guidance and what it changed</span>
+      <h2>The text everybody quotes was replaced this year</h2>
+      <span class="tag concept">8 min live</span>
+    </div>
+    <p class="lede">For fifteen years the reference for this discipline was SR 11-7, issued by the Federal Reserve and the OCC in April 2011. On 17 April 2026 the agencies - now including the FDIC - issued revised guidance that supersedes and replaces it, along with the 2021 statement on model risk for anti-money-laundering systems. Most of the framework survived. Four things moved, and one of them changes an argument that has run in every institution for a decade.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 344" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A comparison of the 2011 and 2026 supervisory guidance. Five rows compare them: who issued it, how model risk is decomposed, what effective challenge rests on, how independent validation must be, and how artificial intelligence is treated. The 2026 column shows the FDIC added, risk decomposed into inherent risk and materiality, effective challenge resting on expertise independence and standing, quality of review mattering more than organisational structure, and generative and agentic AI excluded from scope.">
+        <style>
+          .a1bH { font: 800 12px Inter, sans-serif; fill: #0F172A; }
+          .a1bT { font: 800 11px Inter, sans-serif; fill: #fff; }
+          .a1bL { font: 700 11px Inter, sans-serif; fill: #0F172A; }
+          .a1bB { font: 400 11px Inter, sans-serif; fill: #0F172A; }
+          .a1bM { font: 400 11px Inter, sans-serif; fill: #56617A; }
+        </style>
+        <text class="a1bH" x="14" y="22">What survived, and what moved, in April 2026.</text>
+
+        <rect x="232" y="34" width="296" height="26" rx="7" fill="#56617A"></rect>
+        <text class="a1bT" x="246" y="52">SR 11-7 · April 2011 · superseded</text>
+        <rect x="546" y="34" width="320" height="26" rx="7" fill="#1E40AF"></rect>
+        <text class="a1bT" x="560" y="52">SR 26-2 · April 2026 · current</text>
+
+        <line x1="14" y1="70" x2="866" y2="70" stroke="#DDE5F0" stroke-width="1"></line>
+
+        <text class="a1bL" x="14" y="92">Issued by</text>
+        <text class="a1bM" x="246" y="92">Federal Reserve and OCC</text>
+        <text class="a1bB" x="560" y="92">Federal Reserve, OCC and the FDIC</text>
+        <line x1="14" y1="104" x2="866" y2="104" stroke="#DDE5F0" stroke-width="1"></line>
+
+        <text class="a1bL" x="14" y="126">Risk is made of</text>
+        <text class="a1bM" x="246" y="126">Two causes: errors, and misuse</text>
+        <text class="a1bB" x="560" y="126">Inherent risk, exposure, purpose, use</text>
+        <line x1="14" y1="138" x2="866" y2="138" stroke="#DDE5F0" stroke-width="1"></line>
+
+        <text class="a1bL" x="14" y="160">Challenge rests on</text>
+        <text class="a1bM" x="246" y="160">Incentives, competence, influence</text>
+        <text class="a1bB" x="560" y="160">Expertise, independence, standing</text>
+        <line x1="14" y1="172" x2="866" y2="172" stroke="#DDE5F0" stroke-width="1"></line>
+
+        <rect x="14" y="180" width="852" height="56" rx="8" fill="#FEF2F2" stroke="#B91C1C"></rect>
+        <text class="a1bL" x="28" y="202">Independence</text>
+        <text class="a1bM" x="246" y="202">Validators generally should not be</text>
+        <text class="a1bM" x="246" y="220">the people who built or use it</text>
+        <text class="a1bB" x="560" y="202">Quality depends on the rigour of the</text>
+        <text class="a1bB" x="560" y="220">review, not on reporting lines</text>
+
+        <text class="a1bL" x="14" y="264">AI</text>
+        <text class="a1bM" x="246" y="264">Not addressed</text>
+        <text class="a1bB" x="560" y="264">Generative and agentic AI excluded;</text>
+        <text class="a1bB" x="560" y="282">other AI models are in scope</text>
+        <line x1="14" y1="296" x2="866" y2="296" stroke="#DDE5F0" stroke-width="1"></line>
+
+        <text class="a1bM" x="14" y="320">The red row is the one to argue about. It is read as relief by model owners and as a warning by validators.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - four rows moved. The independence row is the one that changes an organisational argument.</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>The independence change, and why both readings are defensible<span class="mini">5 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The 2011 text said validation involves a degree of independence from development and use, and that it is generally done by staff who are not responsible for either and have no stake in the outcome. That sentence built a lot of org charts. The 2026 text says something different: that the quality of the validation process depends on the rigour and effectiveness of the review rather than on the organisational structure of the risk management function.</p>
+        <p>There is a real argument on both sides and it is worth having out loud rather than settling by preference. The case for the change is that separation was never sufficient: a separate team with no domain knowledge and no standing produces a document, not a challenge, and plenty of institutions have built exactly that. The case against is that structure is the only part of this that survives a change of personnel. Rigour depends on who is in the chair; a reporting line does not.</p>
+        <p>What the 2026 text does not do is remove independence from the definition of effective challenge, where it still sits alongside expertise and standing. The most defensible reading is that structure stopped being the test and did not stop being evidence. If your validators report to the head of modelling, you now have to demonstrate the rigour some other way, and the burden sits with you.</p>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>Brackwater's validation sat with a two-person team inside the analytics function, reporting to the same director as the model developers. Nobody in that team lacked expertise. What they lacked was the standing to stop a launch that the commercial plan had already been written around, and the finding they did raise about the collections field was recorded as an observation rather than a condition.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Where the generative AI line leaves you<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The 2026 guidance puts generative and agentic AI outside its scope explicitly, on the grounds that they are novel and rapidly evolving, while stating that its principles do apply to traditional statistical and quantitative models and to non-generative, non-agentic AI. It also says that a banking organisation's own risk management and governance practices should guide what controls apply to anything the document does not cover.</p>
+        <p>Read plainly, that is a gap with your name on it. The model risk regime will not tell you how to govern a large language model in a customer-facing process; the AI-specific regimes will, and <strong>learn-ai-governance-with-phoebe</strong> covers those - the EU AI Act tiers and obligations, the NIST AI Risk Management Framework, ISO/IEC 42001, and the MAS expectations for Singapore. The practical split is the one the guidance itself draws: model risk practice governs the statistical and non-generative models, and the AI-specific regimes pick up where it stops.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 3 ============ -->
+  <section class="section" id="part-3">
+    <div class="section-kicker">
+      <span class="klabel">Part 3 · build-along</span>
+      <h2>Score a model you already own</h2>
+      <span class="tag build">20 min build-along</span>
+    </div>
+    <p class="lede">No laptop. Pick one model your area depends on - a scorecard, a forecast, a pricing sheet, an allocation rule, anything whose output somebody acts on - and put it through the four factors out loud. The point is not to produce a number. It is to find out which of the four you cannot answer, because that is the one that will hurt.</p>
+
+    <div class="steps">
+      <div class="step">
+                <div>
+          <p><strong>Name the decision, not the model.</strong> Say out loud what happens differently because this output exists. If nobody can name an action that changes, the exposure is zero and you have found a model to retire rather than validate.</p>
+        </div>
+      </div>
+      <div class="step">
+                <div>
+          <p><strong>Size the exposure.</strong> What volume, what value, how many customers, over what period. This is the one factor that is genuinely quantitative, so refuse adjectives here.</p>
+        </div>
+      </div>
+      <div class="step">
+                <div>
+          <p><strong>State the purpose honestly.</strong> Is the output meeting a regulatory requirement, managing financial risk, or informing a commercial choice. The first two carry more weight, and people routinely understate this to avoid the review that follows.</p>
+        </div>
+      </div>
+      <div class="step">
+                <div>
+          <p><strong>Ask what the model assumes that nobody has checked lately.</strong> Not the methodology - the assumptions. Which relationship is presumed stable, which population is presumed unchanged, which input is presumed to mean today what it meant when the model was built.</p>
+        </div>
+      </div>
+      <div class="step">
+                <div>
+          <p><strong>Ask how it is being used now versus how it was built to be used.</strong> This is the factor that produces the most uncomfortable answers, because scope creep in model use leaves no trace in any document. Brackwater's scorecard was built to rank applicants and by year two was setting prices.</p>
+        </div>
+      </div>
+      <div class="step">
+                <div>
+          <p><strong>Write one sentence.</strong> "This model is [material / not material] because [exposure] and [purpose], and the thing most likely to go wrong is [assumption or use]." If you cannot finish it, that is tonight's finding.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <p><strong>The question that ends the meeting fastest.</strong> Ask what would have to be true for this model to be wrong in a way nobody would notice for six months. The good answers are specific - a feed that silently changes definition, a population that drifts, a threshold that was tuned once - and each of them is a monitoring requirement you can write down before the model goes live.</p>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions</h2>
+    </div>
+
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">A pricing model is accurate, well documented, and validated. The business then starts using it to set limits for a customer segment it was never built for. Under the current guidance, what has happened to its model risk?</p>
+      <button class="qopt" type="button">A · Nothing, because the model's accuracy and documentation are unchanged</button>
+      <button class="qopt" type="button">B · It has risen, because use is one of the four factors and a sound model that is misapplied can still exhibit high model risk</button>
+      <button class="qopt" type="button">C · It has fallen, because the model is now being used more widely and so is better tested</button>
+      <p class="qwhy">The guidance states directly that a fundamentally sound model producing accurate outputs consistent with its design objective can exhibit high model risk if it is misapplied or misused. Use is a factor in its own right, and it is the one that moves without anybody editing the model.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="2">
+      <p class="qtext">Your institution deems a model immaterial on the basis of its small portfolio and commercial purpose. What is the sound treatment?</p>
+      <button class="qopt" type="button">A · Remove it from the inventory, since inventories are for material models</button>
+      <button class="qopt" type="button">B · Validate it to the same depth as everything else, because materiality judgements are subjective</button>
+      <button class="qopt" type="button">C · Record that it exists and monitor for the conditions under which it would become material</button>
+      <p class="qwhy">Immaterial does not mean unwatched. The guidance describes identifying those models and monitoring performance and the conditions under which their use may become material in future. The trigger belongs in writing at the point of tiering.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">Brackwater's validators sit inside the analytics function and report to the same director as the developers. Under the April 2026 guidance, is that acceptable?</p>
+      <button class="qopt" type="button">A · It is not ruled out, because quality is said to depend on the rigour of the review rather than the organisational structure, but independence remains part of effective challenge so the burden of demonstrating rigour is yours</button>
+      <button class="qopt" type="button">B · No, the guidance requires validators to sit outside the first line in every case</button>
+      <button class="qopt" type="button">C · Yes, and no further demonstration is needed, since structure is explicitly said not to matter</button>
+      <p class="qwhy">The text moved the test from structure to rigour without removing independence from the definition of effective challenge, where it sits alongside expertise and standing. Structure stopped being the test; it did not stop being evidence. Brackwater's team had the expertise and lacked the standing, which is the failure mode the definition is pointing at.</p>
+    </div>
+    <p class="quiz-score"></p>
+  </section>
+
+  <!-- ============ HOMEWORK ============ -->
+  <section class="section" id="homework">
+    <div class="section-kicker">
+      <span class="klabel">Homework</span>
+      <h2>Before session 2</h2>
+      <span class="tag time">30 min</span>
+    </div>
+    <div class="callout">
+      <p>Take the model you scored tonight and find out three things about how it was approved. Who signed it off, and what were they shown. Whether any finding was raised during its review, and if so what happened to that finding. And whether the person who raised it could have stopped the launch. Bring the answers to session 2, which is about why the third question is the one that predicts the other two.</p>
+    </div>
+  </section>
+
+  <!-- ============ COVERAGE ============ -->
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Sources covered</span>
+      <h2>What tonight maps to</h2>
+    </div>
+    <div class="covered">
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Model risk defined by consequence, not by error</span>
+        <span class="note">The potential for adverse financial consequences from decisions made on model output, and the statement that a sound, accurate model can still be high risk if misapplied.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">The four factors and how they combine</span>
+        <span class="note">Inherent risk, exposure, purpose and use; purpose and exposure together give materiality; materiality sets how much review a model earns.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">What the April 2026 revision changed</span>
+        <span class="note">The FDIC added as an issuer, risk decomposed into four factors, effective challenge restated around expertise, independence and standing, the independence test moved from structure to rigour, and generative and agentic AI put out of scope.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Aggregate model risk</span>
+        <span class="note">Interactions and dependencies between models, and reliance on common assumptions, data or methodologies.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill light">◐</span>
+        <span class="name">Effective challenge in practice</span>
+        <span class="note">Session 2. Tonight names its three requirements; why organisations with the right job titles still fail at it comes next.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill light">◐</span>
+        <span class="name">Tiering and the model inventory</span>
+        <span class="note">Session 4, and practitioner session 1. Tonight establishes materiality as the dial; the register and the tiering call come later.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill inkpill">·</span>
+        <span class="name">The EU AI Act, NIST AI RMF, ISO/IEC 42001, MAS and FEAT</span>
+        <span class="note">Not covered by design, in any session. Governing AI systems is <strong>learn-ai-governance-with-phoebe</strong>'s territory, and the model risk guidance itself puts generative and agentic AI out of scope.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill inkpill">·</span>
+        <span class="name">What AUC, calibration and a base rate mean</span>
+        <span class="note">Not covered by design. <strong>learn-model-evaluation-with-phoebe</strong> defines the metrics; here they appear only as evidence a validator weighs.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CHEAT SHEET ============ -->
+  <section class="cheat" id="cheatsheet">
+    <h3>Session 1 cheat sheet</h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>Risk is about consequences</b><span>Adverse financial consequences from decisions made on model output. Not a synonym for inaccuracy.</span></div>
+      <div class="cheat-item"><b>Accurate can still be high risk</b><span>A sound model producing correct output, misapplied, is a model risk event. The guidance says so.</span></div>
+      <div class="cheat-item"><b>Four factors</b><span>Inherent risk, exposure, purpose, use. Only the first is about the model.</span></div>
+      <div class="cheat-item"><b>Materiality is the dial</b><span>Purpose plus exposure. It decides how much review a model earns, and it is the only sustainable way to allocate it.</span></div>
+      <div class="cheat-item"><b>Immaterial is not unwatched</b><span>Record it, and write down the conditions that would make it material.</span></div>
+      <div class="cheat-item"><b>SR 11-7 is superseded</b><span>Replaced 17 April 2026 by revised interagency guidance. Quoting the old text as current is a dated answer.</span></div>
+      <div class="cheat-item"><b>Structure is no longer the test</b><span>Rigour is. Independence still sits inside effective challenge, so the burden of proof moved to you.</span></div>
+      <div class="cheat-item"><b>Brackwater in one line</b><span>0.863 submitted, 0.682 out of time, 0.006 ahead of three columns. No code was ever wrong.</span></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="pagefoot">
+  <div class="wrap">
+    <p>Leader session 1 of 6 · learn-model-risk-with-phoebe · by Phoebe Fu</p>
+    <nav class="pagenav">
+      <a href="../index.html">← All sessions</a>
+      <a href="a2-effective-challenge.html">Leader session 2 · Effective challenge →</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="../assets/app.js?v=2"></script>
+</body>
+</html>

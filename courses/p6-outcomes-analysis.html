@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- social:start -->
+<meta name="description" content="Practitioner session 6 of 10. Outcomes analysis compares what the model said against what happened. On the later vintage Brackwater predicts a mean default rate of 0.330 against an actual 0.324, a gap of -0.006. By quintile the same model is out by +0.061 at the safe end and -0.142 at the risky end. A single calibration number would have passed this model.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Learn with Phoebe">
+<meta property="og:title" content="Outcomes analysis - learn model risk with phoebe">
+<meta property="og:description" content="Practitioner session 6 of 10. The aggregate gap is -0.006 and every band is wrong. Band every outcomes test, or run one that cannot fail for the right reason.">
+<meta property="og:url" content="https://phoebefu6.github.io/learn-model-risk-with-phoebe/courses/p6-outcomes-analysis.html">
+<meta property="og:image" content="https://phoebefu6.github.io/learn-model-risk-with-phoebe/assets/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Outcomes analysis - learn model risk with phoebe">
+<meta name="twitter:description" content="-0.006 overall. +0.061 to -0.142 by band. The errors are systematic, opposite, and they cancel.">
+<meta name="twitter:image" content="https://phoebefu6.github.io/learn-model-risk-with-phoebe/assets/og-cover.png">
+<!-- social:end -->
+<title>Practitioner session 6 · Outcomes analysis - learn model risk with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=2">
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-model-risk-with-phoebe</a> / Practitioner session 6 of 10</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Learn Model Risk with Phoebe · Practitioner session 6 of 10</div>
+    <h1>Outcomes <span class="accent">analysis</span></h1>
+    <p class="sub">Sessions 3 to 5 interrogated how the model was built. Tonight the model finally meets the thing it was built to predict. Scored on Brackwater's later vintage, the champion predicts a mean default rate of 0.330 against an actual 0.324, a gap of -0.006. That is the best-looking figure in the entire validation, and it is the most dangerous one. Split the same 2,000 applications into five bands by predicted risk and the model is out by +0.061 on the safest band and -0.142 on the riskiest. The errors are large, they are systematic, they run in opposite directions, and they cancel. A single calibration number would have passed this model.</p>
+    <div class="chip-row">
+      <span class="chip level">🟠 Advanced</span>
+      <span class="chip audience">Validators and the second line</span>
+      <span class="chip audience">Anyone who writes a monitoring pack</span>
+      <span class="chip time">45 min</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:1">0-3 · Welcome</span>
+      <span class="a2" style="flex:4">3-16 · Predicted against actual, by band</span>
+      <span class="a3" style="flex:3">16-27 · Two questions, one of them missed</span>
+      <span class="a4" style="flex:5">27-45 · Build-along and Q&amp;A</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ INTRO ============ -->
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>Where this sits in the practitioner track</h2>
+    </div>
+    <p class="lede">Session 3 found the leaked field and session 4 reproduced the developer's number from the data rather than believing it. Session 5 built a three-feature challenger and found the champion's real edge to be 0.006 of AUC. All three are questions about the model's construction. Tonight is the first test that goes outside the build entirely and asks what happened to the customers: the second of the three components of validation, and the one that produces the headline finding of the whole course. Session 7 takes the same comparison to a period the model never saw. The worked example is <strong>Brackwater</strong> throughout, with 2,000 later-vintage applications at a bad rate of 0.324.</p>
+
+    <div class="legend">
+      <span class="pill">Live = presented in the 45 minutes</span>
+      <span class="pill">Self-study = the full depth, after class</span>
+      <span class="pill">🔍 Every diagram zooms</span>
+    </div>
+
+    <div class="callout win">
+      <p><strong>★ What you walk out with tonight.</strong> One design rule strong enough to change every monitoring pack you touch: band every outcomes test, and state the banding, the population and the window next to the result. The Brackwater demonstration of why, where an aggregate gap of -0.006 sits on top of band gaps running from +0.068 to -0.142. The habit of keeping two different questions apart, because a model can rank customers acceptably and still put the wrong number on each one. And a working sense of what outlier analysis catches that no band average ever will.</p>
+    </div>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>What outcomes analysis is, in the guidance and in practice<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The revised interagency guidance of 17 April 2026 defines outcomes analysis as the activity that "compares model outputs to corresponding real-world outcomes to assess model performance relative to model objectives and business use". Two halves of that sentence are worth separating. Comparing outputs to outcomes is the mechanic. Assessing performance relative to the model's objectives and its business use is the judgement, and it is the reason two models with identical error statistics can get different validation opinions.</p>
+        <p>The guidance is deliberately loose about the form the activity takes. It can be testing done during development, it can be an ongoing monitoring report, or it can be a standalone activity "such as back-testing or outlier analysis". A validator is therefore not obliged to invent a new test; a validator is obliged to make sure that a comparison of output against outcome exists somewhere, is done at a resolution capable of showing a problem, and reaches somebody who can act on it.</p>
+        <p>One clause is easy to skip and matters for models that are not pure statistics. Where a model "relies substantially on expert judgment, quantitative outcomes analysis helps to evaluate the quality of that judgment". A judgemental overlay, an expert-set cutoff or a hand-tuned scaling factor is not exempt from this test. It is precisely the thing the test was written for, because expert judgement is the part of a model with no development statistics attached to it, and outcomes are the only evidence about it anybody will ever have.</p>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>Brackwater ran outcomes analysis every quarter for two years. The pack contained one line per model: predicted average default rate, actual average default rate, and the difference. For the scorecard the difference never exceeded a hundredth. The test was real, it was run on time, it was signed, and it was incapable of detecting what was wrong.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Four words that get used interchangeably and should not be<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <ul>
+          <li><strong>Outcomes analysis.</strong> The component. Comparing model outputs against the corresponding real-world outcomes, in whatever form fits the model. Everything below is a way of doing it.</li>
+          <li><strong>Back-testing.</strong> Named in the guidance as one standalone form of outcomes analysis. Running the model over a historical period whose outcomes are already known and comparing what it would have said against what happened.</li>
+          <li><strong>Outlier analysis.</strong> Named in the guidance in the same breath. Looking at the individual cases the model got most wrong, rather than at the average of everybody.</li>
+          <li><strong>Ongoing monitoring.</strong> A separate component, not a synonym. It asks whether the model still performs as expected given changes in the world around it, and session 8 owns its design. Outcomes analysis supplies much of the evidence it consumes, which is why the two blur in conversation.</li>
+        </ul>
+        <p>Keeping them apart matters in a report. "We perform outcomes analysis quarterly" tells a reviewer nothing. "We back-test quarterly by decile of predicted risk on the trailing twelve months, and review the twenty largest individual misses" tells them what could and could not have been detected.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 1 ============ -->
+  <section class="section" id="part-1">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · covers the headline finding and why the aggregate hides it</span>
+      <h2>The average was right and every band was wrong</h2>
+      <span class="tag concept">11 min live</span>
+    </div>
+    <p class="lede">Score the champion on the later vintage, take the mean of what it predicted and the mean of what happened, and the two agree to within six thousandths. Now split those same 2,000 applications into five equal bands by how risky the model said they were, and take the same two means inside each band. Nothing about the data has changed; the only thing that changed is the resolution of the question. The model under-predicts its safest customers by up to 0.068 and over-predicts its riskiest by 0.142, which is a different model from the one the summary line described.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 436" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Predicted against actual default rate by quintile of predicted risk on Brackwater's later vintage of 2,000 applications, drawn as five lanes with a marker for predicted and a marker for actual. Quintile 1, the safest 400 applications, predicted 0.086 against actual 0.147, a gap of plus 0.061, under-predicted. Quintile 2 predicted 0.169 against actual 0.237, a gap of plus 0.068, under-predicted. Quintile 3 predicted 0.270 against actual 0.305, a gap of plus 0.035, under-predicted. Quintile 4 predicted 0.432 against actual 0.378, a gap of minus 0.054, over-predicted. Quintile 5, the riskiest 400, predicted 0.694 against actual 0.552, a gap of minus 0.142, over-predicted. The sixth lane shows the whole book, where predicted 0.330 and actual 0.324 sit almost on top of each other for an aggregate gap of minus 0.006, the single number that hides all five bands.">
+        <style>
+          .p6aH { font: 800 12px Inter, sans-serif; fill: #0F172A; }
+          .p6aK { font: 800 11px Inter, sans-serif; fill: #0F172A; }
+          .p6aB { font: 400 11px Inter, sans-serif; fill: #0F172A; }
+          .p6aM { font: 400 10px Inter, sans-serif; fill: #56617A; }
+          .p6aV { font: 700 10px Inter, sans-serif; fill: #1E3A8A; }
+          .p6aW { font: 700 10px Inter, sans-serif; fill: #B91C1C; }
+          .p6aG { font: 800 11px Inter, sans-serif; fill: #B91C1C; }
+          .p6aR { font: 800 12px Inter, sans-serif; fill: #B91C1C; }
+        </style>
+        <defs>
+          <marker id="p6aTip" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#56617A"></path></marker>
+        </defs>
+
+        <text class="p6aH" x="14" y="20">Same 2,000 applications, same two means. Only the resolution of the question changes.</text>
+
+        <circle cx="20" cy="38" r="5" fill="#1E3A8A"></circle>
+        <text class="p6aB" x="32" y="42">What the model predicted</text>
+        <circle cx="190" cy="38" r="5" fill="#B91C1C"></circle>
+        <text class="p6aB" x="202" y="42">What actually happened</text>
+        <text class="p6aM" x="360" y="42">Arrow runs from predicted to actual</text>
+
+        <text class="p6aM" x="234" y="74" text-anchor="end">default rate</text>
+        <text class="p6aM" x="260" y="74" text-anchor="middle">0.000</text>
+        <text class="p6aM" x="322.9" y="74" text-anchor="middle">0.100</text>
+        <text class="p6aM" x="385.7" y="74" text-anchor="middle">0.200</text>
+        <text class="p6aM" x="448.6" y="74" text-anchor="middle">0.300</text>
+        <text class="p6aM" x="511.4" y="74" text-anchor="middle">0.400</text>
+        <text class="p6aM" x="574.3" y="74" text-anchor="middle">0.500</text>
+        <text class="p6aM" x="637.1" y="74" text-anchor="middle">0.600</text>
+        <text class="p6aM" x="700" y="74" text-anchor="middle">0.700</text>
+        <text class="p6aK" x="726" y="74">Gap</text>
+
+        <line x1="260" y1="82" x2="260" y2="352" stroke="#C7D2E4" stroke-width="1.4"></line>
+        <line x1="322.9" y1="82" x2="322.9" y2="352" stroke="#DDE5F0" stroke-width="1"></line>
+        <line x1="385.7" y1="82" x2="385.7" y2="352" stroke="#DDE5F0" stroke-width="1"></line>
+        <line x1="448.6" y1="82" x2="448.6" y2="352" stroke="#DDE5F0" stroke-width="1"></line>
+        <line x1="511.4" y1="82" x2="511.4" y2="352" stroke="#DDE5F0" stroke-width="1"></line>
+        <line x1="574.3" y1="82" x2="574.3" y2="352" stroke="#DDE5F0" stroke-width="1"></line>
+        <line x1="637.1" y1="82" x2="637.1" y2="352" stroke="#DDE5F0" stroke-width="1"></line>
+        <line x1="700" y1="82" x2="700" y2="352" stroke="#DDE5F0" stroke-width="1"></line>
+
+        <text class="p6aK" x="14" y="106">Q1 safest</text>
+        <text class="p6aM" x="14" y="120">400 applications</text>
+        <line x1="314.1" y1="112" x2="352.4" y2="112" stroke="#56617A" stroke-width="1.6" marker-end="url(#p6aTip)"></line>
+        <circle cx="314.1" cy="112" r="5.5" fill="#1E3A8A"></circle>
+        <circle cx="352.4" cy="112" r="5.5" fill="#B91C1C"></circle>
+        <text class="p6aV" x="314.1" y="98" text-anchor="middle">0.086</text>
+        <text class="p6aW" x="352.4" y="130" text-anchor="middle">0.147</text>
+        <text class="p6aG" x="726" y="110">+0.061</text>
+        <text class="p6aM" x="726" y="124">under-predicted</text>
+
+        <text class="p6aK" x="14" y="160">Q2</text>
+        <text class="p6aM" x="14" y="174">400 applications</text>
+        <line x1="366.2" y1="166" x2="409.0" y2="166" stroke="#56617A" stroke-width="1.6" marker-end="url(#p6aTip)"></line>
+        <circle cx="366.2" cy="166" r="5.5" fill="#1E3A8A"></circle>
+        <circle cx="409.0" cy="166" r="5.5" fill="#B91C1C"></circle>
+        <text class="p6aV" x="366.2" y="152" text-anchor="middle">0.169</text>
+        <text class="p6aW" x="409.0" y="184" text-anchor="middle">0.237</text>
+        <text class="p6aG" x="726" y="164">+0.068</text>
+        <text class="p6aM" x="726" y="178">under-predicted</text>
+
+        <text class="p6aK" x="14" y="214">Q3</text>
+        <text class="p6aM" x="14" y="228">400 applications</text>
+        <line x1="429.7" y1="220" x2="451.7" y2="220" stroke="#56617A" stroke-width="1.6" marker-end="url(#p6aTip)"></line>
+        <circle cx="429.7" cy="220" r="5.5" fill="#1E3A8A"></circle>
+        <circle cx="451.7" cy="220" r="5.5" fill="#B91C1C"></circle>
+        <text class="p6aV" x="429.7" y="206" text-anchor="middle">0.270</text>
+        <text class="p6aW" x="451.7" y="238" text-anchor="middle">0.305</text>
+        <text class="p6aG" x="726" y="218">+0.035</text>
+        <text class="p6aM" x="726" y="232">under-predicted</text>
+
+        <text class="p6aK" x="14" y="268">Q4</text>
+        <text class="p6aM" x="14" y="282">400 applications</text>
+        <line x1="531.5" y1="274" x2="497.6" y2="274" stroke="#56617A" stroke-width="1.6" marker-end="url(#p6aTip)"></line>
+        <circle cx="531.5" cy="274" r="5.5" fill="#1E3A8A"></circle>
+        <circle cx="497.6" cy="274" r="5.5" fill="#B91C1C"></circle>
+        <text class="p6aV" x="531.5" y="260" text-anchor="middle">0.432</text>
+        <text class="p6aW" x="497.6" y="292" text-anchor="middle">0.378</text>
+        <text class="p6aG" x="726" y="272">-0.054</text>
+        <text class="p6aM" x="726" y="286">over-predicted</text>
+
+        <text class="p6aK" x="14" y="322">Q5 riskiest</text>
+        <text class="p6aM" x="14" y="336">400 applications</text>
+        <line x1="696.2" y1="328" x2="607.0" y2="328" stroke="#56617A" stroke-width="1.6" marker-end="url(#p6aTip)"></line>
+        <circle cx="696.2" cy="328" r="5.5" fill="#1E3A8A"></circle>
+        <circle cx="607.0" cy="328" r="5.5" fill="#B91C1C"></circle>
+        <text class="p6aV" x="696.2" y="314" text-anchor="middle">0.694</text>
+        <text class="p6aW" x="607.0" y="346" text-anchor="middle">0.552</text>
+        <text class="p6aG" x="726" y="326">-0.142</text>
+        <text class="p6aM" x="726" y="340">over-predicted</text>
+
+        <line x1="14" y1="360" x2="866" y2="360" stroke="#C7D2E4" stroke-width="1.2"></line>
+
+        <text class="p6aR" x="14" y="384">Whole book</text>
+        <text class="p6aM" x="14" y="398">all 2,000</text>
+        <circle cx="467.4" cy="390" r="5.5" fill="#1E3A8A"></circle>
+        <circle cx="463.7" cy="390" r="5.5" fill="#B91C1C"></circle>
+        <text class="p6aB" x="490" y="394">predicted 0.330, actual 0.324</text>
+        <text class="p6aG" x="726" y="388">-0.006</text>
+        <text class="p6aM" x="726" y="402">looks excellent</text>
+
+        <rect x="14" y="410" width="852" height="22" rx="7" fill="#FEF2F2" stroke="#B91C1C"></rect>
+        <text class="p6aR" x="26" y="425">A single calibration number would have passed this model. The two markers above are the reason.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - three bands under-predict and two over-predict, so the five errors very nearly wipe each other out in the total. The -0.006 on the last lane is arithmetically true.</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Why the errors cancel, and what that does to a monitoring pack<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>This is not bad luck and it is not rounding. The model is systematically too optimistic about the customers it thinks are safe and systematically too pessimistic about the customers it thinks are risky. The first three bands come in above prediction, by +0.061, +0.068 and +0.035. The last two come in below, by -0.054 and -0.142. Sum across the whole book and the two directions offset to within six thousandths.</p>
+        <p>Now think about what that does to a report. A monitoring pack that carries one calibration figure per model per quarter will show this model as healthy for exactly as long as the two halves stay in balance. The balance is not a property of the model; it is a property of how many customers happen to sit in each band and how far each band is out. Both of those move with the book. So the pack shows green, green, green, and then on the quarter the halves stop offsetting it shows the model as suddenly broken, with no preceding signal and no explanation available from anything the pack ever recorded.</p>
+        <p>The failure mode to name in the report is not "the model is miscalibrated". It is "the test we run cannot distinguish a calibrated model from this one". That is a statement about the control, and controls are things a governance committee knows how to fix.</p>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>Eight quarterly packs at Brackwater reported a calibration difference under one hundredth, every time. The ninth would have been the first to look wrong, and by then the book had already shifted toward the band with the largest error. The pack was not wrong on any of the eight occasions. It was answering a question nobody should have asked on its own.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>The design rule: band every outcomes test, and say how you banded it<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Banding is not extra credit and it is not a nice-to-have for the appendix. It is the only version of the test that can fail for the right reason. An unbanded comparison of two averages has one degree of freedom and can be defeated by any pair of offsetting errors, which in a ranking model is not an exotic circumstance but the normal shape of miscalibration.</p>
+        <p>Three things belong next to every banded result, and a result missing any of them is not reproducible by the next person to hold the report.</p>
+        <ul>
+          <li><strong>The banding.</strong> Quintile or decile of <em>predicted</em> risk, not of any observed attribute. Banding on something the model did not produce answers a different question and usually a less useful one.</li>
+          <li><strong>The population.</strong> Which applications are in scope, and how many are in each band. A band with forty accounts in it will wander for reasons that have nothing to do with the model, and a reader who cannot see the count cannot tell the difference.</li>
+          <li><strong>The window.</strong> Which outcome period, and whether it has fully matured. An outcome window that has not closed makes every band look better than it will finish.</li>
+        </ul>
+        <p>Decile rather than quintile is the usual choice once volumes allow it, and the trade is straightforward: finer bands localise the error better and make each band noisier. State which you chose. A validator who reports "gap by decile" without saying the deciles were cut on predicted risk over a twelve-month matured window has produced a number nobody can check.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Where an aggregate number is still the right thing to report<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The rule is to band every test, not to delete the aggregate. The aggregate answers a real question, which is whether the total expected loss the model implies for the book is close to the total that occurred. For provisioning, pricing at portfolio level and capital, that total is the quantity the business actually carries, and -0.006 on it is genuinely reassuring about that quantity.</p>
+        <p>What the aggregate cannot do is support any statement about an individual decision. Every decision this model drives is made one applicant at a time, at a point on the score distribution, and the error at that point is the one that matters to the applicant and to the credit decision. Reporting both, side by side, with the aggregate labelled as portfolio-level, is the honest presentation. Reporting only the aggregate is what happened here.</p>
+        <p>There is a second reason to keep it. When the bands stop offsetting, the aggregate will move sharply, and a validator who has both series can date the change. A validator who only ever kept bands has to reconstruct the total to explain what the business already noticed.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 2 ============ -->
+  <section class="section" id="part-2">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · covers two different questions and the cases an average never sees</span>
+      <h2>Ranking well and being right are not the same claim</h2>
+      <span class="tag concept">10 min live</span>
+    </div>
+    <p class="lede">Outcomes analysis is usually run as if it were one test with one answer. It is at least two questions, and Brackwater is the clean case where they disagree. Does the model put riskier customers above safer ones is one question. Is the number it attaches to each of them right is a different one. A model can be acceptable on the first and badly wrong on the second, which is exactly what the band table shows, and a report that collapses them into a single verdict of "performance is satisfactory" has thrown away the finding.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 362" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three forms of outcomes analysis side by side. Discrimination asks whether riskier customers are ranked above safer ones, is measured on ordering, and misses errors in the level. Calibration asks whether the predicted rate matches the observed rate, is measured by band of predicted risk, and misses individual cases inside a band. Outlier analysis asks which individual cases the model was most wrong about, is measured case by case, and is the only one of the three that can surface a segment too small to move any band average. A strip below records that on Brackwater the ordering held up while every band level was wrong, so the two questions returned different answers on the same model.">
+        <style>
+          .p6bH { font: 800 12px Inter, sans-serif; fill: #0F172A; }
+          .p6bT { font: 800 11px Inter, sans-serif; fill: #FFFFFF; }
+          .p6bK { font: 800 11px Inter, sans-serif; fill: #0F172A; }
+          .p6bB { font: 400 11px Inter, sans-serif; fill: #0F172A; }
+          .p6bM { font: 400 10px Inter, sans-serif; fill: #56617A; }
+          .p6bR { font: 800 11px Inter, sans-serif; fill: #B91C1C; }
+        </style>
+
+        <text class="p6bH" x="14" y="20">Three forms of the same component. They fail in different places, so they are not substitutes.</text>
+
+        <rect x="14" y="34" width="278" height="196" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <rect x="14" y="34" width="278" height="26" rx="9" fill="#1E3A8A"></rect>
+        <text class="p6bT" x="28" y="52">Discrimination</text>
+        <text class="p6bK" x="28" y="82">Asks</text>
+        <text class="p6bB" x="28" y="98">Are riskier customers ranked</text>
+        <text class="p6bB" x="28" y="114">above safer ones</text>
+        <text class="p6bK" x="28" y="140">Read at</text>
+        <text class="p6bB" x="28" y="156">the ordering of the scores</text>
+        <text class="p6bK" x="28" y="182">Cannot see</text>
+        <text class="p6bB" x="28" y="198">whether the level attached</text>
+        <text class="p6bB" x="28" y="214">to each score is right</text>
+
+        <rect x="301" y="34" width="278" height="196" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <rect x="301" y="34" width="278" height="26" rx="9" fill="#1E40AF"></rect>
+        <text class="p6bT" x="315" y="52">Calibration</text>
+        <text class="p6bK" x="315" y="82">Asks</text>
+        <text class="p6bB" x="315" y="98">Does the predicted rate match</text>
+        <text class="p6bB" x="315" y="114">the rate that occurred</text>
+        <text class="p6bK" x="315" y="140">Read at</text>
+        <text class="p6bB" x="315" y="156">band level, or it reads nothing</text>
+        <text class="p6bK" x="315" y="182">Cannot see</text>
+        <text class="p6bB" x="315" y="198">which cases inside a band</text>
+        <text class="p6bB" x="315" y="214">carried the error</text>
+
+        <rect x="588" y="34" width="278" height="196" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <rect x="588" y="34" width="278" height="26" rx="9" fill="#1E40AF"></rect>
+        <text class="p6bT" x="602" y="52">Outlier analysis</text>
+        <text class="p6bK" x="602" y="82">Asks</text>
+        <text class="p6bB" x="602" y="98">Which individual cases was</text>
+        <text class="p6bB" x="602" y="114">the model most wrong about</text>
+        <text class="p6bK" x="602" y="140">Read at</text>
+        <text class="p6bB" x="602" y="156">one case at a time</text>
+        <text class="p6bK" x="602" y="182">Catches</text>
+        <text class="p6bB" x="602" y="198">a small segment that cannot</text>
+        <text class="p6bB" x="602" y="214">move any band average</text>
+
+        <rect x="14" y="246" width="852" height="100" rx="9" fill="#FEF2F2" stroke="#B91C1C"></rect>
+        <text class="p6bR" x="28" y="270">On Brackwater the two questions return different answers about the same model.</text>
+        <text class="p6bB" x="28" y="292">The ordering survives: the champion still separates the bands, predicted rising 0.086 to 0.694 across them.</text>
+        <text class="p6bB" x="28" y="311">Every level is wrong: actual runs 0.147 to 0.552 against it.</text>
+        <text class="p6bB" x="28" y="330">A verdict of "performance is satisfactory" would be true of one question and false of the other.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the definitions of these measures belong to learn-model-evaluation-with-phoebe. What a validator needs is which question each one answers and what it cannot see.</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Naming the two questions without defining either metric<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>A validator does not need to be able to derive a measure to use it as evidence, and reaching for a definition in a validation report is usually a sign that the finding has not been written clearly. What a validator needs is the question each measure answers and the class of defect it is blind to.</p>
+        <p>Discrimination asks about order. Given two customers, one of whom defaulted, how often does the model put the defaulter higher. Nothing in that question involves the number attached to either customer, which is why a model whose predictions were all divided by two would answer it identically.</p>
+        <p>Calibration asks about level. Among the customers the model said were 30 percent likely to default, did roughly 30 percent of them default. Nothing in that question involves the ordering, which is why a model that ranked no better than a coin toss but predicted the base rate for everybody would look excellent on the aggregate version of it.</p>
+        <p>How each of those is measured, what the standard statistics are, how to read the curves and where the thresholds come from is <strong>learn-model-evaluation-with-phoebe</strong>'s territory and it is taught properly there. Borrow the numbers, cite the source, and keep the validation report about what the numbers are evidence for.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>What outlier analysis catches that a banded average does not<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The guidance names outlier analysis alongside back-testing as a standalone form of outcomes analysis, and it is the form that gets dropped first when time is short. It is worth defending, because banding and averaging are the same operation applied twice, and both of them destroy the evidence for a whole class of defect.</p>
+        <p>Consider a band of four hundred accounts whose average is exactly on target. That average is consistent with four hundred accounts each slightly off, and it is equally consistent with three hundred and eighty accounts exactly right and twenty accounts catastrophically wrong in the same direction as each other. Those two situations call for completely different responses, and no banded table anywhere in the pack can tell them apart.</p>
+        <p>The twenty are what outlier analysis looks for. In practice the things it surfaces are of four kinds, and all four are common. A data defect affecting one source, one branch or one channel. A segment the model was never fitted on and has no evidence about, which is the situation session 7 walks into. A feature taking a value outside anything in development, where the model is extrapolating rather than interpolating. And a genuine population the model simply handles badly, which is a limitation to write down rather than a bug to fix.</p>
+        <p>The operational form is unglamorous and works. Rank by the size of the individual error, take the largest twenty or fifty, and read them as cases rather than as rows. If a pattern appears across them, you have a finding that no aggregate would ever have produced. If nothing appears, you have spent an hour and can say in the report that you looked.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Outcomes analysis when the model is substantially expert judgement<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The clause is short and it is the one most often skipped. Where a model "relies substantially on expert judgment, quantitative outcomes analysis helps to evaluate the quality of that judgment". Read it as an instruction about scope: the judgemental parts of a model are inside the boundary of the test, not outside it.</p>
+        <p>Most consumer scorecards carry at least one. A cutoff set by a credit committee rather than by an optimisation. A policy rule that declines an applicant regardless of score. A scaling factor applied to bring the model's output onto a business scale. An override rate where underwriters reverse the model. None of these has a development statistic, because none of them was fitted, and their absence from the model's performance section is usually treated as natural.</p>
+        <p>The test is the same test. Take the population the judgement applies to, compare what the judgement implied against what happened, and band it. An override population is the sharpest version: the model said one thing, a human said another, and the outcome is known. Comparing the outcome rate of overridden cases against the model's prediction for those same cases is outcomes analysis on the judgement itself, and it is frequently the single most informative table in a validation of a scorecard that has been in production for two years.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 3 ============ -->
+  <section class="section" id="part-3">
+    <div class="section-kicker">
+      <span class="klabel">Part 3 · build-along</span>
+      <h2>Produce the banded table and the number that hides it</h2>
+      <span class="tag build">18 min build-along</span>
+    </div>
+    <p class="lede">The whole finding is about thirty lines of code, and the order matters: build the banded table first and derive the aggregate from it, rather than the other way round. A validator who computes the aggregate first has already anchored on -0.006 and will read the bands as a refinement of a good result instead of as a contradiction of it.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div><p><strong>Score the model on the population you are testing, and keep the predictions.</strong> Not the fitted values from development. The comparison is only outcomes analysis if the outcome was unknown to the fit, which for Brackwater means the 2,000 later-vintage applications and not the 4,000 the model was estimated on.</p></div>
+      </div>
+      <div class="step">
+        <div><p><strong>Confirm the outcome window has closed before you compare anything.</strong> A partially matured window makes every actual rate look lower than it will finish, and the bands most affected are the ones with the longest time to default. This is the single most common way a banded table gets published wrong.</p></div>
+      </div>
+      <div class="step">
+        <div><p><strong>Cut bands on predicted risk, not on anything observed.</strong> Quintiles if the population is small, deciles if it is not. Record the cut points, because the next person to run this needs to reproduce your bands and quantile boundaries move with the sample.</p></div>
+      </div>
+      <div class="step">
+        <div><p><strong>Inside each band, take the mean prediction and the mean outcome, and print the count.</strong> Three columns, plus the signed gap. The count is not decoration: it is what tells the reader whether a band's gap is a finding or a sample-size artefact.</p></div>
+      </div>
+      <div class="step">
+        <div><p><strong>Sign the gap consistently and say which way round it is.</strong> Actual minus predicted throughout, so a positive number always means the model was too optimistic. Half the confusion in calibration reporting is two tables in the same pack using opposite conventions.</p></div>
+      </div>
+      <div class="step">
+        <div><p><strong>Only now compute the aggregate, and put it on the same page.</strong> -0.006 against band gaps from +0.068 to -0.142. Presenting them together is the finding; presenting either alone is a different and less useful report.</p></div>
+      </div>
+      <div class="step">
+        <div><p><strong>Rank the individual errors and read the top twenty as cases.</strong> The banded table has averaged away everything specific. Sort by the size of the individual miss and look at what is actually in there, because a concentrated segment inside an on-target band is invisible to every other step above.</p></div>
+      </div>
+      <div class="step">
+        <div><p><strong>Write the banding, the population and the window into the report itself.</strong> Not into a footnote and not into a methodology appendix nobody opens. A result whose banding is unstated cannot be challenged, and a result that cannot be challenged is not evidence.</p></div>
+      </div>
+    </div>
+
+    <div class="prompt-box good">
+      <span class="label">★ Try it now - the banded table, built before the aggregate</span>
+      <pre style="margin:0"><code>import pandas as pd
+
+# oot: the 2,000 later-vintage applications, already scored by the
+# champion refit without the leaked field. oot["bad"] is the outcome.
+oot = pd.read_csv("brackwater_oot_scored.csv")   # columns: pred, bad
+
+# Cut bands on PREDICTED risk, not on anything observed.
+oot["band"] = pd.qcut(oot["pred"], 5, labels=[1, 2, 3, 4, 5])
+
+banded = oot.groupby("band", observed=True).agg(
+    n        = ("bad",  "size"),
+    predicted= ("pred", "mean"),
+    actual   = ("bad",  "mean"),
+).round(3)
+
+# Sign it one way and keep it that way: positive means too optimistic.
+banded["gap"] = (banded["actual"] - banded["predicted"]).round(3)
+print(banded)
+
+#  band    n   predicted   actual     gap
+#     1  400       0.086    0.147   0.061     &lt;- under-predicts the safest
+#     2  400       0.169    0.237   0.068
+#     3  400       0.270    0.305   0.035
+#     4  400       0.432    0.378  -0.054
+#     5  400       0.694    0.552  -0.142     &lt;- over-predicts the riskiest</code></pre>
+    </div>
+
+    <div class="prompt-box good">
+      <span class="label">★ Try it now - the one number that would have passed it</span>
+      <pre style="margin:0"><code>predicted = oot["pred"].mean()
+actual    = oot["bad"].mean()
+
+print(round(predicted, 3))               # 0.330
+print(round(actual, 3))                  # 0.324
+print(round(actual - predicted, 3))      # -0.006
+
+# Side by side, which is the only honest way to show either of them:
+print("aggregate gap        ", round(actual - predicted, 3))    # -0.006
+print("worst band gap       ", banded["gap"].min())             # -0.142
+print("best  band gap       ", banded["gap"].max())             #  0.068
+
+# Three bands are too optimistic and two are too pessimistic, so the
+# five errors offset to within six thousandths across the whole book.
+# Report the aggregate as a portfolio-level figure and never as a
+# statement about any individual decision the model drives.</code></pre>
+    </div>
+
+    <div class="callout tip">
+      <p><strong>Keep the band counts in the printed table even when they are all identical.</strong> They will not stay identical. The moment somebody filters to a segment, splits by channel or reruns on a shorter window, the bands stop being equal and a reader who has been trained by your earlier tables to ignore the count will misread the first uneven one.</p>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions</h2>
+    </div>
+
+    <div class="quiz-q" data-answer="2">
+      <p class="qtext">A monitoring pack has reported one calibration figure per model per quarter for two years, and Brackwater's scorecard has never been out by more than a hundredth. What is the correct finding?</p>
+      <button class="qopt" type="button">A · The model is well calibrated and no finding is warranted on this evidence</button>
+      <button class="qopt" type="button">B · The model is miscalibrated and the pack has been reporting it incorrectly</button>
+      <button class="qopt" type="button">C · The test as designed cannot distinguish a calibrated model from this one, because errors in opposite directions cancel in an aggregate; the pack was not wrong on any occasion, it was answering a question that should never be asked alone</button>
+      <p class="qwhy">The eight packs were arithmetically correct. Scored by quintile the same model is out by +0.061, +0.068, +0.035, -0.054 and -0.142, and the aggregate gap of -0.006 is what those five sum to. Writing this up as "the model is miscalibrated" invites a debate about the model; writing it up as "the control cannot fail for the right reason" is a statement about a control, which is a thing a committee can fix.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">A band of 400 accounts has an average gap of almost exactly zero. What can you conclude about the accounts in it?</p>
+      <button class="qopt" type="button">A · Very little on its own, because the same average is produced by 400 accounts each slightly off and by 380 exactly right with 20 catastrophically wrong in the same direction</button>
+      <button class="qopt" type="button">B · That the model handles this band correctly, since banding is the resolution at which calibration is assessed</button>
+      <button class="qopt" type="button">C · That the band is too wide and should be split into deciles until the gap appears</button>
+      <p class="qwhy">Banding and averaging are the same operation applied twice, and both destroy the evidence for a concentrated error inside a band. This is what outlier analysis is for, and the revised interagency guidance of 17 April 2026 names it alongside back-testing as a standalone form of outcomes analysis. Finer bands help, but no band average of any width separates a diffuse error from a concentrated one.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">A model document states that a judgemental cutoff was set by the credit committee rather than fitted, and the performance section therefore reports nothing about it. How should a validator treat that?</p>
+      <button class="qopt" type="button">A · As reasonable, since there is no development statistic available for a judgement that was never estimated</button>
+      <button class="qopt" type="button">B · As a gap, because where a model relies substantially on expert judgement, quantitative outcomes analysis helps to evaluate the quality of that judgement, and outcomes are the only evidence about it that will ever exist</button>
+      <button class="qopt" type="button">C · As out of scope, since the cutoff is a business policy rather than part of the model</button>
+      <p class="qwhy">The guidance puts the judgemental parts of a model inside the boundary of the test rather than outside it. The absence of a fitted statistic is the reason to run outcomes analysis on the judgement, not an excuse from it: take the population the judgement applies to, compare what it implied against what happened, and band it. An override population is the sharpest case, because the model said one thing, a person said another, and the outcome is known for both.</p>
+    </div>
+    <p class="quiz-score"></p>
+  </section>
+
+  <!-- ============ HOMEWORK ============ -->
+  <section class="section" id="homework">
+    <div class="section-kicker">
+      <span class="klabel">Homework</span>
+      <h2>Before session 7</h2>
+      <span class="tag time">40 min</span>
+    </div>
+    <div class="callout">
+      <p>Find the most recent monitoring pack for a model your team owns and answer one question about every performance line in it: at what resolution was this computed. Most lines will turn out to be a single figure over the whole book. Pick one of them, rebuild it by decile of predicted risk, and put the two versions on the same page with the band counts showing. Then rank the individual errors and read the top twenty as cases rather than rows. Bring both to session 7, which takes the same comparison to a period the model never saw and asks the harder question underneath it: whether the book being scored is even the same book the model was fitted on.</p>
+    </div>
+  </section>
+
+  <!-- ============ COVERAGE ============ -->
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Sources covered</span>
+      <h2>What tonight maps to</h2>
+    </div>
+    <div class="covered">
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Outcomes analysis as the guidance defines it</span>
+        <span class="note">Under the revised interagency guidance of 17 April 2026 it "compares model outputs to corresponding real-world outcomes to assess model performance relative to model objectives and business use", and can take the form of development testing, ongoing monitoring reports, or standalone activities "such as back-testing or outlier analysis". SR 11-7 is superseded.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">The headline finding, with every number</span>
+        <span class="note">On the later vintage the champion predicts a mean default rate of 0.330 against an actual 0.324, a gap of -0.006. By quintile of predicted risk: 0.086 against 0.147 (+0.061), 0.169 against 0.237 (+0.068), 0.270 against 0.305 (+0.035), 0.432 against 0.378 (-0.054), 0.694 against 0.552 (-0.142).</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Why the errors cancel and what it costs</span>
+        <span class="note">Three bands under-predict and two over-predict, so a pack carrying one calibration figure per model per quarter shows this model as healthy for exactly as long as the two halves stay in balance, then shows it as suddenly broken on the quarter they stop.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">The design rule that follows</span>
+        <span class="note">Band every outcomes test. Banding is not extra credit, it is the only version of the test that can fail for the right reason. State the banding, the population and the window in the report itself.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Outlier analysis as a distinct form</span>
+        <span class="note">Named in the guidance alongside back-testing. It surfaces a concentrated segment inside an on-target band, which no average of any band width can separate from a diffuse error.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Outcomes analysis on expert judgement</span>
+        <span class="note">Where a model "relies substantially on expert judgment, quantitative outcomes analysis helps to evaluate the quality of that judgment". Cutoffs, policy rules, scaling factors and overrides are inside the boundary of the test.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill light">◐</span>
+        <span class="name">Out-of-time testing and population stability</span>
+        <span class="note">Session 7. Tonight compares prediction with outcome on the later vintage; why that vintage behaves differently, and whether it is even the same book, comes next.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill light">◐</span>
+        <span class="name">Monitoring thresholds and triggers</span>
+        <span class="note">Session 8 owns the design of the pack, who reads it and what fires. Tonight establishes what it has to be capable of detecting.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill inkpill">·</span>
+        <span class="name">Defining discrimination, calibration and the statistics behind them</span>
+        <span class="note">Not covered by design. <strong>learn-model-evaluation-with-phoebe</strong> defines the metrics, the curves and the thresholds; here they are only evidence a validator weighs, named by the question each one answers.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill inkpill">·</span>
+        <span class="name">Drift detection as a technique</span>
+        <span class="note">Not covered by design. <strong>learn-model-evaluation-with-phoebe</strong> owns drift and continuous evaluation. A validator measures the shift and names it; the detection methods live there.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill inkpill">·</span>
+        <span class="name">Whether any of this is a causal claim</span>
+        <span class="note">Not covered by design. A comparison of prediction against outcome is not an estimate of an effect. <strong>learn-causal-inference-with-phoebe</strong> owns the machinery for claims that need more.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill inkpill">·</span>
+        <span class="name">Governance frameworks of every kind</span>
+        <span class="note">Not covered by design, in any session. <strong>learn-ai-governance-with-phoebe</strong> owns them.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CHEAT SHEET ============ -->
+  <section class="cheat" id="cheatsheet">
+    <h3>Session 6 cheat sheet</h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>What the component is</b><span>Comparing model outputs to the corresponding real-world outcomes, relative to the model's objectives and business use.</span></div>
+      <div class="cheat-item"><b>The number that hides everything</b><span>Predicted 0.330 against actual 0.324, a gap of -0.006. Arithmetically true, and it passed this model for two years.</span></div>
+      <div class="cheat-item"><b>The five bands</b><span>+0.061, +0.068, +0.035, -0.054, -0.142. Under-predicts the safest, over-predicts the riskiest.</span></div>
+      <div class="cheat-item"><b>Band every outcomes test</b><span>Not extra credit. The only version of the test that can fail for the right reason.</span></div>
+      <div class="cheat-item"><b>State three things next to it</b><span>The banding, on predicted risk; the population and the count per band; the outcome window and whether it closed.</span></div>
+      <div class="cheat-item"><b>Two questions, not one</b><span>Ranking well and attaching the right level are separate claims. A model can pass one and fail the other.</span></div>
+      <div class="cheat-item"><b>Outlier analysis earns its hour</b><span>An on-target band can hide twenty catastrophic cases. No average of any width separates that from a diffuse error.</span></div>
+      <div class="cheat-item"><b>Judgement is inside the test</b><span>Cutoffs, policy rules, scaling factors and overrides have no development statistic, which is why outcomes are the only evidence about them.</span></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="pagefoot">
+  <div class="wrap">
+    <p>Practitioner session 6 of 10 · learn-model-risk-with-phoebe · by Phoebe Fu</p>
+    <nav class="pagenav">
+      <a href="p5-benchmarks-and-challengers.html">← Practitioner session 5 · Benchmarks and challengers</a>
+      <a href="p7-out-of-time-and-stability.html">Practitioner session 7 · Out of time and stability →</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="../assets/app.js?v=2"></script>
+</body>
+</html>

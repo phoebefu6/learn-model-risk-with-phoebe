@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- social:start -->
+<meta name="description" content="Practitioner session 5 of 10. Three columns reach 0.676 out of time against the champion's 0.682. The cheapest question in validation is what the simple thing would have scored, and the answer reframes every other finding.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Learn with Phoebe">
+<meta property="og:title" content="Benchmarks and challengers - learn model risk with phoebe">
+<meta property="og:description" content="Practitioner session 5 of 10. The champion's edge out of time is 0.006. At matched cutoffs it approves 69.3 percent with 24.7 percent bad; the challenger approves 72.2 percent with 25.3 percent.">
+<meta property="og:url" content="https://phoebefu6.github.io/learn-model-risk-with-phoebe/courses/p5-benchmarks-and-challengers.html">
+<meta property="og:image" content="https://phoebefu6.github.io/learn-model-risk-with-phoebe/assets/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Benchmarks and challengers - learn model risk with phoebe">
+<meta name="twitter:description" content="0.682 against 0.676. Neither model is obviously better, and that is the finding: the evidence submitted did not support the claim made.">
+<meta name="twitter:image" content="https://phoebefu6.github.io/learn-model-risk-with-phoebe/assets/og-cover.png">
+<!-- social:end -->
+<title>Practitioner session 5 · Benchmarks and challengers - learn model risk with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=2">
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-model-risk-with-phoebe</a> / Practitioner session 5 of 10</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Learn Model Risk with Phoebe · Practitioner session 5 of 10</div>
+    <h1>Benchmarks and <span class="accent">challengers</span></h1>
+    <p class="sub">The cheapest question in validation is what the simple thing would have scored, and almost nobody runs it, because by the time a model reaches review everybody has spent months on the complicated one. Brackwater's champion, honestly refit without the leaked field, scores 0.772 on development and 0.682 on the later vintage. Three columns that any analyst could assemble in an afternoon score 0.763 and 0.676. The edge out of time is 0.006. That single number does not condemn the champion, and it changes how every other finding in the report should be read.</p>
+    <div class="chip-row">
+      <span class="chip level">🟠 Advanced</span>
+      <span class="chip audience">Validators and the second line</span>
+      <span class="chip audience">Data scientists who build the model</span>
+      <span class="chip time">45 min</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:1">0-3 · Welcome</span>
+      <span class="a2" style="flex:4">3-15 · The three-feature challenger</span>
+      <span class="a3" style="flex:4">15-27 · Where it belongs, what it costs</span>
+      <span class="a4" style="flex:6">27-45 · Build-along and Q&amp;A</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ INTRO ============ -->
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>Where this sits in the practitioner track</h2>
+    </div>
+    <p class="lede">Session 3 found the leaked field and produced the honest development number, 0.772 against the submitted 0.863. Session 4 reproduced the document and showed what one unrecorded choice is worth. Tonight supplies the context both of those findings were missing: a floor. Without one, a validator reporting a 0.091 leak has no way to say whether the model underneath it was worth building. Session 6 then takes the honest model and asks a different question, whether its predictions match what actually happened. <strong>Brackwater</strong> stays the worked example, 4,000 development applications at a bad rate of 0.292 and 2,000 from the following year at 0.324.</p>
+
+    <div class="legend">
+      <span class="pill">Live = presented in the 45 minutes</span>
+      <span class="pill">Self-study = the full depth, after class</span>
+      <span class="pill">🔍 Every diagram zooms</span>
+    </div>
+
+    <div class="callout win">
+      <p><strong>★ What you walk out with tonight.</strong> A challenger you can build in twenty lines and defend in one sentence, and the rule for choosing one: the simplest thing the business could actually run, on data that definitely exists at scoring time. The Brackwater comparison on both axes, discrimination and business impact, where the champion wins one and the challenger wins the other. The claim not to make, which is that either model is better. And the claim that is defensible and survives contact with a committee: the evidence submitted did not support the claim made, which is a statement about the model document rather than about the model.</p>
+    </div>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>What a benchmark is for<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>A model document reports a number. Every number needs a comparison before it means anything, and the comparison a model document supplies is almost always the wrong one: last year's model, or a target agreed at the start of the project, or nothing at all. The comparison a validator needs is the one nobody has an interest in producing, which is what the same business outcome would have cost with a model that took an afternoon.</p>
+        <p>That is the entire idea of a benchmark. It is not an attempt to build a better model and it is not a competition. It sets a floor under the reported number so that the rest of the review has a scale to work on. A validation that reports performance without a floor is reporting a number in units nobody can interpret, and the interpretation gets supplied later by whoever is most confident in the room.</p>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>Brackwater's model document contains a comparison. It compares the champion's 0.863 against the previous scorecard's number from four years earlier, on a different book, computed by a team that had since left. It is the only benchmark in the file, and it was the strongest evidence in the approval pack. Nobody had ever fitted three columns on the current sample, which takes about twenty lines and would have taken an afternoon at any point in the model's life.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Four words for four different comparisons<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <ul>
+          <li><strong>Benchmark.</strong> A reference model run on the same sample to put the reported number on a scale. Its job is to be interpretable, not to be good. It is never proposed for deployment.</li>
+          <li><strong>Challenger.</strong> A model kept alongside the champion, scored on the same applications over time, and capable of replacing it. A challenger is an operational commitment; a benchmark is a one-off calculation. Tonight's three-feature model starts life as the first and could become the second.</li>
+          <li><strong>Baseline.</strong> The trivial reference: predict the base rate for everybody, or keep whatever rule the business used before there was a model. Worth computing because it is free and because it occasionally wins.</li>
+          <li><strong>The incumbent.</strong> Whatever is running today. Useful to compare against and easy to over-weight, because the incumbent was fitted on a different book and its reported number was produced under a different standard of evidence.</li>
+        </ul>
+        <p>Keeping these apart matters in the write-up. A recommendation to run a challenger programme commits somebody to monthly scoring and a governance process. A benchmark commits nobody to anything, which is precisely why it is the one a validator can always insist on.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 1 ============ -->
+  <section class="section" id="part-1">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · covers the challenger, the numbers and both axes</span>
+      <h2>Three columns, and a gap of six thousandths</h2>
+      <span class="tag concept">11 min live</span>
+    </div>
+    <p class="lede">The challenger uses prior delinquency, utilisation and months employed. All three are known at the moment the application is decided, all three are in every credit file, and any analyst at Brackwater could have produced the model in an afternoon. It scores 0.763 on development and 0.676 on the later vintage. The champion, refit without the leaked field, scores 0.772 and 0.682. The champion's edge out of time is 0.006.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 356" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Champion against challenger on two axes. On discrimination, the champion refit without the leaked field scores 0.772 on development and 0.682 on the later vintage, while the three-feature challenger scores 0.763 and 0.676, so the champion's edge out of time is 0.006. On business impact, with the cutoff set on the development sample at the 75th percentile of score, the champion approves 69.3 percent of the later vintage with 24.7 percent bad among approved, and the challenger at its own equivalent cutoff approves 72.2 percent with 25.3 percent bad. The champion buys 0.6 points of bad rate and gives up 2.9 points of volume, so each wins on a different axis and neither is obviously better.">
+        <style>
+          .p5aH { font: 800 12px Inter, sans-serif; fill: #0F172A; }
+          .p5aT { font: 800 11px Inter, sans-serif; fill: #FFFFFF; }
+          .p5aK { font: 800 11px Inter, sans-serif; fill: #0F172A; }
+          .p5aV { font: 800 11px Inter, sans-serif; fill: #1E3A8A; }
+          .p5aB { font: 400 11px Inter, sans-serif; fill: #0F172A; }
+          .p5aM { font: 400 11px Inter, sans-serif; fill: #56617A; }
+        </style>
+
+        <text class="p5aH" x="14" y="22">Two axes, two winners, and a gap of 0.006 between them.</text>
+
+        <rect x="14" y="40" width="418" height="300" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <rect x="14" y="40" width="418" height="26" rx="9" fill="#1E3A8A"></rect>
+        <text class="p5aT" x="28" y="58">Axis one: discrimination</text>
+
+        <line x1="182" y1="74" x2="182" y2="240" stroke="#C7D2E4" stroke-width="1.4"></line>
+        <line x1="258" y1="74" x2="258" y2="240" stroke="#DDE5F0" stroke-width="1"></line>
+        <line x1="335" y1="74" x2="335" y2="240" stroke="#DDE5F0" stroke-width="1"></line>
+        <line x1="412" y1="74" x2="412" y2="240" stroke="#DDE5F0" stroke-width="1"></line>
+
+        <text class="p5aK" x="28" y="96">Champion, development</text>
+        <rect x="182" y="80" width="187" height="24" rx="5" fill="#1E40AF"></rect>
+        <text class="p5aV" x="375" y="97">0.772</text>
+
+        <text class="p5aB" x="28" y="134">Challenger, development</text>
+        <rect x="182" y="118" width="173" height="24" rx="5" fill="#BFDBFE" stroke="#93C5FD"></rect>
+        <text class="p5aV" x="361" y="135">0.763</text>
+
+        <text class="p5aK" x="28" y="184">Champion, out of time</text>
+        <rect x="182" y="168" width="49" height="24" rx="5" fill="#1E40AF"></rect>
+        <text class="p5aV" x="237" y="185">0.682</text>
+
+        <text class="p5aB" x="28" y="222">Challenger, out of time</text>
+        <rect x="182" y="206" width="40" height="24" rx="5" fill="#BFDBFE" stroke="#93C5FD"></rect>
+        <text class="p5aV" x="228" y="223">0.676</text>
+
+        <text class="p5aM" x="182" y="256" text-anchor="middle">0.650</text>
+        <text class="p5aM" x="258" y="256" text-anchor="middle">0.700</text>
+        <text class="p5aM" x="335" y="256" text-anchor="middle">0.750</text>
+        <text class="p5aM" x="412" y="256" text-anchor="middle">0.800</text>
+
+        <rect x="28" y="270" width="390" height="58" rx="8" fill="#BFDBFE" stroke="#93C5FD"></rect>
+        <text class="p5aK" x="42" y="294">The champion's edge out of time is 0.006</text>
+        <text class="p5aB" x="42" y="314">0.682 against 0.676. Eleven features against three.</text>
+
+        <rect x="446" y="40" width="420" height="300" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <rect x="446" y="40" width="420" height="26" rx="9" fill="#1E40AF"></rect>
+        <text class="p5aT" x="460" y="58">Axis two: what it does to the book</text>
+
+        <text class="p5aM" x="460" y="88">Cutoff set on development at the 75th percentile of</text>
+        <text class="p5aM" x="460" y="106">score, then read off the later vintage.</text>
+
+        <text class="p5aK" x="690" y="136" text-anchor="middle">Champion</text>
+        <text class="p5aK" x="800" y="136" text-anchor="middle">Challenger</text>
+        <line x1="460" y1="146" x2="852" y2="146" stroke="#DDE5F0" stroke-width="1"></line>
+
+        <text class="p5aB" x="460" y="176">Approved, later vintage</text>
+        <text class="p5aV" x="690" y="176" text-anchor="middle">69.3%</text>
+        <text class="p5aV" x="800" y="176" text-anchor="middle">72.2%</text>
+        <line x1="460" y1="190" x2="852" y2="190" stroke="#DDE5F0" stroke-width="1"></line>
+
+        <text class="p5aB" x="460" y="220">Bad among approved</text>
+        <text class="p5aV" x="690" y="220" text-anchor="middle">24.7%</text>
+        <text class="p5aV" x="800" y="220" text-anchor="middle">25.3%</text>
+        <line x1="460" y1="234" x2="852" y2="234" stroke="#DDE5F0" stroke-width="1"></line>
+
+        <text class="p5aK" x="460" y="262">The champion buys 0.6 points of bad rate</text>
+        <text class="p5aK" x="460" y="280">and gives up 2.9 points of volume.</text>
+
+        <rect x="460" y="292" width="392" height="38" rx="8" fill="#FFFFFF" stroke="#C7D2E4"></rect>
+        <text class="p5aB" x="474" y="316">Each wins on a different axis. Neither is obviously better.</text>
+
+        <text class="p5aM" x="14" y="352">What these figures measure belongs to learn-model-evaluation-with-phoebe. Here they are evidence a validator weighs.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the champion is ahead on discrimination by six thousandths and behind on volume by 2.9 points. Read both before you write anything.</figcaption>
+    </figure>
+
+    <div class="prompt-box good">
+      <span class="label">★ Try it now - fit the three-feature challenger</span>
+      <pre style="margin:0"><code>import pandas as pd
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import roc_auc_score
+
+dev = pd.read_csv("brackwater_dev.csv")   # 4,000 applications, bad rate 0.292
+oot = pd.read_csv("brackwater_oot.csv")   # 2,000 from the following year, bad rate 0.324
+
+# Three fields, all of them known at the moment the application is decided.
+challenger = ["priorDelq", "util", "employed"]
+
+# The champion, honestly refit: the leaked field from session 3 is gone.
+no_leak = ["util", "priorDelq", "employed", "incomeRat", "thin",
+           "age", "n0", "n1", "n2", "n3"]
+
+def fit(cols):
+    return LogisticRegression(max_iter=2000, C=1e4).fit(dev[cols], dev["bad"])
+
+def auc(model, cols, frame):
+    return roc_auc_score(frame["bad"], model.predict_proba(frame[cols])[:, 1])
+
+ch, cp = fit(challenger), fit(no_leak)
+
+print(round(auc(ch, challenger, dev), 3))   # 0.763 on development
+print(round(auc(ch, challenger, oot), 3))   # 0.676 on the later vintage
+print(round(auc(cp, no_leak, dev), 3))      # 0.772
+print(round(auc(cp, no_leak, oot), 3))      # 0.682
+
+# Eleven features against three, out of time: an edge of 0.006.</code></pre>
+    </div>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Why the benchmark belongs early in the review<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>A benchmark is usually run last, if at all, on the grounds that it is a nice-to-have once the real tests are done. That ordering wastes it, because the benchmark is the finding that reframes the others rather than adding to them. Consider session 3's leak, worth 0.091 on development. Read it against a model that beats three columns by 0.15 and it is a serious defect in a genuinely valuable model, and the report is about fixing the number. Read it against a model that beats three columns by 0.006 and the same leak becomes the whole story, because the leak was the only thing holding the complexity up.</p>
+        <p>Identical finding, identical size, two different reports. The only thing that changed is whether there was a floor on the page. Run the benchmark before you decide how to frame the leak, the calibration work or the monitoring recommendation, and all three come out at the right weight the first time.</p>
+        <p>There is a cost argument too, and committees respond to it. Eleven features carry eleven data dependencies, eleven things that can drift, and eleven lines of an ongoing monitoring obligation. Three carry three. That comparison is not part of the AUC and it belongs in the report next to it.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>How to choose a challenger<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The rule is one sentence: the simplest defensible thing the business could actually run, built on data that definitely exists at scoring time. Every word in it is doing work. <strong>Simplest</strong>, because a complicated challenger gives the model owner somewhere to argue. <strong>Defensible</strong>, because a challenger that a credit officer would laugh at proves nothing when it does well. <strong>Could actually run</strong>, because the comparison is about what the business gave up, not about what is theoretically possible. <strong>Data that definitely exists at scoring time</strong>, because a challenger built on a post-outcome field repeats session 3's mistake with the validator's name on it.</p>
+        <p>Brackwater's three fields pass all four. Prior delinquency, utilisation and months employed are in the credit file at application, they are the fields a human underwriter would have asked for, and nothing about them needs explaining to a committee.</p>
+        <div class="callout tip">
+          <p><strong>A challenger nobody could deploy is not a benchmark, it is a debating point.</strong> If your reference model needs a data source the business does not have, or a field that arrives two weeks after the decision, it cannot tell you what the complexity was worth. It can only tell you what a different business would have scored.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>What the benchmark does not license<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><strong>It does not license a recommendation to deploy the challenger.</strong> Replacing a production scorecard is a modelling and business decision with its own build, its own validation and its own implementation risk. The validator's finding is about the evidence for the champion, and a validator who arrives with a replacement has stopped being a reviewer.</p>
+        <p><strong>It does not license a claim about which model will do better next year.</strong> Both numbers come from one later vintage. What holds up over time is a monitoring question, and a challenger run alongside the champion for a few cycles answers it far better than a single comparison can.</p>
+        <p><strong>It does not license dropping features.</strong> Session 3 showed that four of the champion's features are pure noise and that ten of the eleven carry very little. Tonight shows that the whole set beats three columns by 0.006. Neither is a simplification instruction. Both are evidence that the design was never justified, which is a finding the developer answers with a redesign or with an argument, not something the report decides for them.</p>
+        <p>What it does license is a condition: re-run the benchmark at every periodic review, alongside the performance numbers, so the question is never again unanswered for the life of the model.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 2 ============ -->
+  <section class="section" id="part-2">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · covers where the result is filed, the business translation and the claim not to make</span>
+      <h2>Where it belongs, and what it costs the book</h2>
+      <span class="tag concept">10 min live</span>
+    </div>
+    <p class="lede">Two things have to happen before a benchmark result is usable. It has to be filed in the right place, and the guidance is specific about that: benchmarking to other models is named inside conceptual soundness, as one practical way to assess a model, and not as a component of its own. Then it has to be translated, because a committee does not act on 0.006. Set the cutoff on the development sample at the 75th percentile of score, apply it to the later vintage, and count. The champion approves 69.3 percent of the later vintage with 24.7 percent bad among approved. The challenger, at its own equivalent cutoff, approves 72.2 percent with 25.3 percent bad. The champion buys 0.6 points of bad rate and gives up 2.9 points of volume.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 306" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The three components of validation under the revised interagency guidance of 17 April 2026: conceptual soundness, outcomes analysis and ongoing monitoring. Benchmarking to other models is shown nested inside conceptual soundness as one practical way to assess a model. A banner underneath states that there is no fourth box, and that framing benchmarking as a separate stage of validation is an editorial claim rather than the guidance.">
+        <style>
+          .p5bH { font: 800 12px Inter, sans-serif; fill: #0F172A; }
+          .p5bT { font: 800 11px Inter, sans-serif; fill: #FFFFFF; }
+          .p5bK { font: 800 11px Inter, sans-serif; fill: #0F172A; }
+          .p5bR { font: 800 11px Inter, sans-serif; fill: #B91C1C; }
+          .p5bB { font: 400 11px Inter, sans-serif; fill: #0F172A; }
+          .p5bM { font: 400 11px Inter, sans-serif; fill: #56617A; }
+        </style>
+
+        <text class="p5bH" x="14" y="22">Benchmarking is named inside conceptual soundness. It is not a fourth component.</text>
+
+        <rect x="14" y="44" width="272" height="150" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <rect x="14" y="44" width="272" height="26" rx="9" fill="#1E3A8A"></rect>
+        <text class="p5bT" x="28" y="62">Conceptual soundness</text>
+        <text class="p5bB" x="28" y="90">Design, assumptions,</text>
+        <text class="p5bB" x="28" y="108">data selection,</text>
+        <text class="p5bB" x="28" y="126">construction and</text>
+        <text class="p5bB" x="28" y="144">developmental testing</text>
+        <rect x="26" y="156" width="248" height="30" rx="7" fill="#BFDBFE" stroke="#93C5FD"></rect>
+        <text class="p5bK" x="38" y="176">Benchmarking to other models</text>
+
+        <rect x="300" y="44" width="272" height="150" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <rect x="300" y="44" width="272" height="26" rx="9" fill="#1E40AF"></rect>
+        <text class="p5bT" x="314" y="62">Outcomes analysis</text>
+        <text class="p5bB" x="314" y="90">Model outputs compared</text>
+        <text class="p5bB" x="314" y="108">to real-world outcomes</text>
+        <text class="p5bM" x="314" y="132">Back-testing, outlier analysis,</text>
+        <text class="p5bM" x="314" y="150">testing during development</text>
+
+        <rect x="586" y="44" width="280" height="150" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <rect x="586" y="44" width="280" height="26" rx="9" fill="#1E40AF"></rect>
+        <text class="p5bT" x="600" y="62">Ongoing monitoring</text>
+        <text class="p5bB" x="600" y="90">Is the model still performing</text>
+        <text class="p5bB" x="600" y="108">as expected, given changes</text>
+        <text class="p5bM" x="600" y="132">in products, exposures, clients,</text>
+        <text class="p5bM" x="600" y="150">data relevance, market conditions</text>
+
+        <rect x="14" y="210" width="852" height="60" rx="9" fill="#FEF2F2" stroke="#B91C1C"></rect>
+        <text class="p5bR" x="28" y="238">There is no fourth box.</text>
+        <text class="p5bB" x="190" y="238">Benchmarking is one practical way to assess a model, named inside the first</text>
+        <text class="p5bB" x="190" y="256">component. Framing it as a separate stage is an editorial claim, not the guidance.</text>
+
+        <text class="p5bM" x="14" y="294">SR 11-7 is superseded. The current text is the revised interagency guidance of 17 April 2026.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - three components, and the benchmark lives inside the first one.</figcaption>
+    </figure>
+
+    <div class="prompt-box good">
+      <span class="label">★ Try it now - translate it into approvals and losses</span>
+      <pre style="margin:0"><code>import numpy as np
+
+def business(model, cols):
+    """Set the cutoff on development, then read the later vintage through it."""
+    cut = np.quantile(model.predict_proba(dev[cols])[:, 1], 0.75)   # safest 75 percent
+    s   = model.predict_proba(oot[cols])[:, 1]
+    ok  = s &lt;= cut
+    return round(100 * ok.mean(), 1), round(100 * oot["bad"][ok].mean(), 1)
+
+print(business(cp, no_leak))       # (69.3, 24.7)  champion
+print(business(ch, challenger))    # (72.2, 25.3)  challenger, equivalent cutoff
+
+# 0.6 points of bad rate bought for 2.9 points of volume given up.
+# Which of those the business would rather have is not the validator's call.
+# Reporting that the trade exists, and that nobody had measured it, is.</code></pre>
+    </div>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>The claim not to make<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Do not write that the champion is worthless, and do not write that the challenger is better. Both sentences overreach the evidence in front of you. On this data the two models are within noise of each other on discrimination, and on business impact each one wins a different axis: the champion takes fewer bad accounts, the challenger takes more volume. There is no reading of these numbers that ranks one above the other without also importing a business judgement about the price of volume, and that judgement is not the validator's to make.</p>
+        <p>What is defensible, and what the report should say, is that <strong>the evidence submitted did not support the claim made</strong>. The model document claimed a level of performance that justified an eleven-feature bespoke build and the ongoing obligations that come with it. Nobody had ever established that the complexity bought anything, because nobody had run the comparison. That sentence is about the model document. It does not require you to prefer either model and it cannot be rebutted by preferring one.</p>
+        <div class="callout tip">
+          <p><strong>The test for whether your finding overreaches.</strong> Read it back and ask which sentence the model owner could argue with using a business fact you do not have. "The challenger is better" invites exactly that argument and you will lose it. "The comparison was never run, and here is what it shows" invites no argument at all, because it is a fact about the submission.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Why matched cutoffs are the honest comparison<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Two models produce scores on different scales, so comparing them at the same numerical threshold compares nothing. The fix is to give each model the cutoff that implements the same business policy, which here is approving the safest 75 percent of the development sample, and then to apply each model's own cutoff to the later vintage. Both models are then being asked to carry out the same instruction, and the differences that appear are differences in how well they carry it out.</p>
+        <p>Notice what the champion's own numbers do across the two vintages under that policy. It was set to approve 75.0 percent on development with 19.5 percent bad among approved. On the later vintage the same cutoff approves 69.3 percent with 24.7 percent bad. The book got harder for both models, which is a session 7 subject, and it is worth flagging here so nobody reads the 69.3 as a property of the cutoff rule.</p>
+        <p>One caution on the arithmetic. These are two figures from one later vintage of 2,000 applications, and a difference of 0.6 points of bad rate on a sample that size is not something to build a policy on. Report it as what it is: the scale of the trade, measured once, on the data available.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Where benchmarking sits in the guidance<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Validation has three components under the revised interagency guidance of 17 April 2026: conceptual soundness, outcomes analysis and ongoing monitoring, in that order. Benchmarking is named inside the first of those. Assessing conceptual soundness means assessing model design, construction and developmental testing; for some models what matters is evaluating the theoretical construction, and for others, in the guidance's own framing, interpretability measures or benchmarking to other models are more practical.</p>
+        <p>So benchmarking is one practical way to assess a model, sitting inside conceptual soundness. It is not a fourth component. This is worth saying plainly because the opposite is drawn constantly, in slide decks and in validation standards, as a fourth box in a row of boxes. Anyone doing that is making an editorial claim about how a validation should be organised, which is a reasonable thing to argue for and a different thing from attributing it to the guidance.</p>
+        <p>The practical consequence is about where the finding goes in the report. A benchmark result is evidence about whether the model's design and construction were justified, which is conceptual soundness. Filing it under performance turns it into a debate about which number is bigger, and the numbers here are six thousandths apart.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 3 ============ -->
+  <section class="section" id="part-3">
+    <div class="section-kicker">
+      <span class="klabel">Part 3 · build-along</span>
+      <h2>Build the floor, then price the gap</h2>
+      <span class="tag build">18 min build-along</span>
+    </div>
+    <p class="lede">The two code blocks above are the whole exercise: one fits the challenger, one turns the comparison into approvals and losses. The steps below are the order to run them in and the decisions to make while you do, because the choices that decide whether a benchmark is defensible are all made before any code is written.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div><p><strong>Choose the three fields before you look at any performance number.</strong> The simplest defensible thing the business could run, on data that definitely exists at scoring time. Choosing them after seeing which ones score well turns the benchmark into a second model built by you, and it will not survive the first question about it.</p></div>
+      </div>
+      <div class="step">
+        <div><p><strong>Fit the challenger on the same sample as the champion, with the same procedure.</strong> Same rows, same fitting settings. Any difference between the two fits that is not the feature list is a difference you will have to explain later.</p></div>
+      </div>
+      <div class="step">
+        <div><p><strong>Compare on the later vintage, not on development.</strong> Development says 0.772 against 0.763 and out of time says 0.682 against 0.676. The second pair is the one the business will live with, and it is the one that closes the gap.</p></div>
+      </div>
+      <div class="step">
+        <div><p><strong>Set each model's cutoff by policy, not by score.</strong> The safest 75 percent of the development sample for both, then carry each cutoff forward. Comparing two score scales at the same numerical threshold compares nothing.</p></div>
+      </div>
+      <div class="step">
+        <div><p><strong>Report both axes together, in the same table.</strong> 0.682 against 0.676 on discrimination; 69.3 percent approved with 24.7 percent bad against 72.2 percent with 25.3 percent. Reporting either axis alone produces a ranking that the other axis contradicts.</p></div>
+      </div>
+      <div class="step">
+        <div><p><strong>Write the finding about the document, not about the models.</strong> The evidence submitted did not support the claim made. Then attach the condition: re-run this comparison at every periodic review, named owner, stated date.</p></div>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <p><strong>Twenty lines and an afternoon is the number to quote.</strong> When a committee asks why the comparison was not part of the original submission, the answer that lands is the cost of producing it. Three fields, one fit, one table. The reason it was missing is not that it was expensive.</p>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions</h2>
+    </div>
+
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">Out of time the champion scores 0.682 and the three-feature challenger scores 0.676. What goes in the report?</p>
+      <button class="qopt" type="button">A · That the challenger is the better model, since it achieves the same discrimination on three fields instead of eleven</button>
+      <button class="qopt" type="button">B · That the evidence submitted did not support the claim made, because nothing in the model document established that the complexity was buying anything</button>
+      <button class="qopt" type="button">C · That the champion is worthless, since an edge of six thousandths is within noise</button>
+      <p class="qwhy">The two models are within noise of each other on discrimination and each wins a different business axis, so neither A nor C can be defended from these numbers. The finding is about the submission: the comparison had never been run, and running it shows the edge is 0.006. That sentence describes the model document and cannot be rebutted by preferring either model.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="2">
+      <p class="qtext">With the cutoff set on development at the 75th percentile of score, the champion approves 69.3 percent of the later vintage with 24.7 percent bad among approved; the challenger approves 72.2 percent with 25.3 percent. What does this establish?</p>
+      <button class="qopt" type="button">A · That the challenger is riskier, since a higher bad rate among approved accounts means higher losses</button>
+      <button class="qopt" type="button">B · That the champion is the safer choice and its extra complexity is therefore justified</button>
+      <button class="qopt" type="button">C · That the champion buys 0.6 points of bad rate and gives up 2.9 points of volume, a trade whose value depends on a business judgement the validator does not get to make</button>
+      <p class="qwhy">Both models are carrying out the same policy through their own cutoffs, and the result is a trade rather than a ranking: fewer bad accounts against less volume. Whether 0.6 points of bad rate is worth 2.9 points of volume is a pricing question for the business. What the validator reports is that the trade exists, its size, and the fact that nobody had measured it before the model was approved.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">Under the revised interagency guidance of 17 April 2026, where does benchmarking sit?</p>
+      <button class="qopt" type="button">A · Inside conceptual soundness, named as one practical way to assess a model alongside interpretability measures; it is not a separate component</button>
+      <button class="qopt" type="button">B · It is the fourth component of validation, after conceptual soundness, outcomes analysis and ongoing monitoring</button>
+      <button class="qopt" type="button">C · Inside outcomes analysis, because the evidence it produces is a comparison of performance figures</button>
+      <p class="qwhy">Validation has three components in the current text, in the order conceptual soundness, outcomes analysis, ongoing monitoring, and benchmarking to other models is named inside the first as a practical alternative to evaluating theoretical construction. Drawing it as a fourth box is an editorial claim about how to organise a validation rather than something the guidance says. Note that SR 11-7 is superseded.</p>
+    </div>
+    <p class="quiz-score"></p>
+  </section>
+
+  <!-- ============ HOMEWORK ============ -->
+  <section class="section" id="homework">
+    <div class="section-kicker">
+      <span class="klabel">Homework</span>
+      <h2>Before session 6</h2>
+      <span class="tag time">40 min</span>
+    </div>
+    <div class="callout">
+      <p>Pick a model your team owns and name its three-field challenger before you fit anything: the simplest defensible fields, all available at scoring time, written down with your reasons. Then fit it on the same sample the model was built on, score both on the most recent data you have, and put the two numbers side by side. Add the business translation if you can get the cutoff the model actually runs at. Whatever the gap turns out to be, write the one-sentence version of the finding and notice how much of it is about the model document rather than the model. Session 6 takes the honest champion and stops asking how well it ranks, asking instead whether its predicted rates match what happened.</p>
+    </div>
+  </section>
+
+  <!-- ============ COVERAGE ============ -->
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Sources covered</span>
+      <h2>What tonight maps to</h2>
+    </div>
+    <div class="covered">
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">The three-feature challenger</span>
+        <span class="note">Prior delinquency, utilisation and months employed. Development 0.763, out of time 0.676, against the honestly refit champion's 0.772 and 0.682. The champion's edge out of time is 0.006.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">The business translation</span>
+        <span class="note">With the cutoff set on development at the 75th percentile of score, the champion approves 69.3 percent of the later vintage with 24.7 percent bad among approved; the challenger at its equivalent cutoff approves 72.2 percent with 25.3 percent. It buys 0.6 points of bad rate and gives up 2.9 points of volume.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">The claim not to make</span>
+        <span class="note">Neither that the champion is worthless nor that the challenger is better. The defensible finding is that the evidence submitted did not support the claim made, which is a statement about the model document.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Where benchmarking sits</span>
+        <span class="note">Under the revised interagency guidance of 17 April 2026, benchmarking to other models is named inside conceptual soundness as one practical way to assess a model. It is not a fourth component, and drawing it as one is an editorial claim. SR 11-7 is superseded.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Why the benchmark belongs early</span>
+        <span class="note">It reframes every other finding. A leak worth 0.091 reads one way against a model that beats three columns by 0.15 and another way against one that beats them by 0.006.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">How to choose a challenger</span>
+        <span class="note">The simplest defensible thing the business could actually run, on data that definitely exists at scoring time. A challenger nobody could deploy is a debating point rather than a benchmark.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill light">◐</span>
+        <span class="name">Outcomes analysis, banded</span>
+        <span class="note">Session 6. Tonight compares two models on how they rank; whether either one's predicted rates match what happened is a different test.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill light">◐</span>
+        <span class="name">What moved between the two vintages</span>
+        <span class="note">Session 7. The later vintage appears here as the sample both models are judged on; the thin-file shift and the relationship that moved belong there.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill inkpill">·</span>
+        <span class="name">What AUC is, and what a cutoff does to a distribution</span>
+        <span class="note">Not covered by design. <strong>learn-model-evaluation-with-phoebe</strong> defines the metrics and the threshold machinery; here they are evidence a validator weighs.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill inkpill">·</span>
+        <span class="name">Whether approving an applicant caused the outcome</span>
+        <span class="note">Not covered by design. The comparison here is between two scoring rules on the same book. <strong>learn-causal-inference-with-phoebe</strong> owns claims that need more than that.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill inkpill">·</span>
+        <span class="name">Governance frameworks of every kind</span>
+        <span class="note">Not covered by design, in any session. <strong>learn-ai-governance-with-phoebe</strong> owns them.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CHEAT SHEET ============ -->
+  <section class="cheat" id="cheatsheet">
+    <h3>Session 5 cheat sheet</h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>The cheapest question</b><span>What would the simple thing have scored. Twenty lines, one afternoon, and almost nobody runs it.</span></div>
+      <div class="cheat-item"><b>Brackwater's challenger</b><span>Prior delinquency, utilisation, months employed. Development 0.763, out of time 0.676.</span></div>
+      <div class="cheat-item"><b>The edge is 0.006</b><span>The honestly refit champion scores 0.772 and 0.682. Eleven features against three.</span></div>
+      <div class="cheat-item"><b>Both axes or neither</b><span>69.3 percent approved at 24.7 percent bad against 72.2 percent at 25.3 percent. One axis alone gives a ranking the other contradicts.</span></div>
+      <div class="cheat-item"><b>The trade, stated</b><span>The champion buys 0.6 points of bad rate and gives up 2.9 points of volume. Pricing that trade is the business's job.</span></div>
+      <div class="cheat-item"><b>The claim not to make</b><span>Not that the champion is worthless, not that the challenger is better. The evidence submitted did not support the claim made.</span></div>
+      <div class="cheat-item"><b>Choose it before you fit it</b><span>The simplest defensible thing the business could run, on data that exists at scoring time. Chosen after the fact, it is your model.</span></div>
+      <div class="cheat-item"><b>Not a fourth component</b><span>Benchmarking to other models is named inside conceptual soundness. Drawing it as a separate stage is an editorial claim.</span></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="pagefoot">
+  <div class="wrap">
+    <p>Practitioner session 5 of 10 · learn-model-risk-with-phoebe · by Phoebe Fu</p>
+    <nav class="pagenav">
+      <a href="p4-replication.html">← Practitioner session 4 · Replication</a>
+      <a href="p6-outcomes-analysis.html">Practitioner session 6 · Outcomes analysis →</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="../assets/app.js?v=2"></script>
+</body>
+</html>

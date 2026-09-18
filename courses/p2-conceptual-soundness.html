@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- social:start -->
+<meta name="description" content="Practitioner session 2 of 10. Conceptual soundness is design, construction and developmental testing, assessed on both the quality and the extent of the evidence. Read the purpose statement, then the assumptions, then the data selection, then the method, and only then a number.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Learn with Phoebe">
+<meta property="og:title" content="Conceptual soundness - learn model risk with phoebe">
+<meta property="og:description" content="Practitioner session 2 of 10. Quality is whether the evidence is any good. Extent is whether there is enough of it, and that is the half model documents fail.">
+<meta property="og:url" content="https://phoebefu6.github.io/learn-model-risk-with-phoebe/courses/p2-conceptual-soundness.html">
+<meta property="og:image" content="https://phoebefu6.github.io/learn-model-risk-with-phoebe/assets/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Conceptual soundness - learn model risk with phoebe">
+<meta name="twitter:description" content="Three charts on a slide are evidence of one test, not of a testing programme.">
+<meta name="twitter:image" content="https://phoebefu6.github.io/learn-model-risk-with-phoebe/assets/og-cover.png">
+<!-- social:end -->
+<title>Practitioner session 2 · Conceptual soundness - learn model risk with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=2">
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-model-risk-with-phoebe</a> / Practitioner session 2 of 10</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Learn Model Risk with Phoebe · Practitioner session 2 of 10</div>
+    <h1>Conceptual <span class="accent">soundness</span></h1>
+    <p class="sub">Brackwater's model document opens with a development AUC of 0.863, and almost every review of it opened there too. Tonight the number is the last thing read. Validating conceptual soundness means assessing and documenting model design, construction and developmental testing, and the design half is where the whole Brackwater case is visible without running anything: the feature list contains a field whose value is written after the outcome window opens. No metric produced that observation. Reading did, in the order a review is supposed to happen, and the order is the technique.</p>
+    <div class="chip-row">
+      <span class="chip level">🟠 Advanced</span>
+      <span class="chip audience">Validators and the second line</span>
+      <span class="chip audience">Data scientists who write the document</span>
+      <span class="chip time">45 min</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:1">0-3 · Welcome</span>
+      <span class="a2" style="flex:4">3-16 · What soundness covers</span>
+      <span class="a3" style="flex:4">16-28 · Quality and extent</span>
+      <span class="a4" style="flex:4">28-45 · Build-along and Q&amp;A</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ INTRO ============ -->
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>Where this sits in the practitioner track</h2>
+    </div>
+    <p class="lede">Session 1 built the inventory and made the tiering call, which decided that Brackwater's scorecard earns a full review. Tonight is the first thing that review does, and the only part of it that needs no data access: read the design. Session 3 is the leak hunt, which takes one observation from tonight and works it into a material finding with numbers attached. Session 4 is replication, session 5 is benchmarking and challengers, and sessions 6 to 10 run outcomes analysis, out-of-time testing, monitoring, findings and the full bench. The worked example stays <strong>Brackwater</strong>'s consumer scorecard, submitted with a development AUC of 0.863 and a recommendation to deploy.</p>
+
+    <div class="legend">
+      <span class="pill">Live = presented in the 45 minutes</span>
+      <span class="pill">Self-study = the full depth, after class</span>
+      <span class="pill">🔍 Every diagram zooms</span>
+    </div>
+
+    <div class="callout win">
+      <p><strong>★ What you walk out with tonight.</strong> The scope of conceptual soundness stated precisely, so you can tell a reviewer which component your finding belongs to. The operative pair that most reviews only do half of: evidence has a quality and it has an extent, and a model document usually fails on extent while looking fine on quality. A review order that protects you from the number, because a validator who reads the results first spends the rest of the review explaining them. And one worked design finding on Brackwater, reached without computing anything.</p>
+    </div>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>The sentence, in full<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Validating conceptual soundness involves assessing and documenting model design, including key modelling choices, assumptions, qualitative judgments and data selection, together with construction and developmental testing. Sound practice subjects modelling aspects to critical analysis by evaluating both the quality and the extent of developmental evidence.</p>
+        <p>Three things are being assessed, and four things sit inside the first of them. That structure is worth holding because it is where findings get filed. Design covers the choices a person made: which modelling approach, which assumptions, which judgments where the data ran out, and which fields were selected in and out. Construction covers whether the thing that was built is the thing that was described. Developmental testing covers what was done to try to break it before anybody was asked to approve it. A finding that names its component travels; a finding that says "the model is not very good" gets argued with forever.</p>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>The single most consequential finding in the Brackwater validation is a data selection finding, which means it is a conceptual soundness finding, which means it is answerable by reading. It was available on the first afternoon of the review, before any data access request had been approved, and it had been available at every quarterly review for two years.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>The words tonight uses precisely<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <ul>
+          <li><strong>Design.</strong> Key modelling choices, assumptions, qualitative judgments and data selection. All four are decisions somebody made, and all four are reviewable in prose.</li>
+          <li><strong>Construction.</strong> Whether what was built matches what was described. The gap between the document's model and the repository's model is a finding in its own right.</li>
+          <li><strong>Developmental testing.</strong> What the developer did to test the thing before submitting it. Ranges from out-of-sample and out-of-time testing to comparing alternative assumptions and methodologies, and to critically assessing data quality, relevance and inputs.</li>
+          <li><strong>Quality of evidence.</strong> Whether the evidence offered is any good: correctly computed, on the right sample, measuring the claim it is attached to.</li>
+          <li><strong>Extent of evidence.</strong> Whether there is enough of it. One chart is one test. A testing programme is a different object and looks different on the page.</li>
+          <li><strong>Purpose statement.</strong> The clear statement of what the model is for, which an effective development process begins with, so that development is aligned with intended use.</li>
+          <li><strong>Intended use, and beyond it.</strong> Effective use depends on a clear understanding of the model's limitations. Using a model beyond its intended purpose introduces additional uncertainty and risk.</li>
+          <li><strong>Interpretability and benchmarking.</strong> Two practical routes named inside conceptual soundness for models where assessing theoretical construction is not the useful move.</li>
+        </ul>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 1 ============ -->
+  <section class="section" id="part-1">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · covers the three components of soundness and what belongs in each</span>
+      <h2>Design, construction, developmental testing</h2>
+      <span class="tag concept">12 min live</span>
+    </div>
+    <p class="lede">Rigour is commensurate with a model's complexity and materiality, so the depth of this reading varies. The shape does not. Every conceptual soundness review answers the same three questions in the same order: what was decided, whether the build matches the decisions, and what was done to try to break it. The first question is the one that is almost always under-reviewed, because it is written in prose and prose does not look like evidence.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 326" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Conceptual soundness decomposed into three assessed areas. Design holds key modelling choices, assumptions stated and implied, qualitative judgments and data selection. Construction holds whether the model was actually built the way the document describes. Developmental testing holds out-of-sample and out-of-time testing, comparison of alternative assumptions and methodologies, and critical assessment of data quality, relevance and inputs. A band below states that sound practice evaluates both the quality and the extent of the developmental evidence, and a footnote records that benchmarking to other models is named inside conceptual soundness rather than as a fourth component.">
+        <style>
+          .p2aH { font: 800 12px Inter, sans-serif; fill: #0F172A; }
+          .p2aT { font: 800 12px Inter, sans-serif; fill: #FFFFFF; }
+          .p2aK { font: 800 12px Inter, sans-serif; fill: #0F172A; }
+          .p2aB { font: 400 11px Inter, sans-serif; fill: #0F172A; }
+          .p2aM { font: 400 11px Inter, sans-serif; fill: #56617A; }
+        </style>
+
+        <text class="p2aH" x="14" y="22">One sentence, three things to assess, and four things inside the first.</text>
+
+        <rect x="14" y="42" width="340" height="176" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <rect x="14" y="42" width="340" height="26" rx="9" fill="#1E3A8A"></rect>
+        <text class="p2aT" x="28" y="60">Design</text>
+        <text class="p2aB" x="28" y="94">Key modelling choices</text>
+        <text class="p2aB" x="28" y="120">Assumptions, stated and implied</text>
+        <text class="p2aB" x="28" y="146">Qualitative judgments</text>
+        <text class="p2aB" x="28" y="172">Data selection</text>
+        <text class="p2aM" x="28" y="200">All four are decisions somebody made</text>
+
+        <rect x="368" y="42" width="228" height="176" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <rect x="368" y="42" width="228" height="26" rx="9" fill="#1E40AF"></rect>
+        <text class="p2aT" x="382" y="60">Construction</text>
+        <text class="p2aB" x="382" y="94">How the model was built</text>
+        <text class="p2aB" x="382" y="120">Against the design on paper</text>
+        <text class="p2aM" x="382" y="148">Does the build match the</text>
+        <text class="p2aM" x="382" y="166">statement of what was built</text>
+
+        <rect x="610" y="42" width="256" height="176" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <rect x="610" y="42" width="256" height="26" rx="9" fill="#1E40AF"></rect>
+        <text class="p2aT" x="624" y="60">Developmental testing</text>
+        <text class="p2aB" x="624" y="94">Out-of-sample, out-of-time</text>
+        <text class="p2aB" x="624" y="120">Alternative assumptions</text>
+        <text class="p2aB" x="624" y="146">Alternative methodologies</text>
+        <text class="p2aB" x="624" y="172">Data quality and relevance</text>
+        <text class="p2aM" x="624" y="200">A core component, not an annex</text>
+
+        <rect x="14" y="234" width="852" height="56" rx="9" fill="#BFDBFE" stroke="#93C5FD"></rect>
+        <text class="p2aK" x="30" y="258">Sound practice evaluates both the quality and the extent of the developmental evidence</text>
+        <text class="p2aM" x="30" y="278">Quality is whether the evidence is any good. Extent is whether there is enough of it. Most documents pass the first and fail the second.</text>
+
+        <text class="p2aM" x="14" y="312">Benchmarking to other models is named inside conceptual soundness, not as a fourth component. Session 5 owns it as a technique.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the left box is prose, which is why it gets skimmed, and it is where the Brackwater finding was sitting the whole time.</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>An effective development process begins with a statement of purpose<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Development begins with a clear statement of purpose, so that the work is aligned with the intended use. That sentence is doing more than it appears to. It makes purpose a development artefact rather than a framing device, and it gives every subsequent choice something to be answerable to. A model that cannot produce its purpose statement has no standard against which its data selection, its sample window or its cutoff can be judged, so every review of it degenerates into taste.</p>
+        <p>The second half is just as useful to quote in a room: model development is not a purely technical exercise, and the developer's judgment shapes the conceptual design, the inputs, the assumptions and the methodology. This is not a criticism of developers, it is a description of the job. Judgment is unavoidable and often correct. What conceptual soundness asks is that the judgments be visible, so they can be examined by somebody who did not make them. An undocumented judgment is not a neutral omission; it is the part of the model nobody can review.</p>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>Brackwater's document had a section headed "Objective" containing one line: "improve credit decisioning". That is not a purpose statement. It names no decision, no population, no moment at which the score has to exist, and no use that is out of scope. Every later argument in the review, including the one about whether a post-outcome field was acceptable, was harder than it needed to be because there was nothing to hold the answer against.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Testing is a core component, and it has a stated range<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Model testing is a core component of development, and the range it covers is broader than the one number most documents carry. It runs from out-of-sample and out-of-time testing, through comparing alternative assumptions and alternative methodologies, to critically assessing data quality, relevance and the inputs themselves. Four different kinds of activity, and only the first is routinely present.</p>
+        <p>Read that list as a checklist against the document in front of you and the gaps become specific rather than vague. Was the model scored on a later vintage, or only on a holdout drawn from the same one. Was any alternative assumption tried, and what happened. Was any alternative methodology fitted, even a simple one, or is the chosen approach the only one that appears in the document. Was the data itself assessed, or only consumed. Each gap you find is a statement about extent, which is the second half of the pair, and each one is answerable by the developer without a fight because none of them accuses anybody of being wrong.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Interpretability and benchmarking, and where they sit<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>For some models, evaluating theoretical construction is the right move: there is an established theory, the model claims to implement it, and a reviewer can check the implementation against the claim. For others that route is unavailable or unhelpful, and interpretability measures or benchmarking to other models are more practical ways to get at the same question.</p>
+        <p>Two things follow. The first is that benchmarking is named inside conceptual soundness rather than alongside it. It is one practical technique for assessing whether a model's approach holds up, not a separate component of validation, and a page that presents it as a fourth pillar is making an editorial claim rather than reporting the guidance. Session 5 builds the Brackwater challenger and treats benchmarking properly as a technique. The second is that the choice between these routes is itself a judgment the validator should record, because "we benchmarked instead of assessing the theory" is a defensible decision and an indefensible silence.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 2 ============ -->
+  <section class="section" id="part-2">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · covers quality, extent, and the order you read in</span>
+      <h2>Quality is not the half you are missing</h2>
+      <span class="tag concept">11 min live</span>
+    </div>
+    <p class="lede">Evidence gets assessed on two axes and reviewers are trained on one. Quality asks whether the evidence offered is any good: computed correctly, on the right sample, actually measuring the claim it is attached to. Extent asks whether there is enough of it. Most model documents are strong on quality, because the people who wrote them are competent, and thin on extent, because nobody ever asked for a testing programme, only for results. The order you read in is what stops a strong quality impression from standing in for a missing extent.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 428" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A five-rung review order read from the top down. First the purpose statement and the intended use it names. Then assumptions and qualitative judgments, stated and implied. Then data selection, every field and when its value is written. Then construction and method, whether the build matches the stated design. Last, the results, and what each number is evidence of. A dashed red arrow runs upward from the last rung to the first, and a red panel states that reading the results first anchors the rest of the review.">
+        <style>
+          .p2bH { font: 800 12px Inter, sans-serif; fill: #0F172A; }
+          .p2bL { font: 800 11px Inter, sans-serif; fill: #56617A; }
+          .p2bK { font: 800 12px Inter, sans-serif; fill: #0F172A; }
+          .p2bT { font: 800 12px Inter, sans-serif; fill: #FFFFFF; }
+          .p2bW { font: 400 11px Inter, sans-serif; fill: #FFFFFF; }
+          .p2bM { font: 400 11px Inter, sans-serif; fill: #56617A; }
+          .p2bB { font: 400 11px Inter, sans-serif; fill: #0F172A; }
+          .p2bR { font: 800 11px Inter, sans-serif; fill: #B91C1C; }
+        </style>
+        <defs>
+          <marker id="p2bAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#B91C1C"></path></marker>
+        </defs>
+
+        <text class="p2bH" x="14" y="22">Read downward. Every rung is answerable before the one below it exists.</text>
+
+        <text class="p2bL" x="14" y="81">First</text>
+        <rect x="120" y="48" width="746" height="54" rx="8" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <text class="p2bK" x="138" y="71">The purpose statement</text>
+        <text class="p2bM" x="138" y="89">What the output decides, who acts on it, and which uses are out of scope</text>
+
+        <text class="p2bL" x="14" y="143">Then</text>
+        <rect x="120" y="110" width="746" height="54" rx="8" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <text class="p2bK" x="138" y="133">Assumptions and qualitative judgments</text>
+        <text class="p2bM" x="138" y="151">The stated ones, and the ones you can only find by asking why a choice was made</text>
+
+        <text class="p2bL" x="14" y="205">Then</text>
+        <rect x="120" y="172" width="746" height="54" rx="8" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <text class="p2bK" x="138" y="195">Data selection</text>
+        <text class="p2bM" x="138" y="213">Every field in and every field out, and when each value is written</text>
+
+        <text class="p2bL" x="14" y="267">Then</text>
+        <rect x="120" y="234" width="746" height="54" rx="8" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <text class="p2bK" x="138" y="257">Construction and method</text>
+        <text class="p2bM" x="138" y="275">Whether the thing that was built is the thing the document describes</text>
+
+        <text class="p2bL" x="14" y="329">Last</text>
+        <rect x="120" y="296" width="746" height="54" rx="8" fill="#1E3A8A"></rect>
+        <text class="p2bT" x="138" y="319">The results</text>
+        <text class="p2bW" x="138" y="337">And for each number, what claim it is evidence of, and how much of it there is</text>
+
+        <path d="M104 326 L104 78" fill="none" stroke="#B91C1C" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#p2bAr)"></path>
+
+        <rect x="14" y="364" width="852" height="50" rx="9" fill="#FEF2F2" stroke="#B91C1C"></rect>
+        <text class="p2bR" x="30" y="388">Read the results first and you are anchored for the rest of the review</text>
+        <text class="p2bB" x="30" y="406">Every judgment above it then gets read as an explanation of a number you have already accepted.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the dashed arrow is the direction most reviews actually run in, and it is why strong documents pass with weak evidence.</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Quality and extent, the operative pair<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Sound practice subjects the modelling aspects to critical analysis by evaluating both the quality and the extent of the developmental evidence. Both, named together, and they fail in different ways. Quality fails when the evidence is wrong: the wrong sample, a metric that does not speak to the claim, a chart whose axis hides the thing it is supposed to show. Extent fails when the evidence is fine and there is not enough of it to support the weight being placed on it.</p>
+        <p>The practical test is embarrassingly simple. Count the tests. Three charts on a slide are evidence of one test presented three ways, not of a testing programme, and a document that carries one performance number with three visualisations of it has produced one piece of evidence. Then ask what each test could have concluded if the model were bad. Evidence that had no way of coming out badly is not evidence of anything, however well it is drawn.</p>
+        <p>Extent is also the finding that is easiest to write without a fight, which matters more than it should. "This is wrong" is a confrontation. "This claim rests on one sample from one vintage, and the model is being approved for the following year's book" is a description, and the usual response to it is somebody going away and producing the missing evidence, which is the outcome you wanted.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Read in this order, and say so in the report<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Purpose statement first, then assumptions, then data selection, then method, and only then any number. The order is not fussiness. A validator who reads the results first is anchored for the rest of the review, and anchoring here has a specific shape: once 0.863 is in your head, every design choice you read afterwards gets evaluated as a possible explanation for a good number rather than as a decision that has to stand on its own. The feature list stops being a list of decisions and becomes the recipe that produced the result.</p>
+        <p>There is a reason to put the order in the report as well as in your practice. It tells the reader what the finding is not: a data selection finding reached before any number was computed cannot be a reaction to disappointing performance, and saying so removes the most common rebuttal before it is offered. It also sets an expectation for the next review, which is how a personal habit turns into a house standard.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Use beyond the intended purpose, and what it calls for<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Effective use depends on a clear understanding of the model's limitations, and using a model beyond its intended purpose introduces additional uncertainty and risk. When a use is extended beyond the original application, the sound practice is additional analysis of the new usage and its limitations, together with a review of the existing controls. Three obligations, all of them triggered by a change that leaves the model itself untouched.</p>
+        <p>This is why the purpose statement is the first rung rather than a preamble. It is the only artefact that makes "beyond intended purpose" a checkable claim instead of an opinion, and a model whose purpose statement says "improve credit decisioning" can never be used beyond its intended purpose, because the statement excludes nothing. A useful purpose statement names what is out of scope. Session 1 put the re-tier trigger in the inventory for the same reason, and the two artefacts are meant to be read together: the inventory notices the extension, the purpose statement says whether it is one.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 3 - BUILD ALONG ============ -->
+  <section class="section" id="part-3">
+    <div class="section-kicker">
+      <span class="klabel">Part 3 · build-along</span>
+      <h2>Review Brackwater's design, before any number</h2>
+      <span class="tag build">17 min build-along</span>
+    </div>
+    <p class="lede">Work the seven steps against the model document, then use the two code blocks to turn the reading into something a reviewer can check. Neither block fits a model or computes a metric, which is the point: everything below is available on the first afternoon, with no data access and no compute.</p>
+
+    <div class="steps">
+      <div class="step">
+                <div>
+          <p><strong>Find the purpose statement, or record that there is not one.</strong> It has to name the decision, the population, the moment the output must exist, and at least one use that is out of scope. A section headed "Objective" containing an aspiration is a finding, and it is the finding that makes every later one harder to argue with.</p>
+        </div>
+      </div>
+      <div class="step">
+                <div>
+          <p><strong>List the assumptions the document states, then hunt the ones it does not.</strong> Implied assumptions hide inside choices: a sample window assumes the period is representative, a bureau field assumes comparability across vintages, an exclusion assumes the excluded population is not the one you will face. Write each implied assumption as a sentence the developer can agree or disagree with.</p>
+        </div>
+      </div>
+      <div class="step">
+                <div>
+          <p><strong>Ask which judgments were made where the data ran out.</strong> Development is not purely technical, and the judgments are the part that never appears unless somebody asks. "What did you do when the data would not answer" is the question, and the answer usually produces two or three items nobody had written down.</p>
+        </div>
+      </div>
+      <div class="step">
+                <div>
+          <p><strong>Walk the feature list against the prediction moment.</strong> For every field, when is its value written relative to the moment the score has to exist. This is data selection, it is part of conceptual soundness, and on Brackwater it is where the review stops being routine.</p>
+        </div>
+      </div>
+      <div class="step">
+                <div>
+          <p><strong>Check the build against the description.</strong> Construction is its own assessed area. The document describes a model; the repository contains one. Differences in preprocessing, in the sample filter, or in which fields actually reach the fit are findings even when the difference makes no measurable difference.</p>
+        </div>
+      </div>
+      <div class="step">
+                <div>
+          <p><strong>Inventory the developmental evidence and score it twice.</strong> One row per test, with the claim it supports, a quality judgment and an extent judgment. Testing that never appears, out-of-time or alternative assumptions or an alternative methodology, is an extent finding recorded as an absence.</p>
+        </div>
+      </div>
+      <div class="step">
+                <div>
+          <p><strong>Only now open the results, and read each number as evidence of a stated claim.</strong> If a number is not attached to a claim, attach it or drop it. Carrying an unattached number into a report invites the reader to decide for themselves what it proves, and they will decide generously.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="prompt-box good">
+      <span class="label">★ Try it now - walk the feature list against the prediction moment</span>
+      <pre style="margin:0"><code>import pandas as pd
+
+# Step 4 needs no data and no model. It needs the feature list, the data
+# dictionary, and one sentence fixing the moment the score has to exist.
+PREDICTION_MOMENT = "application decided, before any repayment behaviour is observed"
+
+features = pd.DataFrame([
+    {"field": "util",        "written": "at application", "source": "bureau_v3"},
+    {"field": "priorDelq",   "written": "at application", "source": "bureau_v3"},
+    {"field": "employed",    "written": "at application", "source": "application form"},
+    {"field": "incomeRat",   "written": "at application", "source": "application form"},
+    {"field": "thin",        "written": "at application", "source": "bureau_v3"},
+    {"field": "age",         "written": "at application", "source": "application form"},
+    {"field": "collections", "written": "after the outcome window opens",
+                             "source": "collections_log"},
+    {"field": "n0",          "written": "not stated", "source": "not stated"},
+    {"field": "n1",          "written": "not stated", "source": "not stated"},
+    {"field": "n2",          "written": "not stated", "source": "not stated"},
+    {"field": "n3",          "written": "not stated", "source": "not stated"},
+])
+
+print(PREDICTION_MOMENT)
+print(features.loc[features["written"] != "at application"])
+
+# Two design findings, both reached by reading:
+#   collections  - the value is written after the outcome window opens,
+#                  so the field is a consequence of the thing being predicted.
+#   n0 to n3     - no stated provenance and no stated write time. Unresolved,
+#                  which is not the same as clean.
+# Session 3 turns the first one into a material finding with numbers attached.</code></pre>
+    </div>
+
+    <div class="prompt-box good">
+      <span class="label">★ Try it now - score the evidence on quality and on extent</span>
+      <pre style="margin:0"><code># Step 6. One row per claim the document makes, with the evidence offered
+# for it, judged twice. The extent column is the one that fills up.
+evidence = pd.DataFrame([
+    {
+        "claim": "The score ranks default risk at origination",
+        "offered": "Development AUC of 0.863 on the build sample",
+        "quality": "Correctly computed on the stated sample",
+        "extent": "One sample, one vintage. No later vintage scored.",
+    },
+    {
+        "claim": "The feature set is appropriate for origination",
+        "offered": "A feature list and a correlation table",
+        "quality": "Correct as presented",
+        "extent": "No write time recorded for any field. Nothing on provenance.",
+    },
+    {
+        "claim": "The chosen method suits the problem",
+        "offered": "A paragraph naming the method",
+        "quality": "Reasonable and conventional",
+        "extent": "No alternative methodology fitted. No alternative assumptions tried.",
+    },
+    {
+        "claim": "The cutoff is appropriate for the book",
+        "offered": "An approval rate at the chosen cutoff",
+        "quality": "Correct on the development sample",
+        "extent": "Development sample only. No sensitivity to a moved population.",
+    },
+])
+
+print(evidence[["claim", "extent"]].to_string(index=False))
+
+# Quality: four for four. Extent: nothing tested out of time, no alternative
+# assumption, no alternative methodology, no provenance. The document is
+# well made and the evidence is thin, which is the usual combination.</code></pre>
+    </div>
+
+    <div class="callout tip">
+      <p><strong>Write the absences down as rows, not as a closing paragraph.</strong> A missing test recorded as a row in an evidence table is a specific, answerable request with an obvious owner. The same observation written as "developmental evidence was limited" at the end of a section is a mood, and moods do not get remediated.</p>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions</h2>
+    </div>
+
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">A model document presents one development performance number, illustrated with three well-made charts, each correctly computed on the stated sample. How does that stand up on the operative pair?</p>
+      <button class="qopt" type="button">A · Well on both, since three separate exhibits are three pieces of developmental evidence</button>
+      <button class="qopt" type="button">B · Well on quality and poorly on extent, because three views of one result are one test presented three ways</button>
+      <button class="qopt" type="button">C · Poorly on quality, because presenting the same result three times is a presentational choice designed to inflate the evidence</button>
+      <p class="qwhy">Sound practice evaluates both the quality and the extent of the developmental evidence. Quality is satisfied here: the charts are correct and on the right sample. Extent is not, because nothing was tested out of time, no alternative assumption or methodology was compared, and the data itself was consumed rather than assessed. Nothing in this implies bad faith, which is why extent is the easier finding to write.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="2">
+      <p class="qtext">Your review benchmarks the model against a simpler alternative. Where does that activity belong when you file the finding?</p>
+      <button class="qopt" type="button">A · In outcomes analysis, because a benchmark compares two sets of outputs</button>
+      <button class="qopt" type="button">B · In a fourth component of validation alongside the three named ones, since benchmarking is its own discipline</button>
+      <button class="qopt" type="button">C · Inside conceptual soundness, where benchmarking to other models is named as one practical way to assess a model when evaluating theoretical construction is not the useful route</button>
+      <p class="qwhy">The guidance names interpretability measures and benchmarking to other models inside conceptual soundness, as practical alternatives for models where assessing theoretical construction does not get you there. There are three components, not four. Session 5 treats benchmarking properly as a technique and builds the Brackwater challenger.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">A scorecard validated for ranking applications is extended to set prices. The model, the code and the data are unchanged. What does conceptual soundness ask for?</p>
+      <button class="qopt" type="button">A · Additional analysis of the new usage and its limitations, plus a review of the existing controls, because use beyond the intended purpose introduces additional uncertainty and risk</button>
+      <button class="qopt" type="button">B · Nothing, since the model is unchanged and its developmental evidence is unaffected by what the output is used for</button>
+      <button class="qopt" type="button">C · A full redevelopment, because a model validated for one purpose cannot be used for another</button>
+      <p class="qwhy">Effective use depends on a clear understanding of the model's limitations, and extending use beyond the original application calls for additional analysis of that new usage and its limitations, together with a review of the controls already in place. This is also why the purpose statement has to name what is out of scope: without that, no extension is detectable as one.</p>
+    </div>
+    <p class="quiz-score"></p>
+  </section>
+
+  <!-- ============ HOMEWORK ============ -->
+  <section class="section" id="homework">
+    <div class="section-kicker">
+      <span class="klabel">Homework</span>
+      <h2>Before session 3</h2>
+      <span class="tag time">40 min</span>
+    </div>
+    <div class="callout">
+      <p>Take the model document your team is proudest of and build the evidence table from step 6 against it: one row per claim, with what was offered, a quality judgment and an extent judgment. Do not compute anything. Then count two things and write them at the top: how many distinct tests the document contains, as opposed to how many exhibits, and how many of those tests could have come out badly. Bring the table to session 3, which takes the data selection row from tonight and works it into a material finding, with the numbers that make the Brackwater case: one field scoring 0.748 on its own against a full model at 0.863.</p>
+    </div>
+  </section>
+
+  <!-- ============ COVERAGE ============ -->
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Sources covered</span>
+      <h2>What tonight maps to</h2>
+    </div>
+    <div class="covered">
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Conceptual soundness, in full</span>
+        <span class="note">Under the revised interagency guidance of 17 April 2026, validating conceptual soundness involves assessing and documenting model design, including key modelling choices, assumptions, qualitative judgments and data selection, plus construction and developmental testing. SR 11-7 is superseded.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Quality and extent</span>
+        <span class="note">Sound practice subjects modelling aspects to critical analysis by evaluating both the quality and the extent of developmental evidence. Quality is whether the evidence is any good; extent is whether there is enough of it, and extent is the half a model document usually fails.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Theoretical construction, interpretability, benchmarking</span>
+        <span class="note">For some models evaluating theoretical construction matters; for others interpretability measures or benchmarking to other models are more practical. Benchmarking is named inside conceptual soundness and is not a fourth component of validation.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Model development</span>
+        <span class="note">Begins with a clear statement of purpose so development aligns with intended use; is not purely technical, since the developer's judgment shapes conceptual design, inputs, assumptions and methodology; testing is a core component, from out-of-sample and out-of-time work to comparing alternative assumptions and methodologies and critically assessing data quality, relevance and inputs; rigour is commensurate with complexity and materiality.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Model use</span>
+        <span class="note">Effective use depends on a clear understanding of limitations. Use beyond the intended purpose introduces additional uncertainty and risk, and extending use calls for additional analysis of the new usage and its limitations plus a review of existing controls.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">The review order, and one worked design finding</span>
+        <span class="note">Purpose, assumptions, data selection, method, then numbers. Brackwater's feature list contains a field written after the outcome window opens, reached by reading rather than by computing.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill light">◐</span>
+        <span class="name">The leak hunt in full</span>
+        <span class="note">Session 3. Tonight produces the observation; the checklist that finds one in an unfamiliar model, and the numbers that make it material, belong there.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill light">◐</span>
+        <span class="name">Benchmarking as a technique</span>
+        <span class="note">Session 5. Tonight only places it correctly inside conceptual soundness.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill inkpill">·</span>
+        <span class="name">What AUC and calibration are</span>
+        <span class="note">Not covered by design. <strong>learn-model-evaluation-with-phoebe</strong> defines the metrics; here they appear only as evidence a validator weighs.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill inkpill">·</span>
+        <span class="name">Reasoning formally about consequence and cause</span>
+        <span class="note">Not covered by design. The design finding rests on the order of two timestamps. <strong>learn-causal-inference-with-phoebe</strong> owns the machinery for claims that need more than that.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill inkpill">·</span>
+        <span class="name">Governance frameworks of every kind</span>
+        <span class="note">Not covered by design, in any session. The EU AI Act, the NIST AI RMF, ISO/IEC 42001, MAS and FEAT belong to <strong>learn-ai-governance-with-phoebe</strong>.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CHEAT SHEET ============ -->
+  <section class="cheat" id="cheatsheet">
+    <h3>Session 2 cheat sheet</h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>Three assessed areas</b><span>Design, construction, developmental testing. Design holds choices, assumptions, judgments and data selection.</span></div>
+      <div class="cheat-item"><b>The operative pair</b><span>Quality and extent. Documents pass on quality and fail on extent, and extent is the easier finding to write.</span></div>
+      <div class="cheat-item"><b>Count the tests, not the charts</b><span>Three exhibits of one result are one test. Then ask what each test could have concluded if the model were bad.</span></div>
+      <div class="cheat-item"><b>Read in order</b><span>Purpose, assumptions, data selection, method, then numbers. Put the order in the report as well as in your practice.</span></div>
+      <div class="cheat-item"><b>Purpose is a development artefact</b><span>Development begins with a clear statement of purpose so the work aligns with intended use. Name what is out of scope.</span></div>
+      <div class="cheat-item"><b>Judgment is unavoidable</b><span>Development is not purely technical. The ask is that judgments be visible, not that there be none.</span></div>
+      <div class="cheat-item"><b>Benchmarking sits inside</b><span>Named within conceptual soundness as one practical route. There are three components of validation, not four.</span></div>
+      <div class="cheat-item"><b>Beyond intended purpose</b><span>Additional uncertainty and risk. Analyse the new usage and its limitations, and review the existing controls.</span></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="pagefoot">
+  <div class="wrap">
+    <p>Practitioner session 2 of 10 · learn-model-risk-with-phoebe · by Phoebe Fu</p>
+    <nav class="pagenav">
+      <a href="p1-the-inventory-and-the-tier.html">← Practitioner session 1 · The inventory and the tiering call</a>
+      <a href="p3-the-leak-hunt.html">Practitioner session 3 · The leak hunt →</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="../assets/app.js?v=2"></script>
+</body>
+</html>

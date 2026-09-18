@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- social:start -->
+<meta name="description" content="Practitioner session 4 of 10. Brackwater's champion reproduces exactly: development AUC 0.863. Replication passing is the normal outcome and still worth the hour, because it establishes that the document describes the model that actually exists.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Learn with Phoebe">
+<meta property="og:title" content="Replication - learn model risk with phoebe">
+<meta property="og:description" content="Practitioner session 4 of 10. Reproducing the number in the model document, what a gap means, and the five things a document has to state before a re-run is even possible.">
+<meta property="og:url" content="https://phoebefu6.github.io/learn-model-risk-with-phoebe/courses/p4-replication.html">
+<meta property="og:image" content="https://phoebefu6.github.io/learn-model-risk-with-phoebe/assets/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Replication - learn model risk with phoebe">
+<meta name="twitter:description" content="0.863 reproduces exactly. The same specification on a different window gives 0.682. A document that does not state its window can be quoting either.">
+<meta name="twitter:image" content="https://phoebefu6.github.io/learn-model-risk-with-phoebe/assets/og-cover.png">
+<!-- social:end -->
+<title>Practitioner session 4 · Replication - learn model risk with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=2">
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-model-risk-with-phoebe</a> / Practitioner session 4 of 10</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Learn Model Risk with Phoebe · Practitioner session 4 of 10</div>
+    <h1>Reproducing the <span class="accent">reported number</span></h1>
+    <p class="sub">Brackwater's model document reports a development AUC of 0.863. Tonight that number gets regenerated from the documented sample, the documented feature list and the documented fitting procedure, by somebody who was not in the room when it was produced. It reproduces exactly. That is the normal outcome of a replication and it is still worth the hour, because a number that can be reproduced is a number the document has earned the right to quote. When it does not reproduce, the interesting part is never the arithmetic. It is the thing nobody wrote down.</p>
+    <div class="chip-row">
+      <span class="chip level">🟠 Advanced</span>
+      <span class="chip audience">Validators and the second line</span>
+      <span class="chip audience">Anyone who has to defend a number</span>
+      <span class="chip time">45 min</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:1">0-3 · Welcome</span>
+      <span class="a2" style="flex:4">3-15 · Why replication earns the hour</span>
+      <span class="a3" style="flex:4">15-27 · Reading a gap</span>
+      <span class="a4" style="flex:6">27-45 · Build-along and Q&amp;A</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ INTRO ============ -->
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>Where this sits in the practitioner track</h2>
+    </div>
+    <p class="lede">Session 1 built the inventory and made the tiering call. Session 2 read Brackwater's design before touching a number. Session 3 found the leaked field by reading the data dictionary, and produced a second number, 0.772, from the same data. Tonight goes back to the first number and asks the question nobody asks about it: can it be regenerated. Session 5 then asks what the simple thing would have scored. The worked example stays <strong>Brackwater</strong>'s consumer scorecard, 4,000 development applications at a bad rate of 0.292, with a later vintage of 2,000 at 0.324.</p>
+
+    <div class="legend">
+      <span class="pill">Live = presented in the 45 minutes</span>
+      <span class="pill">Self-study = the full depth, after class</span>
+      <span class="pill">🔍 Every diagram zooms</span>
+    </div>
+
+    <div class="callout win">
+      <p><strong>★ What you walk out with tonight.</strong> The five things a model document has to state before a re-run is even possible, which doubles as a checklist you can run against a document before you have any data. The four explanations for a replication gap, in the order they actually occur, none of which is fraud and all of which invalidate the number. A worked re-fit of Brackwater's champion that lands on 0.863, and a second fit that changes one undocumented thing and lands 0.090 lower. And the wording for both outcomes, because "we reproduced the reported figure" is a finding worth writing down and so is "we could not, and here is what was missing".</p>
+    </div>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>Replication is not about arithmetic<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Replication is the cheapest test on the bench and the one most often skipped, and the reason it gets skipped is that it feels like doubting somebody's arithmetic. It is not that. Nobody in a model review suspects the developer of dividing wrong. The question replication answers is different and much more useful: can the documented result be regenerated from the documented inputs, by a person who was not in the room, working only from what is written down.</p>
+        <p>Phrased that way it stops being an insult and starts being a property of the document. A number that only exists in one notebook on one laptop is not evidence, however correct it is. A number that a second person can produce from the written specification is evidence, because the specification is now known to be complete enough to describe the model that exists. That is the real output of a replication: not a verdict on the number, a verdict on the document.</p>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>Brackwater's champion reproduces on the first attempt. The feature list in the document is the feature list that was fitted, the sample is the sample, and the development AUC comes back as 0.863 to three decimal places. Two years of quarterly reviews had never checked, on the reasonable-sounding grounds that the number had been reviewed before. It had been read before. It had never been regenerated.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Three things replication is not<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <ul>
+          <li><strong>Not a code review.</strong> You are not reading the developer's script for defects. You are writing your own from the specification and seeing whether it lands in the same place. If you start from their code you have tested nothing, because their code carries their undocumented choices with it.</li>
+          <li><strong>Not a performance test.</strong> A replication that reproduces 0.863 has said nothing about whether 0.863 is a good number, whether it survives a later vintage, or whether it was earned by a field written after the outcome. Those are other sessions. This one asks only whether the document regenerates.</li>
+          <li><strong>Not a fraud check.</strong> Every common cause of a gap is an omission rather than a misstatement, and treating a gap as an accusation is the fastest way to lose the cooperation you need to close it. The finding is that something was not written down.</li>
+        </ul>
+        <p>What it is, and the reason it goes early in a validation: a cheap test of whether the rest of the review has a stable foundation. Every later finding is expressed relative to a reported number. If that number cannot be reproduced, every later finding is expressed relative to something nobody can regenerate.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 1 ============ -->
+  <section class="section" id="part-1">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · covers what a document must state and what a pass is worth</span>
+      <h2>Five things, and the two ways a re-run can end</h2>
+      <span class="tag concept">11 min live</span>
+    </div>
+    <p class="lede">A validator can decide whether a model is replicable before running anything, by reading the document for five specific items. Most model documents carry three of them. The two that go missing are the ones nobody thinks of as part of the method: the exact sample boundary, and the population the metric was computed over. Both are invisible in the notebook, because in the notebook they were just whatever was in memory at the time.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A replication pipeline. On the left, the five things a model document must state: the sample with dates, the feature list and transformations, the fitting procedure, the split or the seed, and the metric with its population. An arrow leads to a re-run built from the document alone, without asking the modeller. The re-run ends one of two ways. Either it reproduces the reported 0.863, which means the document describes the model that actually exists, or it does not, which means something about the model or the sample is not written down and the number cannot be used until it is.">
+        <style>
+          .p4aH { font: 800 12px Inter, sans-serif; fill: #0F172A; }
+          .p4aT { font: 800 11px Inter, sans-serif; fill: #FFFFFF; }
+          .p4aL { font: 800 11px Inter, sans-serif; fill: #1E3A8A; }
+          .p4aR { font: 800 11px Inter, sans-serif; fill: #B91C1C; }
+          .p4aB { font: 400 11px Inter, sans-serif; fill: #0F172A; }
+          .p4aK { font: 800 11px Inter, sans-serif; fill: #0F172A; }
+          .p4aM { font: 400 11px Inter, sans-serif; fill: #56617A; }
+        </style>
+        <defs>
+          <marker id="p4aArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#56617A"></path></marker>
+        </defs>
+
+        <text class="p4aH" x="14" y="22">The document says 0.863. Replication asks whether that number can be regenerated.</text>
+
+        <rect x="14" y="44" width="252" height="216" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <rect x="14" y="44" width="252" height="26" rx="9" fill="#1E3A8A"></rect>
+        <text class="p4aT" x="28" y="62">What the document must state</text>
+        <text class="p4aB" x="28" y="92">1  The sample, with dates</text>
+        <text class="p4aB" x="28" y="116">2  The features and transforms</text>
+        <text class="p4aB" x="28" y="140">3  The fitting procedure</text>
+        <text class="p4aB" x="28" y="164">4  The split or the seed</text>
+        <text class="p4aB" x="28" y="188">5  The metric and its population</text>
+        <text class="p4aM" x="28" y="216">Anything missing here is the</text>
+        <text class="p4aM" x="28" y="234">finding, before a line is run.</text>
+
+        <line x1="268" y1="150" x2="296" y2="150" stroke="#56617A" stroke-width="1.6" marker-end="url(#p4aArrow)"></line>
+
+        <rect x="300" y="100" width="176" height="100" rx="9" fill="#BFDBFE" stroke="#93C5FD"></rect>
+        <text class="p4aK" x="314" y="126">Your re-run</text>
+        <text class="p4aB" x="314" y="150">from the document</text>
+        <text class="p4aB" x="314" y="168">alone, without</text>
+        <text class="p4aB" x="314" y="186">asking the modeller</text>
+
+        <path d="M478 140 L492 140 L492 92 L504 92" fill="none" stroke="#56617A" stroke-width="1.6" marker-end="url(#p4aArrow)"></path>
+        <path d="M478 160 L492 160 L492 208 L504 208" fill="none" stroke="#56617A" stroke-width="1.6" marker-end="url(#p4aArrow)"></path>
+
+        <rect x="508" y="46" width="358" height="96" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <text class="p4aL" x="522" y="72">It reproduces. Development AUC 0.863.</text>
+        <text class="p4aB" x="522" y="96">The document describes the model that exists.</text>
+        <text class="p4aM" x="522" y="118">Write it down. A pass is a finding, and it is</text>
+        <text class="p4aM" x="522" y="132">the normal one.</text>
+
+        <rect x="508" y="160" width="358" height="100" rx="9" fill="#FEF2F2" stroke="#B91C1C"></rect>
+        <text class="p4aR" x="522" y="186">It does not reproduce.</text>
+        <text class="p4aB" x="522" y="210">Something about the model or the sample is</text>
+        <text class="p4aB" x="522" y="228">not written down. The reported number cannot</text>
+        <text class="p4aB" x="522" y="246">be relied on until it is.</text>
+
+        <text class="p4aM" x="14" y="290">Neither ending is an accusation. One says the document is complete, the other says it is not yet.</text>
+        <text class="p4aM" x="14" y="310">What AUC measures belongs to learn-model-evaluation-with-phoebe. Here it is only the figure being reproduced.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the output of a replication is a verdict on the document, not on the number.</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>A pass is worth writing down<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Validators under-report passing tests, and replication is the one they under-report most, because a test that found nothing feels like an hour with no output. It has an output. It establishes that the model in production is the model in the document, which is a statement the approver is relying on whether or not anybody has checked it. Once it is checked, every other finding in the report inherits a fixed reference point: when the report says the honest number is 0.772 rather than 0.863, both numbers now refer to the same fitted object.</p>
+        <p>There is a second reason, which is about the next validator rather than this one. A replication that passed and was recorded, with the specification it was run from, turns the model document into something a successor can pick up. A replication that passed and was not recorded leaves the next person to spend the same hour, and they will not spend it, because the file gives them no reason to think it is needed.</p>
+        <div class="callout tip">
+          <p><strong>The sentence to write.</strong> "The reported development AUC of 0.863 was independently reproduced from the documented sample, feature list and fitting procedure." One line, in the evidence section, with the date. That is the whole deliverable of a passing replication and it is worth more than its length suggests.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>What the guidance asks of developmental evidence<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Under the revised interagency guidance of 17 April 2026, validating conceptual soundness involves assessing and documenting model design, including key modelling choices, assumptions, qualitative judgements and data selection, together with construction and developmental testing. The standard of assessment is stated plainly: sound practice subjects modelling aspects to critical analysis by evaluating both the <strong>quality and the extent</strong> of the developmental evidence.</p>
+        <p>Those two words are what replication serves. Quality asks whether the evidence supports the claim. Extent asks how much evidence there is and whether it covers what it needs to. A validator who reads the developmental testing section and nods has assessed neither. A validator who re-runs it has tested both at once, because a specification too thin to re-run is by definition a specification whose extent cannot be assessed, and a result that does not regenerate is a result whose quality cannot be assessed either.</p>
+        <p>Note the vintage. SR 11-7, issued in 2011, is the document most of the industry still quotes from memory, and it was superseded. The current text is the April 2026 revision, issued jointly by the Federal Reserve, the OCC and the FDIC.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>The two items documents usually miss<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><strong>The sample boundary.</strong> Documents say "the 2024 book" or "twelve months of applications". Neither is a sample definition. A sample definition is a rule that a second person can apply to the warehouse and get the same row count: which table, which date field, which inclusive boundaries, and which exclusions, in the order they were applied. Exclusions are where the row count goes: declined applications, staff accounts, records with a missing outcome, duplicates on a customer key. Each one is defensible and each one moves the sample.</p>
+        <p><strong>The population the metric covers.</strong> A metric is a formula and a set of rows, and documents record the formula. If the reported figure was computed on the fitting sample, say so. If it was computed on a holdout, say which one and how it was drawn. If rows with a missing outcome were dropped before scoring but after sampling, that is a third population again. The formula is never the ambiguous part.</p>
+        <p>Both items share a property that makes them easy to lose: in the notebook they were not decisions, they were just the state of a variable. Nobody omits them on purpose. They were never in anybody's head as things to write.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 2 ============ -->
+  <section class="section" id="part-2">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · covers what a gap means and how to run it down</span>
+      <h2>Four explanations, in the order they actually occur</h2>
+      <span class="tag concept">10 min live</span>
+    </div>
+    <p class="lede">When a re-run disagrees with the document, the useful move is not to escalate and not to assume error. It is to work down a short list in order of likelihood, because the list is short, the causes are ordinary, and the one you land on determines what the finding says. None of the four is fraud. All four mean the reported number cannot be relied on until the gap is closed, which is an uncomfortable pair of facts to hold at once and the reason this finding gets softened in the write-up.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 332" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Four explanations for a replication gap, ranked in order of likelihood, each paired with the item in the document that would have prevented it. One, a different feature set or sample than the one shipped, prevented by a feature list with dates on the sample. Two, an undocumented preprocessing step, prevented by the transformation written next to each field. Three, an unrecorded seed or split, prevented by the split rule or the seed. Four, a metric computed over a different population, prevented by the metric definition and the rows it covers. A banner states that none of these is fraud and all of them mean the reported number cannot be relied on until it is reproduced.">
+        <style>
+          .p4bH { font: 800 12px Inter, sans-serif; fill: #0F172A; }
+          .p4bT { font: 800 11px Inter, sans-serif; fill: #FFFFFF; }
+          .p4bK { font: 800 11px Inter, sans-serif; fill: #0F172A; }
+          .p4bB { font: 400 11px Inter, sans-serif; fill: #0F172A; }
+          .p4bM { font: 400 11px Inter, sans-serif; fill: #56617A; }
+        </style>
+
+        <text class="p4bH" x="14" y="22">A gap is not an accusation. Work down the list in order.</text>
+        <text class="p4bM" x="14" y="50">In order of likelihood</text>
+        <text class="p4bM" x="466" y="50">What in the document would have prevented it</text>
+
+        <rect x="14" y="62" width="440" height="44" rx="8" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <circle cx="38" cy="84" r="13" fill="#1E3A8A"></circle>
+        <text class="p4bT" x="38" y="88" text-anchor="middle">1</text>
+        <text class="p4bK" x="62" y="80">A different feature set or sample</text>
+        <text class="p4bM" x="62" y="97">the document describes a model other than the one shipped</text>
+        <rect x="466" y="62" width="400" height="44" rx="8" fill="#FFFFFF" stroke="#DDE5F0"></rect>
+        <text class="p4bB" x="482" y="89">A feature list, and dates on the sample</text>
+
+        <rect x="14" y="114" width="440" height="44" rx="8" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <circle cx="38" cy="136" r="13" fill="#1E3A8A"></circle>
+        <text class="p4bT" x="38" y="140" text-anchor="middle">2</text>
+        <text class="p4bK" x="62" y="132">An undocumented preprocessing step</text>
+        <text class="p4bM" x="62" y="149">a cap, a fill or a re-coding that lives only in the notebook</text>
+        <rect x="466" y="114" width="400" height="44" rx="8" fill="#FFFFFF" stroke="#DDE5F0"></rect>
+        <text class="p4bB" x="482" y="141">The transformation written next to each field</text>
+
+        <rect x="14" y="166" width="440" height="44" rx="8" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <circle cx="38" cy="188" r="13" fill="#1E3A8A"></circle>
+        <text class="p4bT" x="38" y="192" text-anchor="middle">3</text>
+        <text class="p4bK" x="62" y="184">The seed or the split is not recorded</text>
+        <text class="p4bM" x="62" y="201">every re-run lands somewhere slightly different</text>
+        <rect x="466" y="166" width="400" height="44" rx="8" fill="#FFFFFF" stroke="#DDE5F0"></rect>
+        <text class="p4bB" x="482" y="193">The split rule, or the seed, in the document</text>
+
+        <rect x="14" y="218" width="440" height="44" rx="8" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <circle cx="38" cy="240" r="13" fill="#1E3A8A"></circle>
+        <text class="p4bT" x="38" y="244" text-anchor="middle">4</text>
+        <text class="p4bK" x="62" y="236">The metric covers a different population</text>
+        <text class="p4bM" x="62" y="253">same formula, different rows, different answer</text>
+        <rect x="466" y="218" width="400" height="44" rx="8" fill="#FFFFFF" stroke="#DDE5F0"></rect>
+        <text class="p4bB" x="482" y="245">The metric definition and the rows it covers</text>
+
+        <rect x="14" y="274" width="852" height="44" rx="9" fill="#1E3A8A"></rect>
+        <text class="p4bT" x="28" y="301">None of these is fraud. All of them mean the reported number cannot be relied on until it is reproduced.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - four ordinary omissions, each one fatal to the number and none of them fatal to the model.</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Why the order matters more than the list<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Anybody can produce the list. The order is the working technique, because each item is cheaper to test than the one below it and each one, if it is the cause, makes testing the rest pointless. Start by comparing row counts and column names, which takes a minute and catches the first item outright. If the sample sizes disagree, nothing about preprocessing, seeds or metric populations is worth investigating until the sample question is settled.</p>
+        <p>Only when the sample matches does preprocessing become the live hypothesis, and the test for it is to ask for summary statistics on each feature rather than the code: minimum, maximum, mean, missing count. A capped variable shows up immediately in a maximum that is suspiciously round, and a filled variable shows up in a missing count of zero where the raw table has thousands.</p>
+        <p>The seed comes third because its signature is distinctive: a gap that changes size every time you re-run. If your re-run gives a different answer each time, you have found the cause without needing the developer at all, and the finding writes itself. The metric population comes last because it is the hardest to test from outside and, in practice, the rarest of the four in a scorecard.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>How big a gap has to be before it is a finding<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>This is the question the room always asks, and the honest answer is that the size of the gap is the wrong axis. A gap of any size is evidence that the document is incomplete, because a complete specification run twice gives the same answer twice. The size tells you about severity and about how hard you should push, not about whether there is something to report.</p>
+        <p>The practical split. A gap you can explain, where the developer names the missing step and the re-run then matches, is a documentation finding: the specification was incomplete, here is what was missing, add it. A gap you cannot explain is a different animal, because now neither party can say what produced the reported number, and a number nobody can account for should not be carried forward into an approval whatever its size.</p>
+        <p>What the size does drive is the rest of the review. A gap of three thousandths changes no conclusion and gets a documentation condition. A gap large enough to move the model across a threshold, a tier boundary or a business case has to be resolved before anything downstream of it is worth computing.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Asking for what you need without asking for the code<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The request that destroys a replication is "can you send me your notebook". It feels cooperative and it ends the test, because from that moment you are re-running their choices rather than the written ones, and the thing you were measuring was exactly the difference between those two sets.</p>
+        <p>The requests that preserve it are narrow and answerable. The sample definition as a query or as a rule, not as a row count. Per-feature summary statistics on the fitting sample, which let you verify your sample against theirs without either party sharing code. The split rule, or the seed, stated as a value. And the population the reported metric was computed over, in rows.</p>
+        <p>If the answer to any of these is "it is in the code", that is itself the finding, and it is worth stating in exactly those terms: the specification for this model is the code, so the model cannot be independently reproduced from its documentation. That sentence is more useful to an approver than any number in the report, because it describes a condition that will still be true for the next model the same team builds.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 3 ============ -->
+  <section class="section" id="part-3">
+    <div class="section-kicker">
+      <span class="klabel">Part 3 · build-along</span>
+      <h2>Re-run the champion, then change one undocumented thing</h2>
+      <span class="tag build">18 min build-along</span>
+    </div>
+    <p class="lede">Two fits. The first rebuilds Brackwater's champion from the documented specification and lands on the documented number. The second keeps the specification identical and changes the one thing the document does not record, the window the sample was drawn from, and watches the number move by 0.090 without a line of the model changing. That second fit is the whole argument for writing the sample definition down.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div><p><strong>Read the specification out of the document before opening any data.</strong> Write the five items on one page: sample, features, fitting procedure, split or seed, metric and population. Any item you cannot fill in is a finding you already have, and you have it before you have spent any compute.</p></div>
+      </div>
+      <div class="step">
+        <div><p><strong>Rebuild the sample and check the row count first.</strong> 4,000 development applications at a bad rate of 0.292. If either number disagrees with the document, stop here. Every later comparison is meaningless until the two samples are the same object.</p></div>
+      </div>
+      <div class="step">
+        <div><p><strong>Fit from the written feature list, in your own code.</strong> Not their script. The point of the exercise is to test whether the written list is sufficient, and their script silently supplies everything the list left out.</p></div>
+      </div>
+      <div class="step">
+        <div><p><strong>Compare to the same precision the document quotes.</strong> The document says 0.863, so compare at three decimal places. Comparing at more precision than was reported invents a disagreement; comparing at less hides one.</p></div>
+      </div>
+      <div class="step">
+        <div><p><strong>Record the result either way, with the date and the specification you ran.</strong> A pass is one line in the evidence section. A gap is a finding with the list from Part 2 attached and your position on it.</p></div>
+      </div>
+      <div class="step">
+        <div><p><strong>Change exactly one undocumented thing and re-run.</strong> Here it is the sample window. One change, everything else held, and the size of the move tells you how much the missing item was worth. This is also the evidence that turns "please document the window" into a condition somebody acts on.</p></div>
+      </div>
+    </div>
+
+    <div class="prompt-box good">
+      <span class="label">★ Try it now - rebuild the champion from the document</span>
+      <pre style="margin:0"><code>import pandas as pd
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import roc_auc_score
+
+# Everything below is taken from the model document and nothing else.
+dev = pd.read_csv("brackwater_dev.csv")     # sample: 4,000 development applications
+y   = dev["bad"]                            # outcome: dev["bad"].mean() is 0.292
+
+champion = ["util", "priorDelq", "employed", "incomeRat", "thin",
+            "age", "collections", "n0", "n1", "n2", "n3"]   # the documented feature list
+
+m   = LogisticRegression(max_iter=2000, C=1e4).fit(dev[champion], y)
+auc = roc_auc_score(y, m.predict_proba(dev[champion])[:, 1])
+
+print(round(auc, 3))                        # 0.863, the figure in the model document
+print(round(auc, 3) == 0.863)               # True: it reproduces exactly
+
+# One line for the evidence section:
+# "Reported development AUC of 0.863 independently reproduced from the
+#  documented sample, feature list and fitting procedure."</code></pre>
+    </div>
+
+    <div class="prompt-box good">
+      <span class="label">★ Try it now - change the window and nothing else</span>
+      <pre style="margin:0"><code># Same specification. One thing changed, and the document does not record it:
+# which window the applications were drawn from.
+oot = pd.read_csv("brackwater_oot.csv")   # 2,000 applications, the following year
+
+no_leak = [c for c in champion if c != "collections"]
+m2 = LogisticRegression(max_iter=2000, C=1e4).fit(dev[no_leak], y)
+
+on_dev = roc_auc_score(y, m2.predict_proba(dev[no_leak])[:, 1])
+on_oot = roc_auc_score(oot["bad"], m2.predict_proba(oot[no_leak])[:, 1])
+
+print(round(on_dev, 3))                   # 0.772
+print(round(on_oot, 3))                   # 0.682
+print(round(on_dev - on_oot, 3))          # 0.090, and not one line of the model changed
+
+# A document that does not state its window can be quoting either number,
+# and a reader has no way to tell which. That is the finding, not the 0.090.</code></pre>
+    </div>
+
+    <div class="callout tip">
+      <p><strong>Keep the two fits side by side when you write it up.</strong> The first shows the document is reproducible on the sample it names. The second shows what a single unnamed choice is worth on this model. Together they turn a documentation request into something with a number attached, and a documentation request with a number attached is the only kind that gets actioned.</p>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions</h2>
+    </div>
+
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">Your re-run of Brackwater's champion reproduces the documented development AUC of 0.863 exactly. What belongs in the report?</p>
+      <button class="qopt" type="button">A · Nothing. A test that found no defect has produced no finding, and the hour is better spent elsewhere</button>
+      <button class="qopt" type="button">B · One line recording that the reported figure was independently reproduced from the documented sample, feature list and fitting procedure, with the date</button>
+      <button class="qopt" type="button">C · A statement that the model is sound, since the number the approval rests on has now been verified</button>
+      <p class="qwhy">A passing replication establishes that the document describes the model that actually exists, which every later finding in the report depends on and which nobody had checked. It says nothing about whether 0.863 is a good number, whether it survives a later vintage, or whether it was earned by a field written after the outcome, so C claims far more than the test supports.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">Your re-run comes out below the documented figure. Before contacting the developer, what is the first thing to check?</p>
+      <button class="qopt" type="button">A · The sample: row count, bad rate and column names, because a different sample or feature set is the most common cause and makes every other test pointless until it is settled</button>
+      <button class="qopt" type="button">B · The random seed, because an unrecorded seed is the classic cause of a number that will not reproduce</button>
+      <button class="qopt" type="button">C · Whether the developer computed the metric correctly, since an arithmetic error is the simplest explanation for a gap</button>
+      <p class="qwhy">The four causes are worked in order of likelihood and cost: a different feature set or sample first, then an undocumented preprocessing step, then an unrecorded seed or split, then a metric computed over a different population. An unrecorded seed has a distinctive signature, a gap that changes size on every re-run, so it is cheap to rule in later. Arithmetic is almost never the cause, and treating it as one is how a validator loses the cooperation needed to close the gap.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="2">
+      <p class="qtext">Under the revised interagency guidance of 17 April 2026, what is a replication actually testing?</p>
+      <button class="qopt" type="button">A · Ongoing monitoring, since re-running a model on new data is how performance is tracked after launch</button>
+      <button class="qopt" type="button">B · Nothing the guidance asks for. Replication is an internal convention rather than an expectation of the validation function</button>
+      <button class="qopt" type="button">C · The quality and extent of the developmental evidence, which is the stated standard for assessing conceptual soundness, since the component covers model design, construction and developmental testing</button>
+      <p class="qwhy">Sound practice subjects modelling aspects to critical analysis by evaluating both the quality and the extent of developmental evidence. Reading that evidence tests neither; re-running it tests both, because a specification too thin to reproduce has an extent that cannot be assessed and a result that does not regenerate has a quality that cannot be assessed. Note also that SR 11-7 is superseded and the April 2026 text is the current one.</p>
+    </div>
+    <p class="quiz-score"></p>
+  </section>
+
+  <!-- ============ HOMEWORK ============ -->
+  <section class="section" id="homework">
+    <div class="section-kicker">
+      <span class="klabel">Homework</span>
+      <h2>Before session 5</h2>
+      <span class="tag time">40 min</span>
+    </div>
+    <div class="callout">
+      <p>Take the documentation for a model your team runs and fill in the five items from Part 1 using only what is written there: the sample with its dates and exclusions, the feature list with transformations, the fitting procedure and its settings, the split or the seed, and the metric with the population it covers. Do not ask anybody. Whatever is left blank after thirty minutes is the replication finding for that model, and you have it without running anything. Then pick the single blank you think would move the number most, and bring your reasoning to session 5, which puts the model against a three-feature challenger and asks what the complexity was buying.</p>
+    </div>
+  </section>
+
+  <!-- ============ COVERAGE ============ -->
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Sources covered</span>
+      <h2>What tonight maps to</h2>
+    </div>
+    <div class="covered">
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Replication, defined by who can run it</span>
+        <span class="note">Whether the documented result can be regenerated from the documented inputs by somebody who was not in the room. A verdict on the document rather than on the number.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">The Brackwater re-run</span>
+        <span class="note">The champion as submitted reproduces exactly at a development AUC of 0.863, on 4,000 applications with a bad rate of 0.292. A pass is the normal outcome and is still recorded.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">What a gap means, in order of likelihood</span>
+        <span class="note">A different feature set or sample; an undocumented preprocessing step; an unrecorded seed or split; a metric computed over a different population. None is fraud and all invalidate the number.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">The five reproducibility requirements</span>
+        <span class="note">The exact sample definition with dates, the feature list with transformations, the fitting procedure and its settings, the split or the seed, and the metric definition including the population it covers.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Quality and extent of developmental evidence</span>
+        <span class="note">Under the revised interagency guidance of 17 April 2026, conceptual soundness covers model design, construction and developmental testing, and sound practice evaluates both the quality and the extent of the developmental evidence. SR 11-7, issued in 2011, is superseded.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">One undocumented change, priced</span>
+        <span class="note">The same specification on the documented window scores 0.772 and on the later vintage 0.682, a move of 0.090 with nothing about the model altered.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill light">◐</span>
+        <span class="name">Benchmarks and the three-feature challenger</span>
+        <span class="note">Session 5. Tonight reproduces the reported number; whether the complexity behind it was buying anything is tested there.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill light">◐</span>
+        <span class="name">Out-of-time testing and population stability</span>
+        <span class="note">Session 7. The later vintage appears here only as a window change that moves a number; what moved in the book between the two vintages belongs there.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill inkpill">·</span>
+        <span class="name">What AUC is, and what a bad rate is</span>
+        <span class="note">Not covered by design. <strong>learn-model-evaluation-with-phoebe</strong> defines the metrics; here they are only the figures being reproduced.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill inkpill">·</span>
+        <span class="name">Governance frameworks of every kind</span>
+        <span class="note">Not covered by design, in any session. <strong>learn-ai-governance-with-phoebe</strong> owns them.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CHEAT SHEET ============ -->
+  <section class="cheat" id="cheatsheet">
+    <h3>Session 4 cheat sheet</h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>The question replication asks</b><span>Can the documented result be regenerated from the documented inputs by somebody who was not in the room.</span></div>
+      <div class="cheat-item"><b>It is a verdict on the document</b><span>Not on the arithmetic. Nobody suspects the developer of dividing wrong.</span></div>
+      <div class="cheat-item"><b>Brackwater reproduces</b><span>Development AUC 0.863, exactly as submitted. A pass is the normal outcome and is worth the hour.</span></div>
+      <div class="cheat-item"><b>Write the pass down</b><span>One line with the date and the specification you ran. The next validator will not spend the hour unless the file says it was needed.</span></div>
+      <div class="cheat-item"><b>Five things to insist on</b><span>Sample with dates, features with transformations, fitting procedure and settings, split or seed, metric and its population.</span></div>
+      <div class="cheat-item"><b>Four causes, in order</b><span>Different sample or features, undocumented preprocessing, unrecorded seed or split, different metric population.</span></div>
+      <div class="cheat-item"><b>None is fraud, all are fatal</b><span>To the number, not to the model. Hold both facts at once and the finding writes itself.</span></div>
+      <div class="cheat-item"><b>One window, 0.090</b><span>Same specification, different sample window: 0.772 against 0.682. That is why the window gets written down.</span></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="pagefoot">
+  <div class="wrap">
+    <p>Practitioner session 4 of 10 · learn-model-risk-with-phoebe · by Phoebe Fu</p>
+    <nav class="pagenav">
+      <a href="p3-the-leak-hunt.html">← Practitioner session 3 · The leak hunt</a>
+      <a href="p5-benchmarks-and-challengers.html">Practitioner session 5 · Benchmarks and challengers →</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="../assets/app.js?v=2"></script>
+</body>
+</html>

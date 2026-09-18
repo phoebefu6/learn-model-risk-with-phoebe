@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- social:start -->
+<meta name="description" content="Leader session 3 of 6. The three components of validation in plain language, and the four Brackwater findings each one caught. Overall calibration was off by 0.006 and every band was wrong. A single number would have passed this model.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Learn with Phoebe">
+<meta property="og:title" content="What a validator is checking - learn model risk with phoebe">
+<meta property="og:description" content="Leader session 3 of 6. Conceptual soundness, outcomes analysis, ongoing monitoring - and the finding each one caught at Brackwater.">
+<meta property="og:url" content="https://phoebefu6.github.io/learn-model-risk-with-phoebe/courses/a3-what-a-validator-checks.html">
+<meta property="og:image" content="https://phoebefu6.github.io/learn-model-risk-with-phoebe/assets/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="What a validator is checking - learn model risk with phoebe">
+<meta name="twitter:description" content="An aggregate gap of -0.006 that hides bands running from +0.068 to -0.142.">
+<meta name="twitter:image" content="https://phoebefu6.github.io/learn-model-risk-with-phoebe/assets/og-cover.png">
+<!-- social:end -->
+<title>Leader session 3 · What a validator is checking - learn model risk with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=2">
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-model-risk-with-phoebe</a> / Leader session 3 of 6</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Learn Model Risk with Phoebe · Leader session 3 of 6</div>
+    <h1>What a validator <span class="accent">is checking</span></h1>
+    <p class="sub">Validation is not a recount. Nobody is re-adding the columns, and at Brackwater the arithmetic was right every single time. A validator is asking a narrower and much harder question: does the evidence submitted support the claim being made. Tonight is the tour of that work from the side of the table you sit on - the person who will read the report rather than write it. Three components, four findings, and one number that looked perfect while everything underneath it was wrong.</p>
+    <div class="chip-row">
+      <span class="chip level">🟠 Advanced</span>
+      <span class="chip audience">Whoever signs the approval</span>
+      <span class="chip audience">Risk, audit and the second line</span>
+      <span class="chip time">45 min</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:1">0-3 · Welcome</span>
+      <span class="a2" style="flex:5">3-22 · The three components</span>
+      <span class="a3" style="flex:4">22-40 · Build-along: sort the findings</span>
+      <span class="a4" style="flex:1">40-45 · Q&amp;A</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ INTRO ============ -->
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>Where tonight sits</h2>
+    </div>
+    <p class="lede">Session 1 was what model risk is. Session 2 was effective challenge and why organisations with all the right job titles still fail at it. Tonight is the other half of that: what the challenge actually consists of, component by component, with no metric defined anywhere on the page. Session 4 is materiality and the inventory, which decides which models get this treatment at all. Session 5 is how to read the report that comes out of it, and session 6 is signing it. The worked example stays <strong>Brackwater</strong>, whose consumer scorecard was submitted with a recommendation to deploy and came back with four findings, each caught by a different part of the review.</p>
+
+    <div class="legend">
+      <span class="pill">Live = presented in the 45 minutes</span>
+      <span class="pill">Self-study = the full depth, after class</span>
+      <span class="pill">🔍 Every diagram zooms</span>
+    </div>
+
+    <div class="callout win">
+      <p><strong>★ What you walk out with tonight.</strong> The three components of validation in language you can use in a committee, so you can tell which of them a report has actually done and which it has skipped. The habit that catches the most expensive class of error: when a report hands you one number, ask what it looks like broken into bands. And the single most useful sentence for a leader in this whole discipline - the validator is not checking whether the arithmetic is right, they are checking whether the evidence supports the claim.</p>
+    </div>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>Nobody is re-checking the arithmetic<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The most common misreading of validation, from people who have never had one done to them, is that it is a quality-control pass on the computation. Somebody re-runs the numbers, confirms they come out the same, and signs. If that were the job it would be a week of work and it would catch almost nothing, because the modelling team has already run those numbers many more times than the validator will.</p>
+        <p>The real job is evidential. A model document makes a claim: this model separates the customers who will default from the ones who will not, this well, on this population, for this purpose. Validation asks whether the evidence attached to that document is good enough, and wide enough, to support the claim. Those are two separate tests. Evidence can be impeccable in quality and far too narrow in extent, which is exactly the shape of the Brackwater failure.</p>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>Every number in Brackwater's model document reproduced. The headline figure of 0.863 for how well the scorecard separates defaulters from non-defaulters was correct, reproducible, and computed the way the document said. The validation still went badly, because three of the four findings were about things the document never showed, and the fourth was about a field nobody had questioned.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>The three words, before anyone says them at you<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <ul>
+          <li><strong>Conceptual soundness.</strong> Assessing the model's design, its key modelling choices, its assumptions, the qualitative judgements built into it, how the data was selected and constructed, and what developmental testing was done. The test is on both the quality and the extent of the developmental evidence.</li>
+          <li><strong>Outcomes analysis.</strong> Comparing the model's outputs to the corresponding real-world outcomes. Back-testing and outlier analysis are named forms of it. Where a model rests substantially on expert judgement, quantitative outcomes analysis is how the quality of that judgement gets evaluated rather than simply accepted.</li>
+          <li><strong>Ongoing monitoring.</strong> Evaluating whether the model still performs as expected given changes in products, exposures, activities, clients, the relevance of the data, or market conditions.</li>
+          <li><strong>Benchmarking.</strong> Not one of the three. A comparison against an alternative, often a deliberately simpler one, that answers a question none of the three components asks on its own: was the complexity worth anything.</li>
+          <li><strong>Out of time.</strong> Scored on a later period than the one the model was built on. The single cheapest way to find out whether a result was a property of the model or a property of that year.</li>
+          <li><strong>Developmental evidence.</strong> What the builders produced while building: the tests they ran, the alternatives they tried, the choices they rejected and why. Its absence is itself a finding.</li>
+        </ul>
+        <p>The numbers on this page are quoted, not explained. What a separation figure is, how calibration is computed and what a base rate does to both belong to <strong>learn-model-evaluation-with-phoebe</strong>, which defines every one of them properly.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 1 ============ -->
+  <section class="section" id="part-1">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · covers the three components and the finding each one caught</span>
+      <h2>Three components, three different questions</h2>
+      <span class="tag concept">10 min live</span>
+    </div>
+    <p class="lede">The current guidance sets out validation in three components, in this order: conceptual soundness, outcomes analysis, and ongoing model monitoring. The order is not decorative. The first can be done on the day the document arrives, with no new data at all. The second needs the world to have answered back. The third never finishes. A report that is strong on one and silent on another has not been half done, it has answered a different question.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 304" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The three components of validation shown as three lenses, each with the Brackwater finding it caught. Conceptual soundness reviews design, assumptions, key choices, data selection and construction and developmental testing, judged on the quality and extent of the evidence; it caught the leak, where the collections field scores 0.748 on its own against the champion's 0.863 and removing it drops development performance to 0.772. Outcomes analysis compares predictions with what actually happened, including back-testing and outlier analysis; it caught the calibration, where the overall gap is minus 0.006 but the gap by band runs from plus 0.061 to minus 0.142. Ongoing monitoring asks whether the model still performs given changes in products, exposures, activities, clients, data relevance or market conditions; it caught the population shift, with thin-file share moving from 19.0 percent to 34.0 percent. A band below shows benchmarking: out of time the champion scores 0.682 and a three-feature challenger scores 0.676, a difference of 0.006.">
+        <style>
+          .a3aH { font: 800 12px Inter, sans-serif; fill: #0F172A; }
+          .a3aT { font: 800 12px Inter, sans-serif; fill: #fff; }
+          .a3aB { font: 400 11px Inter, sans-serif; fill: #0F172A; }
+          .a3aM { font: 400 11px Inter, sans-serif; fill: #56617A; }
+          .a3aR { font: 800 11px Inter, sans-serif; fill: #B91C1C; }
+        </style>
+
+        <text class="a3aH" x="14" y="22">Three components. Three questions. Four findings.</text>
+
+        <rect x="14" y="38" width="276" height="180" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <rect x="14" y="38" width="276" height="28" rx="9" fill="#1E3A8A"></rect>
+        <text class="a3aT" x="28" y="57">1 · Conceptual soundness</text>
+        <circle cx="258" cy="50" r="7" fill="none" stroke="#BFDBFE" stroke-width="2"></circle>
+        <line x1="263" y1="55" x2="271" y2="62" stroke="#BFDBFE" stroke-width="2"></line>
+        <text class="a3aB" x="28" y="88">Design, assumptions, key choices,</text>
+        <text class="a3aB" x="28" y="104">data selection, construction and</text>
+        <text class="a3aM" x="28" y="120">developmental testing. Judged on</text>
+        <text class="a3aM" x="28" y="136">the quality and extent of evidence.</text>
+        <rect x="28" y="148" width="248" height="58" rx="7" fill="#FEF2F2" stroke="#B91C1C"></rect>
+        <text class="a3aR" x="40" y="168">Caught: the leak</text>
+        <text class="a3aB" x="40" y="185">0.748 on its own vs 0.863 full;</text>
+        <text class="a3aB" x="40" y="199">without it development is 0.772</text>
+
+        <rect x="302" y="38" width="276" height="180" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <rect x="302" y="38" width="276" height="28" rx="9" fill="#1E40AF"></rect>
+        <text class="a3aT" x="316" y="57">2 · Outcomes analysis</text>
+        <circle cx="546" cy="50" r="7" fill="none" stroke="#BFDBFE" stroke-width="2"></circle>
+        <line x1="551" y1="55" x2="559" y2="62" stroke="#BFDBFE" stroke-width="2"></line>
+        <text class="a3aB" x="316" y="88">Compare what the model said</text>
+        <text class="a3aB" x="316" y="104">with what actually happened.</text>
+        <text class="a3aM" x="316" y="120">Back-testing and outlier analysis</text>
+        <text class="a3aM" x="316" y="136">are the named forms of it.</text>
+        <rect x="316" y="148" width="248" height="58" rx="7" fill="#FEF2F2" stroke="#B91C1C"></rect>
+        <text class="a3aR" x="328" y="168">Caught: the calibration</text>
+        <text class="a3aB" x="328" y="185">overall gap -0.006, but by band</text>
+        <text class="a3aB" x="328" y="199">it runs +0.068 down to -0.142</text>
+
+        <rect x="590" y="38" width="276" height="180" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <rect x="590" y="38" width="276" height="28" rx="9" fill="#1E40AF"></rect>
+        <text class="a3aT" x="604" y="57">3 · Ongoing monitoring</text>
+        <circle cx="834" cy="50" r="7" fill="none" stroke="#BFDBFE" stroke-width="2"></circle>
+        <line x1="839" y1="55" x2="847" y2="62" stroke="#BFDBFE" stroke-width="2"></line>
+        <text class="a3aB" x="604" y="88">Does it still perform as expected,</text>
+        <text class="a3aB" x="604" y="104">given changes in products,</text>
+        <text class="a3aM" x="604" y="120">exposures, activities, clients, data</text>
+        <text class="a3aM" x="604" y="136">relevance or market conditions.</text>
+        <rect x="604" y="148" width="248" height="58" rx="7" fill="#FEF2F2" stroke="#B91C1C"></rect>
+        <text class="a3aR" x="616" y="168">Caught: the population</text>
+        <text class="a3aB" x="616" y="185">thin-file share moved from</text>
+        <text class="a3aB" x="616" y="199">19.0 percent to 34.0 percent</text>
+
+        <rect x="14" y="230" width="852" height="60" rx="9" fill="#BFDBFE" stroke="#93C5FD"></rect>
+        <text class="a3aH" x="28" y="254">Benchmarking: not a fourth component, but the comparison that asks whether any of it was worth it</text>
+        <text class="a3aB" x="28" y="274">Out of time the champion scores 0.682. A three-feature challenger scores 0.676. The difference is 0.006.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - each component asks a question the other two cannot, and at Brackwater each one found something different.</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Conceptual soundness, and the field that was a consequence<span class="mini">5 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Conceptual soundness is the part of validation that needs no new data and no waiting. It is an assessment of the model's design, the key modelling choices, the assumptions, the qualitative judgements, and how the data was selected and constructed, together with whatever developmental testing the builders did. The word to hold onto is <strong>extent</strong>. The review is not only whether the developmental evidence is any good; it is whether there is enough of it to support what is being claimed.</p>
+        <p>At Brackwater this is the component that found the leak. One of the eleven fields was a count of collections contacts. Collections contacts are logged after the outcome window opens, which means the field is a consequence of a customer defaulting rather than a signal that they are about to. On its own that single field separates defaulters from non-defaulters at 0.748, against the full model's 0.863. Refit without it, development performance drops to 0.772.</p>
+        <p>Notice what caught it. Not a performance test - the performance was excellent, which is precisely the problem. It was a question about what the field means and when it comes into existence, asked by somebody reading the data dictionary against the outcome definition. That question costs an afternoon and no data at all.</p>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>The reason nobody caught this internally is that the field is noisy. It is not a copy of the answer: plenty of defaulters never get a collections contact and some non-defaulters do. A field that predicted perfectly would have been spotted in a day. A field that predicts well and imperfectly looks exactly like a good feature, and it will keep looking like one right up until it is deployed against customers who have not defaulted yet.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>The two components that need the world to answer back<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><strong>Outcomes analysis</strong> compares model output to the corresponding real-world outcomes. That is the whole idea, and everything else is a form of it: back-testing, where you score a period the model did not see and wait for the outcomes to arrive, and outlier analysis, where you go and look at the cases the model got most wrong rather than the average of all of them. The point worth carrying into a committee is the one about judgement. Where a model rests substantially on expert judgement, quantitative outcomes analysis is how the quality of that judgement is evaluated. Experience is not a substitute for a track record; it is a reason to go and measure one.</p>
+        <p><strong>Ongoing monitoring</strong> asks whether the model still performs as expected given changes in products, exposures, activities, clients, the relevance of the data, and market conditions. It is the only component with no end date, and the only one that fails quietly, because nothing about a model going stale generates an alert unless somebody wrote the alert first.</p>
+        <p>At Brackwater it found the population. Between the development vintage and the later one, the share of thin-file applicants in the book went from 19.0 percent to 34.0 percent. Nobody changed the model and nobody made an error. The book moved toward exactly the customers the model had seen least of, and the only reason this is a finding rather than a surprise is that somebody was still looking a year after launch.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>How to tell whether a report did conceptual soundness at all<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Conceptual soundness is the easiest component to fake, because it produces prose rather than tables and prose can be written without doing anything. Four tells, all of which you can check in a report without any technical background.</p>
+        <ul>
+          <li><strong>Are the assumptions listed as assumptions?</strong> A section that describes the methodology is not the same as a section that names what is being presumed true. If the word "assumes" appears nowhere, nobody wrote them down.</li>
+          <li><strong>Is any alternative mentioned?</strong> Developmental evidence includes what was tried and rejected. A document in which the chosen approach is the only approach ever considered is describing a decision that was never made.</li>
+          <li><strong>Does every field have a provenance and a timing?</strong> Where it comes from and when in the customer's life it gets written. This one question is what caught Brackwater's leak, and it is answerable by anybody.</li>
+          <li><strong>Is the extent of the evidence assessed, or only its quality?</strong> "The tests performed were correct" and "the tests performed were sufficient" are different sentences, and reports routinely contain only the first.</li>
+        </ul>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 2 ============ -->
+  <section class="section" id="part-2">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · covers the one number that hid everything else</span>
+      <h2>The average was right and every band was wrong</h2>
+      <span class="tag concept">8 min live</span>
+    </div>
+    <p class="lede">This is the finding that should change how you read reports. Scored on the later vintage, Brackwater's scorecard predicted a default rate of 0.330 against an actual 0.324. The gap is -0.006. On a single line in a summary table that is not just acceptable, it is the best-looking number in the document. Split the same customers into five bands by how risky the model said they were, and the story inverts completely.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 372" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Predicted against actual default rate by quintile of predicted risk, out of time. Quintile 1, the safest, predicted 0.086 against actual 0.147, a gap of plus 0.061. Quintile 2 predicted 0.169 against actual 0.237, a gap of plus 0.068. Quintile 3 predicted 0.270 against actual 0.305, a gap of plus 0.035. Quintile 4 predicted 0.432 against actual 0.378, a gap of minus 0.054. Quintile 5, the riskiest, predicted 0.694 against actual 0.552, a gap of minus 0.142. Across all customers the model predicted 0.330 against an actual 0.324, an aggregate gap of only minus 0.006, which is the single number that would have passed this model. The model under-predicts the safest borrowers and over-predicts the riskiest.">
+        <style>
+          .a3bH { font: 800 12px Inter, sans-serif; fill: #0F172A; }
+          .a3bK { font: 800 12px Inter, sans-serif; fill: #B91C1C; }
+          .a3bB { font: 400 11px Inter, sans-serif; fill: #0F172A; }
+          .a3bM { font: 400 11px Inter, sans-serif; fill: #56617A; }
+          .a3bL { font: 700 11px Inter, sans-serif; fill: #0F172A; }
+          .a3bV { font: 700 10px Inter, sans-serif; fill: #56617A; }
+          .a3bG { font: 800 11px Inter, sans-serif; fill: #B91C1C; }
+          .a3bA { font: 400 10px Inter, sans-serif; fill: #56617A; }
+        </style>
+
+        <text class="a3bH" x="14" y="22">Predicted against actual, by band of predicted risk, on the later vintage.</text>
+
+        <rect x="14" y="32" width="12" height="12" rx="3" fill="#1E40AF"></rect>
+        <text class="a3bB" x="32" y="42">Predicted</text>
+        <rect x="106" y="32" width="12" height="12" rx="3" fill="#93C5FD"></rect>
+        <text class="a3bB" x="124" y="42">Actual</text>
+        <text class="a3bM" x="188" y="42">Gap printed above each band</text>
+
+        <line x1="70" y1="300" x2="560" y2="300" stroke="#C7D2E4" stroke-width="1.4"></line>
+        <line x1="70" y1="236" x2="560" y2="236" stroke="#DDE5F0" stroke-width="1"></line>
+        <line x1="70" y1="172" x2="560" y2="172" stroke="#DDE5F0" stroke-width="1"></line>
+        <line x1="70" y1="108" x2="560" y2="108" stroke="#DDE5F0" stroke-width="1"></line>
+        <text class="a3bA" x="62" y="304" text-anchor="end">0.00</text>
+        <text class="a3bA" x="62" y="240" text-anchor="end">0.20</text>
+        <text class="a3bA" x="62" y="176" text-anchor="end">0.40</text>
+        <text class="a3bA" x="62" y="112" text-anchor="end">0.60</text>
+
+        <rect x="86" y="272.5" width="28" height="27.5" rx="3" fill="#1E40AF"></rect>
+        <rect x="120" y="253" width="28" height="47" rx="3" fill="#93C5FD"></rect>
+        <text class="a3bG" x="119" y="245" text-anchor="middle">+0.061</text>
+        <text class="a3bL" x="119" y="318" text-anchor="middle">Q1 safest</text>
+        <text class="a3bV" x="119" y="334" text-anchor="middle">pred 0.086</text>
+        <text class="a3bV" x="119" y="348" text-anchor="middle">actual 0.147</text>
+
+        <rect x="184" y="246" width="28" height="54" rx="3" fill="#1E40AF"></rect>
+        <rect x="218" y="224" width="28" height="76" rx="3" fill="#93C5FD"></rect>
+        <text class="a3bG" x="217" y="216" text-anchor="middle">+0.068</text>
+        <text class="a3bL" x="217" y="318" text-anchor="middle">Q2</text>
+        <text class="a3bV" x="217" y="334" text-anchor="middle">pred 0.169</text>
+        <text class="a3bV" x="217" y="348" text-anchor="middle">actual 0.237</text>
+
+        <rect x="282" y="213.6" width="28" height="86.4" rx="3" fill="#1E40AF"></rect>
+        <rect x="316" y="202.4" width="28" height="97.6" rx="3" fill="#93C5FD"></rect>
+        <text class="a3bG" x="315" y="194" text-anchor="middle">+0.035</text>
+        <text class="a3bL" x="315" y="318" text-anchor="middle">Q3</text>
+        <text class="a3bV" x="315" y="334" text-anchor="middle">pred 0.270</text>
+        <text class="a3bV" x="315" y="348" text-anchor="middle">actual 0.305</text>
+
+        <rect x="380" y="161.8" width="28" height="138.2" rx="3" fill="#1E40AF"></rect>
+        <rect x="414" y="179" width="28" height="121" rx="3" fill="#93C5FD"></rect>
+        <text class="a3bG" x="413" y="154" text-anchor="middle">-0.054</text>
+        <text class="a3bL" x="413" y="318" text-anchor="middle">Q4</text>
+        <text class="a3bV" x="413" y="334" text-anchor="middle">pred 0.432</text>
+        <text class="a3bV" x="413" y="348" text-anchor="middle">actual 0.378</text>
+
+        <rect x="478" y="77.9" width="28" height="222.1" rx="3" fill="#1E40AF"></rect>
+        <rect x="512" y="123.4" width="28" height="176.6" rx="3" fill="#93C5FD"></rect>
+        <text class="a3bG" x="511" y="70" text-anchor="middle">-0.142</text>
+        <text class="a3bL" x="511" y="318" text-anchor="middle">Q5 riskiest</text>
+        <text class="a3bV" x="511" y="334" text-anchor="middle">pred 0.694</text>
+        <text class="a3bV" x="511" y="348" text-anchor="middle">actual 0.552</text>
+
+        <rect x="580" y="60" width="286" height="108" rx="9" fill="#FEF2F2" stroke="#B91C1C"></rect>
+        <text class="a3bK" x="594" y="84">The one number in the summary</text>
+        <text class="a3bB" x="594" y="106">Predicted 0.330 against actual 0.324,</text>
+        <text class="a3bB" x="594" y="122">a gap of -0.006. It looks excellent.</text>
+        <text class="a3bB" x="594" y="140">A single calibration number would</text>
+        <text class="a3bB" x="594" y="156">have passed this model.</text>
+
+        <rect x="580" y="182" width="286" height="126" rx="9" fill="#BFDBFE" stroke="#93C5FD"></rect>
+        <text class="a3bH" x="594" y="206">What the bands say instead</text>
+        <text class="a3bB" x="594" y="228">Q1 +0.061 · Q2 +0.068 · Q3 +0.035</text>
+        <text class="a3bB" x="594" y="244">Q4 -0.054 · Q5 -0.142</text>
+        <text class="a3bB" x="594" y="268">It under-predicts the safest</text>
+        <text class="a3bB" x="594" y="284">borrowers and over-predicts the</text>
+        <text class="a3bB" x="594" y="300">riskiest ones. Both errors cost.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the errors run in opposite directions, so they cancel in the total. The aggregate gap of -0.006 is arithmetically true and tells you nothing.</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Why the two errors cancel, and what each one costs<span class="mini">5 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The mechanism is simple enough to say in a sentence. The model is too optimistic about the customers it thinks are safe and too pessimistic about the customers it thinks are risky. In the first three bands the actual default rate comes in above what was predicted, by +0.061, +0.068 and +0.035. In the last two it comes in below, by -0.054 and -0.142. Add them all up across the whole book and they very nearly wipe each other out, leaving the -0.006 that looks like a triumph.</p>
+        <p>Both halves of that cost money, in different places and to different people. Under-predicting the safest band means the customers being approved most freely, at the best prices, default more often than the pricing assumed. Over-predicting the riskiest band means declining or repricing customers who would mostly have paid. One error shows up in losses and the other shows up in volume that never happened, which is why only the first tends to get noticed.</p>
+        <div class="callout tip">
+          <p><strong>The question to ask every time.</strong> When a report shows you an aggregate accuracy or a single gap, ask for the same comparison split into bands - by risk, by segment, by product, by anything the business actually treats differently. If the answer is that it was not done, that is not a gap in the analysis, it is the analysis missing. An average is only safe to read when you already know the parts agree.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Benchmarking, and the six thousandths question<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The fourth finding came from a comparison rather than from any of the three components. The validator built a challenger: a deliberately plain model using three features, the kind of thing a competent analyst produces in an afternoon. Scored on the later vintage, the champion separates defaulters from non-defaulters at 0.682, with the leaking field removed. The challenger scores 0.676. The difference is 0.006.</p>
+        <p>Be careful with what that does and does not establish. It does not establish that the champion is worthless or that the challenger should be deployed instead; on this data the two are close enough that the ranking is not the point, and each has different consequences for volume and for losses. What it establishes is the thing a leader needs: the model document claimed an edge, and the edge that survives to the population the model is actually being used on is six thousandths over something nobody needed a project for. The defensible finding is not about the model. It is about the document, which asserted more than its evidence supported.</p>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>The benchmark is also the cheapest thing on this entire page to demand. You do not need to know how it is built, and you do not need the result to be flattering. You need one line in every model document that says what this model was compared against and by how much it won, because a model submitted with no comparison has been graded against nothing.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>What is still there after a clean validation<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The guidance is unusually direct about its own limits, and it is worth reading that part rather than skipping to the procedures. Even with sound model development and rigorous validation, material model risk can remain. Validation reduces risk; it does not retire it, and a model that has passed is not a model that has been made safe.</p>
+        <p>What follows from that is a short list of habits for the people who use the output, and none of them are the validator's job. Understand the model's limitations and communicate them, rather than passing the number on stripped of its caveats. Monitor performance instead of assuming the launch conditions persist. Review periodically whether the model is still relevant to the decision it is feeding, which is a different question from whether it still performs. And supplement the model's output with complementary analysis, so that no consequential decision rests on one number from one source.</p>
+        <p>That last habit is the one leaders can actually enforce, and it is worth noticing that it is the same discipline as the band question. One number, from one model, read on its own, is the failure mode that runs through every finding on this page.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 3 ============ -->
+  <section class="section" id="part-3">
+    <div class="section-kicker">
+      <span class="klabel">Part 3 · build-along</span>
+      <h2>Sort a real report into the three components</h2>
+      <span class="tag build">18 min build-along</span>
+    </div>
+    <p class="lede">No laptop. Bring to mind a validation report, a model document, or an approval paper you have actually been sent - and if you have never been sent one, use the last analysis that arrived with a recommendation attached. The exercise is to stop reading it as a verdict and start reading it as a set of claims with evidence behind them.</p>
+
+    <div class="steps">
+      <div class="step">
+                <div>
+          <p><strong>Write the claim in one sentence.</strong> What is this document asserting, in a form that could turn out to be false. "The model performs well" is not a claim, it is a mood. "This model ranks applicants well enough to set the approval cutoff for next year's book" is a claim, and you can now go looking for the evidence attached to it.</p>
+        </div>
+      </div>
+      <div class="step">
+                <div>
+          <p><strong>Sort every finding into one of the three boxes.</strong> Design and assumptions go in conceptual soundness. Predicted against actual goes in outcomes analysis. Anything about whether it still holds goes in ongoing monitoring. Then look at which box is empty, because an empty box is the report telling you what it did not do.</p>
+        </div>
+      </div>
+      <div class="step">
+                <div>
+          <p><strong>Find the single numbers.</strong> Go through and mark every place where one figure stands for a whole population. For each one, ask out loud what it would look like split into five bands. Brackwater's -0.006 is the warning: the aggregate can be right while nothing underneath it is.</p>
+        </div>
+      </div>
+      <div class="step">
+                <div>
+          <p><strong>Ask where each input comes from and when it gets written.</strong> Pick the three fields doing the most work and ask when in the customer's life each one appears. Anything recorded after the thing being predicted has already started is a consequence, not a predictor, however well it performs.</p>
+        </div>
+      </div>
+      <div class="step">
+                <div>
+          <p><strong>Ask what it was compared against.</strong> Not "is it good" but "good compared to what". If the document contains no alternative, no simpler version and no prior model, the recommendation has been graded on a curve of one.</p>
+        </div>
+      </div>
+      <div class="step">
+                <div>
+          <p><strong>Write the expiry condition.</strong> One sentence: "This conclusion stops being true if [population, relationship or input] changes, and we would find out because [somebody is watching this]." If the second half is blank, you have just written the monitoring requirement that should have been in the report.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <p><strong>The one sentence to take into the committee.</strong> The validator is not checking whether the arithmetic is right. The validator is checking whether the evidence submitted supports the claim being made. At Brackwater the arithmetic was right every time, and the model still should not have been approved as submitted, which is a sentence that only makes sense once those two things are separated.</p>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions</h2>
+    </div>
+
+    <div class="quiz-q" data-answer="2">
+      <p class="qtext">A report tells you the model predicted a 0.330 default rate against an actual 0.324 on the later vintage. What should your next question be?</p>
+      <button class="qopt" type="button">A · None, because a gap of -0.006 is as close as this kind of work gets</button>
+      <button class="qopt" type="button">B · Whether the actual rate was measured on enough customers to be reliable</button>
+      <button class="qopt" type="button">C · What the same comparison looks like split into bands, because opposite errors cancel in a total</button>
+      <p class="qwhy">At Brackwater that aggregate gap of -0.006 sits on top of band gaps of +0.061, +0.068, +0.035, -0.054 and -0.142. The model under-predicts the safest borrowers and over-predicts the riskiest, and the two directions very nearly cancel. A single calibration number would have passed this model.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">The collections field is a count of contacts logged after the outcome window opens. Which component of validation is built to catch that, and why?</p>
+      <button class="qopt" type="button">A · Conceptual soundness, because it assesses data selection and construction and asks what a field means and when it is written, before any performance test is run</button>
+      <button class="qopt" type="button">B · Outcomes analysis, because the field would show up as a poor predictor once real outcomes arrived</button>
+      <button class="qopt" type="button">C · Ongoing monitoring, because the problem only appears once the model is live</button>
+      <p class="qwhy">Performance testing cannot catch this one, which is the trap: the field looks excellent, separating defaulters from non-defaulters at 0.748 on its own against the full model's 0.863. Only a review of how the data was selected and constructed asks when in a customer's life the field gets written. Refit without it, development performance falls to 0.772.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">Out of time the champion scores 0.682 and a three-feature challenger scores 0.676. What is the defensible finding to put in the report?</p>
+      <button class="qopt" type="button">A · The champion is worthless and the challenger should replace it</button>
+      <button class="qopt" type="button">B · The evidence submitted did not support the claim made, which is a statement about the document rather than about the model</button>
+      <button class="qopt" type="button">C · Nothing, since 0.682 is higher than 0.676 and the champion therefore wins</button>
+      <p class="qwhy">A difference of 0.006 does not establish that either model is better; the two are close, and each wins on a different business axis. What it does establish is that the document claimed an edge its own evidence cannot carry. Findings are written about the evidence and the claim, not about which model somebody prefers.</p>
+    </div>
+    <p class="quiz-score"></p>
+  </section>
+
+  <!-- ============ HOMEWORK ============ -->
+  <section class="section" id="homework">
+    <div class="section-kicker">
+      <span class="klabel">Homework</span>
+      <h2>Before session 4</h2>
+      <span class="tag time">30 min</span>
+    </div>
+    <div class="callout">
+      <p>Take the report you sorted tonight and do two things with it. First, count how many of its numbers are aggregates standing in for a whole population, and pick the one that would hurt most if the bands disagreed. Second, ask whoever owns the model when it was last looked at, and what would have triggered a fresh look if nobody had asked. Bring both answers to session 4, which is about how an institution decides in advance which models get the full three-component treatment and which get a line in a register.</p>
+    </div>
+  </section>
+
+  <!-- ============ COVERAGE ============ -->
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Sources covered</span>
+      <h2>What tonight maps to</h2>
+    </div>
+    <div class="covered">
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">The three components, in the order the current guidance gives them</span>
+        <span class="note">Conceptual soundness, outcomes analysis, ongoing model monitoring. The 2011 text listed the last two the other way round; the April 2026 revision reordered them.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Conceptual soundness, including the quality and extent test</span>
+        <span class="note">Design, key modelling choices, assumptions, qualitative judgements, data selection and construction, developmental testing - assessed on both the quality and the extent of the developmental evidence.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Outcomes analysis, back-testing and expert judgement</span>
+        <span class="note">Comparing outputs to corresponding real-world outcomes; back-testing and outlier analysis as named forms; quantitative outcomes analysis as the way the quality of expert judgement gets evaluated.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Ongoing monitoring and what it watches for</span>
+        <span class="note">Whether the model still performs as expected given changes in products, exposures, activities, clients, data relevance or market conditions. At Brackwater: thin-file share 19.0 percent to 34.0 percent.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">What remains after a clean validation</span>
+        <span class="note">Material model risk can remain even with sound development and rigorous validation, so users benefit from understanding and communicating limitations, monitoring performance, periodically reviewing relevance, and supplementing output with complementary analysis.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill light">◐</span>
+        <span class="name">Findings, severity and conditions</span>
+        <span class="note">Session 5. Tonight produces the four findings; how they are graded, what "approve with conditions" buys, and when to refuse come next but one.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill light">◐</span>
+        <span class="name">Which models earn this treatment at all</span>
+        <span class="note">Session 4, and practitioner session 1. Materiality and the inventory decide how much of the three-component review a given model gets.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill inkpill">·</span>
+        <span class="name">The EU AI Act, NIST AI RMF, ISO/IEC 42001, MAS and FEAT</span>
+        <span class="note">Not covered by design, in any session. Governing AI systems is <strong>learn-ai-governance-with-phoebe</strong>'s territory, and the model risk guidance itself puts generative and agentic AI out of scope.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill inkpill">·</span>
+        <span class="name">What separation, calibration and a base rate actually are</span>
+        <span class="note">Not covered by design. <strong>learn-model-evaluation-with-phoebe</strong> defines every metric on this page; here they are quoted only as evidence a validator weighs.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CHEAT SHEET ============ -->
+  <section class="cheat" id="cheatsheet">
+    <h3>Session 3 cheat sheet</h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>Evidence, not arithmetic</b><span>The validator asks whether the evidence submitted supports the claim made. At Brackwater the arithmetic was right every time.</span></div>
+      <div class="cheat-item"><b>Three components, in order</b><span>Conceptual soundness, outcomes analysis, ongoing monitoring. An empty box is a report telling you what it skipped.</span></div>
+      <div class="cheat-item"><b>Quality and extent</b><span>Developmental evidence is judged on both. Correct tests and insufficient tests are different failures.</span></div>
+      <div class="cheat-item"><b>Provenance and timing</b><span>Collections contacts are logged after the outcome window opens. 0.748 alone, and removing it takes development from 0.863 to 0.772.</span></div>
+      <div class="cheat-item"><b>Never accept one number</b><span>Predicted 0.330 against actual 0.324 is a gap of -0.006. By band: +0.061, +0.068, +0.035, -0.054, -0.142.</span></div>
+      <div class="cheat-item"><b>Ask for the bands</b><span>Opposite errors cancel in a total. A single calibration number would have passed this model.</span></div>
+      <div class="cheat-item"><b>Good compared to what</b><span>0.682 against a three-feature challenger's 0.676. Six thousandths. A model with no benchmark was graded against nothing.</span></div>
+      <div class="cheat-item"><b>Validation does not retire risk</b><span>Material model risk can remain. Communicate the limitations, monitor, review relevance, and never rest a decision on one number.</span></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="pagefoot">
+  <div class="wrap">
+    <p>Leader session 3 of 6 · learn-model-risk-with-phoebe · by Phoebe Fu</p>
+    <nav class="pagenav">
+      <a href="../index.html">← All sessions</a>
+      <a href="a4-materiality-and-inventory.html">Leader session 4 · Materiality and the inventory →</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="../assets/app.js?v=2"></script>
+</body>
+</html>

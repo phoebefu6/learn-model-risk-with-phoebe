@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- social:start -->
+<meta name="description" content="Leader session 6 of 6. You are not signing that the model is correct. You are signing that the risk is understood, bounded and owned. Roles and conflicts, internal audit, vendor models, and the refusal.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Learn with Phoebe">
+<meta property="og:title" content="Signing it off - learn model risk with phoebe">
+<meta property="og:description" content="Leader session 6 of 6. Vendor models, external resources, the five questions to ask before your name goes on it, and how to refuse without stranding the business.">
+<meta property="og:url" content="https://phoebefu6.github.io/learn-model-risk-with-phoebe/courses/a6-signing-it-off.html">
+<meta property="og:image" content="https://phoebefu6.github.io/learn-model-risk-with-phoebe/assets/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Signing it off - learn model risk with phoebe">
+<meta name="twitter:description" content="Understood, bounded, owned. Everything else is somebody else's signature.">
+<meta name="twitter:image" content="https://phoebefu6.github.io/learn-model-risk-with-phoebe/assets/og-cover.png">
+<!-- social:end -->
+<title>Leader session 6 · Signing it off - learn model risk with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=2">
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-model-risk-with-phoebe</a> / Leader session 6 of 6</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Learn Model Risk with Phoebe · Leader session 6 of 6</div>
+    <h1>What your name is <span class="accent">actually going on</span></h1>
+    <p class="sub">The uncomfortable version of this session is short. You cannot verify that Brackwater's scorecard is correct, you were never going to be able to, and nobody expects it of you. What you are signing is something else and something you can genuinely be held to: that the risk this model carries has been understood, that its use has been bounded, and that a named person owns each thing that has to hold. Tonight is who owns what across the lifecycle and the conflict the guidance names by name, the models you did not build and cannot see inside, the legitimate way to run something before validation has finished, and the answer nobody rehearses until the night they need it, which is no.</p>
+    <div class="chip-row">
+      <span class="chip level">🔴 Advanced</span>
+      <span class="chip audience">Whoever signs the approval</span>
+      <span class="chip audience">Risk, audit and the second line</span>
+      <span class="chip time">45 min</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:1">0-3 · Welcome</span>
+      <span class="a2" style="flex:5">3-22 · Roles, conflicts, vendor models</span>
+      <span class="a3" style="flex:4">22-40 · Build-along: sign one off</span>
+      <span class="a4" style="flex:1">40-45 · Close</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ INTRO ============ -->
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>Where tonight sits, and where the track ends</h2>
+    </div>
+    <p class="lede">Five sessions to get here. Session 1 defined model risk as the potential for adverse financial consequences arising from decisions made on model output, and established that a fundamentally sound model can still be a high-risk one. Session 2 was effective challenge and the three things it rests on. Session 3 was what a validator checks. Session 4 was materiality, tiering and the register. Session 5 was the report, and the three parts a condition needs before it is a control. Tonight is the signature, and it closes the leader track. The worked example stays <strong>Brackwater</strong>, whose scorecard is in front of you with four findings and a recommendation to approve with conditions.</p>
+
+    <div class="legend">
+      <span class="pill">Live = presented in the 45 minutes</span>
+      <span class="pill">Self-study = the full depth, after class</span>
+      <span class="pill">🔍 Every diagram zooms</span>
+    </div>
+
+    <div class="callout win">
+      <p><strong>★ What you walk out with tonight.</strong> A precise statement of what a sign-off asserts, which is narrower than everyone assumes and therefore defensible. The accountability map across the lifecycle, including the conflict of interest the guidance names in as many words, and where internal audit sits relative to all of it. What to require for a model your organisation did not build and cannot fully see inside, which is the fastest-growing part of most inventories and the least governed. And the refusal: when declining is the correct answer, how to give it so the business still has a route forward, and why a validation function that has never refused anything has told you nothing about its portfolio.</p>
+    </div>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>Understood, bounded, owned<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Start from the definition the track opened with. Model risk is the potential for adverse financial consequences associated with models, which may result from decisions made based on model output. Read that back slowly and notice what it is not about. It is not about whether the model is right. It is about consequences, which arrive through decisions, which are made by people. A signature that claims the model is correct is claiming something no signature can carry, and the moment it is tested it collapses into an argument about a coefficient.</p>
+        <p>A sign-off that holds asserts three things instead. <strong>Understood:</strong> the risk this model carries has been identified, including its limitations, and it has been written down in language the people making the decisions can act on. <strong>Bounded:</strong> the use is limited to what the evidence supports, and each limit is a condition with an owner, a trigger or a date, and a consequence if it is missed. <strong>Owned:</strong> for every one of those conditions and every residual limitation, a named person is accountable, and it is knowable who that is without a meeting.</p>
+        <p>Each of the three is checkable by somebody who cannot read a model, which is the point. If you can say what the risk is, what the limits on use are, and who owns each of them, you have signed something you can defend. If any of the three is missing, your signature is doing work you did not intend it to do.</p>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>Brackwater's scorecard can be signed off honestly. Understood: the submitted 0.863 depended on a field recorded after the outcome window opened, the honest development figure is 0.772, out of time it is 0.682, and the aggregate calibration gap of -0.006 conceals a band-level spread from +0.061 to -0.142. Bounded: it may rank applicants, it may not set price until the honest evidence is produced, and the monthly pack reports calibration by band. Owned: a person, a date and a consequence against each of those. Nothing in that signature claims the model is right.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>The words this session runs on<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <ul>
+          <li><strong>Accountability.</strong> Who answers for an activity, as distinct from who performs it. Delegating the second never moves the first.</li>
+          <li><strong>Conflict of interest.</strong> Named in the guidance, with misalignment of incentives between different reporting lines, such as model development and validation groups, given as the example.</li>
+          <li><strong>Internal audit.</strong> The third line. It evaluates whether model risk management practices are rigorous and effective, rather than performing them. Session 2 covers this in full.</li>
+          <li><strong>External resources.</strong> Work brought in from outside to help manage model risk. Oversight stays inside, and the work has to be integrated rather than filed.</li>
+          <li><strong>Vendor model.</strong> A product bought rather than built, which may include data, parameter values or a complete model, and whose components may be proprietary.</li>
+          <li><strong>Customisation.</strong> Anything your organisation changed on the way in. Documented, justified, and evaluated as part of validation.</li>
+          <li><strong>Residual risk.</strong> What remains after sound modelling and rigorous validation, which the guidance is explicit can still be material.</li>
+          <li><strong>The refusal.</strong> Declining to approve. Correct when no bounded use of the model is defensible, and wrong as a stronger way of saying that conditions are needed.</li>
+        </ul>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 1 ============ -->
+  <section class="section" id="part-1">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · covers roles across the lifecycle, the named conflict, audit and outside help</span>
+      <h2>Who owns what, and the conflict that is written into the guidance</h2>
+      <span class="tag concept">10 min live</span>
+    </div>
+    <p class="lede">Model risk management benefits from clear roles with well-defined accountability, including with respect to potential conflicts of interest. Sound governance delineates who is responsible for the key activities across the lifecycle, from development through validation and ongoing monitoring. That sentence is doing more work than it looks like it is doing, because the conflict it points at is structural rather than personal, and the map below is only useful if it is filled in with names before anybody needs it.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 392" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="An accountability map across the model lifecycle. A header strip states that sound governance delineates who is responsible at each stage. Four stages follow: development, owned by the developer, whose judgment shapes design, inputs and assumptions; validation, owned by objective experts, requiring expertise, independence and the standing to effect change; ongoing monitoring, owned by a named person with dates, asking whether the model is still performing given what has changed; and use, owned by the business, where limitations are understood and communicated. A red band names the conflict of interest the guidance calls out: misalignment of incentives between different reporting lines, such as model development and validation groups, and states that clear accountability with respect to that conflict is part of what sound governance means. Two boxes below show internal audit sitting above the map, not duplicating development or validation but evaluating whether the practices are rigorous and effective and whether policies are implemented, and external resources sitting inside the map, with oversight maintained, the work integrated into broader model risk management, and roles clearly defined when work is delegated. A closing line states that nothing here transfers accountability.">
+        <style>
+          .a6aH { font: 800 12px Inter, sans-serif; fill: #0F172A; }
+          .a6aT { font: 800 11px Inter, sans-serif; fill: #FFFFFF; }
+          .a6aL { font: 800 11px Inter, sans-serif; fill: #0F172A; }
+          .a6aB { font: 400 11px Inter, sans-serif; fill: #0F172A; }
+          .a6aM { font: 400 11px Inter, sans-serif; fill: #56617A; }
+          .a6aR { font: 800 11px Inter, sans-serif; fill: #B91C1C; }
+          .a6aRb { font: 400 11px Inter, sans-serif; fill: #B91C1C; }
+        </style>
+
+        <text class="a6aH" x="14" y="20">Four stages, four owners. Fill it in with names before anybody needs it.</text>
+
+        <rect x="14" y="30" width="852" height="24" rx="7" fill="#1E3A8A"></rect>
+        <text class="a6aT" x="28" y="47">THE LIFECYCLE · SOUND GOVERNANCE DELINEATES WHO IS RESPONSIBLE AT EACH STAGE</text>
+
+        <rect x="14" y="62" width="205" height="104" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <rect x="14" y="62" width="205" height="26" rx="9" fill="#1E40AF"></rect>
+        <text class="a6aT" x="28" y="80">Development</text>
+        <text class="a6aL" x="28" y="110">Owner: the developer</text>
+        <text class="a6aB" x="28" y="128">Judgment shapes design,</text>
+        <text class="a6aB" x="28" y="146">inputs and assumptions.</text>
+
+        <rect x="227" y="62" width="205" height="104" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <rect x="227" y="62" width="205" height="26" rx="9" fill="#1E40AF"></rect>
+        <text class="a6aT" x="241" y="80">Validation</text>
+        <text class="a6aL" x="241" y="110">Owner: objective experts</text>
+        <text class="a6aB" x="241" y="128">Expertise, independence,</text>
+        <text class="a6aB" x="241" y="146">standing to effect change.</text>
+
+        <rect x="440" y="62" width="205" height="104" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <rect x="440" y="62" width="205" height="26" rx="9" fill="#1E40AF"></rect>
+        <text class="a6aT" x="454" y="80">Ongoing monitoring</text>
+        <text class="a6aL" x="454" y="110">Owner: named, with dates</text>
+        <text class="a6aB" x="454" y="128">Still performing, given</text>
+        <text class="a6aB" x="454" y="146">what has changed since.</text>
+
+        <rect x="653" y="62" width="205" height="104" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <rect x="653" y="62" width="205" height="26" rx="9" fill="#1E40AF"></rect>
+        <text class="a6aT" x="667" y="80">Use</text>
+        <text class="a6aL" x="667" y="110">Owner: the business</text>
+        <text class="a6aB" x="667" y="128">Limitations understood</text>
+        <text class="a6aB" x="667" y="146">and communicated.</text>
+
+        <rect x="14" y="178" width="852" height="70" rx="9" fill="#FEF2F2" stroke="#B91C1C"></rect>
+        <text class="a6aR" x="28" y="202">The conflict of interest the guidance names</text>
+        <text class="a6aRb" x="28" y="222">Misalignment of incentives between different reporting lines, such as model development and validation groups.</text>
+        <text class="a6aRb" x="28" y="240">Clear accountability with respect to that conflict is part of what sound governance means.</text>
+
+        <rect x="14" y="260" width="422" height="92" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <rect x="14" y="260" width="422" height="26" rx="9" fill="#1E3A8A"></rect>
+        <text class="a6aT" x="28" y="278">Internal audit, above the map</text>
+        <text class="a6aB" x="28" y="308">Does not duplicate development or validation.</text>
+        <text class="a6aB" x="28" y="326">Evaluates whether the practices are rigorous</text>
+        <text class="a6aB" x="28" y="344">and effective, and policies implemented.</text>
+
+        <rect x="444" y="260" width="422" height="92" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <rect x="444" y="260" width="422" height="26" rx="9" fill="#1E3A8A"></rect>
+        <text class="a6aT" x="458" y="278">External resources, inside it</text>
+        <text class="a6aB" x="458" y="308">Oversight is maintained and the work integrated</text>
+        <text class="a6aB" x="458" y="326">into broader model risk management. Roles are</text>
+        <text class="a6aB" x="458" y="344">clearly defined when work is delegated.</text>
+
+        <text class="a6aM" x="14" y="376">Nothing here transfers accountability. Delegating the work does not delegate the answer.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the map is worthless with job titles in it and useful with names in it. Fill it in for one model before the next approval.</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Clear roles, and why the conflict is structural rather than personal<span class="mini">5 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The guidance asks for clear roles with well-defined accountability, and it does something unusual immediately afterwards: it says that the accountability has to be clear specifically with respect to potential conflicts of interest, and it gives an example rather than leaving it abstract. The example is misalignment of incentives between different reporting lines, such as model development and validation groups. That is a supervisory document naming, in writing, the thing everybody in the industry already knows and rarely says at a committee table.</p>
+        <p>What makes it worth dwelling on is that it is a statement about incentives rather than about integrity. Nobody has to behave badly for this conflict to bite. A development group is measured on delivery and a validation group on the quality of challenge, and those two measures pull against each other at exactly the moment a launch date is close. If both report to the same person, that person resolves the tension privately, using judgement, with no record. The resolution may well be the right one. What is missing is the trace.</p>
+        <p>Session 2 covered the underlying argument in full, including the 2026 change that moved the test from organisational structure to the rigour of the review. Tonight only needs the consequence for the signature. If your validators and your developers share a reporting line, that is not disqualifying, and the burden of demonstrating rigour sits with you rather than with the guidance. Before signing, know two things: who resolved any disagreement between the two groups on this model, and whether that resolution is recorded anywhere you could show somebody.</p>
+        <p>The practical form of "clear roles" is unglamorous. For each of the four lifecycle stages, one name. Not a function, not a committee, a person, with a deputy if the model is material enough to need one. A governance map made of job titles reads well in a policy and produces a two-week delay the first time something fires, because every title has to be resolved into a person under pressure.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Where internal audit sits, and what outside help does not remove<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><strong>Internal audit.</strong> The line is in the guidance and it is worth having exactly: internal audit would generally not duplicate model risk management activities such as model development or validation. Instead, internal audit's role is generally to evaluate whether the model risk management practices are rigorous and effective and whether related policies are implemented accordingly. Session 2 taught why that distinction matters and what goes wrong when it is blurred in either direction. On the accountability map it simply sits above everything: audit is not a stage in the lifecycle, and its findings are about your framework rather than about Brackwater's scorecard. If audit comes back with a view on whether the scorecard is any good, something has gone wrong upstream of audit.</p>
+        <p><strong>External resources.</strong> Consultants, contractors, outsourced validation, a third-party reviewer brought in because the internal team is at capacity. All legitimate, and widely used. Where an organisation uses external resources to help manage model risk, sound practice involves maintaining proper oversight of that work and integrating it into the broader model risk management framework, with roles clearly defined when activities are delegated. Read the three requirements separately, because organisations tend to satisfy one and assume the others.</p>
+        <p>Oversight means somebody inside the organisation is close enough to the work to know whether it was done well, which implies enough internal expertise to judge it. Integration means the output lands in the same inventory, the same findings log and the same remediation tracking as everything else. An external validation report that lives in the procurement folder has been bought rather than used. And defined roles means it is written down, before the engagement, which parts of the activity the external party owns and which parts remain internal, because the boundary is where things fall through.</p>
+        <p>What none of the three do is move the accountability. You can delegate the analysis. The answer is still yours, and the signature at the end of it is still yours.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Filling in the map without triggering a reorganisation<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Accountability maps have a reputation for producing org-chart projects, which is why they so often stall. The version that works is deliberately smaller: one model, four names, one page, produced in an afternoon. The exercise is not to design a target operating model. It is to find out whether the four names exist.</p>
+        <p>Three failures show up almost immediately and all three are findable without anybody's cooperation. <strong>An empty cell</strong>, usually ongoing monitoring, because monitoring is the stage with no launch event and therefore no natural moment at which somebody is handed it. <strong>One name in two cells</strong>, usually development and monitoring, which means the person who built the model is the person who watches it, and nobody will find out that it has drifted from a source with an interest in it not having drifted. <strong>A name that has left</strong>, which is the commonest of all and the reason the guidance ties documentation to continuity of operations.</p>
+        <p>None of those three require a restructure to fix. They require somebody to notice, put a name in the cell, and tell the person that their name is in it. The last clause is not a joke: a surprising share of accountability maps contain people who have never been told.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 2 ============ -->
+  <section class="section" id="part-2">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · covers vendor and third-party models, and using one before validation ends</span>
+      <h2>The models you did not build and cannot see inside</h2>
+      <span class="tag concept">8 min live</span>
+    </div>
+    <p class="lede">Customised vendor products, including those that supply data, parameter values, or complete models, present unique challenges. Components of a vendor product may be proprietary, so an organisation may not receive the code, the development data or the methodology that it would have had if the model had been built internally. That is a real constraint and it is where most governance of bought models stops, on the reasonable-sounding grounds that you cannot review what you cannot see. The guidance does not stop there, and neither can a signature.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 394" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Vendor and third-party models. On the left, a dashed box lists what may be proprietary and therefore not received: the source code, the development data, the methodology in full, and the parameter values chosen, noting that a customised product can include data, parameters or a whole model. On the right, four expectations that still stand: understand the conceptual soundness, meaning its design, its development data and how it performs; monitor it on your own book, through ongoing monitoring and outcomes analysis on your data; ask whether it is still fit for purpose, meaning accurate, still fit for the use you put it to, and still reliable; and document and justify every customisation, and evaluate the customisations as part of validation. A band beneath states that the principles still apply, and that a closed component changes what evidence you can obtain but not what you are accountable for. A final red band covers using a model before validation has finished: validation generally occurs prior to first use, and where an urgent business need means otherwise, sound practice is greater attention to the limitations, informing relevant stakeholders, and controls on use such as limits or closer monitoring.">
+        <style>
+          .a6bH { font: 800 12px Inter, sans-serif; fill: #0F172A; }
+          .a6bK { font: 800 12px Inter, sans-serif; fill: #0F172A; }
+          .a6bL { font: 800 11px Inter, sans-serif; fill: #0F172A; }
+          .a6bB { font: 400 11px Inter, sans-serif; fill: #0F172A; }
+          .a6bM { font: 400 11px Inter, sans-serif; fill: #56617A; }
+          .a6bR { font: 800 11px Inter, sans-serif; fill: #B91C1C; }
+          .a6bRb { font: 400 11px Inter, sans-serif; fill: #B91C1C; }
+        </style>
+
+        <text class="a6bH" x="14" y="20">The code may be closed. The expectations are not.</text>
+
+        <rect x="14" y="32" width="300" height="176" rx="9" fill="#FFFFFF" stroke="#C7D2E4" stroke-dasharray="5 4"></rect>
+        <text class="a6bK" x="28" y="56">What may be proprietary</text>
+        <text class="a6bM" x="28" y="84">The source code</text>
+        <text class="a6bM" x="28" y="104">The development data</text>
+        <text class="a6bM" x="28" y="124">The methodology in full</text>
+        <text class="a6bM" x="28" y="144">The parameter values chosen</text>
+        <text class="a6bB" x="28" y="174">A customised product can include</text>
+        <text class="a6bB" x="28" y="192">data, parameters, or a whole model.</text>
+
+        <rect x="330" y="32" width="536" height="42" rx="8" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <text class="a6bL" x="344" y="52">Understand the conceptual soundness</text>
+        <text class="a6bM" x="344" y="68">Its design, its development data, and how it performs.</text>
+
+        <rect x="330" y="78" width="536" height="42" rx="8" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <text class="a6bL" x="344" y="98">Monitor it on your own book</text>
+        <text class="a6bM" x="344" y="114">Ongoing monitoring and outcomes analysis, on your data.</text>
+
+        <rect x="330" y="124" width="536" height="42" rx="8" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <text class="a6bL" x="344" y="144">Ask whether it is still fit for purpose</text>
+        <text class="a6bM" x="344" y="160">Accurate, still fit for the use you put it to, still reliable.</text>
+
+        <rect x="330" y="170" width="536" height="42" rx="8" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <text class="a6bL" x="344" y="190">Document and justify every customisation</text>
+        <text class="a6bM" x="344" y="206">And evaluate the customisations as part of validation.</text>
+
+        <rect x="14" y="224" width="852" height="64" rx="9" fill="#BFDBFE" stroke="#93C5FD"></rect>
+        <text class="a6bL" x="28" y="248">The principles still apply.</text>
+        <text class="a6bB" x="28" y="270">A closed component changes what evidence you can obtain. It does not change what you are accountable for.</text>
+
+        <rect x="14" y="300" width="852" height="80" rx="9" fill="#FEF2F2" stroke="#B91C1C"></rect>
+        <text class="a6bR" x="28" y="324">Using a model before validation has finished</text>
+        <text class="a6bRb" x="28" y="344">Validation generally occurs prior to first use. Where an urgent business need means otherwise, sound practice is</text>
+        <text class="a6bRb" x="28" y="362">greater attention to the limitations, informing relevant stakeholders, and controls on use such as limits or monitoring.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - none of the four expectations on the right require the vendor's source code. Three of them are about your own book.</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>The principles do not weaken because the code is closed<span class="mini">5 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The argument that arrives with every bought model is that the usual expectations cannot apply, because the usual expectations assume you can open the thing. It is half true and it is used as though it were wholly true. The guidance is direct on this: the principles still apply even where components are proprietary. What changes is the evidence available to you, not the standard you are held to.</p>
+        <p>Sound practice for a vendor model has four parts, and it is worth noticing how little of it depends on seeing the code.</p>
+        <p><strong>Develop an understanding of the vendor model's conceptual soundness, design, development data and performance.</strong> The vendor will not hand over the methodology in full, and you can still establish a great deal: what class of model it is, what it was built on, which population that data represented, what it was tested against, what the vendor claims it does and does not do. A vendor who will not answer any of that is itself a finding, and a commercially useful one, because it is a question you can ask before the contract is signed rather than after.</p>
+        <p><strong>Conduct ongoing monitoring and outcomes analysis.</strong> This is the part that is fully in your hands and is most often skipped. The vendor's performance figures were produced on the vendor's data. Whether the model is accurate on your book, on your applicants, at your cutoffs, is a question only you can answer, and it is answered with the same outcomes analysis you would run on anything you built. A bought model is not exempt from the question session 5 kept asking, which is whether it performs by band rather than only in aggregate.</p>
+        <p><strong>Assess whether it remains fit for purpose and continues to be reliable.</strong> Fit for purpose is about your use, which the vendor knows nothing about and cannot certify. A model sold for one decision and deployed against another is the same scope-creep problem session 4 described, with the added difficulty that the boundaries of intended use were written by somebody with an interest in them being broad.</p>
+        <p><strong>Document, justify and evaluate every customisation.</strong> Covered in the next card, because it is the part your organisation genuinely owns.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Customisation is the part that is unambiguously yours<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Almost nothing is installed as shipped. Thresholds get retuned, a segment gets excluded, an input gets mapped from a field that means something slightly different in your systems, an override is added for a population the vendor did not anticipate. Each of those is a customisation, and customisations should be documented, justified and evaluated as part of validation.</p>
+        <p>Take the three verbs separately, because they fail separately. <strong>Documented</strong> is the easy one and still commonly missing, since customisation usually happens during implementation rather than during modelling, and implementation notes are not model documentation. <strong>Justified</strong> means there is a recorded reason, which matters most for the changes made under time pressure in the last fortnight of a project. <strong>Evaluated as part of validation</strong> is the one with teeth: the customised model, not the shipped model, is the thing in production, so it is the thing that has to be assessed. A validation of the vendor's product that was performed before your changes has validated something you are not running.</p>
+        <p>There is a governance sharp edge here worth saying plainly. Customisation is where a bought model quietly becomes a built one. At some point the accumulated changes mean your organisation is making the modelling choices, and the comfortable position of "we bought it, they built it" stops being true while nobody notices the transition. The signature is where that gets tested: if you are approving a model whose behaviour is substantially set by your own adjustments, you are approving a model you built, on evidence produced by somebody else.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Running it before validation has finished<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Validation generally occurs prior to a model's first use. That is the expectation, and it is the right default. The guidance also recognises that an urgent business need may mean a model is used before validation is complete, and it says what sound practice looks like when that happens: greater attention to the model's limitations, informing the relevant stakeholders, and placing controls on the use, such as limits or closer monitoring.</p>
+        <p>Session 2 covered this as the legitimate route, and the reason to repeat it here is that it is the single most useful thing a leader can know on a bad night. The path exists. It is narrow, it is documented, and using it is a decision you can defend. Not using it is what produces the failure mode: a model goes live because the business need was genuinely urgent, nobody wanted to write down that validation was incomplete, and so no limitation was recorded, no stakeholder was told, and no control was placed. The model has then been deployed in exactly the same state as the defensible version, with none of the three things that would have made it defensible.</p>
+        <p>The discipline is to treat the early-use decision as its own sign-off with its own conditions. What is not yet known, who has been told that it is not known, what limit applies until it is known, and what date the validation completes by. Brackwater did not use this route. The scorecard went live with a validation that had been performed and whose central finding had been recorded as an observation, which is a different failure and a worse one, because on paper it looks finished.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 3 ============ -->
+  <section class="section" id="part-3">
+    <div class="section-kicker">
+      <span class="klabel">Part 3 · build-along</span>
+      <h2>Sign one off, and rehearse the refusal</h2>
+      <span class="tag build">20 min build-along</span>
+    </div>
+    <p class="lede">No laptop. The first six steps are the sign-off itself, run out loud on a real model. The seventh is the one nobody practises. Declining to approve is correct when no bounded use of the model is defensible: not when the model disappoints, not when the findings are numerous, and not as a stronger way of saying that conditions are needed. That distinction is the whole test, because if a narrower use, a lower limit or closer monitoring would make the model defensible, then conditions are the honest answer and a refusal is theatre. A refusal given well leaves the business a route: it says what would have to be true, it names the smaller use that would be approvable today, and it gives a date for the next look rather than an indefinite no. A refusal given badly is a verdict with no next step, and it teaches the organisation to route around the function that issued it. Which is why the distribution matters as much as any single decision: a validation function that has never refused anything has not demonstrated a healthy portfolio, it has demonstrated that refusal is not available to it, and the two look identical from the outside until the year they do not.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div>
+          <p><strong>State the claim you are approving, in one sentence.</strong> Not the model, the claim: what it does, how well, for whom. Then ask the second half of the question, which is whether that is the claim the business will act on. Those two drift apart quietly and the signature covers only the first.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <p><strong>Ask what was not tested, and who decided that.</strong> Scope is a decision somebody made under a deadline. An untested area that is not written down as untested will be read next year as an area that passed, and you are the last person who can still have it written down.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <p><strong>Run the three tests on every condition.</strong> A named person, a date or a trigger, a consequence if it is missed. Say the count out loud: how many of the conditions have all three. Anything short of all three is a sentence, and a model approved on sentences has been approved outright.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <p><strong>Name the limitation that survives every condition.</strong> There is always one, because material model risk can remain even after sound modelling and rigorous validation. Write it, decide who tells the people making decisions on the output, and decide what complementary analysis sits alongside it.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <p><strong>Fill in the four cells of the accountability map with names.</strong> Development, validation, ongoing monitoring, use. People, not functions. If the monitoring cell is empty or holds the developer's name, fix that before you sign rather than after, because it will not be fixed after.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <p><strong>If you did not build it, ask the four vendor questions.</strong> What you understand about its design, development data and performance. How it is monitored on your book. Whether it is still fit for the use you put it to. And what was customised, justified how, and evaluated by whom.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <p><strong>Rehearse the refusal out loud, on this model.</strong> Say the sentence: "I am not approving this, because no bounded use of it is defensible on this evidence. What would change my answer is the following. The smaller use I would approve today is the following. We look again on the following date." If you cannot say it about a model you are about to approve, you have found out something useful about whether your approval means anything.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <p><strong>The five questions, in the order you will need them.</strong> What claim am I approving, and is it the claim the business will act on. What was not tested, and who decided that. Which conditions are controls, and what happens if one is missed. What limitation survives every condition, and who gets told. Who owns this after tonight, by name, and what would bring them back. Five questions, four minutes, and they are the same five whether the model was built upstairs or bought.</p>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions</h2>
+    </div>
+
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">Your organisation buys a credit model. The vendor will not release the code, the development data or the full methodology. What follows for your model risk management?</p>
+      <button class="qopt" type="button">A · The usual expectations cannot apply, so the sound approach is to rely on the vendor's own validation and record that the components are proprietary</button>
+      <button class="qopt" type="button">B · The principles still apply: develop an understanding of its conceptual soundness, design, development data and performance, run your own ongoing monitoring and outcomes analysis, and document, justify and evaluate every customisation as part of validation</button>
+      <button class="qopt" type="button">C · Vendor models sit outside the model inventory, since your organisation is not the model developer</button>
+      <p class="qwhy">Customised vendor products present unique challenges precisely because components may be proprietary, and the guidance addresses that by saying the principles still apply anyway. What a closed component changes is the evidence available to you, not the standard. Three of the four expectations are answered on your own book: how it performs on your applicants, whether it remains fit for your use, and what you changed on the way in.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">Internal audit proposes to review the model risk function and reports that the validation team's testing of the scorecard was technically sound. What should you notice?</p>
+      <button class="qopt" type="button">A · That audit has drifted toward duplicating validation; its role is generally to evaluate whether the model risk management practices are rigorous and effective and whether policies are implemented accordingly</button>
+      <button class="qopt" type="button">B · Nothing; a second technical opinion on the scorecard strengthens the evidence base for the sign-off</button>
+      <button class="qopt" type="button">C · That validation has become redundant, since audit has now covered the same ground with more independence</button>
+      <p class="qwhy">Internal audit would generally not duplicate model risk management activities such as model development or validation. Its findings are about your framework, not about Brackwater's scorecard. An audit opinion on the model itself means you have two partial validations and no assessment of whether the practices work, which is the thing only audit was positioned to give you.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="2">
+      <p class="qtext">A model comes to you with numerous findings and a disappointing out-of-time performance, but a narrower use with a lower limit and closer monitoring would be defensible. The validation lead has never refused a model. What is the correct recommendation?</p>
+      <button class="qopt" type="button">A · Decline to approve, since the volume of findings is itself evidence that the model is not fit to run</button>
+      <button class="qopt" type="button">B · Decline to approve, because a function that has never refused anything needs to establish that refusal is available to it</button>
+      <button class="qopt" type="button">C · Approve with conditions that encode the narrower use, the lower limit and the closer monitoring, each with an owner, a date or trigger, and a consequence - and separately raise the never-refused pattern as a question about the function</button>
+      <p class="qwhy">Declining is correct when no bounded use is defensible. Here one is, so conditions are the honest answer and the narrowing belongs inside them. The never-refused record is a real concern and it is a concern about the function rather than about this model; using this model to make a point would be a refusal given for the wrong reason, which is exactly what discredits refusals when they are genuinely needed.</p>
+    </div>
+    <p class="quiz-score"></p>
+  </section>
+
+  <!-- ============ HOMEWORK ============ -->
+  <section class="section" id="homework">
+    <div class="section-kicker">
+      <span class="klabel">Homework</span>
+      <h2>After the last session</h2>
+      <span class="tag time">45 min</span>
+    </div>
+    <div class="callout">
+      <p>Take the next model that comes to you for approval and put the five questions to it before you sign, in writing, on one page. Then do the harder half: find the last model your area approved and fill in its accountability map with four names, and find out whether the person in the ongoing monitoring cell knows they are in it. Two outputs, one page each, and between them they are the whole of the leader track applied to a live decision. If you want to see the evidence being made rather than read, the practitioner capstone walks the full validation of Brackwater's scorecard and scores your call against what is true by construction: <a href="p10-the-validation-bench.html">Practitioner session 10 · The validation bench</a>.</p>
+    </div>
+  </section>
+
+  <!-- ============ COVERAGE ============ -->
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Sources covered</span>
+      <h2>What tonight maps to</h2>
+    </div>
+    <div class="covered">
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Model risk defined by consequence</span>
+        <span class="note">The potential for adverse financial consequences associated with models, which may result from decisions made based on model output. Tonight turns that definition into what a signature can honestly assert.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Roles, accountability and the named conflict</span>
+        <span class="note">Clear roles with well-defined accountability, including with respect to potential conflicts of interest, for example misalignment of incentives between different reporting lines, such as model development and validation groups.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Governance across the lifecycle</span>
+        <span class="note">Sound governance delineates who is responsible for key activities from development through validation and ongoing monitoring.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">External resources</span>
+        <span class="note">Where external resources are used to help manage model risk, sound practice involves maintaining proper oversight and integrating the work into broader model risk management, with roles clearly defined when activities are delegated.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Vendor and third-party models</span>
+        <span class="note">Customised vendor products, including data, parameter values or complete models, present unique challenges and may be proprietary; the principles still apply. Understand conceptual soundness, design, development data and performance; run ongoing monitoring and outcomes analysis; assess whether it remains fit for purpose and reliable; document, justify and evaluate customisations as part of validation.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Using a model before validation is complete</span>
+        <span class="note">Validation generally occurs prior to first use; where an urgent business need means otherwise, sound practice is greater attention to the limitations, informing relevant stakeholders, and controls on use such as limits or closer monitoring.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Residual risk after validation</span>
+        <span class="note">Even with sound modelling practices and rigorous validation, material model risk can remain, which is what the limitation named at sign-off is for.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill light">◐</span>
+        <span class="name">Internal audit's role</span>
+        <span class="note">Session 2 teaches it in full. Tonight places it on the accountability map: it would generally not duplicate development or validation, and evaluates whether the practices are rigorous and effective and whether related policies are implemented accordingly.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill light">◐</span>
+        <span class="name">Severity, conditions and the three recommendations</span>
+        <span class="note">Session 5. Tonight assumes the three tests on a condition and takes the third recommendation, declining to approve, further.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill light">◐</span>
+        <span class="name">The evidence behind every Brackwater number</span>
+        <span class="note">The practitioner track builds it, and session p10 runs the whole validation end to end and scores the call against what is true by construction.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill inkpill">·</span>
+        <span class="name">The EU AI Act, NIST AI RMF, ISO/IEC 42001, MAS and FEAT</span>
+        <span class="note">Not covered by design, in any session. Governing AI systems, including third-party AI obligations, is <strong>learn-ai-governance-with-phoebe</strong>'s territory, and the model risk guidance itself puts generative and agentic AI out of scope.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill inkpill">·</span>
+        <span class="name">What the performance numbers in the report measure</span>
+        <span class="note">Not covered by design. <strong>learn-model-evaluation-with-phoebe</strong> defines the metrics; here they appear only as the evidence a signature rests on.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CHEAT SHEET ============ -->
+  <section class="cheat" id="cheatsheet">
+    <h3>Session 6 cheat sheet</h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>Understood, bounded, owned</b><span>Not that the model is correct. Three things a non-specialist can check, and all three are defensible.</span></div>
+      <div class="cheat-item"><b>Four stages, four names</b><span>Development, validation, ongoing monitoring, use. People, not functions, and tell them they are in the cell.</span></div>
+      <div class="cheat-item"><b>The conflict is named in the text</b><span>Misalignment of incentives between different reporting lines, such as development and validation groups.</span></div>
+      <div class="cheat-item"><b>Audit sits above the map</b><span>It evaluates whether the practices are rigorous and effective, rather than re-running development or validation.</span></div>
+      <div class="cheat-item"><b>Outside help does not move the answer</b><span>Keep oversight, integrate the work, define the roles when delegating. The signature is still yours.</span></div>
+      <div class="cheat-item"><b>Vendor: the principles still apply</b><span>Understand its soundness and data, monitor it on your book, check fitness for your use, evaluate every customisation.</span></div>
+      <div class="cheat-item"><b>Early use has a legitimate route</b><span>Attention to limitations, tell the stakeholders, put controls on use. Narrow, documented, defensible.</span></div>
+      <div class="cheat-item"><b>Refuse only when nothing is bounded</b><span>If a narrower use would be defensible, conditions are the honest answer. Never refusing is not a clean portfolio.</span></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="pagefoot">
+  <div class="wrap">
+    <p>Leader session 6 of 6 · learn-model-risk-with-phoebe · by Phoebe Fu</p>
+    <nav class="pagenav">
+      <a href="a5-reading-a-validation-report.html">← Leader session 5 · Reading a validation report</a>
+      <a href="../index.html">All sessions →</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="../assets/app.js?v=2"></script>
+</body>
+</html>

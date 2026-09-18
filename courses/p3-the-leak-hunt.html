@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- social:start -->
+<meta name="description" content="Practitioner session 3 of 10. Brackwater's scorecard scores 0.863 on development. One column, collections, scores 0.748 on its own, and it is written after the outcome. Remove it and the model scores 0.772. How a post-outcome field gets onto a feature list, and how a validator finds it.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Learn with Phoebe">
+<meta property="og:title" content="The leak hunt - learn model risk with phoebe">
+<meta property="og:description" content="Practitioner session 3 of 10. A leaked feature is not an overfitted model, and it does not show up as a train/test gap. Brackwater's collections column scores 0.748 alone against a full model at 0.863.">
+<meta property="og:url" content="https://phoebefu6.github.io/learn-model-risk-with-phoebe/courses/p3-the-leak-hunt.html">
+<meta property="og:image" content="https://phoebefu6.github.io/learn-model-risk-with-phoebe/assets/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The leak hunt - learn model risk with phoebe">
+<meta name="twitter:description" content="0.863 for the model, 0.748 for one post-outcome column, 0.520 for four columns of pure noise.">
+<meta name="twitter:image" content="https://phoebefu6.github.io/learn-model-risk-with-phoebe/assets/og-cover.png">
+<!-- social:end -->
+<title>Practitioner session 3 · The leak hunt - learn model risk with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=2">
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-model-risk-with-phoebe</a> / Practitioner session 3 of 10</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Learn Model Risk with Phoebe · Practitioner session 3 of 10</div>
+    <h1>The <span class="accent">leak hunt</span></h1>
+    <p class="sub">Brackwater's scorecard has eleven features and a development AUC of 0.863. One of those features is <code>collections</code>, a count of collections contacts. Collections contacts are logged after the outcome window opens: a customer who defaults gets chased, and the chasing is written into the same table the modeller pulled from. On its own, that one column scores 0.748. The four pure-noise columns in the same feature list score 0.520 together. Refit the model without the leaked field and development performance falls to 0.772, so the field was worth 0.091 of a number that was never earned. Nothing about this is subtle once you know to look, and nobody looked.</p>
+    <div class="chip-row">
+      <span class="chip level">🟠 Advanced</span>
+      <span class="chip audience">Data scientists who build the model</span>
+      <span class="chip audience">Validators and the second line</span>
+      <span class="chip time">45 min</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:1">0-3 · Welcome</span>
+      <span class="a2" style="flex:4">3-16 · Post-outcome features</span>
+      <span class="a3" style="flex:3">16-27 · The three numbers</span>
+      <span class="a4" style="flex:5">27-45 · Build-along and Q&amp;A</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ INTRO ============ -->
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>Where this sits in the practitioner track</h2>
+    </div>
+    <p class="lede">Ten sessions, 45 minutes each, and a laptop from here on. Session 1 built the inventory and made the tiering call. Session 2 read Brackwater's design before touching a number: the purpose statement, the assumptions, the data selection and the developmental evidence offered for each. Tonight is the finding that falls straight out of that reading, and it is the single most common material finding in consumer scoring: a feature whose value is written after the thing the model claims to predict. Session 4 is replication, where the reported number gets reproduced from the data rather than believed. The worked example is <strong>Brackwater</strong>'s consumer scorecard throughout, with 4,000 development applications at a bad rate of 0.292.</p>
+
+    <div class="legend">
+      <span class="pill">Live = presented in the 45 minutes</span>
+      <span class="pill">Self-study = the full depth, after class</span>
+      <span class="pill">🔍 Every diagram zooms</span>
+    </div>
+
+    <div class="callout win">
+      <p><strong>★ What you walk out with tonight.</strong> A definition of target leakage that does not depend on any statistic, so it survives being applied to a model you have never seen. The four questions that find one, in an order you can run down a data dictionary with. The reason the usual defence does not work: a leak is present in training and in test, so the split that catches overfitting cannot catch this. And the vocabulary to file it correctly, because a leak is a conceptual soundness finding rather than a performance finding, and writing it up as the latter is how it gets argued away.</p>
+    </div>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>A leak is a fact about timing, not about statistics<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>A leaked feature is one whose value is determined after, or as a result of, the outcome the model predicts. That is the whole definition. It says nothing about correlation, nothing about variance, nothing about a metric. You can decide whether a feature is leaked by reading the data dictionary and asking one question of each field: when is this value written, relative to the moment the prediction has to be made.</p>
+        <p>This matters because every instinct a modeller has points somewhere else. The trained reflex when a number looks too good is to suspect overfitting, and the trained response is to hold out data. That reflex is useless here. An overfitted model has learned noise in the training rows that does not repeat in the test rows, which is why a train/test gap exposes it. A leaked feature is not noise. It is a real, stable, reproducible relationship, and it is present in the training rows and the test rows in exactly the same strength, because the leak was baked into the table before anybody split it. Both sides of the split look fine. The number is honest about the data and the data is dishonest about the world.</p>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>Brackwater's model document reports a development AUC of 0.863 and a stable holdout. The holdout was stable. Every row in it carried the same post-outcome field as every row in training, so there was nothing for the split to reveal. The finding was available to anyone who read the eleventh line of the feature table and asked when that column gets populated.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Four words that get confused with each other<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <ul>
+          <li><strong>Target leakage.</strong> A feature whose value is determined after, or because of, the outcome. A timing property of the data, found by reading the process that writes the field.</li>
+          <li><strong>Overfitting.</strong> A model that has fitted noise specific to the training rows. A property of the fit, found by holding data out. Different problem, different detection, different remedy.</li>
+          <li><strong>Train/test contamination.</strong> The same records, or records sharing a key, appearing on both sides of the split. Also a data problem, but it does leave a gap when the split is repaired, which leakage does not.</li>
+          <li><strong>Availability at scoring time.</strong> Whether the field will physically exist in the production feature payload at the moment the score is computed. A leaked field usually fails this too, and that failure is often what finally surfaces the leak, in production, after launch.</li>
+        </ul>
+        <p>The practical consequence of keeping these apart: three of the four are found by running something, and the first one is found by reading something. If your leak check is a script, it is checking for the wrong thing.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 1 ============ -->
+  <section class="section" id="part-1">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · covers the definition and how the field got onto the list</span>
+      <h2>Put every feature on a timeline and one of them is on the wrong side</h2>
+      <span class="tag concept">9 min live</span>
+    </div>
+    <p class="lede">There is a moment in the process when the score has to exist. For an application scorecard it is the moment the decision is made, before anything about the customer's subsequent behaviour is known. Every feature the model uses must have a value written before that moment. The outcome window opens after it, and everything the business does in response to what happens inside that window gets written later still. A leak is simply a field from the second region that has found its way into the first.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 336" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A timeline of when each feature value is written. To the left of the prediction moment sit utilisation, prior delinquency, months employed, income ratio, thin file and age, all known when the application is scored. To the right sits the outcome window, in which default is observed and in which the collections contacts are logged. The field named collections counts contacts that are logged after the outcome window has opened, so it is a consequence of default rather than a predictor of it, yet it is used as a model input. Its fitted coefficient is 2.214, second only to utilisation at 2.612.">
+        <style>
+          .p3aH { font: 800 12px Inter, sans-serif; fill: #0F172A; }
+          .p3aT { font: 800 11px Inter, sans-serif; fill: #FFFFFF; }
+          .p3aL { font: 800 11px Inter, sans-serif; fill: #1E3A8A; }
+          .p3aK { font: 800 11px Inter, sans-serif; fill: #0F172A; }
+          .p3aB { font: 400 11px Inter, sans-serif; fill: #0F172A; }
+          .p3aM { font: 400 11px Inter, sans-serif; fill: #56617A; }
+          .p3aR { font: 800 11px Inter, sans-serif; fill: #B91C1C; }
+        </style>
+        <defs>
+          <marker id="p3aArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#56617A"></path></marker>
+          <marker id="p3aRedArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#B91C1C"></path></marker>
+        </defs>
+
+        <text class="p3aH" x="14" y="22">Every feature has a moment when its value is written. Put the feature list on one line.</text>
+        <text class="p3aL" x="300" y="52" text-anchor="middle">Prediction moment</text>
+
+        <line x1="300" y1="60" x2="300" y2="282" stroke="#1E3A8A" stroke-width="2" stroke-dasharray="5 5"></line>
+
+        <rect x="24" y="68" width="268" height="24" rx="7" fill="#1E3A8A"></rect>
+        <text class="p3aT" x="38" y="85">Known before the decision</text>
+        <rect x="308" y="68" width="548" height="24" rx="7" fill="#1E40AF"></rect>
+        <text class="p3aT" x="322" y="85">Written after the decision, inside the outcome window</text>
+
+        <rect x="24" y="98" width="268" height="72" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <text class="p3aB" x="38" y="122">utilisation, prior delinquency,</text>
+        <text class="p3aB" x="38" y="140">months employed, income ratio,</text>
+        <text class="p3aB" x="38" y="158">thin file, age</text>
+
+        <rect x="308" y="98" width="548" height="72" rx="9" fill="#BFDBFE" stroke="#93C5FD"></rect>
+        <text class="p3aB" x="322" y="122">The outcome window. Default is observed in here.</text>
+        <text class="p3aB" x="322" y="140">So is everything the business does in response to a default,</text>
+        <text class="p3aB" x="322" y="158">including the collections contacts that get logged against the account.</text>
+
+        <path d="M506 214 L506 188 L176 188" fill="none" stroke="#B91C1C" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#p3aRedArrow)"></path>
+
+        <line x1="24" y1="204" x2="856" y2="204" stroke="#56617A" stroke-width="1.6" marker-end="url(#p3aArrow)"></line>
+        <text class="p3aM" x="818" y="196">time</text>
+        <circle cx="506" cy="204" r="5" fill="#B91C1C"></circle>
+        <circle cx="740" cy="204" r="5" fill="#1E3A8A"></circle>
+        <line x1="740" y1="204" x2="740" y2="216" stroke="#56617A" stroke-width="1.2"></line>
+
+        <rect x="24" y="216" width="268" height="76" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <text class="p3aK" x="38" y="240">The moment of the decision</text>
+        <text class="p3aM" x="38" y="258">The score has to exist here,</text>
+        <text class="p3aM" x="38" y="276">so every input has to exist here too.</text>
+
+        <rect x="372" y="216" width="268" height="76" rx="9" fill="#FEF2F2" stroke="#B91C1C"></rect>
+        <text class="p3aR" x="386" y="240">collections</text>
+        <text class="p3aB" x="386" y="258">counts contacts logged after</text>
+        <text class="p3aB" x="386" y="276">the outcome window has opened</text>
+
+        <rect x="656" y="216" width="200" height="76" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <text class="p3aK" x="670" y="240">The outcome</text>
+        <text class="p3aM" x="670" y="258">what the model is</text>
+        <text class="p3aM" x="670" y="276">being asked to predict</text>
+
+        <text class="p3aR" x="14" y="322">The dashed arrow runs the wrong way. A value written to the right of the line is being used as an input to its left.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the customer who defaults gets contacted. The contact did not cause the default, it recorded the consequence of one.</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>How a post-outcome field gets onto a feature list in the first place<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Nobody adds a leaked field on purpose. It arrives through a join. The modeller needs application attributes, pulls them from the application table, and then needs behavioural context, so joins the account table as it stands today. Today is well after the outcome window closed, and the account table has been accumulating rows the whole time: arrears flags, contact history, hardship markers, restructures, collections activity. The join is correct SQL against a table that is correct on its own terms. What is wrong is the as-of date, and no join key carries one.</p>
+        <p>The second route is a feature store or a curated mart built for a different purpose. Operational reporting wants the current state of an account, and it is right to want that. A training set wants the state of an account as of the decision date, which is a different object with the same column names. When the two share a catalogue and a naming convention, nothing in the feature list tells you which one you are holding.</p>
+        <p>Both routes leave the same fingerprint: the field is real, the values are correct, the lineage is documented, and the timing is wrong. A data quality check will pass it. A schema test will pass it. A reviewer who knows what the business process does with the field will catch it in under a minute.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>The consequence-is-not-a-cause point, and where to stop<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The plain statement of the Brackwater finding is that a customer who defaults gets contacted, and the contact did not cause the default. The arrow runs from outcome to feature. That is enough for a validation finding, and a validator should say exactly that much and no more.</p>
+        <p>It is worth naming where the temptation goes, so you can decline it. There is a whole formal apparatus for reasoning about what causes what and about when conditioning on a variable creates a relationship that is not there, and <strong>learn-causal-inference-with-phoebe</strong> owns it. A validation report does not need it. The finding here does not rest on identifying a causal effect; it rests on the order of two timestamps, and a timestamp is not contestable in the way a causal claim is. Reaching for the causal vocabulary makes a finding that is currently unarguable into one the model owner can argue with.</p>
+        <div class="callout tip">
+          <p><strong>Write the finding as a sentence about process, not about statistics.</strong> "The field <code>collections</code> counts contacts logged after the outcome window opens, so its value is determined by the outcome the model predicts." No metric appears in that sentence, which is why no metric can be produced to rebut it.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>The coefficient is a clue, and not the evidence<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>In Brackwater's fitted champion, <code>collections</code> carries a coefficient of 2.214, second only to utilisation's 2.612. That ordering is a useful thing to notice and a poor thing to argue from. Coefficients in a logistic fit are on the scale of the feature, so an input recorded in different units, or with a different spread, is not comparable to its neighbour without care, and a large coefficient on a genuinely predictive field is exactly what you would hope to see.</p>
+        <p>What makes the coefficient interesting is the combination with the timing fact. A field written after the outcome should not be doing anything at all, so any material weight on it is weight the model is drawing from the future. Use the coefficient to decide which fields to read the dictionary entry for first, in a list too long to read end to end. Do not put it in the finding.</p>
+        <p>The same caution applies to the per-feature scores in the next part. They are a triage device that tells you where to look. The finding is always the timing.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 2 ============ -->
+  <section class="section" id="part-2">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · covers the three numbers and why nobody caught it</span>
+      <h2>Score every column on its own</h2>
+      <span class="tag concept">10 min live</span>
+    </div>
+    <p class="lede">Reading the dictionary finds the leak. Scoring each column alone tells you how much of the model was resting on it, which is what turns a note into a material finding. Three numbers make the Brackwater case, and they can be produced in about twenty lines. The champion as submitted scores 0.863 on development. The <code>collections</code> column alone scores 0.748. The four pure-noise features together score 0.520. One post-outcome field carries almost all of the apparent skill, and ten others carry nearly nothing.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 356" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A bar chart of development AUC for four fits of the Brackwater scorecard. The champion as submitted with all eleven features scores 0.863. The champion refit with the collections column removed scores 0.772, so the leak was worth 0.091. The collections column fitted alone scores 0.748. The four pure-noise columns fitted together score 0.520. The axis runs from 0.500 to 0.900.">
+        <style>
+          .p3bH { font: 800 12px Inter, sans-serif; fill: #0F172A; }
+          .p3bK { font: 800 11px Inter, sans-serif; fill: #0F172A; }
+          .p3bM { font: 400 11px Inter, sans-serif; fill: #56617A; }
+          .p3bV { font: 800 11px Inter, sans-serif; fill: #1E3A8A; }
+          .p3bR { font: 800 11px Inter, sans-serif; fill: #B91C1C; }
+        </style>
+
+        <text class="p3bH" x="14" y="22">Score each column on its own. One of them is not like the others.</text>
+
+        <line x1="401" y1="60" x2="401" y2="280" stroke="#DDE5F0" stroke-width="1"></line>
+        <line x1="544" y1="60" x2="544" y2="280" stroke="#DDE5F0" stroke-width="1"></line>
+        <line x1="687" y1="60" x2="687" y2="280" stroke="#DDE5F0" stroke-width="1"></line>
+        <line x1="830" y1="60" x2="830" y2="280" stroke="#DDE5F0" stroke-width="1"></line>
+        <line x1="258" y1="60" x2="258" y2="280" stroke="#C7D2E4" stroke-width="1.4"></line>
+
+        <text class="p3bK" x="14" y="90">Champion as submitted</text>
+        <text class="p3bM" x="14" y="106">all 11 features, development</text>
+        <rect x="258" y="72" width="519" height="32" rx="5" fill="#1E3A8A"></rect>
+        <text class="p3bV" x="787" y="93">0.863</text>
+
+        <path d="M647 112 L647 120 L777 120 L777 112" fill="none" stroke="#B91C1C" stroke-width="1.6"></path>
+        <text class="p3bR" x="639" y="124" text-anchor="end">+0.091, what the leak was worth</text>
+
+        <text class="p3bK" x="14" y="146">Champion refit</text>
+        <text class="p3bM" x="14" y="162">with collections removed</text>
+        <rect x="258" y="128" width="389" height="32" rx="5" fill="#1E40AF"></rect>
+        <text class="p3bV" x="657" y="149">0.772</text>
+
+        <text class="p3bK" x="14" y="202">collections alone</text>
+        <text class="p3bM" x="14" y="218">one post-outcome column</text>
+        <rect x="258" y="184" width="355" height="32" rx="5" fill="#B91C1C"></rect>
+        <text class="p3bR" x="623" y="205">0.748</text>
+
+        <text class="p3bK" x="14" y="258">The four noise columns</text>
+        <text class="p3bM" x="14" y="274">together, nothing else</text>
+        <rect x="258" y="240" width="29" height="32" rx="5" fill="#C7D2E4" stroke="#93C5FD"></rect>
+        <text class="p3bV" x="297" y="261">0.520</text>
+
+        <text class="p3bM" x="258" y="296" text-anchor="middle">0.500</text>
+        <text class="p3bM" x="401" y="296" text-anchor="middle">0.600</text>
+        <text class="p3bM" x="544" y="296" text-anchor="middle">0.700</text>
+        <text class="p3bM" x="687" y="296" text-anchor="middle">0.800</text>
+        <text class="p3bM" x="830" y="296" text-anchor="middle">0.900</text>
+
+        <text class="p3bM" x="14" y="322">One post-outcome column scores 0.748 alone. The four noise columns score 0.520 together. The submitted model scores 0.863.</text>
+        <text class="p3bM" x="14" y="340">What these numbers mean as measures belongs to learn-model-evaluation-with-phoebe. Here they are only evidence a validator weighs.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - a single field at 0.748 against an eleven-feature model's 0.863 is not a good feature, it is a question.</figcaption>
+    </figure>
+
+    <div class="prompt-box good">
+      <span class="label">★ Try it now - score every column on its own</span>
+      <pre style="margin:0"><code>import pandas as pd
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import roc_auc_score
+
+dev = pd.read_csv("brackwater.csv")       # 4,000 development applications
+y = dev["bad"]                            # dev["bad"].mean() is 0.292
+
+champion = ["util", "priorDelq", "employed", "incomeRat", "thin",
+            "age", "collections", "n0", "n1", "n2", "n3"]
+
+def auc_of(cols):
+    """Fit on these columns only, score the same sample, return the AUC."""
+    X = dev[cols]
+    m = LogisticRegression(max_iter=2000, C=1e4).fit(X, y)
+    return roc_auc_score(y, m.predict_proba(X)[:, 1])
+
+print(round(auc_of(champion), 3))         # 0.863, the number in the model document
+
+for col in champion:
+    print(col.ljust(12), round(auc_of([col]), 3))
+# collections  0.748   &lt;- one column, against a whole model at 0.863</code></pre>
+    </div>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Why it survived review: it is noisy, not a copy of the target<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The reason this leak lived through a build, a review and a sign-off is the most instructive thing in the whole case. Of Brackwater's defaulters, 58 percent get a collections contact. Of the non-defaulters, 11 percent get one. The field is strongly related to the outcome and nowhere near a copy of it.</p>
+        <p>Consider what the alternative would have looked like. A field that reproduced the target exactly would have produced an AUC at or near the ceiling, and a modeller seeing that reaches for the join immediately, because an almost-perfect model is a universally recognised alarm. Nobody ships that. What Brackwater had instead was a field that lifted the model into a range that looked like a good build by a competent team. There is no alarm for that. Good numbers are the thing everyone is trying to produce.</p>
+        <p>The generalisation is uncomfortable and worth saying out loud: the leaks that get caught are the useless ones. The leaks that reach production are the ones that are only partially informative, because partial information is indistinguishable from a well-engineered feature when all you look at is performance. Which is the argument for not looking at performance first.</p>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>The Brackwater review did notice the collections field. It was raised, discussed, and recorded as an observation rather than a condition, on the grounds that the field was "predictive and available in the warehouse". Both of those statements are true. Neither is relevant to the question of when the value is written.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>File it as conceptual soundness, not as performance<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Validation has three components, and the current guidance puts conceptual soundness first. It covers model design, key modelling choices, assumptions, qualitative judgements and data selection, and the way it is assessed is by critically evaluating the quality and extent of the developmental evidence. Read that list again with a leaked feature in mind: data selection is in it, explicitly. A post-outcome field in a feature list is a data selection defect, assessed by reading the evidence the developer offered for including it.</p>
+        <p>Filing it anywhere else weakens it. As a performance finding it becomes a debate about how much the number moves, which is a debate the model owner can win with a business argument about the cost of the removal. As a data quality finding it goes to whoever owns the warehouse, and the warehouse is not wrong. Conceptual soundness is the category that says the model as designed does not do what it claims, at which point the number is beside the point.</p>
+        <p>This is also the category that survives a rebuttal of the form "the field is available in production". Sometimes it genuinely is, because the scoring pipeline reads the same current-state table. That makes the operational risk worse rather than better: the model would then be scoring new applicants on a field that is structurally empty for them and populated for anyone with history, which is a different defect on top of the first one.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>What the ten other features were doing<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The per-column sweep answers a second question for free. Four of Brackwater's eleven features are pure noise by construction, and fitted together they score 0.520. That is a useful control to have in the same table as the headline, because it calibrates the reader's eye: it shows what a column contributing nothing looks like in this exact setup, on this exact sample, with this exact fitting procedure.</p>
+        <p>A validator should want that control in every sweep, and it does not require the data to have been generated. Permuting a column and refitting gives the same service. The point is to have a floor on the page, so that a reviewer looking at a per-feature table can tell the difference between a weak feature and a decorative one without appealing to a rule of thumb.</p>
+        <p>What the sweep does not license is a recommendation to drop the ten. Simplification is a modelling decision, and the report's job is to state what the evidence shows rather than to redesign the model. The benchmark that tests whether the complexity earns its place is session 5's job, and it is a different exercise with a different standard of proof.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 3 ============ -->
+  <section class="section" id="part-3">
+    <div class="section-kicker">
+      <span class="klabel">Part 3 · build-along</span>
+      <h2>Run the hunt on the model in front of you</h2>
+      <span class="tag build">18 min build-along</span>
+    </div>
+    <p class="lede">The checklist below is the whole technique, and it generalises past credit scoring to any model with an outcome window. Run it against Brackwater tonight, then run it next week against a feature list from your own book. Steps 1 and 2 are reading. Steps 3 and 4 are code. Step 5 is the part people skip and then discover at launch.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div>
+          <p><strong>Fix the prediction moment, in writing, before you look at anything.</strong> One sentence: "the score must exist at the point the application is decided, before any repayment behaviour is observed." Everything else in the checklist is measured against this sentence, so if you cannot write it the model has a purpose problem that outranks the leak hunt.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <p><strong>For every feature, ask when its value is known relative to that moment.</strong> Every feature, including the boring ones. The answer has to come from the data dictionary or from a person who knows the process, not from the feature name. Fields whose answer is "when the record was last updated" are unresolved, not clean.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <p><strong>Ask what process writes each field, and what triggers that process.</strong> This is the question that catches the ones timing alone misses. A field can be written before the decision and still be a consequence, if the thing that triggers the write is correlated with the outcome. "Which team populates this, and what makes them populate it" is the form of the question that gets a useful answer.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <p><strong>Score each feature alone and be suspicious of any single field that approaches the full model.</strong> Not as proof, as triage. Anything within striking distance of the headline goes to the top of the reading list for steps 2 and 3. Include a floor, either genuinely uninformative columns or permuted ones, so the table has a reference point.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <p><strong>Check whether the feature would even exist at scoring time in production.</strong> Ask for the production feature payload, not the training table. A field that is present in one and absent or structurally empty in the other is either a leak or a live incident waiting for the first score, and often both.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <p><strong>Refit without the suspect field and quote both numbers.</strong> The submitted number and the number without the field, side by side, with the difference named. This is what converts a conceptual point into a material one, and it is what the approver needs in order to understand what was actually being bought.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <p><strong>Write it as a finding about data selection.</strong> State the timing fact, state the process that writes the field, state the effect on the reported number, and stop. Resist adding a recommendation about what should replace it; that is the developer's job and putting it in your finding gives them something to negotiate over.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="prompt-box good">
+      <span class="label">★ Try it now - refit without the field and price the leak</span>
+      <pre style="margin:0"><code>no_leak = [c for c in champion if c != "collections"]
+noise   = ["n0", "n1", "n2", "n3"]
+
+full  = auc_of(champion)                      # 0.863 as submitted
+clean = auc_of(no_leak)                       # 0.772 with the field removed
+
+print(round(full, 3), round(clean, 3))
+print(round(full - clean, 3))                 # 0.091, what the leak was worth
+
+print(round(auc_of(noise), 3))                # 0.520, the floor: four noise columns
+print(round(auc_of(["collections"]), 3))      # 0.748, the column on its own
+
+# Both numbers go in the report. 0.863 is what was claimed;
+# 0.772 is what the model does using only fields that exist at decision time.</code></pre>
+    </div>
+
+    <div class="prompt-box good">
+      <span class="label">★ Try it now - show why it survived review</span>
+      <pre style="margin:0"><code># A field that predicted perfectly would have been obvious.
+# This one only predicts well, which is what a good feature looks like.
+contacted = dev["collections"] &gt; 0
+
+print(round(contacted[y == 1].mean(), 2))   # 0.58 of defaulters were contacted
+print(round(contacted[y == 0].mean(), 2))   # 0.11 of non-defaulters were
+
+# Weight in the fit: a clue for triage, never the finding itself.
+m = LogisticRegression(max_iter=2000, C=1e4).fit(dev[champion], y)
+coef = pd.Series(m.coef_[0], index=champion).sort_values(ascending=False)
+print(coef.round(3).head(2))
+# util          2.612
+# collections   2.214
+
+# The finding is still the timestamp, not either of these numbers.</code></pre>
+    </div>
+
+    <div class="callout tip">
+      <p><strong>The question that settles it in one exchange.</strong> Ask the developer to describe, step by step, what has to happen in the business for this field to take a non-zero value. If any step in their answer involves the customer having already done the thing the model predicts, the hunt is over and you have the wording of your finding in their own words.</p>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions</h2>
+    </div>
+
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">A model owner responds to your leakage finding by showing that training and holdout AUC are nearly identical, and says this rules out a leak. What is wrong with the argument?</p>
+      <button class="qopt" type="button">A · Nothing is wrong with it, a matched train and holdout number is the standard test for leakage</button>
+      <button class="qopt" type="button">B · A leaked field is present at the same strength in both splits, so no gap appears; the split tests for overfitting, which is a different defect</button>
+      <button class="qopt" type="button">C · The argument fails only because the holdout was too small to detect the difference</button>
+      <p class="qwhy">The split catches a model that has fitted noise specific to the training rows. A post-outcome field is a stable, reproducible relationship that was baked into the table before it was split, so both sides carry it identically. Matched numbers are exactly what a leak produces, which is why the reassurance is worthless here.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="2">
+      <p class="qtext">Brackwater's champion scores 0.863 on development. The <code>collections</code> field alone scores 0.748, and the four pure-noise features together score 0.520. What is the defensible reading?</p>
+      <button class="qopt" type="button">A · The model is worthless and should be rejected outright</button>
+      <button class="qopt" type="button">B · The noise features should be dropped first, since they are contributing nothing</button>
+      <button class="qopt" type="button">C · One post-outcome field carries almost all of the apparent skill and ten others carry nearly nothing, so the evidence submitted does not support the claim made</button>
+      <p class="qwhy">The sweep is a statement about the model document, not a verdict on the model. Refitting without the field gives 0.772, so there is a real model underneath. The finding is that 0.863 was quoted for something that partly measures the future, and the floor at 0.520 is there to show what a column contributing nothing looks like, not to trigger a simplification recommendation.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">Under the revised interagency guidance of 17 April 2026, which component of validation does a target leakage finding belong to, and why does the category matter?</p>
+      <button class="qopt" type="button">A · Conceptual soundness, because it covers model design, key modelling choices, assumptions, qualitative judgements and data selection, assessed by critically evaluating the developmental evidence; filed as a performance finding it becomes a negotiation about how much the number moves</button>
+      <button class="qopt" type="button">B · Outcomes analysis, because the evidence for the finding is a comparison of AUC values</button>
+      <button class="qopt" type="button">C · Ongoing monitoring, because the field may stop being populated after launch</button>
+      <p class="qwhy">Data selection sits inside conceptual soundness, and that component is assessed by critically evaluating the quality and extent of the developmental evidence, which is precisely what a leaked field fails. The AUC sweep is triage that sizes the finding; the finding itself is that the field is written after the outcome, and that is a design and data selection defect. Note that SR 11-7 is superseded and the April 2026 text is the current one.</p>
+    </div>
+    <p class="quiz-score"></p>
+  </section>
+
+  <!-- ============ HOMEWORK ============ -->
+  <section class="section" id="homework">
+    <div class="section-kicker">
+      <span class="klabel">Homework</span>
+      <h2>Before session 4</h2>
+      <span class="tag time">40 min</span>
+    </div>
+    <div class="callout">
+      <p>Take a feature list from a model your team actually runs, and answer step 2 for every single field: when is this value written, relative to the moment the score has to exist. Write the answer next to each field, and write "unknown" where you cannot find out, because the unknowns are the finding. Then run the per-feature sweep on the same model and put the two columns side by side. Bring the table to session 4, which is about replication: reproducing the number the model document reports, and what it means when the re-run and the document disagree.</p>
+    </div>
+  </section>
+
+  <!-- ============ COVERAGE ============ -->
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Sources covered</span>
+      <h2>What tonight maps to</h2>
+    </div>
+    <div class="covered">
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Target leakage, defined by timing</span>
+        <span class="note">A feature whose value is determined after, or as a result of, the outcome the model predicts. Not the same as an overfitted model, and invisible to a train/test split because the leak is present at equal strength in both.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">The Brackwater finding, with the numbers</span>
+        <span class="note">Champion as submitted 0.863 on development; <code>collections</code> alone 0.748; the four pure-noise features together 0.520; refit without the field 0.772, so the leak was worth 0.091. Fitted coefficient 2.214, second only to utilisation at 2.612.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Why a noisy leak survives review</span>
+        <span class="note">58 percent of defaulters get a collections contact and 11 percent of non-defaulters do. A field that predicted perfectly would have been obvious; a field that predicts well looks like a good feature.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">The validator's checklist</span>
+        <span class="note">When the value is known relative to the prediction moment; what process writes it; score each field alone and be suspicious of one that approaches the full model; and whether it would exist at scoring time in production.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Conceptual soundness as the finding category</span>
+        <span class="note">Under the revised interagency guidance of 17 April 2026, conceptual soundness covers model design, key modelling choices, assumptions, qualitative judgements and data selection, assessed by critically evaluating the quality and extent of the developmental evidence. SR 11-7 is superseded.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill light">◐</span>
+        <span class="name">Replication</span>
+        <span class="note">Session 4. Tonight produces a second number, 0.772, from the same data; reproducing the developer's reported number and reading a gap between document and re-run comes next.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill light">◐</span>
+        <span class="name">Benchmarking and the challenger</span>
+        <span class="note">Session 5. Tonight shows that ten features carry nearly nothing; whether the remaining complexity earns its place is tested against a three-feature challenger there, not here.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill inkpill">·</span>
+        <span class="name">What AUC is, and what a base rate is</span>
+        <span class="note">Not covered by design. <strong>learn-model-evaluation-with-phoebe</strong> defines the metrics; here they appear only as evidence a validator weighs.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill inkpill">·</span>
+        <span class="name">Reasoning formally about consequence and cause</span>
+        <span class="note">Not covered by design. The finding rests on the order of two timestamps. <strong>learn-causal-inference-with-phoebe</strong> owns the machinery for claims that need more than that.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill inkpill">·</span>
+        <span class="name">Governance frameworks of every kind</span>
+        <span class="note">Not covered by design, in any session. <strong>learn-ai-governance-with-phoebe</strong> owns them.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CHEAT SHEET ============ -->
+  <section class="cheat" id="cheatsheet">
+    <h3>Session 3 cheat sheet</h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>The definition</b><span>A leaked feature is one whose value is determined after, or as a result of, the outcome the model predicts.</span></div>
+      <div class="cheat-item"><b>A split cannot catch it</b><span>The leak is present in training and test at the same strength, so there is no gap. That is overfitting's tell, not leakage's.</span></div>
+      <div class="cheat-item"><b>Brackwater in four numbers</b><span>0.863 submitted, 0.748 for collections alone, 0.520 for four noise columns, 0.772 refit without it.</span></div>
+      <div class="cheat-item"><b>The leak was worth 0.091</b><span>Quote both numbers in the report. The approver needs to know what was actually being bought.</span></div>
+      <div class="cheat-item"><b>Noisy is why it survived</b><span>58 percent of defaulters contacted, 11 percent of non-defaulters. A perfect predictor gets caught; a good one gets shipped.</span></div>
+      <div class="cheat-item"><b>Four questions, in order</b><span>When is it written; what process writes it; how does it score alone; would it exist at scoring time in production.</span></div>
+      <div class="cheat-item"><b>Conceptual soundness, not performance</b><span>Data selection sits inside it, assessed on the quality and extent of the developmental evidence. Filed as performance, it becomes a negotiation.</span></div>
+      <div class="cheat-item"><b>The coefficient is triage</b><span>2.214 against utilisation's 2.612 tells you what to read first. The finding is always the timestamp.</span></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="pagefoot">
+  <div class="wrap">
+    <p>Practitioner session 3 of 10 · learn-model-risk-with-phoebe · by Phoebe Fu</p>
+    <nav class="pagenav">
+      <a href="../index.html">← All sessions</a>
+      <a href="p4-replication.html">Practitioner session 4 · Replication →</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="../assets/app.js?v=2"></script>
+</body>
+</html>

@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- social:start -->
+<meta name="description" content="Leader session 4 of 6. Materiality is purpose plus exposure, and it decides which models get three weeks of review and which get a line in a register. Plus the clause that tells you which columns the register needs.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Learn with Phoebe">
+<meta property="og:title" content="Materiality and the inventory - learn model risk with phoebe">
+<meta property="og:description" content="Leader session 4 of 6. Immaterial is not unwatched, and a register of individually green rows can still be a concentration.">
+<meta property="og:url" content="https://phoebefu6.github.io/learn-model-risk-with-phoebe/courses/a4-materiality-and-inventory.html">
+<meta property="og:image" content="https://phoebefu6.github.io/learn-model-risk-with-phoebe/assets/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Materiality and the inventory - learn model risk with phoebe">
+<meta name="twitter:description" content="Purpose plus exposure sets the depth of review. Shared inputs set the risk no single row can show.">
+<meta name="twitter:image" content="https://phoebefu6.github.io/learn-model-risk-with-phoebe/assets/og-cover.png">
+<!-- social:end -->
+<title>Leader session 4 · Materiality and the inventory - learn model risk with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=2">
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-model-risk-with-phoebe</a> / Leader session 4 of 6</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Learn Model Risk with Phoebe · Leader session 4 of 6</div>
+    <h1>Which models earn three weeks, and which earn <span class="accent">a line in a register</span></h1>
+    <p class="sub">No institution can review every model to the depth it gave Brackwater's scorecard, and the ones that try end up reviewing nothing properly, because the queue grows faster than the team. The guidance solves this with a single dial. Purpose and exposure together give materiality, materiality sets the rigour, and the register that records the answer is either the most useful document in the building or a spreadsheet with a date on it from two reorganisations ago. Tonight is how the dial is set, what happens to the models it turns down, and the one clause that decides which columns the register actually needs.</p>
+    <div class="chip-row">
+      <span class="chip level">🟠 Advanced</span>
+      <span class="chip audience">Whoever signs the approval</span>
+      <span class="chip audience">Risk, audit and the second line</span>
+      <span class="chip time">45 min</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:1">0-3 · Welcome</span>
+      <span class="a2" style="flex:5">3-22 · Tiering and the register</span>
+      <span class="a3" style="flex:4">22-40 · Build-along: re-tier one model</span>
+      <span class="a4" style="flex:1">40-45 · Q&amp;A</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ INTRO ============ -->
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>Where tonight sits</h2>
+    </div>
+    <p class="lede">Session 1 was what model risk is, and it named materiality in passing as the dial that decides how much review a model earns. Session 2 was effective challenge, and session 3 was what a validator is actually checking. Tonight is the question that comes before all three of those in real life: which models get that treatment at all, who decides, and what is done with the ones that do not. Session 5 is how to read the report that comes back, and session 6 is signing it. The worked example stays <strong>Brackwater</strong>, whose scorecard was tiered once, at the start, and was still carrying that tier two years later when it had quietly started doing a different job.</p>
+
+    <div class="legend">
+      <span class="pill">Live = presented in the 45 minutes</span>
+      <span class="pill">Self-study = the full depth, after class</span>
+      <span class="pill">🔍 Every diagram zooms</span>
+    </div>
+
+    <div class="callout win">
+      <p><strong>★ What you walk out with tonight.</strong> The two halves of materiality, one measurable and one a judgement, and how to stop the judgement half being argued down by the people who would rather not be reviewed. What an immaterial verdict actually obliges you to do, which is more than nothing and less than a validation. The question a per-model register can never answer, and the column that makes it answerable. And a habit worth more than any of them: re-tiering when the use changes, because a model that starts doing a new job has changed its materiality without changing a single line of itself.</p>
+    </div>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>Purpose plus exposure, and nothing else<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The current guidance puts it in one sentence: model purpose, together with model exposure, determines model materiality. Overall model risk is then inherent risk read in the context of that materiality. So the model's own properties, its assumptions and complexity and data quality, tell you how much could go wrong inside it, and materiality tells you how much that would matter. Neither half is useful alone. A fragile model nobody acts on is a curiosity; a robust model the whole book depends on still deserves the review.</p>
+        <p><strong>Exposure is the quantitative half.</strong> It is the significance of the model output to the business decision it feeds, and it is greater for models that affect larger portfolios or carry larger business impact. Because it is quantitative it can be measured, portfolio size being the obvious instrument, and because it can be measured it is the half of the conversation that stays honest. Insist on a number here and most of the usual argument disappears.</p>
+        <p><strong>Purpose is the qualitative half.</strong> Models built to meet regulatory requirements or to manage financial risk exposures are generally considered higher risk than models that are not. That is a judgement rather than a measurement, which is exactly why it gets negotiated. A model owner who does not want a comprehensive review will describe the output as informational, decision support, one input among several. Ask what the output is for, ask who acts on it and how, and grade what happens rather than what it is called.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>The words this session runs on<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <ul>
+          <li><strong>Exposure.</strong> The significance of the output to business decisions. Greater for models affecting larger portfolios or with larger business impact, and measurable, for example by portfolio size.</li>
+          <li><strong>Purpose.</strong> What the output is for. Meeting a regulatory requirement or managing a financial risk exposure is generally higher risk than a use that does neither.</li>
+          <li><strong>Materiality.</strong> Purpose together with exposure. The dial that sets how much oversight a model earns.</li>
+          <li><strong>Immaterial.</strong> A verdict, not an exemption. It converts the obligation from validating the model into identifying it and watching for the conditions that would change the verdict.</li>
+          <li><strong>Tiering.</strong> The act of placing a model on that dial and recording the placement, along with what would move it.</li>
+          <li><strong>Aggregate risk.</strong> Interactions and dependencies among models, and reliance on common assumptions, data or methodologies. The part no single model's review can see.</li>
+          <li><strong>Inventory.</strong> The comprehensive set of information held on models under development and in use. Its job is to support management of model risk at the individual and the aggregate level, and that second clause is what decides its columns.</li>
+        </ul>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 1 ============ -->
+  <section class="section" id="part-1">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · covers tiering, tailoring, and what immaterial obliges</span>
+      <h2>Setting the dial, and what happens to the models it turns down</h2>
+      <span class="tag concept">10 min live</span>
+    </div>
+    <p class="lede">Rigour is meant to be commensurate with risk. Higher materiality warrants more comprehensive and rigorous oversight; lower materiality warrants less, and at the bottom of the range a model may be deemed immaterial altogether. The grid below is how that reads when both halves are put on axes. What matters is not which cell a given model lands in, which will always be arguable, but that the landing is recorded along with the conditions that would move it.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A tiering grid with exposure across three columns, low, moderate and high, and purpose in two rows, higher purpose meaning regulatory use or managing financial risk exposure, and lower purpose meaning commercial or operational use. Low exposure with lower purpose is the record and monitor cell, where a model may be deemed immaterial and the trigger must be written down. Low exposure with higher purpose and moderate exposure with lower purpose both earn a scoped review. Moderate and high exposure with higher purpose, and high exposure with lower purpose, all earn a comprehensive review, with the top right cell carrying the most rigorous oversight and the closest monitoring. A red band across the bottom, with an arrow pointing up into the record and monitor cell, records that the re-tiering trigger is written at the point of tiering rather than improvised later, and names what must be written: the book size that would move it, the purpose change that would move it, the new decision that would use it, and who watches.">
+        <style>
+          .a4aH { font: 800 12px Inter, sans-serif; fill: #0F172A; }
+          .a4aL { font: 800 11px Inter, sans-serif; fill: #0F172A; }
+          .a4aT { font: 800 11px Inter, sans-serif; fill: #FFFFFF; }
+          .a4aW { font: 400 11px Inter, sans-serif; fill: #FFFFFF; }
+          .a4aB { font: 400 11px Inter, sans-serif; fill: #0F172A; }
+          .a4aM { font: 400 11px Inter, sans-serif; fill: #56617A; }
+          .a4aR { font: 800 11px Inter, sans-serif; fill: #B91C1C; }
+        </style>
+        <defs>
+          <marker id="a4aRd" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#B91C1C"></path></marker>
+        </defs>
+
+        <text class="a4aH" x="14" y="20">Exposure is measured. Purpose is judged. Together they set materiality.</text>
+
+        <rect x="184" y="32" width="216" height="44" rx="8" fill="#BFDBFE" stroke="#93C5FD"></rect>
+        <text class="a4aL" x="198" y="52">Low exposure</text>
+        <text class="a4aM" x="198" y="68">small book, limited impact</text>
+
+        <rect x="416" y="32" width="216" height="44" rx="8" fill="#BFDBFE" stroke="#93C5FD"></rect>
+        <text class="a4aL" x="430" y="52">Moderate exposure</text>
+        <text class="a4aM" x="430" y="68">real book, or use is spreading</text>
+
+        <rect x="648" y="32" width="216" height="44" rx="8" fill="#BFDBFE" stroke="#93C5FD"></rect>
+        <text class="a4aL" x="662" y="52">High exposure</text>
+        <text class="a4aM" x="662" y="68">large portfolio, large impact</text>
+
+        <rect x="14" y="84" width="156" height="104" rx="8" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <text class="a4aL" x="26" y="106">Higher purpose</text>
+        <text class="a4aM" x="26" y="128">Regulatory use, or</text>
+        <text class="a4aM" x="26" y="146">managing financial</text>
+        <text class="a4aM" x="26" y="164">risk exposure</text>
+
+        <rect x="14" y="196" width="156" height="104" rx="8" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <text class="a4aL" x="26" y="218">Lower purpose</text>
+        <text class="a4aM" x="26" y="240">Commercial or</text>
+        <text class="a4aM" x="26" y="258">operational use,</text>
+        <text class="a4aM" x="26" y="276">no regulatory hook</text>
+
+        <rect x="184" y="84" width="216" height="104" rx="8" fill="#BFDBFE" stroke="#93C5FD"></rect>
+        <text class="a4aL" x="198" y="106">Scoped review</text>
+        <text class="a4aB" x="198" y="128">Purpose points up, exposure</text>
+        <text class="a4aB" x="198" y="146">does not. Depth follows the</text>
+        <text class="a4aB" x="198" y="164">smaller of the two.</text>
+
+        <rect x="416" y="84" width="216" height="104" rx="8" fill="#1E3A8A"></rect>
+        <text class="a4aT" x="430" y="106">Comprehensive review</text>
+        <text class="a4aW" x="430" y="128">Both halves point the same</text>
+        <text class="a4aW" x="430" y="146">way. This is where the</text>
+        <text class="a4aW" x="430" y="164">three weeks go.</text>
+
+        <rect x="648" y="84" width="216" height="104" rx="8" fill="#1E3A8A"></rect>
+        <text class="a4aT" x="662" y="106">Comprehensive review</text>
+        <text class="a4aW" x="662" y="128">The most rigorous oversight</text>
+        <text class="a4aW" x="662" y="146">the institution can mount,</text>
+        <text class="a4aW" x="662" y="164">and the closest monitoring.</text>
+
+        <rect x="184" y="196" width="216" height="104" rx="8" fill="#FFFFFF" stroke="#C7D2E4"></rect>
+        <text class="a4aL" x="198" y="218">Record and monitor</text>
+        <text class="a4aB" x="198" y="240">May be deemed immaterial.</text>
+        <text class="a4aB" x="198" y="258">Identify it, watch it, and</text>
+        <text class="a4aB" x="198" y="276">write the trigger down.</text>
+
+        <rect x="416" y="196" width="216" height="104" rx="8" fill="#BFDBFE" stroke="#93C5FD"></rect>
+        <text class="a4aL" x="430" y="218">Scoped review</text>
+        <text class="a4aB" x="430" y="240">Exposure is real even where</text>
+        <text class="a4aB" x="430" y="258">the purpose is commercial.</text>
+
+        <rect x="648" y="196" width="216" height="104" rx="8" fill="#1E3A8A"></rect>
+        <text class="a4aT" x="662" y="218">Comprehensive review</text>
+        <text class="a4aW" x="662" y="240">Exposure alone can carry a</text>
+        <text class="a4aW" x="662" y="258">model into the top band.</text>
+
+        <line x1="250" y1="332" x2="250" y2="304" stroke="#B91C1C" stroke-width="2" marker-end="url(#a4aRd)"></line>
+
+        <rect x="14" y="336" width="852" height="56" rx="9" fill="#FEF2F2" stroke="#B91C1C"></rect>
+        <text class="a4aR" x="28" y="358">The trigger is written at the point of tiering, not improvised afterwards.</text>
+        <text class="a4aB" x="28" y="378">Name the book size that would move it, the purpose change that would move it, the new decision that would use it, and who watches.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the axes are the two halves of materiality. The red band is the part most registers leave blank.</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Immaterial is a verdict, not an exemption<span class="mini">5 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>A model may be deemed immaterial, and the guidance says what follows: model risk management for such a model may consist of identifying those models and monitoring their performance and the conditions under which their use may become material in future. Read the obligation slowly, because it has three parts and institutions routinely deliver the first one only.</p>
+        <p><strong>Identify it.</strong> The model goes in the inventory. It does not stop being a model because it was judged small, and a register that holds only the models that earned a review is a register that cannot tell you what you own. The commonest way an institution loses track of a model is not concealment, it is a tiering decision that ended with the model being left out.</p>
+        <p><strong>Monitor its performance.</strong> Lightly, at a cadence you can sustain, but monitor it. An immaterial model that is quietly broken is still producing an output somebody acts on, and the cheap version of this is usually one chart and one threshold rather than a monthly pack.</p>
+        <p><strong>Monitor the conditions under which it may become material.</strong> This is the part with teeth and the part that is almost never written down. Materiality is a function of purpose and exposure, so the conditions are simply the things that would move either of them: the book growing past some size, the output starting to feed a regulatory submission, a second business unit adopting it, a manual override being removed so the number now decides rather than advises. Each of those is knowable in advance, and each of them is worth naming at the moment you decide the model is small, while everybody still remembers why.</p>
+        <div class="callout tip">
+          <p><strong>The test for whether a tiering decision is finished.</strong> Read the entry back and ask what would have to happen for this verdict to be wrong. If the answer is a sentence you can write, write it, with a number in it and a name against it. If the answer is "we would notice", the verdict is not finished, because nobody is assigned to notice and nothing has been defined as the thing to notice.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Why the dial is set per institution and then per model<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>There is no universal depth of review, and the guidance is unusually direct about it. A banking organisation with smaller and less complex operations may not need the same rigour as one with large and complex operations, and practices may be tailored to individual models, with the rigour applied to each one commensurate with that model's risk. Two tailorings, then, and they compose: the institution sets the range, and the model's own materiality picks a point inside it.</p>
+        <p>That is a licence and a trap at the same time. The licence is real and worth using, because copying a large institution's model risk framework into a small one produces a queue nobody can clear and a policy everybody quietly breaks. The trap is that tailoring is the easiest thing in this discipline to argue in bad faith. A tailored framework is defensible when the reasoning is written down, applied consistently, and produces different answers for models that genuinely differ. It is indefensible when it produces a lighter answer every time the business is in a hurry, and the tell is a framework where no model has ever been tiered up.</p>
+        <p>The leader's version is a single sanity check on the distribution rather than on any one decision. Ask what proportion of the inventory sits in each band, and ask when a model last moved between bands in either direction. A register where everything is mid-tier and nothing has ever moved is not a tiering framework. It is a default with a policy wrapped around it.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Who sets the tier, and how it gets argued down<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Tiering is the one decision in this discipline where the incentives are most obviously misaligned, because the output of the decision is how much work the model owner has to do. Three moves come up again and again, and all three are easier to spot when you know their shapes.</p>
+        <ul>
+          <li><strong>Reclassifying the purpose downward.</strong> The output becomes "one input among several" or "indicative only", which sounds modest and describes nothing. The counter is to ask what happens when the number is high and what happens when it is low, and whether any human has ever overridden it.</li>
+          <li><strong>Sizing the exposure on today's book.</strong> A model is tiered against the portfolio it currently touches rather than the one it is being built for. Exposure is the quantitative half precisely so that it can be checked, so ask for the planned volume rather than the pilot volume.</li>
+          <li><strong>Splitting one model into parts.</strong> Three components, each individually modest, replace one material model. This is the version that also defeats the inventory, because the three parts are recorded as three entries and the thing that matters is the chain they form.</li>
+        </ul>
+        <p>None of these require anybody to act in bad faith. They are what a reasonable person does under a deadline when the tiering question has only one expensive answer, which is why the durable fix is a tiering call that somebody other than the model owner signs.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 2 ============ -->
+  <section class="section" id="part-2">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · covers the inventory, its columns, and aggregate risk</span>
+      <h2>A register of green rows can still be a concentration</h2>
+      <span class="tag concept">8 min live</span>
+    </div>
+    <p class="lede">It is common industry practice to maintain a comprehensive set of information for models that are under development or in use, with the level of detail varying according to a model's complexity and usage. So far, so administrative. The clause that turns that from a filing exercise into a control is the one about what the information is for: an effective inventory holds enough to understand the model risks and support their management at both the individual and the aggregate level. Individual is easy and everybody does it. Aggregate is the half that decides which columns the register needs, and it is the half most registers cannot answer.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 392" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="An inventory view of three model entries side by side, each individually within its own tolerance. The first is a consumer scorecard whose purpose is managing credit risk and whose exposure is the whole new book. The second is a collections prioritiser used for operational triage on the delinquent book. The third is a limit-increase rule used for commercial growth on existing customers. All three record the same dependency, a bureau refresh feed, and all three carry a marker saying no finding is open. Three red lines converge from the three entries into a single red box reading one shared input, three models, same vendor, same definitions, same refresh calendar, and a change here moves all three at the same time. A band beneath states that each row is fine and the concentration exists only between the rows, and that an inventory supporting management at the aggregate level records what each model depends on, not only how each one performs.">
+        <style>
+          .a4bH { font: 800 12px Inter, sans-serif; fill: #0F172A; }
+          .a4bT { font: 800 11px Inter, sans-serif; fill: #FFFFFF; }
+          .a4bL { font: 800 11px Inter, sans-serif; fill: #0F172A; }
+          .a4bB { font: 400 11px Inter, sans-serif; fill: #0F172A; }
+          .a4bK { font: 700 10px Inter, sans-serif; fill: #0F172A; }
+          .a4bR { font: 800 11px Inter, sans-serif; fill: #B91C1C; }
+          .a4bRb { font: 400 11px Inter, sans-serif; fill: #B91C1C; }
+        </style>
+        <defs>
+          <marker id="a4bRd" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#B91C1C"></path></marker>
+        </defs>
+
+        <text class="a4bH" x="14" y="20">Three entries, each green on its own. One feed underneath all three.</text>
+
+        <rect x="14" y="30" width="852" height="24" rx="7" fill="#1E3A8A"></rect>
+        <text class="a4bT" x="28" y="47">MODEL INVENTORY · EACH ENTRY WITHIN ITS OWN MONITORING TOLERANCE</text>
+
+        <rect x="14" y="62" width="276" height="122" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <rect x="14" y="62" width="276" height="26" rx="9" fill="#1E40AF"></rect>
+        <text class="a4bT" x="28" y="80">Consumer scorecard</text>
+        <text class="a4bB" x="28" y="108">Purpose: manage credit risk</text>
+        <text class="a4bB" x="28" y="126">Exposure: the whole new book</text>
+        <text class="a4bB" x="28" y="144">Depends on: bureau refresh feed</text>
+        <rect x="28" y="154" width="126" height="20" rx="6" fill="#BFDBFE" stroke="#93C5FD"></rect>
+        <text class="a4bK" x="40" y="168">NO FINDING OPEN</text>
+
+        <rect x="302" y="62" width="276" height="122" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <rect x="302" y="62" width="276" height="26" rx="9" fill="#1E40AF"></rect>
+        <text class="a4bT" x="316" y="80">Collections prioritiser</text>
+        <text class="a4bB" x="316" y="108">Purpose: operational triage</text>
+        <text class="a4bB" x="316" y="126">Exposure: the delinquent book</text>
+        <text class="a4bB" x="316" y="144">Depends on: bureau refresh feed</text>
+        <rect x="316" y="154" width="126" height="20" rx="6" fill="#BFDBFE" stroke="#93C5FD"></rect>
+        <text class="a4bK" x="328" y="168">NO FINDING OPEN</text>
+
+        <rect x="590" y="62" width="276" height="122" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <rect x="590" y="62" width="276" height="26" rx="9" fill="#1E40AF"></rect>
+        <text class="a4bT" x="604" y="80">Limit-increase rule</text>
+        <text class="a4bB" x="604" y="108">Purpose: commercial growth</text>
+        <text class="a4bB" x="604" y="126">Exposure: existing customers</text>
+        <text class="a4bB" x="604" y="144">Depends on: bureau refresh feed</text>
+        <rect x="604" y="154" width="126" height="20" rx="6" fill="#BFDBFE" stroke="#93C5FD"></rect>
+        <text class="a4bK" x="616" y="168">NO FINDING OPEN</text>
+
+        <line x1="152" y1="188" x2="322" y2="222" stroke="#B91C1C" stroke-width="1.8" marker-end="url(#a4bRd)"></line>
+        <line x1="440" y1="188" x2="440" y2="222" stroke="#B91C1C" stroke-width="1.8" marker-end="url(#a4bRd)"></line>
+        <line x1="728" y1="188" x2="558" y2="222" stroke="#B91C1C" stroke-width="1.8" marker-end="url(#a4bRd)"></line>
+
+        <rect x="230" y="228" width="420" height="76" rx="9" fill="#FEF2F2" stroke="#B91C1C"></rect>
+        <text class="a4bR" x="246" y="252">One shared input, three models</text>
+        <text class="a4bRb" x="246" y="272">Same vendor, same definitions, same refresh calendar.</text>
+        <text class="a4bRb" x="246" y="292">A change here moves all three at the same time.</text>
+
+        <rect x="14" y="316" width="852" height="62" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <text class="a4bL" x="28" y="340">Each row is fine. The concentration exists only between the rows.</text>
+        <text class="a4bB" x="28" y="362">An inventory that supports management at the aggregate level records what each model depends on, not only how each performs.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - no individual review would have found this, because it is not a property of any individual model.</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Aggregate risk, and the question a per-model review cannot ask<span class="mini">5 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Model risk is assessed for individual models and in aggregate, and the aggregate view is not a sum. It reflects interactions and dependencies among models, and reliance on common assumptions, data or methodologies, any of which can affect several models and their outputs at the same time. That last phrase is the whole point. A risk that arrives in one model is a bad quarter for one product; a risk that arrives in eleven models simultaneously, because all eleven read the same field the same way, is a different category of event.</p>
+        <p>The reason this is structurally invisible is worth stating plainly. Every validation examines one model. A shared dependency is, by definition, not a property of any of the models that share it, so a review that does its job perfectly on each one in turn will report nothing. The dependency is a property of the set, and the only artefact that holds the set is the inventory.</p>
+        <p>Three shapes cover most of what you will find. <strong>Common data.</strong> One feed, one vendor, one definition of a field, under many models. <strong>Common assumptions.</strong> The same view of how a relationship behaves, inherited across a family of models built by the same team in the same year. <strong>Common methodology.</strong> One approach applied everywhere, so that when the approach has a blind spot, every model has the same blind spot. In each case the individual models can be sound, well documented and within their monitoring thresholds, and the concentration still exists.</p>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>At Brackwater the scorecard's most heavily weighted fields come from the same monthly bureau refresh that feeds the collections prioritiser and the limit-increase rule. Nothing about that is wrong, and no validation report mentions it, because each report was written about one model. If the vendor changes how a field is populated, three models move in the same direction in the same month, and the first evidence will be three separate monitoring alerts investigated by three separate owners.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Which columns the register needs, and why<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The level of detail in an inventory may vary with a model's complexity and usage, so there is no fixed schema to copy, and the estate of any two institutions will differ. What does not vary is the test the inventory has to pass: it should hold enough information to understand the model risks and to support their management at both the individual and the aggregate level. Every column argument can be settled against that sentence.</p>
+        <p>Read it as a derivation rather than a list. The individual half gives you the obvious fields, the ones every register already has: what the model is, who owns it, what it is used for, when it was last reviewed, what its current status is. The aggregate half gives you the fields that are usually missing, and they are missing for the same reason in every institution, which is that nobody needs them to manage the model in front of them. You cannot see a shared-dependency concentration unless dependencies are recorded, so the inventory has to hold what each model consumes, what it feeds, and what it assumes. A model whose entry does not say where its inputs come from is an entry that can only ever be read one row at a time.</p>
+        <p>The practical way to find out whether yours passes is to ask a question that cannot be answered row by row. If this feed changed definition next month, which models would move. If that assumption turns out to be wrong, how much of the book is affected. If this vendor withdrew, what stops. A register that can answer those is doing the job the guidance describes. A register that requires three people and a week is a list of models, which is a useful thing and a different thing.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>What the documentation is actually for<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Documentation has a reputation as the tax paid at the end of a project, and it survives that reputation only when people can say what it is for. The guidance gives its purposes directly, and they are all operational rather than ceremonial. Documentation supports the <strong>continuity of operations</strong>, so that the institution still understands its own model when the person who built it has left. It supports <strong>tracking recommendations, responses and exceptions</strong>, so that a finding raised in a review has somewhere to live between being raised and being fixed, along with what the model owner said about it and what was allowed anyway. And it supports <strong>managing remediation</strong>, which is the work of closing those items rather than merely listing them.</p>
+        <p>Each of those purposes is also a test. Continuity: could a competent stranger pick this model up. Tracking: can you show, for any finding from the last two years, what was recommended, what the response was, and whether an exception was granted and by whom. Remediation: for every open item, is there an owner and a date, and has anything ever been closed with evidence rather than with a launch. Session 2 called the second and third of those the two places a finding disappears, and they disappear into exactly the gaps that documentation is supposed to cover.</p>
+        <p>The inventory is where these meet. A register that carries the model's status but not its open findings, or its findings but not its dependencies, will pass a policy review and fail the only question that matters, which is whether anybody could act on it in the week something goes wrong.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Scope creep in use, and the re-tiering nobody triggers<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Brackwater's scorecard was built to rank applicants. By year two it was setting prices. That is not a change to the model, the data, the code or the documentation, and it would not show up in any monitoring pack, because the model kept producing the same numbers to the same accuracy for the same population. What changed is the purpose, and purpose is one of the two halves of materiality, so the materiality changed and therefore the risk did.</p>
+        <p>Notice what no inventory field catches here. A field for the model's purpose records the purpose at tiering, and it records it accurately, and it goes on being accurate on paper while the world underneath it moves. A field for the last review date records a date that was correct at the time. A field for monitoring status records a model behaving exactly as it did last month. The register is wholly consistent and wholly out of date, and the only mechanism that would have caught it is somebody re-tiering the model when the new use started.</p>
+        <p>Which makes re-tiering a trigger rather than a schedule. An annual refresh of the inventory would have found this eventually, on average about six months late and only if the person refreshing it asked what the model is used for rather than reading the field. A trigger finds it on the day: a new decision starts consuming the output, a second business unit adopts it, an override is removed, the output is included in a regulatory submission, the book it touches crosses the size you named. Each of those is an event somebody knows about at the time. The entire trick is having written down, in advance, that the event obliges a phone call.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 3 ============ -->
+  <section class="section" id="part-3">
+    <div class="section-kicker">
+      <span class="klabel">Part 3 · build-along</span>
+      <h2>Re-tier one model you already own</h2>
+      <span class="tag build">20 min build-along</span>
+    </div>
+    <p class="lede">No laptop. Take a model in your area that was tiered at least a year ago, ideally one that was tiered low, and put it through the seven steps below out loud. The output is not a tier. It is two sentences you can hand to whoever maintains the register: where this model sits now, and what would have to happen for that to stop being true.</p>
+
+    <div class="steps">
+      <div class="step">
+                <div>
+          <p><strong>Find the original tiering decision and read it.</strong> Not the tier, the decision: who made it, on what date, on what basis, and whether a reason was recorded. If you cannot find the decision at all, that is the first finding and it is a common one.</p>
+        </div>
+      </div>
+      <div class="step">
+                <div>
+          <p><strong>Size the exposure again, today.</strong> Volume, value, customers, portfolio. This is the measurable half, so produce a number rather than an adjective, and compare it with whatever number was used the first time. If the first time used no number, say so.</p>
+        </div>
+      </div>
+      <div class="step">
+                <div>
+          <p><strong>State the purpose as it is today.</strong> Is the output meeting a regulatory requirement, managing a financial risk exposure, or doing neither. Answer from what the output causes, not from what the model is called, and check whether anyone still overrides it.</p>
+        </div>
+      </div>
+      <div class="step">
+                <div>
+          <p><strong>List every decision that now consumes the output.</strong> Include the ones added since launch. Each new consumer is a potential change of purpose, and this step is the one that catches a ranking model that started setting prices.</p>
+        </div>
+      </div>
+      <div class="step">
+                <div>
+          <p><strong>Write down what it depends on.</strong> Which feeds, which vendors, which assumptions, which upstream models. Then ask the only aggregate question a leader can ask unaided: which other models in the institution depend on the same things.</p>
+        </div>
+      </div>
+      <div class="step">
+                <div>
+          <p><strong>Name the triggers, with numbers and owners.</strong> Three to five conditions that would change this model's materiality, each specific enough to be observed by somebody who is not thinking about model risk that day, each with a name against it.</p>
+        </div>
+      </div>
+      <div class="step">
+                <div>
+          <p><strong>Write the two sentences.</strong> "This model is [tier] because exposure is [number] and purpose is [regulatory / financial risk / neither]." Then: "It stops being [tier] if [trigger], and [name] is watching for that." If the second sentence is hard to write, you have found what the register is missing.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <p><strong>The question that gets an inventory funded.</strong> Ask which models would be affected if one named vendor feed changed definition next month, and ask for the answer in an hour rather than a week. The length of the pause is the business case, and it is a more persuasive number than any count of registered models, because it is the same question you will be asked on the day it actually happens.</p>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions</h2>
+    </div>
+
+    <div class="quiz-q" data-answer="2">
+      <p class="qtext">A pricing sheet was tiered as immaterial two years ago, on the basis of one small product line. That line has since tripled in size and nobody has looked at the model again. Where did this go wrong?</p>
+      <button class="qopt" type="button">A · At the model owner, who should have requested a fresh review when the product line grew</button>
+      <button class="qopt" type="button">B · Nowhere; materiality is assessed when a model is tiered and the assessment properly stands until the next scheduled cycle</button>
+      <button class="qopt" type="button">C · At the tiering decision, which should have named in writing the condition that would make this model material, and who was watching for it</button>
+      <p class="qwhy">An immaterial verdict obliges you to identify the model and to monitor both its performance and the conditions under which its use may become material in future. Those conditions are knowable at the moment the verdict is given, which is when everybody still remembers why the model was judged small. Left to a schedule, the growth is found late; left to the model owner, it is found by the person with the least reason to look.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">Every model in your inventory is inside its own monitoring thresholds and none has an open finding. Your validation lead says the portfolio still carries a concentration. What is she most likely pointing at?</p>
+      <button class="qopt" type="button">A · Interactions and dependencies among models, and reliance on common assumptions, data or methodologies, which can affect several models and their outputs at the same time</button>
+      <button class="qopt" type="button">B · An error in one of the monitoring thresholds, since models that are individually within tolerance cannot aggregate into a problem</button>
+      <button class="qopt" type="button">C · A documentation gap, which is an administrative matter rather than a risk one</button>
+      <p class="qwhy">Model risk is assessed individually and in aggregate, and the aggregate view is not a sum of the individual ones. A shared feed, a shared assumption or a shared methodology is not a property of any single model, so a review that does its job perfectly on each model in turn will report nothing. It is visible only in the inventory, and only if the inventory records dependencies.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">Brackwater's scorecard was built to rank applicants and by year two was setting prices. The model, its data and its performance are unchanged. What does the inventory need to reflect?</p>
+      <button class="qopt" type="button">A · Nothing, because every recorded field is still accurate and the model is behaving exactly as it did at launch</button>
+      <button class="qopt" type="button">B · A change of purpose, and therefore of materiality, which means the model needs re-tiering - and no inventory field would have caught this unless somebody was obliged to re-tier when the use changed</button>
+      <button class="qopt" type="button">C · Only a change of exposure, which is the measurable half and will show up in monitoring</button>
+      <p class="qwhy">Materiality is purpose together with exposure, so a change of purpose changes the materiality even when nothing about the model moves. Every field in the register stays accurate while this happens, which is the trap: the purpose field records the purpose at tiering, the review date records a date that was correct, and monitoring records a model doing what it always did. Only a trigger catches it, fired by the event, on the day.</p>
+    </div>
+    <p class="quiz-score"></p>
+  </section>
+
+  <!-- ============ HOMEWORK ============ -->
+  <section class="section" id="homework">
+    <div class="section-kicker">
+      <span class="klabel">Homework</span>
+      <h2>Before session 5</h2>
+      <span class="tag time">30 min</span>
+    </div>
+    <div class="callout">
+      <p>Open your model inventory and answer three questions from it, timing yourself. How many models are in it, and how many of those were added in the last year. For any one model, what does it depend on, and which other models depend on the same thing. And for every model tiered as immaterial, what was recorded as the condition that would change that verdict. Bring the three timings and the count of blank trigger fields to session 5, which is about reading the report that comes out of a review, and therefore about what the register should have been holding while you waited for it.</p>
+    </div>
+  </section>
+
+  <!-- ============ COVERAGE ============ -->
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Sources covered</span>
+      <h2>What tonight maps to</h2>
+    </div>
+    <div class="covered">
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Materiality, defined</span>
+        <span class="note">Model purpose, together with model exposure, determines model materiality; overall model risk is inherent risk read in the context of materiality.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Exposure as the quantitative half</span>
+        <span class="note">The significance of the output to business decisions, greater for models affecting larger portfolios or with larger business impact, and measurable, for example by portfolio size.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Purpose as the qualitative half</span>
+        <span class="note">Models built to meet regulatory requirements or to manage financial risk exposures are generally considered higher risk than models that are not.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Rigour commensurate with risk, and what immaterial obliges</span>
+        <span class="note">Higher materiality warrants more comprehensive and rigorous oversight. A model may be deemed immaterial, in which case model risk management may consist of identifying those models and monitoring performance and the conditions under which their use may become material in future.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Tailoring, at two levels</span>
+        <span class="note">A banking organisation with simple operations may not need the same rigour as a complex one, and practices may be tailored to individual models with the rigour commensurate with each model's risk.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Aggregate risk</span>
+        <span class="note">Interactions and dependencies among models, and reliance on common assumptions, data or methodologies, which can affect several models and their outputs simultaneously.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">The model inventory and the clause that shapes it</span>
+        <span class="note">Common industry practice to maintain a comprehensive set of information for models under development or in use, with the level of detail varying by complexity and usage; an effective inventory holds enough to understand model risks and support their management at both the individual and the aggregate level.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">What documentation is for</span>
+        <span class="note">Continuity of operations, tracking recommendations, responses and exceptions, and managing remediation.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill light">◐</span>
+        <span class="name">The four factors that set model risk</span>
+        <span class="note">Session 1 covers inherent risk, exposure, purpose and use in full. Tonight takes the two that make materiality and turns them into a tiering call.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill light">◐</span>
+        <span class="name">Findings, severity and conditions</span>
+        <span class="note">Session 5. Tonight decides which models get a review and what the register holds; how the resulting report is graded and read comes next.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill inkpill">·</span>
+        <span class="name">The EU AI Act, NIST AI RMF, ISO/IEC 42001, MAS and FEAT</span>
+        <span class="note">Not covered by design, in any session. Governing AI systems, including their own risk tiers and registries, is <strong>learn-ai-governance-with-phoebe</strong>'s territory, and the model risk guidance itself puts generative and agentic AI out of scope.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill inkpill">·</span>
+        <span class="name">What a monitoring threshold or a performance metric actually measures</span>
+        <span class="note">Not covered by design. <strong>learn-model-evaluation-with-phoebe</strong> defines the metrics; here they appear only as the status a register records.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CHEAT SHEET ============ -->
+  <section class="cheat" id="cheatsheet">
+    <h3>Session 4 cheat sheet</h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>Materiality is purpose plus exposure</b><span>Purpose together with exposure determines materiality. Inherent risk read in that context gives the overall risk.</span></div>
+      <div class="cheat-item"><b>Exposure is the half you can measure</b><span>Significance of the output to the decision, greater for larger portfolios or larger impact. Ask for a number.</span></div>
+      <div class="cheat-item"><b>Purpose is the half that gets argued</b><span>Regulatory requirements and managing financial risk are generally higher risk. Grade what the output causes, not what it is called.</span></div>
+      <div class="cheat-item"><b>Immaterial is a verdict, not an exemption</b><span>Identify it, monitor its performance, and monitor the conditions under which it may become material.</span></div>
+      <div class="cheat-item"><b>Write the trigger at tiering</b><span>The book size, the purpose change, the new consumer, the removed override. With a number in it and a name against it.</span></div>
+      <div class="cheat-item"><b>Tailoring is licensed twice</b><span>Simple operations need less rigour than complex ones, and each model gets rigour commensurate with its own risk.</span></div>
+      <div class="cheat-item"><b>Green rows can still be a concentration</b><span>Interactions, dependencies, common assumptions, data or methodologies. A property of the set, not of any model in it.</span></div>
+      <div class="cheat-item"><b>Aggregate is what decides the columns</b><span>The inventory must support management at the individual and the aggregate level, so it has to record dependencies.</span></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="pagefoot">
+  <div class="wrap">
+    <p>Leader session 4 of 6 · learn-model-risk-with-phoebe · by Phoebe Fu</p>
+    <nav class="pagenav">
+      <a href="../index.html">← All sessions</a>
+      <a href="a5-reading-a-validation-report.html">Leader session 5 · Reading a validation report →</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="../assets/app.js?v=2"></script>
+</body>
+</html>

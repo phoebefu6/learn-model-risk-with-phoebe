@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- social:start -->
+<meta name="description" content="Practitioner session 10 of 10. Run seven validation tests against a model whose truth is known by construction, collect the findings, and make the call. The submitted 0.863 becomes 0.682, six thousandths ahead of three columns.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Learn with Phoebe">
+<meta property="og:title" content="The validation bench - learn model risk with phoebe">
+<meta property="og:description" content="Practitioner session 10 of 10. Seven tests, real regressions, and a recommendation the bench will argue with.">
+<meta property="og:url" content="https://phoebefu6.github.io/learn-model-risk-with-phoebe/courses/p10-the-validation-bench.html">
+<meta property="og:image" content="https://phoebefu6.github.io/learn-model-risk-with-phoebe/assets/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The validation bench - learn model risk with phoebe">
+<meta name="twitter:description" content="0.863 submitted. 0.682 out of time. 0.006 ahead of a three-column benchmark. Now write the report.">
+<meta name="twitter:image" content="https://phoebefu6.github.io/learn-model-risk-with-phoebe/assets/og-cover.png">
+<!-- social:end -->
+<title>Practitioner session 10 · The validation bench - learn model risk with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=2">
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-model-risk-with-phoebe</a> / Practitioner session 10 of 10</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Learn Model Risk with Phoebe · Practitioner session 10 of 10</div>
+    <h1>The validation <span class="accent">bench</span></h1>
+    <p class="sub">Nine sessions of technique, and one thing has been missing from all of them: a model whose truth you can check your findings against. Tonight it is available. Brackwater's 6,000 applications are generated from a written model, so the leak is a leak by construction, the population really did move, and the champion's real edge over a three-column benchmark is a number rather than an opinion. Seven tests are available. Run them, collect what they produce, and make the call. The bench will tell you whether the evidence supports it.</p>
+    <div class="chip-row">
+      <span class="chip level">🔴 Hardest</span>
+      <span class="chip audience">Validators and model risk teams</span>
+      <span class="chip audience">Anyone who has to sign the memo</span>
+      <span class="chip time">45 min</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:1">0-3 · Welcome</span>
+      <span class="a2" style="flex:3">3-14 · A model with a known answer</span>
+      <span class="a3" style="flex:6">14-40 · Build-along: run the seven</span>
+      <span class="a4" style="flex:1">40-45 · Q&amp;A</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ INTRO ============ -->
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>What the bench measures</h2>
+    </div>
+    <p class="lede">Whether your findings are right. Not whether they sound rigorous, not whether the report is well written, but whether the thing you wrote down as a finding is actually true of the model in front of you. That is a check no real validation ever gets, because in a real validation nobody knows the answer. Here the applications come from a model written out in the source file, so every claim the bench makes can be traced to a line of it.</p>
+
+    <div class="legend">
+      <span class="pill">Live = presented in the 45 minutes</span>
+      <span class="pill">Self-study = the full depth, after class</span>
+      <span class="pill">🔍 Every diagram zooms</span>
+    </div>
+
+    <div class="callout win">
+      <p><strong>★ What you walk out with tonight.</strong> A worked validation of one model, start to finish, with the evidence for each finding computed rather than asserted. The measured answer to the question every model owner asks - what would the simpler thing have scored - which here is 0.676 against 0.682. And the habit the whole track has been building toward: writing the recommendation the evidence supports, which on this model is neither approval nor refusal.</p>
+    </div>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>Where a known answer comes from<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Real applications never come labelled with the reason they defaulted. These do, because they were generated from a written model: a borrower's true default probability is a stated function of utilisation, prior delinquency, months employed, income ratio and whether the file is thin, plus a shock nobody has a column for. Two vintages come out of it. The development sample is 4,000 applications with a bad rate of 0.292; the later vintage is 2,000 with a bad rate of 0.324.</p>
+        <p>Three things move between the two, all deliberately: the share of thin-file applicants, the strength of the utilisation relationship, and the size of the unobserved shock. That is what makes this a validation exercise rather than a modelling one. Nothing about the champion is broken. The world it was fitted to stopped being the world it runs in.</p>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>Brackwater's review process was a model document, a meeting, and a sign-off sheet. Every number in the document was correct. The reason the review passed is that nobody asked what the numbers were evidence of, and the one question that would have unravelled it - when is the collections field written - takes about ten seconds to ask and was never asked in two years of quarterly reviews.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>What is real here, and what is not<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <ul>
+          <li><strong>The data.</strong> 6,000 applications from fixed seeds, identical for every learner, generated by the model written out in <code class="mono">mr-live.js</code> where every coefficient is visible.</li>
+          <li><strong>Every model.</strong> A real logistic regression, fitted in the page by iteratively reweighted least squares. The champion, the refit and the challenger are all estimated when you click, not stored.</li>
+          <li><strong>Every AUC.</strong> A rank-based calculation over the scores those regressions produced. Nothing is hard-coded, and a number that disagreed with the course notes would be the course notes' problem.</li>
+          <li><strong>The leak.</strong> Real in the strict sense: the collections field is generated from the default outcome, so its predictive power is a fact about the data-generating process rather than a claim about the world.</li>
+          <li><strong>What is not modelled.</strong> There is no simulated human behaviour anywhere in this widget, and no finding is written in advance. The findings panel is assembled from what the tests return.</li>
+        </ul>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 1 ============ -->
+  <section class="section" id="part-1">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · covers the seven tests and what each one is evidence of</span>
+      <h2>Seven tests, three components, one decision</h2>
+      <span class="tag concept">10 min live</span>
+    </div>
+    <p class="lede">The tests on the bench are not a checklist somebody invented. Each one belongs to one of the three components of validation, and part of the exercise is being able to say which, because a report organised by component is a report a reviewer can follow and a report organised by whatever you happened to run is not.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The seven bench tests grouped under the three components of validation. Conceptual soundness holds reading the feature list and refitting without the leaked field. Outcomes analysis holds replicating the submitted number, comparing predicted against actual, and benchmarking a three-feature challenger. Ongoing monitoring holds scoring the later vintage and checking the population. Below, an arrow shows all three feeding one recommendation.">
+        <style>
+          .p10aH { font: 800 12px Inter, sans-serif; fill: #0F172A; }
+          .p10aT { font: 800 11px Inter, sans-serif; fill: #fff; }
+          .p10aB { font: 400 11px Inter, sans-serif; fill: #0F172A; }
+          .p10aM { font: 400 11px Inter, sans-serif; fill: #56617A; }
+        </style>
+        <defs>
+          <marker id="p10aAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#56617A"></path></marker>
+        </defs>
+
+        <text class="p10aH" x="14" y="22">Every test belongs to a component. Report them that way.</text>
+
+        <rect x="14" y="40" width="272" height="150" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <rect x="14" y="40" width="272" height="26" rx="9" fill="#1E3A8A"></rect>
+        <text class="p10aT" x="28" y="58">Conceptual soundness</text>
+        <text class="p10aB" x="28" y="86">Read the feature list</text>
+        <text class="p10aM" x="28" y="104">Is any field written after the outcome</text>
+        <text class="p10aB" x="28" y="130">Refit without the leaked field</text>
+        <text class="p10aM" x="28" y="148">What is left once it is gone</text>
+        <text class="p10aM" x="28" y="176">Caught: collections, 0.748 alone</text>
+
+        <rect x="300" y="40" width="272" height="150" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <rect x="300" y="40" width="272" height="26" rx="9" fill="#1E40AF"></rect>
+        <text class="p10aT" x="314" y="58">Outcomes analysis</text>
+        <text class="p10aB" x="314" y="86">Replicate the submitted number</text>
+        <text class="p10aM" x="314" y="104">Does the document reproduce</text>
+        <text class="p10aB" x="314" y="130">Predicted against actual</text>
+        <text class="p10aM" x="314" y="148">And a three-feature benchmark</text>
+        <text class="p10aM" x="314" y="176">Caught: bands off by up to 0.142</text>
+
+        <rect x="586" y="40" width="280" height="150" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <rect x="586" y="40" width="280" height="26" rx="9" fill="#1E40AF"></rect>
+        <text class="p10aT" x="600" y="58">Ongoing monitoring</text>
+        <text class="p10aB" x="600" y="86">Score the later vintage</text>
+        <text class="p10aM" x="600" y="104">Has performance held up</text>
+        <text class="p10aB" x="600" y="130">Check the population</text>
+        <text class="p10aM" x="600" y="148">Is it still the same book</text>
+        <text class="p10aM" x="600" y="176">Caught: thin files 19.0 to 34.0 percent</text>
+
+        <line x1="150" y1="196" x2="380" y2="238" stroke="#56617A" stroke-width="1.6" marker-end="url(#p10aAr)"></line>
+        <line x1="436" y1="196" x2="436" y2="238" stroke="#56617A" stroke-width="1.6" marker-end="url(#p10aAr)"></line>
+        <line x1="726" y1="196" x2="496" y2="238" stroke="#56617A" stroke-width="1.6" marker-end="url(#p10aAr)"></line>
+
+        <rect x="256" y="246" width="368" height="62" rx="9" fill="#1E3A8A"></rect>
+        <text class="p10aT" x="272" y="272">One recommendation</text>
+        <text class="p10aT" x="272" y="294" style="font-weight:400">Approve, approve with conditions, or decline</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - seven tests, three components. The grouping is what makes the report readable.</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>The number that decides the report<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Of the seven tests, the benchmark is the one that changes the recommendation rather than the wording. The champion, honestly refit and scored on the later vintage, reaches 0.682. A challenger using prior delinquency, utilisation and months employed reaches 0.676. Eleven features, a bespoke build, a validation cycle and an ongoing monitoring obligation, for six thousandths of AUC.</p>
+        <p>That is not an argument for the challenger. It is an argument about evidence: nothing in the model document ever established that the complexity was buying anything, because nobody had run the simple thing. A benchmark is cheap and it reframes every other finding, which is why it belongs early in a validation rather than at the end.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Why the aggregate calibration number is the dangerous one<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Scored on the later vintage the model predicts a mean default rate of 0.330 against an actual 0.324. A gap of 0.006 on the headline would pass any monitoring threshold anybody writes. Split it by quintile of predicted risk and the same model under-predicts the safest band by 0.061 and over-predicts the riskiest by 0.142.</p>
+        <p>The errors are large, they are systematic, and they cancel. A monitoring pack that reports one calibration number per model per quarter would show this model as healthy for as long as the two halves stay in balance, and would show it as suddenly broken on the quarter they stop. Banding is not extra credit; it is the only version of the test that can fail for the right reason.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 2 - THE BENCH ============ -->
+  <section class="section" id="part-2">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · build-along</span>
+      <h2>Run the validation</h2>
+      <span class="tag build">26 min build-along</span>
+    </div>
+    <p class="lede">Work left to right. Run a test, read what it returns, and watch the findings panel assemble itself. Then make the call. The bench is not scoring your speed and there is no prize for finding everything: the point is the gap between what you would have written after three tests and what the evidence supports after seven.</p>
+
+    <div data-mr-bench></div>
+
+    <div class="callout tip">
+      <p><strong>Run them in a deliberate order at least once.</strong> Start with the feature list rather than the metrics. A validator who scores the model first spends the rest of the review explaining a number that should never have been quoted, and a validator who reads the data dictionary first finds the leak before the number has a chance to anchor anybody.</p>
+    </div>
+  </section>
+
+  <!-- ============ PART 3 ============ -->
+  <section class="section" id="part-3">
+    <div class="section-kicker">
+      <span class="klabel">Part 3 · covers the write-up</span>
+      <h2>Turn seven results into one memo</h2>
+      <span class="tag concept">6 min live</span>
+    </div>
+    <p class="lede">The bench produces findings. A report is findings plus a recommendation plus the conditions that make the recommendation safe, and the conditions are the part that gets written badly, because a condition with no owner and no date is a sentence rather than a control.</p>
+
+    <div class="steps">
+      <div class="step">
+                <div><p><strong>State the claim you are validating, not the model.</strong> "The scorecard ranks default risk well enough to set the approval cutoff for the 2026 book." Everything that follows is evidence for or against that sentence.</p></div>
+      </div>
+      <div class="step">
+                <div><p><strong>Lead with the finding that changes the decision.</strong> Here that is the leaked field, because it invalidates the number the approval was requested on. Severity is about consequence, not about how clever the finding was.</p></div>
+      </div>
+      <div class="step">
+                <div><p><strong>Requote performance honestly.</strong> 0.682 out of time, with the method stated, replacing the 0.863 in the model document. A validation that removes a number without supplying its replacement gets ignored.</p></div>
+      </div>
+      <div class="step">
+                <div><p><strong>Give each condition an owner and a trigger.</strong> Recalibrate before the score drives pricing. Monitor the thin-file share with a stated threshold. Re-run the benchmark at the next review. Each one names a person and a date or it is decoration.</p></div>
+      </div>
+      <div class="step">
+                <div><p><strong>Say what you did not test.</strong> The limitations of the validation are part of the validation. Even with sound modelling and rigorous review, material model risk can remain, and the report that admits its own blind spots is the one a supervisor trusts.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions</h2>
+    </div>
+
+    <div class="quiz-q" data-answer="2">
+      <p class="qtext">On the later vintage the model predicts a mean default rate of 0.330 against an actual 0.324. What has that told you?</p>
+      <button class="qopt" type="button">A · That the model is well calibrated, since the gap is six thousandths</button>
+      <button class="qopt" type="button">B · That the model is badly calibrated, since any gap at all is a finding</button>
+      <button class="qopt" type="button">C · Almost nothing on its own, because errors in opposite directions cancel in an aggregate; by quintile the same model is out by +0.061 at the safe end and -0.142 at the risky end</button>
+      <p class="qwhy">A single calibration number would have passed this model. The bands are what make the test capable of failing for the right reason, and the aggregate gap of -0.006 is the number that hides them.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">Out of time the champion scores 0.682 and a three-feature challenger scores 0.676. What is the defensible finding?</p>
+      <button class="qopt" type="button">A · That the model document never established the complexity was buying anything, because the simple benchmark was never run</button>
+      <button class="qopt" type="button">B · That the challenger is the better model and should replace the champion</button>
+      <button class="qopt" type="button">C · That the champion is worthless, since the difference is within noise</button>
+      <p class="qwhy">The two are close enough that neither discrimination result separates them, and each wins on a different business axis: at matched cutoffs the champion approves 69.3 percent with 24.7 percent bad among approved, the challenger 72.2 percent with 25.3 percent. The finding is about the evidence submitted, not about which model is better.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">You have run every test and found one high-severity leak, systematic band-level calibration error, and a population that has moved. What does the evidence support?</p>
+      <button class="qopt" type="button">A · Approval, since the model still discriminates and no test showed it to be harmful</button>
+      <button class="qopt" type="button">B · Approval with conditions: requote performance without the leaked field, recalibrate before the score drives pricing, and set a monitoring trigger on the thin-file share</button>
+      <button class="qopt" type="button">C · Refusal, since a leaked feature in a submitted model is disqualifying on its own</button>
+      <p class="qwhy">Refusal is for a model that cannot be used safely at all. This one can be used on a narrower mandate with its number restated and its drift watched, which is what approval with conditions means when the conditions have owners and triggers attached.</p>
+    </div>
+    <p class="quiz-score"></p>
+  </section>
+
+  <!-- ============ HOMEWORK ============ -->
+  <section class="section" id="homework">
+    <div class="section-kicker">
+      <span class="klabel">Homework</span>
+      <h2>After the track</h2>
+      <span class="tag time">45 min</span>
+    </div>
+    <div class="callout">
+      <p>Take a model your team owns and run the two cheapest tests from tonight against it: score every feature on its own and see whether any single field approaches the full model, and build the three-column benchmark. Both fit in an afternoon and neither needs anybody's permission. Write down what you find in the form the bench uses - finding, severity, condition - and notice how much of a validation report you can produce before anybody has been asked for a meeting.</p>
+    </div>
+  </section>
+
+  <!-- ============ COVERAGE ============ -->
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Sources covered</span>
+      <h2>What tonight maps to</h2>
+    </div>
+    <div class="covered">
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">The three components, run end to end</span>
+        <span class="note">Conceptual soundness, outcomes analysis and ongoing monitoring, each with the bench test that belongs to it and the finding it produced.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">The full Brackwater canon</span>
+        <span class="note">0.863 submitted, 0.748 for the leaked field alone, 0.772 refit, 0.682 out of time, 0.676 for the challenger, calibration bands from +0.068 to -0.142, thin-file share 19.0 to 34.0 percent.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Writing the recommendation the evidence supports</span>
+        <span class="note">Why approval with conditions is the defensible call here, and what makes a condition a control rather than a sentence.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill light">◐</span>
+        <span class="name">Severity, findings and remediation in full</span>
+        <span class="note">Session 9 owns the taxonomy and the tracking. Tonight applies it.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill inkpill">·</span>
+        <span class="name">What AUC and calibration are</span>
+        <span class="note">Not covered by design. <strong>learn-model-evaluation-with-phoebe</strong> defines the metrics; here they are evidence a validator weighs.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill inkpill">·</span>
+        <span class="name">The EU AI Act, NIST AI RMF, ISO/IEC 42001, MAS and FEAT</span>
+        <span class="note">Not covered by design, in any session. <strong>learn-ai-governance-with-phoebe</strong> owns the AI governance frameworks.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CHEAT SHEET ============ -->
+  <section class="cheat" id="cheatsheet">
+    <h3>Session 10 cheat sheet</h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>Read the features first</b><span>Before any metric. A number quoted early anchors the whole review.</span></div>
+      <div class="cheat-item"><b>Score every field alone</b><span>Collections scored 0.748 against a full model of 0.863. One field, almost all the skill.</span></div>
+      <div class="cheat-item"><b>The honest number</b><span>0.772 on development once the leak is gone, 0.682 out of time.</span></div>
+      <div class="cheat-item"><b>Always run the benchmark</b><span>Three columns reached 0.676. The complexity was never shown to buy anything.</span></div>
+      <div class="cheat-item"><b>Band every calibration test</b><span>-0.006 overall, +0.061 to -0.142 by quintile. Aggregates cancel.</span></div>
+      <div class="cheat-item"><b>Watch the population</b><span>Thin files went 19.0 to 34.0 percent. The book moved toward what the model knows least.</span></div>
+      <div class="cheat-item"><b>Conditions need owners</b><span>A condition with no name and no date is a sentence, not a control.</span></div>
+      <div class="cheat-item"><b>Refusal is for unusable</b><span>Not for disappointing. This model earns a narrower mandate, not a rejection.</span></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="pagefoot">
+  <div class="wrap">
+    <p>Practitioner session 10 of 10 · learn-model-risk-with-phoebe · by Phoebe Fu</p>
+    <nav class="pagenav">
+      <a href="p9-writing-findings.html">← Practitioner session 9 · Writing findings</a>
+      <a href="../index.html">All sessions →</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="../assets/mr-live.js?v=2"></script>
+<script src="../assets/app.js?v=2"></script>
+</body>
+</html>

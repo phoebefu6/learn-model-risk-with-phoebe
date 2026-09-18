@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- social:start -->
+<meta name="description" content="Practitioner session 7 of 10. Brackwater's champion refit without the leak scores 0.772 on development and 0.682 on the later vintage, a degradation of 0.090. Thin-file share moved from 19.0 to 34.0 percent. The model is not broken; the relationship it learned moved, and that distinction decides the remediation.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Learn with Phoebe">
+<meta property="og:title" content="Out of time and stability - learn model risk with phoebe">
+<meta property="og:description" content="Practitioner session 7 of 10. Testing on a period the model never saw, and checking whether it is even the same book. 0.772 to 0.682, and a thin-file share that nearly doubled.">
+<meta property="og:url" content="https://phoebefu6.github.io/learn-model-risk-with-phoebe/courses/p7-out-of-time-and-stability.html">
+<meta property="og:image" content="https://phoebefu6.github.io/learn-model-risk-with-phoebe/assets/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Out of time and stability - learn model risk with phoebe">
+<meta name="twitter:description" content="0.772 on development, 0.682 out of time. A population shift is not a failure, it is a reason to expect one.">
+<meta name="twitter:image" content="https://phoebefu6.github.io/learn-model-risk-with-phoebe/assets/og-cover.png">
+<!-- social:end -->
+<title>Practitioner session 7 · Out of time and stability - learn model risk with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=2">
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-model-risk-with-phoebe</a> / Practitioner session 7 of 10</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Learn Model Risk with Phoebe · Practitioner session 7 of 10</div>
+    <h1>Out of time and <span class="accent">stability</span></h1>
+    <p class="sub">Every number produced so far has come from the 4,000 applications the model was fitted on. Tonight the champion, honestly refit without the leaked field, is scored on a year it has never seen. Development gives 0.772. The later vintage gives 0.682, a degradation of 0.090. Then the second and harder question: is the later vintage even the same book. Thin-file applicants went from 19.0 percent of the population to 34.0 percent, prior delinquency from 34.0 to 36.8 percent, mean utilisation from 0.448 to 0.464, and the bad rate from 0.292 to 0.324. The book moved toward exactly the borrowers the model has least evidence about. Nothing here says the model is broken. It says the relationship it learned moved, and that distinction is what decides the remediation.</p>
+    <div class="chip-row">
+      <span class="chip level">🟠 Advanced</span>
+      <span class="chip audience">Validators and the second line</span>
+      <span class="chip audience">Data scientists who own a live model</span>
+      <span class="chip time">45 min</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:1">0-3 · Welcome</span>
+      <span class="a2" style="flex:4">3-16 · The later vintage, and 0.090</span>
+      <span class="a3" style="flex:3">16-27 · Is it the same book</span>
+      <span class="a4" style="flex:5">27-45 · Build-along and Q&amp;A</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ INTRO ============ -->
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>Where this sits in the practitioner track</h2>
+    </div>
+    <p class="lede">Session 6 compared what the model said against what happened, and found an aggregate calibration gap of -0.006 sitting on top of band gaps from +0.068 to -0.142. That test already used the later vintage, and it used it without asking the obvious question: why is this vintage behaving differently at all. Tonight asks it. Out-of-time testing measures how much performance the model loses on a period it never saw, and population stability tells you whether the loss has an explanation in the book or has to be explained some other way. Session 8 designs the monitoring that would have caught this before a validator did. The worked example is <strong>Brackwater</strong>, with 4,000 development applications and 2,000 from the following year.</p>
+
+    <div class="legend">
+      <span class="pill">Live = presented in the 45 minutes</span>
+      <span class="pill">Self-study = the full depth, after class</span>
+      <span class="pill">🔍 Every diagram zooms</span>
+    </div>
+
+    <div class="callout win">
+      <p><strong>★ What you walk out with tonight.</strong> A measured out-of-time result on a model whose truth is known: 0.772 on development, 0.682 on the later vintage, a degradation of 0.090. The discipline of reporting a population comparison beside every out-of-time number, because a degradation with no accompanying population evidence cannot be acted on. The three-way distinction that actually decides what happens next, between recalibration, an overlay and redevelopment. And the habit that separates a validator from a reporter of numbers: writing the threshold down before it is crossed, rather than deciding afterwards whether the movement mattered.</p>
+    </div>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>Out of sample and out of time are two different guards<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Both are named in the current guidance as part of model testing, and they are routinely treated as the same exercise done twice. They are not. Out-of-sample testing holds back rows from the same period and asks whether the model has fitted noise that does not repeat. Out-of-time testing holds back a whole later period and asks a bigger question: whether the relationship the model learned is still the relationship that governs the world it now runs in.</p>
+        <p>A model can pass the first and fail the second, and Brackwater is that case. Nothing in the development sample suggested a problem. Split it any way you like and the model looks stable, because every row in it comes from the same year, the same economy and the same mix of applicants. The later vintage is drawn after all three of those have moved, and the model loses 0.090 of its discrimination on it.</p>
+        <p>This is also why the order of a validation matters. An out-of-time test run before the population comparison produces a number with no explanation attached, and a number with no explanation attached gets argued about rather than acted on. Run both, and report them together.</p>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>Brackwater's model document contained an out-of-sample section and no out-of-time section, on the reasonable-sounding grounds that there was no later data at build time. Two years later there was a great deal of later data and nobody had gone back. The test was never refused; it was deferred once and then inherited by people who did not know it was outstanding.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Four things that all get called "the model degraded"<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <ul>
+          <li><strong>The population moved.</strong> The mix of applicants changed, but the relationship between features and outcome is the same. A model fitted on one mix and scored on another loses performance without anything about it being wrong.</li>
+          <li><strong>The relationship moved.</strong> The same applicant profile now defaults at a different rate, or a feature that used to carry signal carries less of it. This is the deeper failure, and it is the one that recalibration does not repair.</li>
+          <li><strong>The outcome moved.</strong> The base rate changed, here from 0.292 to 0.324. That alone shifts every predicted level without touching the ordering, which is why it shows up in calibration long before it shows up in discrimination.</li>
+          <li><strong>The pipeline moved.</strong> A feed changed, a definition was revised, a join started returning nulls. This looks exactly like the other three from a performance chart and is the first thing to rule out, because it is the only one where the fix is not a modelling decision.</li>
+        </ul>
+        <p>Detecting these shifts as a technique, with the statistics and the continuous evaluation machinery behind them, is <strong>learn-model-evaluation-with-phoebe</strong>'s territory. A validator measures the movement, names which of the four it is consistent with, and says what follows. Those are different jobs, and only the second one belongs in a validation report.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 1 ============ -->
+  <section class="section" id="part-1">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · covers the out-of-time result and what caused it</span>
+      <h2>Score it on a year it never saw</h2>
+      <span class="tag concept">11 min live</span>
+    </div>
+    <p class="lede">The mechanic is unremarkable. Take the model as fitted on development, change nothing about it, and score the later vintage. Do not refit, do not retune, do not reselect features; the point of the test is to measure what the deployed object does on new data, and any adjustment made along the way measures something else. The champion refit without the leaked field scores 0.772 on development and 0.682 on the later vintage. The interesting part is not the 0.090 itself but what is available to explain it.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 342" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A slope chart of the Brackwater champion refit without the leaked field. On the development sample of 4,000 applications it scores 0.772. Scored unchanged on the later vintage of 2,000 applications it scores 0.682, a degradation of 0.090. A panel to the right names the three things that moved between the two vintages by construction: the thin-file share of the book, which went from 19.0 percent to 34.0 percent; the strength of the utilisation relationship; and an economy-wide shock for which the model has no column at all. A note below records that the model is not broken and that the relationship it learned moved.">
+        <style>
+          .p7aH { font: 800 12px Inter, sans-serif; fill: #0F172A; }
+          .p7aT { font: 800 11px Inter, sans-serif; fill: #FFFFFF; }
+          .p7aK { font: 800 11px Inter, sans-serif; fill: #0F172A; }
+          .p7aB { font: 400 11px Inter, sans-serif; fill: #0F172A; }
+          .p7aM { font: 400 10px Inter, sans-serif; fill: #56617A; }
+          .p7aV { font: 800 13px Inter, sans-serif; fill: #1E3A8A; }
+          .p7aR { font: 800 12px Inter, sans-serif; fill: #B91C1C; }
+        </style>
+        <defs>
+          <marker id="p7aDrop" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#B91C1C"></path></marker>
+        </defs>
+
+        <text class="p7aH" x="14" y="22">Same fitted model, unchanged. Only the year it is scored on changes.</text>
+
+        <line x1="100" y1="80" x2="520" y2="80" stroke="#DDE5F0" stroke-width="1"></line>
+        <line x1="100" y1="146.7" x2="520" y2="146.7" stroke="#DDE5F0" stroke-width="1"></line>
+        <line x1="100" y1="213.3" x2="520" y2="213.3" stroke="#DDE5F0" stroke-width="1"></line>
+        <line x1="100" y1="280" x2="520" y2="280" stroke="#C7D2E4" stroke-width="1.4"></line>
+        <text class="p7aM" x="92" y="84" text-anchor="end">0.800</text>
+        <text class="p7aM" x="92" y="150" text-anchor="end">0.750</text>
+        <text class="p7aM" x="92" y="217" text-anchor="end">0.700</text>
+        <text class="p7aM" x="92" y="284" text-anchor="end">0.650</text>
+        <text class="p7aM" x="14" y="64">AUC</text>
+
+        <line x1="180" y1="117.3" x2="440" y2="237.3" stroke="#1E3A8A" stroke-width="2.4"></line>
+        <circle cx="180" cy="117.3" r="7" fill="#1E3A8A"></circle>
+        <circle cx="440" cy="237.3" r="7" fill="#B91C1C"></circle>
+        <text class="p7aV" x="180" y="104" text-anchor="middle">0.772</text>
+        <text class="p7aV" x="440" y="224" text-anchor="middle" fill="#B91C1C">0.682</text>
+
+        <line x1="488" y1="117.3" x2="488" y2="237.3" stroke="#B91C1C" stroke-width="1.6" marker-end="url(#p7aDrop)"></line>
+        <line x1="440" y1="117.3" x2="488" y2="117.3" stroke="#B91C1C" stroke-width="1" stroke-dasharray="4 3"></line>
+        <text class="p7aR" x="496" y="182">-0.090</text>
+
+        <text class="p7aK" x="180" y="302" text-anchor="middle">Development</text>
+        <text class="p7aM" x="180" y="318" text-anchor="middle">4,000 applications</text>
+        <text class="p7aK" x="440" y="302" text-anchor="middle">Later vintage</text>
+        <text class="p7aM" x="440" y="318" text-anchor="middle">2,000 applications</text>
+
+        <rect x="540" y="60" width="326" height="212" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <rect x="540" y="60" width="326" height="26" rx="9" fill="#1E3A8A"></rect>
+        <text class="p7aT" x="554" y="78">Three things moved between them</text>
+        <text class="p7aK" x="554" y="108">1 · The thin-file share of the book</text>
+        <text class="p7aB" x="554" y="126">19.0 percent to 34.0 percent</text>
+        <text class="p7aK" x="554" y="156">2 · The strength of the</text>
+        <text class="p7aK" x="554" y="172">utilisation relationship</text>
+        <text class="p7aB" x="554" y="190">a feature now carries different weight</text>
+        <text class="p7aK" x="554" y="220">3 · An economy-wide shock</text>
+        <text class="p7aB" x="554" y="238">with no column for it anywhere</text>
+        <text class="p7aB" x="554" y="256">in the feature list</text>
+
+        <rect x="540" y="284" width="326" height="44" rx="9" fill="#FEF2F2" stroke="#B91C1C"></rect>
+        <text class="p7aR" x="554" y="304">The model is not broken.</text>
+        <text class="p7aB" x="554" y="320">The relationship it learned moved.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - two of the three movements are visible in the data and one is not. The one with no column is the reason an out-of-time test is not optional.</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Three causes, three different remediations<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The reason to separate the three movements is that they do not lead to the same action, and a validation that reports only the 0.090 leaves the model owner to guess which action was meant.</p>
+        <p><strong>The mix of borrowers changed.</strong> Thin-file applicants went from 19.0 percent of the book to 34.0 percent. The model was fitted on a population where they were a minority and is now scoring a population where they are a third. It has less evidence about them than about anybody else, and it is now being asked about them twice as often. This is a coverage problem, and the honest responses are to restrict the mandate, to add an overlay for that segment, or to refit once enough of them have matured outcomes.</p>
+        <p><strong>A relationship changed strength.</strong> The utilisation relationship is not the same in the later vintage as in the development one. A coefficient fitted on the old strength is now the wrong coefficient, and no amount of rescaling the output fixes a weight on an input. This is the case that points at redevelopment, and it is the case model owners resist hardest because it is the most expensive.</p>
+        <p><strong>Something moved that has no column.</strong> An economy-wide shock is not in the feature list and cannot be. The model has no way to know about it and no way to adjust for it, and the bad rate moving from 0.292 to 0.324 is partly this. The response here is an overlay or a management adjustment, applied on top of the model rather than inside it, documented as a judgement and then itself subject to outcomes analysis.</p>
+        <p>Recalibration is the fourth answer and the most commonly reached for. It repairs levels, not ordering: if the ranking is intact and only the rates attached to it are wrong, recalibrating is the proportionate response. It does nothing at all for a relationship that has changed strength, and applying it there buys quiet numbers for a quarter or two while the underlying problem grows.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Score it unchanged, or you have measured the wrong thing<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The commonest way an out-of-time test gets quietly invalidated is that somebody refits on the way. It usually happens for good reasons: a feature no longer exists in the later data, a category has new levels, a scaler was rebuilt because the code path expected it. Each of those is a small accommodation and each one converts the test from "what does the deployed model do on new data" into "what could a model like this do if it were rebuilt", which is a question nobody asked.</p>
+        <p>The test to apply is simple. Every coefficient, every cut point, every encoding and every imputation rule must be the ones that were in force at the end of development. If something cannot be held fixed because the later data will not support it, that is itself a finding and belongs in the report, because it means the deployed model cannot be scored on current data without intervention.</p>
+        <p>The second invalidation is more subtle and involves the outcome window. The later vintage must have matured outcomes, and a vintage whose window is still open will flatter the model, because the defaults that have not happened yet are counted as non-defaults. A validator who does not state the maturity of the out-of-time window has not stated whether the result is a floor or an estimate.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>How large a drop is a finding<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>There is no universal threshold and anybody offering one should be asked where it came from. What there is instead is a defensible way to set one for a given model, and it rests on three things the validator can actually establish.</p>
+        <p>The first is the sampling variability of the measure on a sample of this size. A drop inside the range you would see from resampling alone is not evidence of anything, and 2,000 applications is not a large sample. The second is the business consequence at the cutoff in use, which is a far better currency than the measure itself: session 5's comparison is in approval rates and bad rates among approved, and those translate directly into a number the committee already understands. The third is what the model is used for, since the guidance ties the rigour of validation to the model's approach, use and materiality.</p>
+        <p>The thing that is not defensible is deciding after the fact. A threshold chosen once the number is known is a rationalisation, and everyone in the room can tell. Write the threshold down before the test runs, state what happens when it is crossed, and accept the consequence if it is. Session 8 is where this becomes a standing control rather than a one-off judgement.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 2 ============ -->
+  <section class="section" id="part-2">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · covers population stability and what it licenses you to say</span>
+      <h2>Is it even the same book</h2>
+      <span class="tag concept">10 min live</span>
+    </div>
+    <p class="lede">A degradation number on its own is a symptom with no diagnosis. The population comparison is what turns it into one, and it is cheap: means and shares for the features the model uses, development against the later vintage, side by side. At Brackwater it says something specific. The share of thin-file applicants has nearly doubled, prior delinquency is up modestly, mean utilisation is up slightly, and the bad rate has risen from 0.292 to 0.324. The book moved toward exactly the borrowers the model has least evidence about, which is a sentence a validator can put in a report and a committee can act on.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 366" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A population comparison between Brackwater's development sample and its later vintage, on a common scale from zero to 0.500. The thin-file share of the book moved from 19.0 percent to 34.0 percent, a shift of 15.0 percentage points. Prior delinquency moved from 34.0 percent to 36.8 percent, a shift of 2.8 percentage points. Mean utilisation moved from 0.448 to 0.464, a shift of 0.016. The bad rate moved from 0.292 to 0.324, a shift of 0.032. The thin-file movement is several times larger than any other, and thin-file applicants are the group the model has least evidence about.">
+        <style>
+          .p7bH { font: 800 12px Inter, sans-serif; fill: #0F172A; }
+          .p7bK { font: 800 11px Inter, sans-serif; fill: #0F172A; }
+          .p7bB { font: 400 11px Inter, sans-serif; fill: #0F172A; }
+          .p7bM { font: 400 10px Inter, sans-serif; fill: #56617A; }
+          .p7bV { font: 700 10px Inter, sans-serif; fill: #1E3A8A; }
+          .p7bW { font: 700 10px Inter, sans-serif; fill: #B91C1C; }
+          .p7bG { font: 800 11px Inter, sans-serif; fill: #B91C1C; }
+          .p7bR { font: 800 12px Inter, sans-serif; fill: #B91C1C; }
+        </style>
+        <defs>
+          <marker id="p7bTip" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#56617A"></path></marker>
+        </defs>
+
+        <text class="p7bH" x="14" y="20">Four proportions, one common scale. Development against the later vintage.</text>
+
+        <circle cx="20" cy="40" r="5" fill="#1E3A8A"></circle>
+        <text class="p7bB" x="32" y="44">Development, 4,000</text>
+        <circle cx="190" cy="40" r="5" fill="#B91C1C"></circle>
+        <text class="p7bB" x="202" y="44">Later vintage, 2,000</text>
+
+        <text class="p7bM" x="280" y="84" text-anchor="middle">0.000</text>
+        <text class="p7bM" x="372" y="84" text-anchor="middle">0.100</text>
+        <text class="p7bM" x="464" y="84" text-anchor="middle">0.200</text>
+        <text class="p7bM" x="556" y="84" text-anchor="middle">0.300</text>
+        <text class="p7bM" x="648" y="84" text-anchor="middle">0.400</text>
+        <text class="p7bM" x="740" y="84" text-anchor="middle">0.500</text>
+        <text class="p7bK" x="768" y="84">Shift</text>
+
+        <line x1="280" y1="92" x2="280" y2="300" stroke="#C7D2E4" stroke-width="1.4"></line>
+        <line x1="372" y1="92" x2="372" y2="300" stroke="#DDE5F0" stroke-width="1"></line>
+        <line x1="464" y1="92" x2="464" y2="300" stroke="#DDE5F0" stroke-width="1"></line>
+        <line x1="556" y1="92" x2="556" y2="300" stroke="#DDE5F0" stroke-width="1"></line>
+        <line x1="648" y1="92" x2="648" y2="300" stroke="#DDE5F0" stroke-width="1"></line>
+        <line x1="740" y1="92" x2="740" y2="300" stroke="#DDE5F0" stroke-width="1"></line>
+
+        <text class="p7bK" x="14" y="106">Thin-file share of the book</text>
+        <text class="p7bM" x="14" y="120">the group with least evidence</text>
+        <line x1="454.8" y1="112" x2="592.8" y2="112" stroke="#56617A" stroke-width="1.8" marker-end="url(#p7bTip)"></line>
+        <circle cx="454.8" cy="112" r="5.5" fill="#1E3A8A"></circle>
+        <circle cx="592.8" cy="112" r="5.5" fill="#B91C1C"></circle>
+        <text class="p7bV" x="454.8" y="130" text-anchor="middle">19.0%</text>
+        <text class="p7bW" x="592.8" y="99" text-anchor="middle">34.0%</text>
+        <text class="p7bG" x="768" y="116">+15.0 pts</text>
+
+        <text class="p7bK" x="14" y="162">Prior delinquency</text>
+        <text class="p7bM" x="14" y="176">share of applicants</text>
+        <line x1="592.8" y1="168" x2="618.6" y2="168" stroke="#56617A" stroke-width="1.8" marker-end="url(#p7bTip)"></line>
+        <circle cx="592.8" cy="168" r="5.5" fill="#1E3A8A"></circle>
+        <circle cx="618.6" cy="168" r="5.5" fill="#B91C1C"></circle>
+        <text class="p7bV" x="592.8" y="186" text-anchor="middle">34.0%</text>
+        <text class="p7bW" x="618.6" y="155" text-anchor="middle">36.8%</text>
+        <text class="p7bG" x="768" y="172">+2.8 pts</text>
+
+        <text class="p7bK" x="14" y="218">Mean utilisation</text>
+        <text class="p7bM" x="14" y="232">the relationship also changed</text>
+        <line x1="692.2" y1="224" x2="706.9" y2="224" stroke="#56617A" stroke-width="1.8" marker-end="url(#p7bTip)"></line>
+        <circle cx="692.2" cy="224" r="5.5" fill="#1E3A8A"></circle>
+        <circle cx="706.9" cy="224" r="5.5" fill="#B91C1C"></circle>
+        <text class="p7bV" x="692.2" y="242" text-anchor="middle">0.448</text>
+        <text class="p7bW" x="706.9" y="211" text-anchor="middle">0.464</text>
+        <text class="p7bG" x="768" y="228">+0.016</text>
+
+        <text class="p7bK" x="14" y="274">Bad rate</text>
+        <text class="p7bM" x="14" y="288">what the model predicts</text>
+        <line x1="548.6" y1="280" x2="578.1" y2="280" stroke="#56617A" stroke-width="1.8" marker-end="url(#p7bTip)"></line>
+        <circle cx="548.6" cy="280" r="5.5" fill="#1E3A8A"></circle>
+        <circle cx="578.1" cy="280" r="5.5" fill="#B91C1C"></circle>
+        <text class="p7bV" x="548.6" y="298" text-anchor="middle">0.292</text>
+        <text class="p7bW" x="578.1" y="267" text-anchor="middle">0.324</text>
+        <text class="p7bG" x="768" y="284">+0.032</text>
+
+        <rect x="14" y="314" width="852" height="42" rx="9" fill="#FEF2F2" stroke="#B91C1C"></rect>
+        <text class="p7bR" x="26" y="334">One of these movements is several times the size of the others.</text>
+        <text class="p7bB" x="26" y="350">The book moved toward exactly the borrowers the model has least evidence about. That is not a failure. It is a reason to expect one.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - shifts in points for the two shares and in absolute terms for the two rates. Measuring the movement is the validator's job; the detection techniques belong to learn-model-evaluation-with-phoebe.</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>A population shift is not a failure, it is a reason to expect one<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>This is the sentence to take away. A book that has changed shape has not done anything wrong, and neither has the model. Lending books move because businesses grow, channels open, competitors withdraw, marketing changes and the economy turns. A validator who treats every shift as a defect will be ignored within two cycles, and correctly so.</p>
+        <p>What a shift does is change the standing of the evidence. The development testing in the model document was evidence about a population that is 19.0 percent thin-file. It is weaker evidence about a population that is 34.0 percent thin-file, and it is weaker in a specific, nameable way: the segment now carrying a third of the volume was a minority of the rows the coefficients were estimated from. Nothing about the model changed. The question the evidence answers stopped matching the question being asked.</p>
+        <p>So the validator's job here has two halves. Say which shifts the model can absorb, which for most models means shifts inside the range the development data covered, where the model is interpolating. And say which it cannot, which means shifts that take a segment outside that range or that make a sparse segment material. Then write the threshold down before it is crossed, because the value of this analysis is entirely in having done it early.</p>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>The thin-file share at Brackwater did not jump. It drifted, a little each quarter, through a period when the business was deliberately opening a newer-to-credit channel and reporting that as a success. Every individual quarter's movement was defensible. No individual quarter's movement crossed anything, because nothing had been written down to cross.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Which shift the model can absorb, and writing it down first<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>A threshold that is useful has four parts, and a threshold missing any of them will not survive its first breach.</p>
+        <ul>
+          <li><strong>The quantity.</strong> Named precisely enough to be recomputed by somebody else, with its population and its window. "Thin-file share of booked applications, trailing three months" is a quantity. "Population stability" is a topic.</li>
+          <li><strong>The level.</strong> A number, set with a stated reason. The reason does not have to be sophisticated, and "this is the edge of the range the model was fitted on" is a better reason than most of the sophisticated ones.</li>
+          <li><strong>The action.</strong> What happens on breach, specifically. Not "escalate", but who is told, what they are required to produce, and by when. A trigger whose action is a notification is a trigger that fires into a mailbox.</li>
+          <li><strong>The owner.</strong> A named role that carries the consequence. Without this, the breach gets discussed and the model keeps running, which is the observed outcome in most institutions.</li>
+        </ul>
+        <p>The reason to write this before the number is known is that nobody can do it afterwards. Once the thin-file share reads 34.0 percent, any threshold you propose is a position in an argument. Proposed at 19.0 percent, when nothing is at stake and the channel is new, the same threshold is uncontroversial and takes ten minutes to agree. The whole value of the control is spent in that ten minutes, and session 8 is about not wasting it.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>What the guidance says happens next<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Ongoing monitoring is the third component of validation, and the current text defines it as "an evaluation of the extent to which a model is performing as expected given potential changes in products, exposures, activities, clients, data relevance, or market conditions". That list is worth reading item by item against Brackwater, because three of the six are directly in evidence tonight. Clients, in the shift toward thin-file applicants. Data relevance, in development evidence that is now about a different mix. Market conditions, in the economy-wide shock with no column for it.</p>
+        <p>The guidance goes on to say that a model no longer performing as expected may warrant overlays, adjustment or redevelopment. Three named options, in ascending order of cost, and the choice between them is exactly the three-way diagnosis from Part 1. An overlay for the shock nobody has a column for. Adjustment, in the sense of recalibration, for levels that have drifted while the ordering holds. Redevelopment for a relationship that has changed strength.</p>
+        <p>Tonight is the test that tells you one of those is needed. It does not design the control that would have told you sooner, and it does not decide the thresholds that make the control fire. Session 8 owns both. The reason they are separate sessions is that they are separate skills: measuring a shift is a technical exercise, and designing a control that somebody will actually act on is an organisational one.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 3 ============ -->
+  <section class="section" id="part-3">
+    <div class="section-kicker">
+      <span class="klabel">Part 3 · build-along</span>
+      <h2>Two tables, and neither is useful without the other</h2>
+      <span class="tag build">18 min build-along</span>
+    </div>
+    <p class="lede">The out-of-time score is four lines of code and the population comparison is six. Together they are the whole of tonight, and the discipline is that they go in the report as a pair. A degradation with no population evidence is a number the model owner will explain away; a population comparison with no degradation is a table nobody reads.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div><p><strong>Freeze the model before you go anywhere near the later data.</strong> Fit on development, then treat the fitted object as read-only. Every coefficient, cut point, encoding and imputation rule stays as it was. If your code cannot score the later vintage without changing one of them, stop and write that down, because it is a finding about the deployed model rather than a technical inconvenience.</p></div>
+      </div>
+      <div class="step">
+        <div><p><strong>Confirm the later vintage has matured outcomes.</strong> An open window counts defaults that have not happened yet as non-defaults and flatters the model. State the maturity in the report so the reader knows whether your number is a floor or an estimate.</p></div>
+      </div>
+      <div class="step">
+        <div><p><strong>Score it unchanged and report both numbers with the degradation named.</strong> 0.772 and 0.682, and the 0.090 between them. Reporting only the second one invites the response that it was never that good; reporting only the difference hides the level the business is actually running at.</p></div>
+      </div>
+      <div class="step">
+        <div><p><strong>Compare the population on every feature the model uses, not just the interesting ones.</strong> Means for continuous features, shares for indicators, and the outcome rate alongside them. The feature you did not check is the one the model owner will point at.</p></div>
+      </div>
+      <div class="step">
+        <div><p><strong>Rank the shifts by size and look at the largest first.</strong> At Brackwater the thin-file share moves by several times more than anything else, which makes it the sentence the report leads with. Prior delinquency at +2.8 points and utilisation at +0.016 are context, not headlines.</p></div>
+      </div>
+      <div class="step">
+        <div><p><strong>Say which of the four causes each shift is consistent with, and stop there.</strong> Mix, relationship, outcome level, or pipeline. Consistent with is the right strength of claim; a comparison of two populations does not identify an effect, and reaching for machinery that would is <strong>learn-causal-inference-with-phoebe</strong>'s territory and unnecessary here.</p></div>
+      </div>
+      <div class="step">
+        <div><p><strong>Name the remediation the diagnosis points at, with its cost.</strong> Overlay, recalibration or redevelopment. The model owner will choose, and a validator who names all three with what each does and does not repair has made that choice an informed one rather than a budget one.</p></div>
+      </div>
+      <div class="step">
+        <div><p><strong>Propose the threshold now, while the number is uncontroversial.</strong> Quantity, level, action, owner. Written into the report as a recommendation, not left for the monitoring redesign, because the monitoring redesign is six months away and the book is still moving.</p></div>
+      </div>
+    </div>
+
+    <div class="prompt-box good">
+      <span class="label">★ Try it now - score the development-fitted model on the later vintage</span>
+      <pre style="margin:0"><code>import pandas as pd
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import roc_auc_score
+
+dev = pd.read_csv("brackwater_dev.csv")   # 4,000 development applications
+oot = pd.read_csv("brackwater_oot.csv")   # 2,000 from the following year
+
+# The honest champion: refit without the leaked collections field.
+feats = ["util", "priorDelq", "employed", "incomeRat", "thin",
+         "age", "n0", "n1", "n2", "n3"]
+
+model = LogisticRegression(max_iter=2000, C=1e4).fit(dev[feats], dev["bad"])
+
+# Fitted once, scored twice. Nothing is refitted on the later vintage.
+dev_auc = roc_auc_score(dev["bad"], model.predict_proba(dev[feats])[:, 1])
+oot_auc = roc_auc_score(oot["bad"], model.predict_proba(oot[feats])[:, 1])
+
+print(round(dev_auc, 3))               # 0.772  development
+print(round(oot_auc, 3))               # 0.682  later vintage
+print(round(dev_auc - oot_auc, 3))     # 0.090  the degradation
+
+# If this block had to touch `feats`, a scaler or an encoder to run the
+# second line, the test would be measuring a rebuild and not the model.</code></pre>
+    </div>
+
+    <div class="prompt-box good">
+      <span class="label">★ Try it now - the population comparison that explains it</span>
+      <pre style="margin:0"><code>def profile(df):
+    """Shares for the indicators, means for the rates, outcome alongside."""
+    return pd.Series({
+        "thin-file share":   df["thin"].mean(),
+        "prior delinquency": df["priorDelq"].mean(),
+        "mean utilisation":  df["util"].mean(),
+        "bad rate":          df["bad"].mean(),
+    })
+
+compare = pd.DataFrame({
+    "development":   profile(dev),
+    "later vintage": profile(oot),
+}).round(3)
+
+compare["shift"] = (compare["later vintage"] - compare["development"]).round(3)
+print(compare.sort_values("shift", key=abs, ascending=False))
+
+#                     development  later vintage  shift
+# thin-file share           0.190          0.340  0.150   &lt;- nearly doubled
+# bad rate                  0.292          0.324  0.032
+# prior delinquency         0.340          0.368  0.028
+# mean utilisation          0.448          0.464  0.016
+
+# One shift is several times the others. The book moved toward exactly
+# the borrowers the model has least evidence about, and the development
+# testing in the model document is weaker evidence about that book.</code></pre>
+    </div>
+
+    <div class="callout tip">
+      <p><strong>Put the two tables on one page and write one sentence between them.</strong> "Discrimination fell by 0.090 on the later vintage, over a period in which the thin-file share of the book rose from 19.0 percent to 34.0 percent." That sentence is the finding. Everything above it is evidence and everything below it is remediation, and a report structured that way is one a model owner can disagree with precisely rather than generally.</p>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions</h2>
+    </div>
+
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">Brackwater's champion, refit without the leaked field, scores 0.772 on development and 0.682 on the later vintage. What is the defensible reading of the 0.090?</p>
+      <button class="qopt" type="button">A · The model is broken and should be withdrawn until it has been rebuilt</button>
+      <button class="qopt" type="button">B · The model is not broken; the relationship it learned moved, and which of the three movements dominates decides whether the answer is recalibration, an overlay or redevelopment</button>
+      <button class="qopt" type="button">C · The development number was overstated, since a model that loses 0.090 was never really at 0.772</button>
+      <p class="qwhy">Three things moved between the vintages by construction: the thin-file share of the book, the strength of the utilisation relationship, and an economy-wide shock with no column for it. Each points at a different remediation, and recalibration in particular repairs levels rather than ordering, so it does nothing for a relationship that has changed strength. Reporting the 0.090 without the diagnosis leaves the model owner to guess which action was meant.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="2">
+      <p class="qtext">The thin-file share of the book has gone from 19.0 percent to 34.0 percent. A model owner says no threshold was breached, so there is nothing to report. What is the flaw?</p>
+      <button class="qopt" type="button">A · There is no flaw; without a documented threshold there is no basis for a finding</button>
+      <button class="qopt" type="button">B · The flaw is that the shift is large, and any shift above ten points should be reported regardless of thresholds</button>
+      <button class="qopt" type="button">C · Nothing was breached because nothing had been written down to breach; the validator's job is to say which shifts the model can absorb and which it cannot, and to get the threshold recorded before it is crossed rather than after</button>
+      <p class="qwhy">A population shift is not itself a failure, it is a reason to expect one. The drift was gradual and each quarter's movement was individually defensible, which is exactly how a book arrives somewhere nobody intended. A threshold proposed at 19.0 percent costs ten minutes to agree; the same threshold proposed at 34.0 percent is a position in an argument. Option B invents a level with no stated reason, which is the thing to avoid.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">Under the revised interagency guidance of 17 April 2026, what does ongoing monitoring evaluate, and what may follow when a model is no longer performing as expected?</p>
+      <button class="qopt" type="button">A · The extent to which a model is performing as expected given potential changes in products, exposures, activities, clients, data relevance, or market conditions; a model no longer performing as expected may warrant overlays, adjustment or redevelopment</button>
+      <button class="qopt" type="button">B · Whether the model's development documentation remains complete and current, with any gaps closed at the next annual review</button>
+      <button class="qopt" type="button">C · Whether the model continues to satisfy the applicable governance framework, with re-certification required when it does not</button>
+      <p class="qwhy">Three of the six named changes are directly in evidence at Brackwater: clients, in the shift toward thin-file applicants; data relevance, in development evidence that is now about a different mix; and market conditions, in the shock with no column for it. The three remedies are named in ascending order of cost and map onto the three-way diagnosis. Note that SR 11-7 is superseded; the April 2026 text is the current one. Governance frameworks are a different subject and belong to learn-ai-governance-with-phoebe.</p>
+    </div>
+    <p class="quiz-score"></p>
+  </section>
+
+  <!-- ============ HOMEWORK ============ -->
+  <section class="section" id="homework">
+    <div class="section-kicker">
+      <span class="klabel">Homework</span>
+      <h2>Before session 8</h2>
+      <span class="tag time">45 min</span>
+    </div>
+    <div class="callout">
+      <p>Take a model your team runs and build the population comparison for it: every feature the model uses, development against the most recent complete quarter, with the outcome rate alongside and the shifts ranked by size. Most of the work is finding the development profile, and if it is not recoverable that is your first finding. Then pick the largest shift and draft a four-part threshold for it: the quantity with its population and window, the level with a stated reason, the action on breach, and the named owner. Bring the draft to session 8, which is where thresholds stop being a validator's recommendation and become a control that fires.</p>
+    </div>
+  </section>
+
+  <!-- ============ COVERAGE ============ -->
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Sources covered</span>
+      <h2>What tonight maps to</h2>
+    </div>
+    <div class="covered">
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Out-of-time testing, measured</span>
+        <span class="note">The champion refit without the leak scores 0.772 on development and 0.682 on the later vintage, a degradation of 0.090. Out-of-sample and out-of-time testing are both named in the current guidance as part of model testing, and they guard against different things.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Why it degraded</span>
+        <span class="note">Three things moved between the vintages by construction: the thin-file share of the book, the strength of the utilisation relationship, and an economy-wide shock with no column for it. The model is not broken; the relationship it learned moved.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Population stability, with the numbers</span>
+        <span class="note">Thin-file share 19.0 percent to 34.0 percent; prior delinquency 34.0 to 36.8 percent; mean utilisation 0.448 to 0.464. Bad rates moved too, from 0.292 on development to 0.324 on the later vintage. The book moved toward exactly the borrowers the model has least evidence about.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">What the shift licenses a validator to say</span>
+        <span class="note">A population shift is not itself a failure, it is a reason to expect one. The job is to say which shift the model can absorb and which it cannot, and to write the threshold down before it is crossed.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">The remediation the diagnosis points at</span>
+        <span class="note">Under the revised interagency guidance of 17 April 2026, ongoing monitoring is "an evaluation of the extent to which a model is performing as expected given potential changes in products, exposures, activities, clients, data relevance, or market conditions", and a model no longer performing as expected may warrant overlays, adjustment or redevelopment. SR 11-7 is superseded.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill light">◐</span>
+        <span class="name">Outcomes analysis by band</span>
+        <span class="note">Session 6. It supplied the calibration evidence on this same later vintage: an aggregate gap of -0.006 over band gaps from +0.068 to -0.142.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill light">◐</span>
+        <span class="name">Designing the monitoring that fires</span>
+        <span class="note">Session 8 owns thresholds, triggers, what actually fires and who reads it. Tonight is the test that tells you it is needed.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill inkpill">·</span>
+        <span class="name">Drift detection as a technique</span>
+        <span class="note">Not covered by design. <strong>learn-model-evaluation-with-phoebe</strong> owns drift and continuous evaluation. Here the shift is measured and named; the detection methods and their statistics live there.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill inkpill">·</span>
+        <span class="name">What AUC is, and what a base rate is</span>
+        <span class="note">Not covered by design. <strong>learn-model-evaluation-with-phoebe</strong> defines the metrics; here they appear only as evidence a validator weighs.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill inkpill">·</span>
+        <span class="name">Whether the economy-wide shock caused the degradation</span>
+        <span class="note">Not covered by design. A comparison of two populations does not identify an effect; "consistent with" is the right strength of claim. <strong>learn-causal-inference-with-phoebe</strong> owns the machinery for anything stronger.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill inkpill">·</span>
+        <span class="name">Governance frameworks of every kind</span>
+        <span class="note">Not covered by design, in any session. <strong>learn-ai-governance-with-phoebe</strong> owns them.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CHEAT SHEET ============ -->
+  <section class="cheat" id="cheatsheet">
+    <h3>Session 7 cheat sheet</h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>The out-of-time result</b><span>0.772 on development, 0.682 on the later vintage, a degradation of 0.090. Same fitted model, scored twice.</span></div>
+      <div class="cheat-item"><b>Two different guards</b><span>Out of sample asks whether the model fitted noise. Out of time asks whether the relationship still holds.</span></div>
+      <div class="cheat-item"><b>Score it unchanged</b><span>Refit anything on the way and you have measured a rebuild. If you cannot hold it fixed, that is the finding.</span></div>
+      <div class="cheat-item"><b>Three things moved</b><span>The thin-file share, the strength of the utilisation relationship, and a shock with no column for it.</span></div>
+      <div class="cheat-item"><b>The population numbers</b><span>Thin-file 19.0 to 34.0 percent, prior delinquency 34.0 to 36.8, utilisation 0.448 to 0.464, bad rate 0.292 to 0.324.</span></div>
+      <div class="cheat-item"><b>Not a failure, a reason to expect one</b><span>The book moved toward the borrowers the model has least evidence about. The evidence weakened; the model did not change.</span></div>
+      <div class="cheat-item"><b>Three remedies, ascending cost</b><span>Overlay for what has no column, recalibration for levels while ordering holds, redevelopment for a relationship that moved.</span></div>
+      <div class="cheat-item"><b>Write the threshold down first</b><span>Quantity, level, action, owner. Agreed at 19.0 percent it takes ten minutes. Proposed at 34.0 percent it is an argument.</span></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="pagefoot">
+  <div class="wrap">
+    <p>Practitioner session 7 of 10 · learn-model-risk-with-phoebe · by Phoebe Fu</p>
+    <nav class="pagenav">
+      <a href="p6-outcomes-analysis.html">← Practitioner session 6 · Outcomes analysis</a>
+      <a href="p8-ongoing-monitoring.html">Practitioner session 8 · Ongoing monitoring →</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="../assets/app.js?v=2"></script>
+</body>
+</html>

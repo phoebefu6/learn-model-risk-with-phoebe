@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- social:start -->
+<meta name="description" content="Practitioner session 8 of 10. Brackwater's aggregate calibration gap out of time is -0.006 and passes any threshold anybody writes, while the bands run +0.061 to -0.142. Designing a monitoring pack that can fail for the right reason: what to watch, at what level, in what window, owned by whom, and with what consequence.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Learn with Phoebe">
+<meta property="og:title" content="Ongoing monitoring - learn model risk with phoebe">
+<meta property="og:description" content="Practitioner session 8 of 10. A monitoring metric that cannot fail for the right reason is decoration. Thresholds, triggers, owners, and the one defect monitoring can never see.">
+<meta property="og:url" content="https://phoebefu6.github.io/learn-model-risk-with-phoebe/courses/p8-ongoing-monitoring.html">
+<meta property="og:image" content="https://phoebefu6.github.io/learn-model-risk-with-phoebe/assets/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ongoing monitoring - learn model risk with phoebe">
+<meta name="twitter:description" content="-0.006 overall, +0.061 to -0.142 by band. One of those numbers is in the monitoring pack, and it is the wrong one.">
+<meta name="twitter:image" content="https://phoebefu6.github.io/learn-model-risk-with-phoebe/assets/og-cover.png">
+<!-- social:end -->
+<title>Practitioner session 8 · Ongoing monitoring - learn model risk with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=2">
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-model-risk-with-phoebe</a> / Practitioner session 8 of 10</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Learn Model Risk with Phoebe · Practitioner session 8 of 10</div>
+    <h1>Ongoing <span class="accent">monitoring</span></h1>
+    <p class="sub">Brackwater's aggregate calibration gap on the later vintage is -0.006. It would pass any threshold anybody has ever written down. By band, the same model in the same quarter is out by +0.061 at the safe end and -0.142 at the risky end, and the two halves cancel. A monitoring pack reporting one number per model per quarter would have shown this model healthy right up to the quarter the cancellation stopped, at which point it would have shown a model that broke overnight. Nothing broke overnight. The pack was measuring something that could not fail for the right reason, and a metric that cannot fail for the right reason is decoration.</p>
+    <div class="chip-row">
+      <span class="chip level">🟠 Advanced</span>
+      <span class="chip audience">Validators and the second line</span>
+      <span class="chip audience">Data scientists who own a live model</span>
+      <span class="chip time">45 min</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:1">0-3 · Welcome</span>
+      <span class="a2" style="flex:4">3-16 · What to watch</span>
+      <span class="a3" style="flex:3">16-27 · Thresholds that fire</span>
+      <span class="a4" style="flex:5">27-45 · Build-along and Q&amp;A</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ INTRO ============ -->
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>Where this sits in the practitioner track</h2>
+    </div>
+    <p class="lede">Session 6 compared predicted against actual by band and found the aggregate hiding the bands. Session 7 scored the frozen model on a year it had never seen, watched discrimination fall from 0.772 to 0.682, and found a book that had moved toward exactly the borrowers the model has least evidence about. Both of those were validator tests, run once, by somebody with a mandate and a deadline. Tonight they become a standing control that runs when nobody is looking, which is a different design problem with a different failure mode: a validator who finds nothing has done a bad review, and a monitoring pack that finds nothing looks like good news. Session 9 turns what fires into a finding somebody has to answer. The worked example is <strong>Brackwater</strong>'s consumer scorecard throughout, 4,000 development applications at a bad rate of 0.292 and 2,000 from the following year at 0.324.</p>
+
+    <div class="legend">
+      <span class="pill">Live = presented in the 45 minutes</span>
+      <span class="pill">Self-study = the full depth, after class</span>
+      <span class="pill">🔍 Every diagram zooms</span>
+    </div>
+
+    <div class="callout win">
+      <p><strong>★ What you walk out with tonight.</strong> A test for whether a monitoring metric is worth reporting: can it fail for the right reason, on this model, given what you already know moves. The four parts every trigger needs before it counts as a control rather than a chart. A worked monitoring specification for Brackwater with seven rows, three of which fire on the later vintage and four of which do not. And the boundary of the whole technique, which matters more than any of it: monitoring compares the model against the world, so it is structurally blind to a model that is wrong in a way the world confirms.</p>
+    </div>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>What ongoing monitoring is, and what it obliges<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Ongoing monitoring is the third of the three components of validation, and the revised interagency guidance of 17 April 2026 defines it as "an evaluation of the extent to which a model is performing as expected given potential changes in products, exposures, activities, clients, data relevance, or market conditions". Read the list of things that might have changed: products, exposures, activities, clients, data relevance, market conditions. Not one of them is a property of the model. Every one of them is a property of the world the model was fitted to, which is the clue to what the pack should contain.</p>
+        <p>A model that is no longer performing as expected "may warrant overlays, adjustment, or redevelopment". That sentence is doing more work than it looks like. It names three different repairs of three very different costs, which means the monitoring result is expected to be specific enough to choose between them. A pack that can only say "red" cannot.</p>
+        <p>An effective plan also includes "regularly assessing any model limitations at the development stage and over time, along with procedures for responding to any issues". The limitations are written at development time, before anything is running, and the procedure for responding is written then too. And the frequency and scope of monitoring reports depend on the nature of the model, the availability of new data or modelling approaches, and model materiality. Frequency is a risk decision, not a calendar convenience.</p>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>Brackwater's monitoring pack had one page per model: a population count, an approval rate, and a single calibration number. It was produced quarterly, circulated to eleven people, and had never once produced an action item in two years. That is not a pack nobody read. It is a pack that could not say anything.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Monitoring, revalidation and a validator's test are three different things<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <ul>
+          <li><strong>A validator's test.</strong> Run once, by somebody independent, against a question they chose. Sessions 3 to 7 were all of these. It can be as expensive and as bespoke as the question deserves, because it happens once.</li>
+          <li><strong>Ongoing monitoring.</strong> Runs on a schedule, unattended, against questions chosen in advance. It has to be cheap enough to run every quarter forever and specific enough that a breach means something. Those two pressures pull in opposite directions and the design is the compromise.</li>
+          <li><strong>Periodic revalidation.</strong> The whole review done again, on a cycle set by materiality. Monitoring is what tells you whether the cycle is fast enough, and a monitoring trigger is what pulls a revalidation forward.</li>
+          <li><strong>An overlay.</strong> An adjustment applied to model output while the underlying model is unchanged. It is a repair, not a monitor, and it is the cheapest of the three repairs the guidance names. A model running on an overlay that nobody has revisited is its own finding.</li>
+        </ul>
+        <p>Keeping them apart matters because the common failure is to promise the second and deliver nothing, on the grounds that the first was thorough. A thorough validation in March says nothing about September, which is the entire reason the third component exists.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 1 ============ -->
+  <section class="section" id="part-1">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · covers the design problem and what to watch</span>
+      <h2>Design the metric so it can fail</h2>
+      <span class="tag concept">13 min live</span>
+    </div>
+    <p class="lede">The usual way a monitoring pack gets built is to list the metrics somebody can compute cheaply and put them in a table. The better way is to start from what you already know can move on this model, and design each metric so that when the thing moves, the number moves too. Brackwater is the perfect teaching case because the evidence is already in hand: session 6 established that the errors are large, systematic and opposed, and session 7 established which part of the population shifted. Any metric that survives both of those facts and still reads as healthy is a metric that was never going to say anything.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 372" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Two panels comparing an aggregate calibration number with the same quarter split by band. The top panel shows the aggregate calibration gap on the later vintage, predicted 0.330 against an actual 0.324, a gap of -0.006 that passes. The lower panel is a diverging bar chart of the five quintiles of predicted risk: quintile 1 plus 0.061, quintile 2 plus 0.068, quintile 3 plus 0.035, quintile 4 minus 0.054, quintile 5 minus 0.142. Blue bars point right where the model under-predicts and red bars point left where it over-predicts, and the two sides cancel in the aggregate.">
+        <style>
+          .p8aH { font: 800 12px Inter, sans-serif; fill: #0F172A; }
+          .p8aT { font: 800 11px Inter, sans-serif; fill: #FFFFFF; }
+          .p8aK { font: 800 11px Inter, sans-serif; fill: #0F172A; }
+          .p8aV { font: 800 11px Inter, sans-serif; fill: #1E3A8A; }
+          .p8aR { font: 800 11px Inter, sans-serif; fill: #B91C1C; }
+          .p8aM { font: 400 11px Inter, sans-serif; fill: #56617A; }
+        </style>
+
+        <text class="p8aH" x="14" y="22">One number per model per quarter, and this model passes.</text>
+
+        <rect x="14" y="34" width="852" height="54" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <text class="p8aK" x="30" y="58">Aggregate calibration gap, later vintage: predicted 0.330 against an actual 0.324</text>
+        <text class="p8aM" x="30" y="78">One row in the pack. Nothing to escalate, and nothing to read twice.</text>
+        <rect x="690" y="46" width="162" height="30" rx="8" fill="#1E3A8A"></rect>
+        <text class="p8aT" x="771" y="65" text-anchor="middle">-0.006 · passes</text>
+
+        <text class="p8aH" x="14" y="112">The same quarter, the same model, banded by predicted risk.</text>
+
+        <line x1="210" y1="122" x2="210" y2="298" stroke="#DDE5F0" stroke-width="1"></line>
+        <line x1="320" y1="122" x2="320" y2="298" stroke="#DDE5F0" stroke-width="1"></line>
+        <line x1="430" y1="122" x2="430" y2="298" stroke="#DDE5F0" stroke-width="1"></line>
+        <line x1="650" y1="122" x2="650" y2="298" stroke="#DDE5F0" stroke-width="1"></line>
+        <line x1="760" y1="122" x2="760" y2="298" stroke="#DDE5F0" stroke-width="1"></line>
+        <line x1="540" y1="122" x2="540" y2="298" stroke="#1E3A8A" stroke-width="2"></line>
+
+        <text class="p8aK" x="14" y="145">Quintile 1 (safest)</text>
+        <rect x="540" y="130" width="134" height="20" rx="4" fill="#1E40AF"></rect>
+        <text class="p8aV" x="682" y="145">+0.061</text>
+
+        <text class="p8aK" x="14" y="177">Quintile 2</text>
+        <rect x="540" y="162" width="150" height="20" rx="4" fill="#1E40AF"></rect>
+        <text class="p8aV" x="698" y="177">+0.068</text>
+
+        <text class="p8aK" x="14" y="209">Quintile 3</text>
+        <rect x="540" y="194" width="77" height="20" rx="4" fill="#1E40AF"></rect>
+        <text class="p8aV" x="625" y="209">+0.035</text>
+
+        <text class="p8aK" x="14" y="241">Quintile 4</text>
+        <rect x="421" y="226" width="119" height="20" rx="4" fill="#B91C1C"></rect>
+        <text class="p8aR" x="413" y="241" text-anchor="end">-0.054</text>
+
+        <text class="p8aK" x="14" y="273">Quintile 5 (riskiest)</text>
+        <rect x="228" y="258" width="312" height="20" rx="4" fill="#B91C1C"></rect>
+        <text class="p8aR" x="220" y="273" text-anchor="end">-0.142</text>
+
+        <text class="p8aM" x="210" y="314" text-anchor="middle">-0.150</text>
+        <text class="p8aM" x="320" y="314" text-anchor="middle">-0.100</text>
+        <text class="p8aM" x="430" y="314" text-anchor="middle">-0.050</text>
+        <text class="p8aM" x="540" y="314" text-anchor="middle">0.000</text>
+        <text class="p8aM" x="650" y="314" text-anchor="middle">+0.050</text>
+        <text class="p8aM" x="760" y="314" text-anchor="middle">+0.100</text>
+
+        <text class="p8aM" x="14" y="340">Blue: the model under-predicts the band. Red: it over-predicts. The two sides cancel in the top panel.</text>
+        <text class="p8aR" x="14" y="358">A monitoring metric that cannot fail for the right reason is decoration.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the top panel and the bottom panel are the same model, the same quarter and the same data. Only one of them is in the pack.</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>The five things worth watching on this model, and where each came from<span class="mini">5 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>None of these is on the list because it is a standard metric. Each one is on the list because something in sessions 3 to 7 showed it capable of moving on this model, which is the only defensible way to build the list.</p>
+        <ul>
+          <li><strong>The banded outcome comparison, never the aggregate.</strong> Predicted against actual, by quintile of predicted risk, every band reported. Session 6 is the whole argument: -0.006 in aggregate over band gaps of +0.061, +0.068, +0.035, -0.054 and -0.142. The aggregate row can stay in the pack for continuity, as long as nobody is allowed to act on it alone.</li>
+          <li><strong>The population fields that actually drive the score.</strong> Thin-file share, which moved from 19.0 to 34.0 percent. Prior delinquency, 34.0 to 36.8 percent. Mean utilisation, 0.448 to 0.464. Three fields, because those are the three the development testing was thinnest about, not because three is a nice number.</li>
+          <li><strong>Discrimination on a recent window.</strong> Development gave 0.772 for the honestly refit champion and the later vintage gave 0.682. A monitoring metric here needs a window with matured outcomes, which is why this row runs on a slower cycle than the population rows.</li>
+          <li><strong>The bad rate itself.</strong> 0.292 on development and 0.324 out of time. It is not a model metric at all, and that is exactly why it belongs: it separates a model that has degraded from a book that has got riskier, and those two have different repairs.</li>
+          <li><strong>The approval rate and the bad rate among approved.</strong> Not a model metric either. It is what the business actually experiences, and a monitoring pack with no business row is a pack the business has no reason to read.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Why the aggregate survives in every pack you will ever see<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>It is worth being fair to the aggregate, because the reasons it dominates monitoring packs are good reasons and it will lose the argument faster if you pretend otherwise. One number per model fits on one row. One row per model fits fifty models on a page, and fifty models on a page is what a committee can actually look at. The aggregate is stable, cheap, comparable across models and across quarters, and it does not need a decision about how many bands or where to cut them.</p>
+        <p>The problem is not that the aggregate is a bad number. It is that the aggregate is the average of the thing you care about, and averaging is precisely the operation that destroys the signal here. Under-prediction at the safe end and over-prediction at the risky end are the signature of a model whose relationship has moved, and it is a signature made entirely of opposing errors. Averaging opposing errors is how you get to -0.006.</p>
+        <p>So the practical design is not to delete the aggregate. It is to make the worst band the row that carries the threshold, and let the aggregate sit next to it as context. The committee still gets one number per model. It is just a number that can go red.</p>
+        <div class="callout tip">
+          <p><strong>The one-line test for any proposed monitoring metric.</strong> Name a specific way this model could go wrong, then ask whether this metric would move if that happened. If you cannot name the failure, you do not yet know what the metric is for. If you can name it and the metric would not move, the metric is decoration and putting it in the pack is worse than leaving it out, because it will be cited as evidence of health.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Frequency follows materiality, not convenience<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The frequency and scope of monitoring reports depend on the nature of the model, the availability of new data or modelling approaches, and model materiality. Every one of those three is a property of the situation, and none of them is the reporting calendar. In practice almost every monitoring pack in existence is quarterly, and almost none of them can explain why.</p>
+        <p>The nature of the model sets the floor on how fast anything can be known. Brackwater's outcome window means a default takes time to appear, so a discrimination row cannot be refreshed monthly no matter how material the model is: there is nothing new in the data. The population rows have no such constraint, because an application's features are known on the day it arrives. That alone splits the pack into two cycles, and a pack that runs everything on one cycle is either late on the fast rows or empty on the slow ones.</p>
+        <p>Materiality sets the appetite. A model driving the approval cutoff on a consumer book is a different proposition from one ranking leads for a call list, and the tiering call from session 1 is where that judgement was already made and written down. Reusing it here is the point of having made it. The availability of new data or modelling approaches is the one people forget: if a materially better approach became available, that is a reason to look again even when every row in the pack is green.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 2 ============ -->
+  <section class="section" id="part-2">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · covers triggers, and the blind spot</span>
+      <h2>A threshold with no stated action is an observation</h2>
+      <span class="tag concept">11 min live</span>
+    </div>
+    <p class="lede">Choosing what to watch is half the job and the easier half. The half that decides whether the pack does anything is the part after the number: what level counts as a breach, over what population and window, who is named, and what happens. Four parts. A row with a level and nothing else produces a chart that goes up and down and a meeting that notices. A row with all four produces a consequence somebody agreed to in advance, which is the only kind of consequence that survives contact with a busy quarter.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The four parts of a monitoring trigger shown as four panels: level, window, owner and consequence. Below them, the consequence is drawn from a fixed escalating list of five: investigate, overlay, recalibrate, redevelop, withdraw, with an arrow showing escalating cost and escalating approval. A red panel at the bottom states that all four parts must be written before the model goes live, because a level set after a breach is a negotiation.">
+        <style>
+          .p8bH { font: 800 12px Inter, sans-serif; fill: #0F172A; }
+          .p8bT { font: 800 11px Inter, sans-serif; fill: #FFFFFF; }
+          .p8bK { font: 800 11px Inter, sans-serif; fill: #1E3A8A; }
+          .p8bB { font: 400 11px Inter, sans-serif; fill: #0F172A; }
+          .p8bM { font: 400 11px Inter, sans-serif; fill: #56617A; }
+          .p8bR { font: 800 11px Inter, sans-serif; fill: #B91C1C; }
+        </style>
+        <defs>
+          <marker id="p8bAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#56617A"></path></marker>
+        </defs>
+
+        <text class="p8bH" x="14" y="22">A threshold is a number. A trigger is that number plus three other things.</text>
+
+        <rect x="14" y="40" width="204" height="78" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <rect x="14" y="40" width="204" height="26" rx="9" fill="#1E40AF"></rect>
+        <text class="p8bT" x="28" y="58">Level</text>
+        <text class="p8bB" x="28" y="88">How far from the approved</text>
+        <text class="p8bB" x="28" y="106">baseline before it counts</text>
+
+        <rect x="232" y="40" width="204" height="78" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <rect x="232" y="40" width="204" height="26" rx="9" fill="#1E40AF"></rect>
+        <text class="p8bT" x="246" y="58">Window</text>
+        <text class="p8bB" x="246" y="88">Which population, and over</text>
+        <text class="p8bB" x="246" y="106">how much of the book</text>
+
+        <rect x="450" y="40" width="204" height="78" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <rect x="450" y="40" width="204" height="26" rx="9" fill="#1E40AF"></rect>
+        <text class="p8bT" x="464" y="58">Owner</text>
+        <text class="p8bB" x="464" y="88">A named person, not a team</text>
+        <text class="p8bB" x="464" y="106">inbox. Somebody is woken.</text>
+
+        <rect x="668" y="40" width="198" height="78" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <rect x="668" y="40" width="198" height="26" rx="9" fill="#1E3A8A"></rect>
+        <text class="p8bT" x="682" y="58">Consequence</text>
+        <text class="p8bB" x="682" y="88">What happens on breach,</text>
+        <text class="p8bB" x="682" y="106">chosen before the breach</text>
+
+        <text class="p8bH" x="14" y="142">The consequence comes from a fixed list, and the list escalates.</text>
+
+        <rect x="14" y="158" width="159" height="46" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <text class="p8bK" x="28" y="180">investigate</text>
+        <text class="p8bM" x="28" y="198">find out why, no change</text>
+
+        <rect x="187" y="158" width="159" height="46" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <text class="p8bK" x="201" y="180">overlay</text>
+        <text class="p8bM" x="201" y="198">adjust the output</text>
+
+        <rect x="360" y="158" width="159" height="46" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <text class="p8bK" x="374" y="180">recalibrate</text>
+        <text class="p8bM" x="374" y="198">refit the levels</text>
+
+        <rect x="533" y="158" width="159" height="46" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <text class="p8bK" x="547" y="180">redevelop</text>
+        <text class="p8bM" x="547" y="198">build it again</text>
+
+        <rect x="706" y="158" width="159" height="46" rx="9" fill="#EFF6FF" stroke="#C7D2E4"></rect>
+        <text class="p8bK" x="720" y="180">withdraw</text>
+        <text class="p8bM" x="720" y="198">stop using it</text>
+
+        <line x1="14" y1="222" x2="858" y2="222" stroke="#56617A" stroke-width="1.6" marker-end="url(#p8bAr)"></line>
+        <text class="p8bM" x="14" y="242">escalating cost, escalating approval, and every step is one somebody already agreed to</text>
+
+        <rect x="14" y="256" width="852" height="56" rx="9" fill="#FEF2F2" stroke="#B91C1C"></rect>
+        <text class="p8bR" x="30" y="280">Write all four before the model goes live.</text>
+        <text class="p8bB" x="30" y="300">A level set after a breach is a negotiation, and the person negotiating is the person who owns the model.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - level, window, owner, consequence. Three of the four are usually missing, and the pack still gets circulated.</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Where the level comes from, given that nothing sets one for you<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>No supervisory text sets a number. There is no threshold in the guidance, there is no industry constant, and anybody who tells you the level is 0.05 because it is always 0.05 is quoting a habit. The level is a choice, it is the bank's choice, and the only thing that makes it defensible is that the reasoning is written down next to it.</p>
+        <p>Three ways to reason about it, in rough order of how well they survive being questioned. The first is consequence: how far can this quantity move before the decision the model drives becomes a decision you would not have made. That is the best argument and the hardest work, because it needs the business to say what it would do differently. The second is historical variation: how much does this quantity move quarter to quarter when nothing is wrong, so that a level can sit above the noise. That needs history, which a new model does not have. The third is the development baseline plus a stated tolerance, which is weak reasoning but honest, and it is what most first versions are.</p>
+        <p>What matters more than which of the three you use is that the level is attached to a baseline you can point at. Brackwater's baselines are the development figures the model was approved on: thin-file share 0.190, prior delinquency 0.340, mean utilisation 0.448, discrimination 0.772, bad rate 0.292. A trigger that says "moves by more than five points from the number in the approved model document" is a sentence anybody can check. A trigger that says "deteriorates materially" is not a trigger.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Write the triggers before go-live, because afterwards it is a negotiation<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The sequencing point is the most practically useful thing tonight and it costs nothing to apply. Before a model goes live, the level is an abstract question and everybody in the room can afford to be principled about it. After a breach, the level is a question about whether a specific model that a specific team built and a specific business depends on has to be taken off the road this specific quarter. The same number, asked in two different rooms, and the second room has a stake in the answer.</p>
+        <p>This is why the validation report is the right place to propose the thresholds, and why session 7 ended by telling you to draft one while the number was uncontroversial. A threshold written into a report that has been signed is a level that was agreed when nobody knew which way it would break. A threshold written after the pack turns red is an agreement about that particular quarter, and it will be revisited the next time it is inconvenient.</p>
+        <p>The same logic applies to the consequence. Deciding in advance that a breach of the worst-band calibration trigger means recalibration is a cheap decision. Deciding it in the meeting where the breach has just been reported means deciding it against a person who will explain, accurately, that recalibration takes eight weeks and the quarter ends in three.</p>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>Brackwater's pack had no thresholds at all, which is the most common arrangement and the one that produces the fewest arguments. Every number was reported as a number. The calibration gap of -0.006 was true, correctly computed, and circulated to eleven people, none of whom had been given a level against which to read it.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>What monitoring cannot see, and why session 2 comes first<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Ongoing monitoring compares the model against the world. That is its definition and its entire mechanism: is the model performing as expected given what has changed in products, exposures, clients, data relevance or market conditions. Which means the one defect it can never detect is a model that is wrong in a way the world confirms.</p>
+        <p>Brackwater is the example, and it is a clean one. The leaked <code>collections</code> field is a count of contacts logged after the outcome window opens. Run the champion as submitted in production, monitor it forever, and every row in the pack stays green: the field keeps being populated, it keeps being related to default at the same strength, the discrimination it produces keeps reproducing, and the model keeps predicting default in people who are about to be recorded as defaulting. There is no quarter on which that stops working. The relationship is real. It is a relationship with the future, and outcomes keep confirming it because it was built out of outcomes.</p>
+        <p>No threshold catches this. No banding catches it, no population comparison catches it, no amount of frequency catches it. The only thing that catches it is somebody reading the feature list and asking when each value is written, which is conceptual soundness, which is the first component and session 2 of this track. That ordering is not an accident of curriculum design. A monitoring programme built on top of an unexamined model is an expensive way to confirm that the model is consistent with itself.</p>
+        <p>The general form, worth carrying past credit scoring: monitoring answers "has anything changed since we approved this". It cannot answer "was the thing we approved ever right". Those are different questions and only one of them gets easier with more data.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 3 ============ -->
+  <section class="section" id="part-3">
+    <div class="section-kicker">
+      <span class="klabel">Part 3 · build-along</span>
+      <h2>Write the specification, then run the quarter against it</h2>
+      <span class="tag build">18 min build-along</span>
+    </div>
+    <p class="lede">A monitoring specification is a table, and the discipline is entirely in which columns it has. Metric, band, level, window, owner, action. Six columns, and a row that cannot fill all six is not ready to be a control. Build the table first, with no data anywhere near it, then score the later vintage against it and read out what fires. Doing it in that order is the whole exercise: a spec written while looking at the data is a spec that agrees with the data.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div>
+          <p><strong>List what can go wrong with this specific model, before listing any metric.</strong> Three or four sentences, each naming a failure: the relationship moves, the book shifts toward a segment with thin evidence, outcomes arrive later than assumed, an upstream field changes meaning. The metrics come from this list, and a metric with no failure attached to it does not go in the pack.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <p><strong>For each failure, pick the quantity that would move if it happened.</strong> Then check the direction and the size you would expect. If the honest answer is "it would move a bit, probably", the metric is too blunt for the failure and you need a band, a segment or a different quantity.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <p><strong>Band anything that can be wrong in opposite directions at once.</strong> Calibration is the standing example and Brackwater is the proof: -0.006 in aggregate over band gaps from +0.061 to -0.142. Put the worst band on the threshold and leave the aggregate next to it as context, never as the control.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <p><strong>Write the baseline each level is measured from, and say where it came from.</strong> The development figures in the approved model document, quoted exactly. A trigger measured against last quarter drifts with the thing it is supposed to detect, which is how a book can move fifteen points without any row ever turning red.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <p><strong>Set the level, and write the sentence justifying it in the same row.</strong> Consequence-based if the business will tell you what it would do differently, historical-variation-based if you have the history, baseline-plus-tolerance if you have neither. Any of the three is defensible. The absence of a written reason is not.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <p><strong>Give each row a window that respects how fast the data can actually know.</strong> Population rows can run as fast as applications arrive. Anything that needs a matured outcome runs slower, and a row refreshed faster than its outcomes mature is reporting an artefact of incompleteness.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <p><strong>Name a person and pick the action from the fixed list.</strong> Investigate, overlay, recalibrate, redevelop, withdraw. A person, not a team, not a function, not the committee. The list is short on purpose: a free-text action column fills up with "review at next cycle", which is the written form of doing nothing.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <p><strong>Run the spec against a period you already understand, and check that something fires.</strong> A spec that passes everything on a quarter you know was bad is broken, and you will not find that out later, because a silent control and a healthy model look identical from the outside. Brackwater's later vintage is the test case: three of seven rows should fire.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="prompt-box good">
+      <span class="label">★ Try it now - the monitoring specification, written before any data is loaded</span>
+      <pre style="margin:0"><code>import pandas as pd
+
+# Six columns. A row that cannot fill all six is not a control.
+# No supervisory text sets a level: these are Brackwater's choice,
+# written into the validation report before the model went live.
+
+spec = pd.DataFrame(
+    [
+        ("calibration gap",   "all applications", 0.050, "quarterly",   "model owner", "investigate"),
+        ("calibration gap",   "worst quintile",   0.050, "quarterly",   "model owner", "recalibrate"),
+        ("thin-file share",   "all applications", 0.050, "quarterly",   "model owner", "investigate"),
+        ("prior delinquency", "all applications", 0.050, "quarterly",   "model owner", "investigate"),
+        ("mean utilisation",  "all applications", 0.050, "quarterly",   "model owner", "investigate"),
+        ("discrimination",    "matured 12 months", 0.050, "semi-annual", "model risk",  "redevelop"),
+        ("bad rate",          "all applications", 0.050, "quarterly",   "credit risk", "investigate"),
+    ],
+    columns=["metric", "band", "level", "window", "owner", "action"],
+)
+
+# Every level is measured from the figures the model was approved on,
+# quoted from the development sample of 4,000 applications.
+baseline = {
+    "calibration gap":   0.000,   # a gap is measured against zero
+    "thin-file share":   0.190,
+    "prior delinquency": 0.340,
+    "mean utilisation":  0.448,
+    "discrimination":    0.772,   # refit without the leaked collections field
+    "bad rate":          0.292,
+}
+
+# Note what is NOT in this table: any row that would have caught the leak.
+# Monitoring compares the model against the world, and the leak is a
+# relationship the world keeps confirming. That one is session 2's job.</code></pre>
+    </div>
+
+    <div class="prompt-box good">
+      <span class="label">★ Try it now - score the later vintage against the spec and read out what fires</span>
+      <pre style="margin:0"><code># The later vintage: 2,000 applications from the following year.
+observed = {
+    ("calibration gap",   "all applications"):  -0.006,  # predicted 0.330, actual 0.324
+    ("calibration gap",   "worst quintile"):    -0.142,  # quintile 5: 0.694 predicted, 0.552 actual
+    ("thin-file share",   "all applications"):   0.340,
+    ("prior delinquency", "all applications"):   0.368,
+    ("mean utilisation",  "all applications"):   0.464,
+    ("discrimination",    "matured 12 months"):  0.682,
+    ("bad rate",          "all applications"):   0.324,
+}
+
+spec["observed"] = spec.apply(lambda r: observed[(r["metric"], r["band"])], axis=1)
+spec["move"] = (spec["observed"] - spec["metric"].map(baseline)).abs().round(3)
+spec["fires"] = spec["move"] &gt;= spec["level"]
+
+for _, r in spec[spec["fires"]].iterrows():
+    print(r["metric"], "/", r["band"], "moved", r["move"], "-&gt;", r["action"], "-", r["owner"])
+
+# calibration gap / worst quintile moved 0.142 -&gt; recalibrate - model owner
+# thin-file share / all applications moved 0.15 -&gt; investigate - model owner
+# discrimination / matured 12 months moved 0.09 -&gt; redevelop - model risk
+
+print(spec.loc[~spec["fires"], ["metric", "move"]].to_string(index=False))
+# calibration gap    0.006      &lt;- the aggregate. It passes.
+# prior delinquency  0.028
+# mean utilisation   0.016
+# bad rate           0.032
+
+# Same model, same quarter, same pack: the aggregate calibration row passes
+# and the row directly beneath it breaches by nearly three times the level.</code></pre>
+    </div>
+
+    <div class="callout tip">
+      <p><strong>Run the spec against the period before the one you are worried about.</strong> If nothing fires on the quarter you already know went wrong, the spec is the problem and not the model. This is the cheapest check in the whole design and it is almost never done, because a control that has never fired is indistinguishable from a control that cannot.</p>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions</h2>
+    </div>
+
+    <div class="quiz-q" data-answer="2">
+      <p class="qtext">A monitoring pack reports one calibration number per model per quarter. On Brackwater's later vintage that number is -0.006. What is the problem with the design?</p>
+      <button class="qopt" type="button">A · There is no problem, since a gap of six thousandths is genuinely good calibration and the pack has reported it correctly</button>
+      <button class="qopt" type="button">B · The number is computed correctly but reported too infrequently, so a quarterly cycle is the defect</button>
+      <button class="qopt" type="button">C · The metric cannot fail for the failure this model actually has: the band gaps run +0.061 to -0.142 and they cancel, so the pack would read healthy until the day they stop cancelling</button>
+      <p class="qwhy">The aggregate is the average of the thing that matters, and averaging is the operation that destroys this particular signal. Under-prediction at the safe end and over-prediction at the risky end is the signature of a relationship that has moved, and it is made entirely of opposing errors. Putting the worst band on the threshold is what makes the row capable of going red for the right reason.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">A monitoring row reads "thin-file share, alert if it deteriorates materially". What is missing before this counts as a control?</p>
+      <button class="qopt" type="button">A · A level measured from a stated baseline, a window and population, a named owner, and an action from a fixed list; without them it is an observation</button>
+      <button class="qopt" type="button">B · Nothing is missing, since the metric is the right one and the wording gives the reviewer useful discretion</button>
+      <button class="qopt" type="button">C · Only the level, since the owner and the action can be decided when it breaches</button>
+      <p class="qwhy">Four parts, and this row has none of them. Deciding the owner and the action at the moment of breach is exactly the failure mode: before go-live the level is an abstract question, and after a breach it is a question about taking a particular model off the road in a particular quarter, asked in front of the people who depend on it. A level set after a breach is a negotiation.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">Suppose Brackwater had shipped the champion with the leaked <code>collections</code> field and monitored it for three years against a well-designed pack. What would the pack have shown?</p>
+      <button class="qopt" type="button">A · A steady degradation, because a leaked field stops predicting once the model is live</button>
+      <button class="qopt" type="button">B · Green rows throughout, because monitoring compares the model against the world and a field written after the outcome keeps being confirmed by outcomes</button>
+      <button class="qopt" type="button">C · An immediate breach on the calibration rows, because a leaked model is miscalibrated by construction</button>
+      <p class="qwhy">Ongoing monitoring evaluates whether a model is performing as expected given changes in products, exposures, activities, clients, data relevance or market conditions. It is a comparison with the world, so it is structurally blind to a model that is wrong in a way the world confirms. Collections contacts keep being logged after default, the relationship keeps reproducing, and no threshold anywhere in the pack fires. Conceptual soundness is the only component that catches it, which is why it is the first one.</p>
+    </div>
+    <p class="quiz-score"></p>
+  </section>
+
+  <!-- ============ HOMEWORK ============ -->
+  <section class="section" id="homework">
+    <div class="section-kicker">
+      <span class="klabel">Homework</span>
+      <h2>Before session 9</h2>
+      <span class="tag time">45 min</span>
+    </div>
+    <div class="callout">
+      <p>Take the monitoring pack your team actually receives, and for every row in it write the four parts next to the number: the level, the window and population, the named owner, and the action on breach. Most rows will have one of the four and several will have none, and the count is the finding. Then do the harder half: for each row, name a specific way the model could go wrong and say whether that row would move if it happened. Any row where the honest answer is no should be marked for deletion, because it is currently being read as evidence of health. Bring the annotated pack to session 9, where what fires becomes a finding with a severity, a condition and an owner, and where the thing that gets argued about is no longer the number.</p>
+    </div>
+  </section>
+
+  <!-- ============ COVERAGE ============ -->
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Sources covered</span>
+      <h2>What tonight maps to</h2>
+    </div>
+    <div class="covered">
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Ongoing monitoring, in the guidance's words</span>
+        <span class="note">Under the revised interagency guidance of 17 April 2026, it is "an evaluation of the extent to which a model is performing as expected given potential changes in products, exposures, activities, clients, data relevance, or market conditions", and a model no longer performing as expected "may warrant overlays, adjustment, or redevelopment". SR 11-7 is superseded.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">What an effective monitoring plan includes</span>
+        <span class="note">"Regularly assessing any model limitations at the development stage and over time, along with procedures for responding to any issues." The limitations and the response procedure are written at development time, before anything is running.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Frequency follows materiality</span>
+        <span class="note">The frequency and scope of monitoring reports depend on the nature of the model, the availability of new data or modelling approaches, and model materiality. None of those three is the reporting calendar, and the nature of the model sets a floor on how fast anything can be known.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">The design problem, with the numbers</span>
+        <span class="note">Aggregate calibration gap -0.006 out of time, over band gaps of +0.061, +0.068, +0.035, -0.054 and -0.142. A monitoring metric that cannot fail for the right reason is decoration, and averaging opposing errors is how the aggregate gets to -0.006.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">What to watch on this model, derived</span>
+        <span class="note">The banded outcome comparison rather than the aggregate; thin-file share 19.0 to 34.0 percent, prior delinquency 34.0 to 36.8 percent, mean utilisation 0.448 to 0.464; discrimination on a matured window, 0.682 out of time against 0.772 on development; and the bad rate itself, 0.292 to 0.324.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">Thresholds, triggers and the fixed action list</span>
+        <span class="note">Level, window, owner, consequence. The consequence is drawn from investigate, overlay, recalibrate, redevelop or withdraw, and it is chosen before go-live because a level set after a breach is a negotiation.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill solid">✓</span>
+        <span class="name">What monitoring cannot see</span>
+        <span class="note">It compares the model against the world, so it is blind to a model that is wrong in a way the world confirms. The leaked <code>collections</code> field would keep predicting default forever and no pack would ever fire. Conceptual soundness is the only component that catches it, which is why session 2 comes first.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill light">◐</span>
+        <span class="name">Out-of-time testing and population stability</span>
+        <span class="note">Session 7. It produced the evidence this pack is designed around: 0.772 to 0.682, and a thin-file share that nearly doubled.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill light">◐</span>
+        <span class="name">Turning a breach into a finding somebody answers</span>
+        <span class="note">Session 9. Tonight produces the trigger and the owner; severity, conditions, remediation and the tracked register come next.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill inkpill">·</span>
+        <span class="name">Drift detection as a technique</span>
+        <span class="note">Not covered by design. <strong>learn-model-evaluation-with-phoebe</strong> owns drift and continuous evaluation. Here a quantity is specified and a level is set; the detection methods and their statistics live there.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill inkpill">·</span>
+        <span class="name">What AUC and calibration are</span>
+        <span class="note">Not covered by design. <strong>learn-model-evaluation-with-phoebe</strong> defines the metrics; here they appear only as evidence a validator weighs.</span>
+      </div>
+      <div class="covered-row">
+        <span class="status pill inkpill">·</span>
+        <span class="name">Governance frameworks of every kind</span>
+        <span class="note">Not covered by design, in any session. <strong>learn-ai-governance-with-phoebe</strong> owns them.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CHEAT SHEET ============ -->
+  <section class="cheat" id="cheatsheet">
+    <h3>Session 8 cheat sheet</h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>The one-line test</b><span>Name a way this model could go wrong, then ask whether the metric would move. If not, it is decoration.</span></div>
+      <div class="cheat-item"><b>Brackwater in two numbers</b><span>-0.006 in aggregate, -0.142 in the worst band. Same model, same quarter, one row in the pack.</span></div>
+      <div class="cheat-item"><b>Band anything two-sided</b><span>Opposing errors cancel. Put the worst band on the threshold and leave the aggregate as context.</span></div>
+      <div class="cheat-item"><b>Four parts or it is a chart</b><span>Level, window, owner, consequence. Three of the four are usually missing.</span></div>
+      <div class="cheat-item"><b>Measure from the approved baseline</b><span>Thin file 0.190, prior delinquency 0.340, utilisation 0.448, discrimination 0.772, bad rate 0.292.</span></div>
+      <div class="cheat-item"><b>Before go-live, always</b><span>A level set after a breach is a negotiation, and the person negotiating owns the model.</span></div>
+      <div class="cheat-item"><b>Frequency follows materiality</b><span>Nature of the model, availability of new data or approaches, and materiality. Not the calendar.</span></div>
+      <div class="cheat-item"><b>The blind spot</b><span>Monitoring asks what changed since approval. It cannot ask whether what was approved was ever right.</span></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="pagefoot">
+  <div class="wrap">
+    <p>Practitioner session 8 of 10 · learn-model-risk-with-phoebe · by Phoebe Fu</p>
+    <nav class="pagenav">
+      <a href="p7-out-of-time-and-stability.html">← Practitioner session 7 · Out of time and stability</a>
+      <a href="p9-writing-findings.html">Practitioner session 9 · Writing findings →</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="../assets/app.js?v=2"></script>
+</body>
+</html>
